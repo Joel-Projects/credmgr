@@ -58,6 +58,13 @@ class BaseModel(object):
                 result[key] = value
         return result
 
+    def __repr__(self):
+        ## ownerRepr = ''
+        ## if hasattr(self, 'owner'):
+        ##     ownerRepr = f', owner={self.owner.username!r}'
+        ## return f'<{self.__class__.__name__} id={self.id}, {self._nameAttr}={getattr(self, self._nameAttr)!r}{ownerRepr}>'
+        return f'<{self.__class__.__name__} id={self.id}, {self._nameAttr}={getattr(self, self._nameAttr)!r}>'
+
     def __eq__(self, other):
         '''Returns true if both objects are equal'''
         if not isinstance(other, type(self)):
