@@ -3,7 +3,7 @@ from CredentialManager.mixins import BaseModel, DeletableMixin
 
 class RefreshToken(BaseModel, DeletableMixin):
 
-    _swagger_types = {**BaseModel._swagger_types,
+    _attr_types = {**BaseModel._attr_types,
         'reddit_app_id': 'str',
         'redditor': 'str',
         'refresh_token': 'str',

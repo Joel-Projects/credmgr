@@ -2,7 +2,7 @@ from ..mixins import BaseApp
 
 class RedditApp(BaseApp):
 
-    _swagger_types = {**BaseApp._swagger_types,
+    _attr_types = {**BaseApp._attr_types,
         'client_id': 'str',
         'client_secret': 'str',
         'short_name': 'str',

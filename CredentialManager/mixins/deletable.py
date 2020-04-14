@@ -12,5 +12,5 @@ class DeletableMixin:
             bot.delete()
 
         '''
-        self._credmgr.delete(self, f'{self._path}/{self.id}')
+        self._credmgr.delete(f'{self._path}/{self.id}')
         del self

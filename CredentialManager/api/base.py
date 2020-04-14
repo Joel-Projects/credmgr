@@ -490,7 +490,7 @@ class APIBase(object):
     def post_api_tokens(self, name, **kwargs):
         '''Create a new API Token
 
-        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-KEY`` header
+        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-TOKEN`` header
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.post_api_tokens(name, async_req=True)
@@ -514,7 +514,7 @@ class APIBase(object):
     def post_api_tokens_with_http_info(self, name, **kwargs):
         '''Create a new API Token
 
-        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-KEY`` header
+        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-TOKEN`` header
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.post_api_tokens_with_http_info(name, async_req=True)

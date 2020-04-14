@@ -4,7 +4,7 @@ import re
 
 class UserItems(object):
 
-    _swagger_types = {
+    _attr_types = {
         'id': 'int',
         'username': 'str',
         'reddit_apps': 'list[UserItemsRedditApps]',
@@ -205,7 +205,7 @@ class UserItems(object):
         '''Returns the model properties as a dict'''
         result = {}
 
-        for attr, _ in self._swagger_types.items():
+        for attr, _ in self._attr_types.items():
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(lambda x: x.to_dict() if hasattr(x, "to_dict") else x, value))

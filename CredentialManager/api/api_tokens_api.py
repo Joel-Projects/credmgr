@@ -15,7 +15,7 @@ class ApiTokensApi(object):
         **PERMISSIONS: Owner/Admin may execute this action.**
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete(item_id, async_req=True)
+        >>> thread = api.delete()
         >>> result = thread.get()
 
 
@@ -81,9 +81,7 @@ class ApiTokensApi(object):
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
 
-        return self._credmgr.delete(f'/api_tokens/{item_id}', query_params, header_params, body=body_params, post_params=form_params,
-                                    files=local_var_files, response_type=None, auth_settings=auth_settings, collection_formats=collection_formats,
-                                    _preload_content=params.get('_preload_content', True), _request_timeout=params.get('_request_timeout'))
+        return self._credmgr.delete(query_params)
 
     def get_api_token_by_id(self, item_id, **kwargs):
         '''Get API Token details by ID
@@ -509,7 +507,7 @@ class ApiTokensApi(object):
     def post_api_tokens(self, name, **kwargs):
         '''Create a new API Token
 
-        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-KEY`` header
+        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-TOKEN`` header
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.post_api_tokens(name, async_req=True)
@@ -533,7 +531,7 @@ class ApiTokensApi(object):
     def post_api_tokens_with_http_info(self, name, **kwargs):
         '''Create a new API Token
 
-        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-KEY`` header
+        **PERMISSIONS: At least Active user is required.**   API token can be used instead of username/password. Include the API token in the ``X-API-TOKEN`` header
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.post_api_tokens_with_http_info(name, async_req=True)

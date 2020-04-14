@@ -26,14 +26,14 @@ Delete a Refresh Token by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -46,7 +46,7 @@ refresh_token_id = 56 # int |
 try:
     # Delete a Refresh Token by ID
     api_instance.delete_refresh_token_by_id(refresh_token_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->delete_refresh_token_by_id: %s\n" % e)
 ```
 
@@ -83,14 +83,14 @@ Get Refresh Token details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -104,7 +104,7 @@ try:
     # Get Refresh Token details by ID
     api_response = api_instance.get_refresh_token_by_id(refresh_token_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->get_refresh_token_by_id: %s\n" % e)
 ```
 
@@ -141,14 +141,14 @@ List of Refresh Tokens
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -165,7 +165,7 @@ try:
     # List of Refresh Tokens
     api_response = api_instance.get_refresh_tokens(limit=limit, redditor=redditor, offset=offset, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->get_refresh_tokens: %s\n" % e)
 ```
 
@@ -205,14 +205,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -224,7 +224,7 @@ api_instance = CredentialManager.RefreshTokensApi(CredentialManager.ApiClient(co
 try:
     # Check which methods are allowed
     api_instance.options_get_refresh_token_by_redditor()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->options_get_refresh_token_by_redditor: %s\n" % e)
 ```
 
@@ -258,14 +258,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -278,7 +278,7 @@ refresh_token_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_refresh_token_by_id(refresh_token_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->options_refresh_token_by_id: %s\n" % e)
 ```
 
@@ -315,14 +315,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -334,7 +334,7 @@ api_instance = CredentialManager.RefreshTokensApi(CredentialManager.ApiClient(co
 try:
     # Check which methods are allowed
     api_instance.options_refresh_tokens()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->options_refresh_tokens: %s\n" % e)
 ```
 
@@ -368,14 +368,14 @@ Patch refresh_token details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -390,7 +390,7 @@ try:
     # Patch refresh_token details by ID
     api_response = api_instance.patch_refresh_token_by_id(refresh_token_id, body)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->patch_refresh_token_by_id: %s\n" % e)
 ```
 
@@ -428,14 +428,14 @@ Get Refresh Token by reddit app and redditor
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -450,7 +450,7 @@ try:
     # Get Refresh Token by reddit app and redditor
     api_response = api_instance.post_get_refresh_token_by_redditor(redditor, reddit_app_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RefreshTokensApi->post_get_refresh_token_by_redditor: %s\n" % e)
 ```
 

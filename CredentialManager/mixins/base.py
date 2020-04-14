@@ -1,5 +1,5 @@
 class BaseModel(object):
-    _swagger_types = {'id': 'int'}
+    _attr_types = {'id': 'int'}
     _attribute_map = {'id': 'id'}
     _path = None
     _nameAttr = None
@@ -14,18 +14,19 @@ class BaseModel(object):
 
     def __getattr__(self, attribute):
         '''Return the value of `attribute`.'''
-        if not attribute.startswith("_") and not self.fetched:
-            self.fetch()
-            return getattr(self, attribute)
-        else:
+        if not attribute.startswith("_"):
+            if not self.fetched:
+                self.fetch()
             return self.__dict__.get(attribute, None)
+        else:
+            return None
 
     def get(self, id):
-        self.__dict__ = self._credmgr.get(self, f'{self._path}/{id}').__dict__
+        self.__dict__ = self._credmgr.get(f'{self._path}/{id}').__dict__
         self.fetched = True
 
     def getByName(self, name):
-        self.__dict__ = self._credmgr.post(self, f'{self._path}/by_name', params={self._nameAttr: name}).__dict__
+        self.__dict__ = self._credmgr.post(f'{self._path}/by_name', data={self._nameAttr: name}).__dict__
         self.fetched = True
 
     def fetch(self, byName=False):
@@ -38,12 +39,12 @@ class BaseModel(object):
         params = dict(limit=limit, offset=offset)
         if owner_id:
             params['owner_id'] = owner_id
-        return self._credmgr.get(f'list[{type(self).__name__}]', self._path, query_params=params)
+        return self._credmgr.get(self._path, params=params)
 
     def to_dict(self):
         result = {}
 
-        for attr, _ in self._swagger_types.items():
+        for attr, _ in self._attr_types.items():
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(lambda x: x.to_dict() if hasattr(x, "to_dict") else x, value))

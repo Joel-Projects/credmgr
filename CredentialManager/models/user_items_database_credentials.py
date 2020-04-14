@@ -4,7 +4,7 @@ import re
 
 class UserItemsDatabaseCredentials(object):
 
-    _swagger_types = {
+    _attr_types = {
         'id': 'int', 'app_name': 'str', 'database_username': 'str', 'database_host': 'str', 'database': 'str', 'database_flavor': 'str'
         }
 
@@ -173,7 +173,7 @@ class UserItemsDatabaseCredentials(object):
         '''Returns the model properties as a dict'''
         result = {}
 
-        for attr, _ in self._swagger_types.items():
+        for attr, _ in self._attr_types.items():
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(lambda x: x.to_dict() if hasattr(x, "to_dict") else x, value))

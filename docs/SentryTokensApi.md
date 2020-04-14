@@ -25,14 +25,14 @@ Delete a Sentry Token by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -45,7 +45,7 @@ sentry_token_id = 56 # int |
 try:
     # Delete a Sentry Token by ID
     api_instance.delete_sentry_token_by_id(sentry_token_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->delete_sentry_token_by_id: %s\n" % e)
 ```
 
@@ -82,14 +82,14 @@ Get Sentry Token details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -103,7 +103,7 @@ try:
     # Get Sentry Token details by ID
     api_response = api_instance.get_sentry_token_by_id(sentry_token_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->get_sentry_token_by_id: %s\n" % e)
 ```
 
@@ -140,14 +140,14 @@ List of Sentry Tokens
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -163,7 +163,7 @@ try:
     # List of Sentry Tokens
     api_response = api_instance.get_sentry_tokens(limit=limit, offset=offset, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->get_sentry_tokens: %s\n" % e)
 ```
 
@@ -202,14 +202,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -222,7 +222,7 @@ sentry_token_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_sentry_token_by_id(sentry_token_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->options_sentry_token_by_id: %s\n" % e)
 ```
 
@@ -259,14 +259,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -278,7 +278,7 @@ api_instance = CredentialManager.SentryTokensApi(CredentialManager.ApiClient(con
 try:
     # Check which methods are allowed
     api_instance.options_sentry_tokens()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->options_sentry_tokens: %s\n" % e)
 ```
 
@@ -312,14 +312,14 @@ Patch sentry_token details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -334,7 +334,7 @@ try:
     # Patch sentry_token details by ID
     api_response = api_instance.patch_sentry_token_by_id(sentry_token_id, body)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->patch_sentry_token_by_id: %s\n" % e)
 ```
 
@@ -372,14 +372,14 @@ Create a new Sentry Token
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -396,7 +396,7 @@ try:
     # Create a new Sentry Token
     api_response = api_instance.post_sentry_tokens(app_name, dsn, enabled=enabled, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling SentryTokensApi->post_sentry_tokens: %s\n" % e)
 ```
 

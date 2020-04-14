@@ -27,14 +27,14 @@ Delete a Bot by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -47,7 +47,7 @@ bot_id = 56 # int |
 try:
     # Delete a Bot by ID
     api_instance.delete_bot_by_id(bot_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->delete_bot_by_id: %s\n" % e)
 ```
 
@@ -84,14 +84,14 @@ Get Bot details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -105,7 +105,7 @@ try:
     # Get Bot details by ID
     api_response = api_instance.get_bot_by_id(bot_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->get_bot_by_id: %s\n" % e)
 ```
 
@@ -142,14 +142,14 @@ List of Bots
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -165,7 +165,7 @@ try:
     # List of Bots
     api_response = api_instance.get_bots(limit=limit, offset=offset, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->get_bots: %s\n" % e)
 ```
 
@@ -204,14 +204,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -224,7 +224,7 @@ bot_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_bot_by_id(bot_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->options_bot_by_id: %s\n" % e)
 ```
 
@@ -261,14 +261,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -280,7 +280,7 @@ api_instance = CredentialManager.BotsApi(CredentialManager.ApiClient(config))
 try:
     # Check which methods are allowed
     api_instance.options_bots()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->options_bots: %s\n" % e)
 ```
 
@@ -314,14 +314,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -333,7 +333,7 @@ api_instance = CredentialManager.BotsApi(CredentialManager.ApiClient(config))
 try:
     # Check which methods are allowed
     api_instance.options_get_bot_by_name()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->options_get_bot_by_name: %s\n" % e)
 ```
 
@@ -367,14 +367,14 @@ Patch bot details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -389,7 +389,7 @@ try:
     # Patch bot details by ID
     api_response = api_instance.patch_bot_by_id(bot_id, body)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->patch_bot_by_id: %s\n" % e)
 ```
 
@@ -427,14 +427,14 @@ Create a new Bot
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -452,7 +452,7 @@ try:
     # Create a new Bot
     api_response = api_instance.post_bots(app_name, reddit_id=reddit_id, sentry_id=sentry_id, database_id=database_id, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->post_bots: %s\n" % e)
 ```
 
@@ -493,14 +493,14 @@ Get Refresh Token by reddit app and redditor
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -515,7 +515,7 @@ try:
     # Get Refresh Token by reddit app and redditor
     api_response = api_instance.post_get_bot_by_name(app_name, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling BotsApi->post_get_bot_by_name: %s\n" % e)
 ```
 

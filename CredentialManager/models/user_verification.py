@@ -3,8 +3,8 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin
 
 class UserVerification(BaseModel, DeletableMixin, EditableMixin):
 
-    _swagger_types = {
-        **BaseModel._swagger_types,
+    _attr_types = {
+        **BaseModel._attr_types,
         'id': 'int',
         'user_id': 'str',
         'redditor': 'str',

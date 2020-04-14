@@ -1,7 +1,7 @@
 from ..mixins import BaseApp
 
 class SentryToken(BaseApp):
-    _swagger_types = {**BaseApp._swagger_types, 'dsn': 'str'}
+    _attr_types = {**BaseApp._attr_types, 'dsn': 'str'}
     _attribute_map = {**BaseApp._attribute_map, 'dsn': 'dsn'}
     editableAttrs = BaseApp._editableAttrs + ['dsn']
     _path = '/sentry_tokens'

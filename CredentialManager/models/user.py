@@ -3,7 +3,7 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin, ToggableMixin
 
 class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
 
-    _swagger_types = {**BaseModel._swagger_types,
+    _attr_types = {**BaseModel._attr_types,
         'id': 'int',
         'username': 'str',
         'is_active': 'str',
@@ -60,6 +60,7 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
         :param bool is_internal: (Internal use only)
         :param str reddit_username:
         :return: User
+
         '''
         additionalParams = {}
         if default_settings:
@@ -74,4 +75,4 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
             additionalParams['is_internal'] = is_internal
         if reddit_username:
             additionalParams['reddit_username'] = reddit_username
-        return _credmgr.post(User, '/bots', params={'username': username, 'password': password, **additionalParams})
+        return _credmgr.post('/bots', data={'username': username, 'password': password, **additionalParams})

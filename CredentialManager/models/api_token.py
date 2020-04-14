@@ -2,8 +2,8 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin, ToggableMixin
 
 
 class ApiToken(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
-    _swagger_types = {
-        **BaseModel._swagger_types,
+    _attr_types = {
+        **BaseModel._attr_types,
         'name': 'str',
         'token': 'str',
         'owner_id': 'int',

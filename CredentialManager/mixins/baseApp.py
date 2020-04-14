@@ -2,7 +2,7 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin, ToggableMixin, Ow
 
 
 class BaseApp(BaseModel, DeletableMixin, EditableMixin, ToggableMixin, OwnerMixin):
-    _swagger_types = {**BaseModel._swagger_types, 'app_name': 'str', 'enabled': 'bool', 'owner_id': 'int'}
+    _attr_types = {**BaseModel._attr_types, 'app_name': 'str', 'enabled': 'bool', 'owner_id': 'int'}
     _attribute_map = {**BaseModel._attribute_map, 'app_name': 'app_name', 'enabled': 'enabled', 'owner_id': 'owner_id'}
     _nameAttr = 'app_name'
     _editableAttrs = ['app_name', 'enabled']

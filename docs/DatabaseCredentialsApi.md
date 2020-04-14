@@ -25,14 +25,14 @@ Delete a Database Credential by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -45,7 +45,7 @@ database_credential_id = 56 # int |
 try:
     # Delete a Database Credential by ID
     api_instance.delete_database_credential_by_id(database_credential_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->delete_database_credential_by_id: %s\n" % e)
 ```
 
@@ -82,14 +82,14 @@ Get Database Credential details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -103,7 +103,7 @@ try:
     # Get Database Credential details by ID
     api_response = api_instance.get_database_credential_by_id(database_credential_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->get_database_credential_by_id: %s\n" % e)
 ```
 
@@ -140,14 +140,14 @@ List of Database Credentials
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -163,7 +163,7 @@ try:
     # List of Database Credentials
     api_response = api_instance.get_database_credentials(limit=limit, offset=offset, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->get_database_credentials: %s\n" % e)
 ```
 
@@ -202,14 +202,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -222,7 +222,7 @@ database_credential_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_database_credential_by_id(database_credential_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->options_database_credential_by_id: %s\n" % e)
 ```
 
@@ -259,14 +259,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -278,7 +278,7 @@ api_instance = CredentialManager.DatabaseCredentialsApi(CredentialManager.ApiCli
 try:
     # Check which methods are allowed
     api_instance.options_database_credentials()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->options_database_credentials: %s\n" % e)
 ```
 
@@ -312,14 +312,14 @@ Patch database_credential details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -334,7 +334,7 @@ try:
     # Patch database_credential details by ID
     api_response = api_instance.patch_database_credential_by_id(database_credential_id, body)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->patch_database_credential_by_id: %s\n" % e)
 ```
 
@@ -372,14 +372,14 @@ Create a new Database Credential
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -398,7 +398,7 @@ try:
     # Create a new Database Credential
     api_response = api_instance.post_database_credentials(app_name, database_username, database_host, database_flavor, database=database, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling DatabaseCredentialsApi->post_database_credentials: %s\n" % e)
 ```
 

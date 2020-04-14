@@ -28,14 +28,14 @@ Delete a Reddit App by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -48,7 +48,7 @@ reddit_app_id = 56 # int |
 try:
     # Delete a Reddit App by ID
     api_instance.delete_reddit_app_by_id(reddit_app_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->delete_reddit_app_by_id: %s\n" % e)
 ```
 
@@ -85,14 +85,14 @@ Get Reddit App details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -106,7 +106,7 @@ try:
     # Get Reddit App details by ID
     api_response = api_instance.get_reddit_app_by_id(reddit_app_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->get_reddit_app_by_id: %s\n" % e)
 ```
 
@@ -143,14 +143,14 @@ List of Reddit Apps
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -166,7 +166,7 @@ try:
     # List of Reddit Apps
     api_response = api_instance.get_reddit_apps(limit=limit, offset=offset, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->get_reddit_apps: %s\n" % e)
 ```
 
@@ -205,14 +205,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -225,7 +225,7 @@ reddit_app_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_generate_auth_url(reddit_app_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->options_generate_auth_url: %s\n" % e)
 ```
 
@@ -262,14 +262,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -282,7 +282,7 @@ reddit_app_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_reddit_app_by_id(reddit_app_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->options_reddit_app_by_id: %s\n" % e)
 ```
 
@@ -319,14 +319,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -338,7 +338,7 @@ api_instance = CredentialManager.RedditAppsApi(CredentialManager.ApiClient(confi
 try:
     # Check which methods are allowed
     api_instance.options_reddit_apps()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->options_reddit_apps: %s\n" % e)
 ```
 
@@ -372,14 +372,14 @@ Patch reddit_app details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -394,7 +394,7 @@ try:
     # Patch reddit_app details by ID
     api_response = api_instance.patch_reddit_app_by_id(reddit_app_id, body)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->patch_reddit_app_by_id: %s\n" % e)
 ```
 
@@ -432,14 +432,14 @@ Generate a reddit auth url
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -457,7 +457,7 @@ try:
     # Generate a reddit auth url
     api_response = api_instance.post_generate_auth_url(reddit_app_id, scopes, duration=duration, user_verification_user_id=user_verification_user_id, user_verification_id=user_verification_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->post_generate_auth_url: %s\n" % e)
 ```
 
@@ -498,14 +498,14 @@ Get Refresh Token by reddit app and redditor
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -520,7 +520,7 @@ try:
     # Get Refresh Token by reddit app and redditor
     api_response = api_instance.post_reddit_app_by_id(reddit_app_id, redditor)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->post_reddit_app_by_id: %s\n" % e)
 ```
 
@@ -558,14 +558,14 @@ Create a new Reddit App
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -589,7 +589,7 @@ try:
     # Create a new Reddit App
     api_response = api_instance.post_reddit_apps(app_name, client_id, user_agent, app_type, redirect_uri, client_secret=client_secret, short_name=short_name, app_description=app_description, state=state, enabled=enabled, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling RedditAppsApi->post_reddit_apps: %s\n" % e)
 ```
 

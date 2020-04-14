@@ -2,7 +2,7 @@ from ..mixins import BaseApp
 
 
 class DatabaseCredential(BaseApp):
-    _swagger_types = {**BaseApp._swagger_types,
+    _attr_types = {**BaseApp._attr_types,
         'database_username': 'str',
         'database_host': 'str',
         'database': 'str',

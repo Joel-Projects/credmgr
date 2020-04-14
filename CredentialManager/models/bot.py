@@ -2,14 +2,14 @@ from ..mixins import BaseApp
 
 
 class Bot(BaseApp):
-    _swagger_types = {
-        **BaseApp._swagger_types, 'reddit_app': 'RedditApp', 'sentry_token': 'SentryToken', 'database_credential': 'DatabaseCredential'
+    _attr_types = {
+        **BaseApp._attr_types, 'reddit_app': 'RedditApp', 'sentry_token': 'SentryToken', 'database_credential': 'DatabaseCredential'
         }
 
     _attribute_map = {
         **BaseApp._attribute_map, 'reddit_app': 'reddit_app', 'sentry_token': 'sentry_token', 'database_credential': 'database_credential'
         }
-    _editableAttrs = BaseApp._editableAttrs + ['reddit_app', 'sentry_token', 'database_credential']
+    _editableAttrs = BaseApp._editableAttrs + ['reddit_id', 'sentry_id', 'database_id']
     _path = '/bots'
     _canFetchByName = True
     def __init__(self, credmgr, id=None, app_name=None, enabled=None, owner_id=None, reddit_app=None, sentry_token=None, database_credential=None):
@@ -53,4 +53,11 @@ class Bot(BaseApp):
             owner = User(_credmgr, username=owner).id
         if owner:
             additionalParams['owner_id'] = owner
-        return _credmgr.post(Bot, '/bots', params={'app_name': name, **additionalParams})
+        return _credmgr.post('/bots', data={'app_name': name, **additionalParams})
+
+    def edit(self, **kwargs):
+        for key, value in kwargs.items():
+            if key in ['reddit_app', 'sentry_token', 'database_credential']:
+                newKey = f'{key.split("_")[0]}_id'
+                kwargs[newKey] = kwargs.pop(key)
+        super(Bot, self).edit(**kwargs)

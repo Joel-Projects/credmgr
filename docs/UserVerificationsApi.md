@@ -27,14 +27,14 @@ Delete a User Verification by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -47,7 +47,7 @@ user_verification_id = 56 # int |
 try:
     # Delete a User Verification by ID
     api_instance.delete_user_verification_by_id(user_verification_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->delete_user_verification_by_id: %s\n" % e)
 ```
 
@@ -84,14 +84,14 @@ Get User Verification details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -105,7 +105,7 @@ try:
     # Get User Verification details by ID
     api_response = api_instance.get_user_verification_by_id(user_verification_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->get_user_verification_by_id: %s\n" % e)
 ```
 
@@ -142,14 +142,14 @@ List of User Verifications
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -165,7 +165,7 @@ try:
     # List of User Verifications
     api_response = api_instance.get_user_verifications(limit=limit, offset=offset, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->get_user_verifications: %s\n" % e)
 ```
 
@@ -204,14 +204,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -223,7 +223,7 @@ api_instance = CredentialManager.UserVerificationsApi(CredentialManager.ApiClien
 try:
     # Check which methods are allowed
     api_instance.options_get_user_verification_by_user_id()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->options_get_user_verification_by_user_id: %s\n" % e)
 ```
 
@@ -257,14 +257,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -277,7 +277,7 @@ user_verification_id = 56 # int |
 try:
     # Check which methods are allowed
     api_instance.options_user_verification_by_id(user_verification_id)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->options_user_verification_by_id: %s\n" % e)
 ```
 
@@ -314,14 +314,14 @@ Check which methods are allowed
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -333,7 +333,7 @@ api_instance = CredentialManager.UserVerificationsApi(CredentialManager.ApiClien
 try:
     # Check which methods are allowed
     api_instance.options_user_verifications()
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->options_user_verifications: %s\n" % e)
 ```
 
@@ -367,14 +367,14 @@ Patch user_verification details by ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -389,7 +389,7 @@ try:
     # Patch user_verification details by ID
     api_response = api_instance.patch_user_verification_by_id(user_verification_id, body)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->patch_user_verification_by_id: %s\n" % e)
 ```
 
@@ -427,14 +427,14 @@ Get User Verification by User ID
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -449,7 +449,7 @@ try:
     # Get User Verification by User ID
     api_response = api_instance.post_get_user_verification_by_user_id(user_id, reddit_app_id=reddit_app_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->post_get_user_verification_by_user_id: %s\n" % e)
 ```
 
@@ -487,14 +487,14 @@ Create a new User Verification
 from __future__ import print_function
 import time
 import CredentialManager
-from CredentialManager.requestor import ApiException
+from CredentialManager.requestor import APIException
 from pprint import pprint
 
 # Configure API key authorization: apiKey
 config = CredentialManager.Configuration()
-config.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+config.api_key['X-API-TOKEN'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# config.api_key_prefix['X-API-KEY'] = 'Bearer'
+# config.api_key_prefix['X-API-TOKEN'] = 'Bearer'
 # Configure HTTP basic authorization: basic
 config = CredentialManager.Configuration()
 config.username = 'YOUR_USERNAME'
@@ -512,7 +512,7 @@ try:
     # Create a new User Verification
     api_response = api_instance.post_user_verifications(user_id, reddit_app_id, redditor=redditor, extra_data=extra_data, owner_id=owner_id)
     pprint(api_response)
-except ApiException as e:
+except APIException as e:
     print("Exception when calling UserVerificationsApi->post_user_verifications: %s\n" % e)
 ```
 

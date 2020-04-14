@@ -4,7 +4,7 @@ class EditableMixin:
     def edit(self, **kwargs):
         payload = []
         for attr in self._editableAttrs:
-            value = kwargs.get(attr, None)
-            if value:
-                payload.append({'op': 'replace', 'path': f'/{attr}', 'value': value})
-        return self._credmgr.patch(self, f'{self._path}/{id.id}', body=payload)
+            if attr in kwargs:
+                payload.append({'op': 'replace', 'path': f'/{attr}', 'value': kwargs[attr]})
+        self.__dict__.update(self._credmgr.patch(f'{self._path}/{self.id}', data=payload).__dict__)
+        return self
