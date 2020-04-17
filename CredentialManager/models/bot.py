@@ -17,7 +17,6 @@ class Bot(BaseApp):
         self.reddit_app = reddit_app
         self.sentry_token = sentry_token
         self.database_credential = database_credential
-        self.discriminator = None
 
     @staticmethod
     def _create(_credmgr, name, reddit_app, sentry_token, database_credential, owner=None):

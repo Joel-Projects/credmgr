@@ -532,7 +532,7 @@ class DatabaseCredentialsApi(object):
         **PERMISSIONS: At least Active user is required.**   Database Credentials are used for logging and error reporting in applications
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_database_credentials(app_name, database_username, database_host, database_flavor, async_req=True)
+        >>> thread = api.post_database_credentials(name, database_username, database_host, database_flavor, async_req=True)
         >>> result = thread.get()
 
 
@@ -560,7 +560,7 @@ class DatabaseCredentialsApi(object):
         **PERMISSIONS: At least Active user is required.**   Database Credentials are used for logging and error reporting in applications
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_database_credentials_with_http_info(app_name, database_username, database_host, database_flavor, async_req=True)
+        >>> thread = api.post_database_credentials_with_http_info(name, database_username, database_host, database_flavor, async_req=True)
         >>> result = thread.get()
 
 
@@ -575,7 +575,7 @@ class DatabaseCredentialsApi(object):
                  returns the request thread.
         '''
 
-        all_params = ['app_name', 'database_username', 'database_host', 'database_flavor', 'database', 'owner_id']
+        all_params = ['name', 'database_username', 'database_host', 'database_flavor', 'database', 'owner_id']
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -588,9 +588,9 @@ class DatabaseCredentialsApi(object):
                                 " to method post_database_credentials" % key)
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'app_name' is set
-        if ('app_name' not in params or params['app_name'] is None):
-            raise ValueError("Missing the required parameter `app_name` when calling `post_database_credentials`")
+        # verify the required parameter 'name' is set
+        if ('name' not in params or params['name'] is None):
+            raise ValueError("Missing the required parameter `name` when calling `post_database_credentials`")
         # verify the required parameter 'database_username' is set
         if ('database_username' not in params or params['database_username'] is None):
             raise ValueError("Missing the required parameter `database_username` when calling `post_database_credentials`")
@@ -611,8 +611,8 @@ class DatabaseCredentialsApi(object):
 
         form_params = []
         local_var_files = {}
-        if 'app_name' in params:
-            form_params.append(('app_name', params['app_name']))
+        if 'name' in params:
+            form_params.append(('name', params['name']))
         if 'database_username' in params:
             form_params.append(('database_username', params['database_username']))
         if 'database_host' in params:

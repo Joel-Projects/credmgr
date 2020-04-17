@@ -101,7 +101,10 @@ class Serializer(object):
         '''
         data = response.json()
         if isinstance(data, list) and all([i['resource_type'] == data[0]['resource_type'] for i in data]):
-            resourceType = f'list[{data[0]["resource_type"]}]'
+            if data:
+                resourceType = f'list[{data[0]["resource_type"]}]'
+            else:
+                return data
         else:
             resourceType = data.get('resource_type', 'dict')
         return self.__deserialize(data, resourceType)

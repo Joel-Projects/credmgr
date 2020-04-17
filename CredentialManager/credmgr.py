@@ -9,7 +9,6 @@ from .requestor import Requestor
 from .serializer import Serializer
 
 
-ApiToken = models.ApiToken
 User = models.User
 Bot = models.Bot
 RedditApp = models.RedditApp
@@ -87,19 +86,6 @@ class CredentialManager(object):
         self.serializer = Serializer(self)
         self.current_user = self.currentUser()
 
-        self.api_token = models.ApiTokenHelper(self)
-        '''An instance of :class:`.ApiTokenHelper`.
-
-        Provides the interface for interacting with :class:`.ApiToken`.
-        For example to get a ``api_token`` with ``id`` of ``1`` do:
-        
-        .. code-block:: python
-            api_token = credmgr.api_token(1)
-            print(api_token.id)
-        
-        .. note::
-            API Tokens cannot be created via the API.
-        '''
         self.user = models.UserHelper(self)
         '''An instance of :class:`.UserHelper`.
 
@@ -135,7 +121,7 @@ class CredentialManager(object):
         See :meth:`~.BotHelper.create` for the required params.
         '''
 
-        ## self.reddit_app = models.RedditAppHelper(self)
+        self.reddit_app = models.RedditAppHelper(self)
         '''An instance of :class:`.RedditAppHelper`.
 
         Provides the interface for interacting with :class:`.RedditApp`.
@@ -217,29 +203,26 @@ class CredentialManager(object):
         See :meth:`~.DatabaseCredentialHelper.create` for the required params.
         '''
 
-    def api_tokens(self, owner_id=None, limit=10, offset=0):
-        return ApiToken(self).list(limit=limit, offset=offset, owner_id=owner_id)
+    def users(self, batchSize=10, limit=None, owner=None):
+        return User(self).list(batchSize=batchSize, limit=limit)
 
-    def users(self, limit=10, offset=0):
-        return User(self).list(limit=limit, offset=offset)
+    def bots(self, batchSize=20, limit=None, owner=None):
+        return Bot(self).list(batchSize=batchSize, limit=limit, owner=owner)
 
-    def bots(self, owner_id=None, limit=10, offset=0):
-        return Bot(self).list(limit=limit, offset=offset, owner_id=owner_id)
+    def reddit_apps(self, batchSize=20, limit=None, owner=None):
+        return RedditApp(self).list(batchSize=batchSize, limit=limit, owner=owner)
 
-    def reddit_apps(self, owner_id=None, limit=10, offset=0):
-        return RedditApp(self).list(limit=limit, offset=offset, owner_id=owner_id)
+    def refresh_tokens(self, batchSize=20, limit=None, owner=None):
+        return RefreshToken(self).list(batchSize=batchSize, limit=limit, owner=owner)
 
-    def refresh_tokens(self, owner_id=None, limit=10, offset=0):
-        return RefreshToken(self).list(limit=limit, offset=offset, owner_id=owner_id)
+    def user_verifications(self, batchSize=20, limit=None, owner=None):
+        return UserVerification(self).list(batchSize=batchSize, limit=limit, owner=owner)
 
-    def user_verifications(self, owner_id=None, limit=10, offset=0):
-        return UserVerification(self).list(limit=limit, offset=offset, owner_id=owner_id)
+    def sentry_tokens(self, batchSize=20, limit=None, owner=None):
+        return SentryToken(self).list(batchSize=batchSize, limit=limit, owner=owner)
 
-    def sentry_tokens(self, owner_id=None, limit=10, offset=0):
-        return SentryToken(self).list(limit=limit, offset=offset, owner_id=owner_id)
-
-    def database_credentials(self, owner_id=None, limit=10, offset=0):
-        return DatabaseCredential(self).list(limit=limit, offset=offset, owner_id=owner_id)
+    def database_credentials(self, batchSize=20, limit=None, owner=None):
+        return DatabaseCredential(self).list(batchSize=batchSize, limit=limit, owner=owner)
 
     def currentUser(self):
         return self.get('/users/me')

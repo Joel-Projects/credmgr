@@ -555,7 +555,7 @@ class SentryTokensApi(object):
         **PERMISSIONS: At least Active user is required.**   Sentry Tokens are used for logging and error reporting in applications
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_sentry_tokens_with_http_info(app_name, dsn, async_req=True)
+        >>> thread = api.post_sentry_tokens_with_http_info(name, dsn, async_req=True)
         >>> result = thread.get()
 
 
@@ -568,7 +568,7 @@ class SentryTokensApi(object):
                  returns the request thread.
         '''
 
-        all_params = ['app_name', 'dsn', 'enabled', 'owner_id']
+        all_params = ['name', 'dsn', 'enabled', 'owner_id']
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -581,9 +581,9 @@ class SentryTokensApi(object):
                                 " to method post_sentry_tokens" % key)
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'app_name' is set
-        if ('app_name' not in params or params['app_name'] is None):
-            raise ValueError("Missing the required parameter `app_name` when calling `post_sentry_tokens`")
+        # verify the required parameter 'name' is set
+        if ('name' not in params or params['name'] is None):
+            raise ValueError("Missing the required parameter `name` when calling `post_sentry_tokens`")
         # verify the required parameter 'dsn' is set
         if ('dsn' not in params or params['dsn'] is None):
             raise ValueError("Missing the required parameter `dsn` when calling `post_sentry_tokens`")
@@ -598,8 +598,8 @@ class SentryTokensApi(object):
 
         form_params = []
         local_var_files = {}
-        if 'app_name' in params:
-            form_params.append(('app_name', params['app_name']))
+        if 'name' in params:
+            form_params.append(('name', params['name']))
         if 'dsn' in params:
             form_params.append(('dsn', params['dsn']))
         if 'enabled' in params:

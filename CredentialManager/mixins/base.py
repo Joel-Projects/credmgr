@@ -14,7 +14,7 @@ class BaseModel(object):
 
     def __getattr__(self, attribute):
         '''Return the value of `attribute`.'''
-        if not attribute.startswith("_"):
+        if not attribute.startswith('_'):
             if not self.fetched:
                 self.fetch()
             return self.__dict__.get(attribute, None)
@@ -35,11 +35,19 @@ class BaseModel(object):
         else:
             self.get(self.id)
 
-    def list(self, limit=10, offset=0, owner_id=None):
-        params = dict(limit=limit, offset=offset)
-        if owner_id:
-            params['owner_id'] = owner_id
-        return self._credmgr.get(self._path, params=params)
+    def list(self, batchSize=20, limit=None, owner=None):
+        from CredentialManager.models import User
+        from CredentialManager.models.helpers import Paginator
+        owner_id = None
+        if isinstance(owner, User):
+            owner_id = owner.id
+        elif isinstance(owner, int):
+            owner_id = owner
+        elif isinstance(owner, str):
+            user = self._credmgr.user(owner)
+            if user:
+                owner_id = user.id
+        return Paginator(self._credmgr, self.__class__, batchSize=batchSize, limit=limit, owner=owner_id)
 
     def to_dict(self):
         result = {}
@@ -47,11 +55,11 @@ class BaseModel(object):
         for attr, _ in self._attr_types.items():
             value = getattr(self, attr)
             if isinstance(value, list):
-                result[attr] = list(map(lambda x: x.to_dict() if hasattr(x, "to_dict") else x, value))
-            elif hasattr(value, "to_dict"):
+                result[attr] = list(map(lambda x: x.to_dict() if hasattr(x, 'to_dict') else x, value))
+            elif hasattr(value, 'to_dict'):
                 result[attr] = value.to_dict()
             elif isinstance(value, dict):
-                result[attr] = dict(map(lambda item: (item[0], item[1].to_dict()) if hasattr(item[1], "to_dict") else item, value.items()))
+                result[attr] = dict(map(lambda item: (item[0], item[1].to_dict()) if hasattr(item[1], 'to_dict') else item, value.items()))
             else:
                 result[attr] = value
         if issubclass(type(self), dict):

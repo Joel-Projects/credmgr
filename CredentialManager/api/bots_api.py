@@ -626,7 +626,7 @@ class BotsApi(object):
         **PERMISSIONS: At least Active user is required.**   Bots are used for grouping apps into a single request
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_bots_with_http_info(app_name, async_req=True)
+        >>> thread = api.post_bots_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
 
@@ -640,7 +640,7 @@ class BotsApi(object):
                  returns the request thread.
         '''
 
-        all_params = ['app_name', 'reddit_id', 'sentry_id', 'database_id', 'owner_id']
+        all_params = ['name', 'reddit_id', 'sentry_id', 'database_id', 'owner_id']
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -653,9 +653,9 @@ class BotsApi(object):
                                 " to method post_bots" % key)
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'app_name' is set
-        if 'app_name' not in params or params['app_name'] is None:
-            raise ValueError("Missing the required parameter `app_name` when calling `post_bots`")
+        # verify the required parameter 'name' is set
+        if 'name' not in params or params['name'] is None:
+            raise ValueError("Missing the required parameter `name` when calling `post_bots`")
 
         collection_formats = {}
 
@@ -667,8 +667,8 @@ class BotsApi(object):
 
         form_params = []
         local_var_files = {}
-        if 'app_name' in params:
-            form_params.append(('app_name', params['app_name']))
+        if 'name' in params:
+            form_params.append(('name', params['name']))
         if 'reddit_id' in params:
             form_params.append(('reddit_id', params['reddit_id']))
         if 'sentry_id' in params:
@@ -699,7 +699,7 @@ class BotsApi(object):
         **PERMISSIONS: At least Active user is required.**   Only Admins can specify ``owner_id`` to get other users' Bot details. If ``owner_id`` is not specified, only your Bots will be queried.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_get_bot_by_name(app_name, async_req=True)
+        >>> thread = api.post_get_bot_by_name(name, async_req=True)
         >>> result = thread.get()
 
 
@@ -722,7 +722,7 @@ class BotsApi(object):
         **PERMISSIONS: At least Active user is required.**   Only Admins can specify ``owner_id`` to get other users' Bot details. If ``owner_id`` is not specified, only your Bots will be queried.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_get_bot_by_name_with_http_info(app_name, async_req=True)
+        >>> thread = api.post_get_bot_by_name_with_http_info(name, async_req=True)
         >>> result = thread.get()
 
 
@@ -733,7 +733,7 @@ class BotsApi(object):
                  returns the request thread.
         '''
 
-        all_params = ['app_name', 'owner_id']
+        all_params = ['name', 'owner_id']
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -746,9 +746,9 @@ class BotsApi(object):
                                 " to method post_get_bot_by_name" % key)
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'app_name' is set
-        if 'app_name' not in params or params['app_name'] is None:
-            raise ValueError("Missing the required parameter `app_name` when calling `post_get_bot_by_name`")
+        # verify the required parameter 'name' is set
+        if 'name' not in params or params['name'] is None:
+            raise ValueError("Missing the required parameter `name` when calling `post_get_bot_by_name`")
 
         collection_formats = {}
 
@@ -760,8 +760,8 @@ class BotsApi(object):
 
         form_params = []
         local_var_files = {}
-        if 'app_name' in params:
-            form_params.append(('app_name', params['app_name']))
+        if 'name' in params:
+            form_params.append(('name', params['name']))
         if 'owner_id' in params:
             form_params.append(('owner_id', params['owner_id']))
 
