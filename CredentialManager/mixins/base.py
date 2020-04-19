@@ -1,9 +1,14 @@
+from CredentialManager.models.utils import resolveUser
+
+
 class BaseModel(object):
-    _attr_types = {'id': 'int'}
+    _attrTypes = {'id': 'int'}
     _attribute_map = {'id': 'id'}
     _path = None
     _nameAttr = None
     _canFetchByName = False
+    _credmgrCallable = None
+    _getByNamePath = 'by_name'
 
     def __init__(self, credmgr, id=None, name=None):
         self._credmgr = credmgr
@@ -26,7 +31,7 @@ class BaseModel(object):
         self.fetched = True
 
     def getByName(self, name):
-        self.__dict__ = self._credmgr.post(f'{self._path}/by_name', data={self._nameAttr: name}).__dict__
+        self.__dict__ = self._credmgr.post(f'{self._path}/{self._getByNamePath}', data={self._nameAttr: name}).__dict__
         self.fetched = True
 
     def fetch(self, byName=False):
@@ -35,24 +40,15 @@ class BaseModel(object):
         else:
             self.get(self.id)
 
-    def list(self, batchSize=20, limit=None, owner=None):
-        from CredentialManager.models import User
+    @resolveUser()
+    def listItems(self, batchSize=20, limit=None, owner=None):
         from CredentialManager.models.helpers import Paginator
-        owner_id = None
-        if isinstance(owner, User):
-            owner_id = owner.id
-        elif isinstance(owner, int):
-            owner_id = owner
-        elif isinstance(owner, str):
-            user = self._credmgr.user(owner)
-            if user:
-                owner_id = user.id
-        return Paginator(self._credmgr, self.__class__, batchSize=batchSize, limit=limit, owner=owner_id)
+        return Paginator(self._credmgr, self.__class__, batchSize=batchSize, limit=limit, owner=owner)
 
     def to_dict(self):
         result = {}
 
-        for attr, _ in self._attr_types.items():
+        for attr, _ in self._attrTypes.items():
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(lambda x: x.to_dict() if hasattr(x, 'to_dict') else x, value))

@@ -1,17 +1,17 @@
+from .utils import resolveUser
 from ..mixins import BaseApp
 
 
 class Bot(BaseApp):
-    _attr_types = {
-        **BaseApp._attr_types, 'reddit_app': 'RedditApp', 'sentry_token': 'SentryToken', 'database_credential': 'DatabaseCredential'
+    _attrTypes = {
+        **BaseApp._attrTypes, 'reddit_app': 'RedditApp', 'sentry_token': 'SentryToken', 'database_credential': 'DatabaseCredential'
         }
 
-    _attribute_map = {
-        **BaseApp._attribute_map, 'reddit_app': 'reddit_app', 'sentry_token': 'sentry_token', 'database_credential': 'database_credential'
-        }
     _editableAttrs = BaseApp._editableAttrs + ['reddit_id', 'sentry_id', 'database_id']
     _path = '/bots'
+    _credmgrCallable = 'bot'
     _canFetchByName = True
+
     def __init__(self, credmgr, id=None, app_name=None, enabled=None, owner_id=None, reddit_app=None, sentry_token=None, database_credential=None):
         super(Bot, self).__init__(credmgr, id, app_name, enabled, owner_id)
         self.reddit_app = reddit_app
@@ -19,6 +19,7 @@ class Bot(BaseApp):
         self.database_credential = database_credential
 
     @staticmethod
+    @resolveUser()
     def _create(_credmgr, name, reddit_app, sentry_token, database_credential, owner=None):
         '''Create a new Bot
 
@@ -46,10 +47,6 @@ class Bot(BaseApp):
             database_credential = database_credential.id
         if database_credential:
             additionalParams['database_id'] = database_credential
-        if isinstance(owner, User):
-            owner = owner.id
-        elif isinstance(owner, str):
-            owner = User(_credmgr, username=owner).id
         if owner:
             additionalParams['owner_id'] = owner
         return _credmgr.post('/bots', data={'app_name': name, **additionalParams})

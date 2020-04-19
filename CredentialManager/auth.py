@@ -1,5 +1,6 @@
 from requests.auth import AuthBase
 
+
 class ApiTokenAuth(AuthBase):
 
     def __init__(self, api_token):

@@ -1,7 +1,8 @@
-import requests
 import logging
 
+import requests
 from requests import codes
+
 from .const import __version__
 from .exceptions import Conflict, Forbidden, InvalidJSON, InvalidRequest, NotFound, ServerError, Unauthorized
 
@@ -30,7 +31,7 @@ class Requestor(object):
         504: ServerError,
         520: ServerError,
         522: ServerError
-    }
+        }
     _successCodes = [200, 201, 202, 204]
 
     def __init__(self, credmgrUrl, auth, session=None, **session_kwargs):

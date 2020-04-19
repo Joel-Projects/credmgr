@@ -1,6 +1,6 @@
+from . import Bot, RedditApp, User, UserVerification
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
-from ..models import Bot, RedditApp, User
 
 
 class Paginator:
@@ -61,7 +61,7 @@ class Paginator:
             self._completed = True
 
 class BaseHelper(BaseModel):
-    MODEL = None
+    _model = None
 
     def __call__(self, id=None, name=None, batchSize=20, limit=None, owner=None):
         kwargs = {}
@@ -73,18 +73,18 @@ class BaseHelper(BaseModel):
         if id:
             kwargs['id'] = id
         if name:
-            if self.MODEL._canFetchByName:
-                kwargs[self.MODEL._nameAttr] = name
+            if self._model._canFetchByName:
+                kwargs[self._model._nameAttr] = name
             else:
-                raise InitializationError(f'Cannot get {self.MODEL.__name__!r} by name')
+                raise InitializationError(f'Cannot get {self._model.__name__!r} by name')
         if not (id or name):
-            return self.MODEL(self._credmgr).list(batchSize=batchSize, limit=limit, owner=owner)
-        item = self.MODEL(self._credmgr, **kwargs)
+            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
+        item = self._model(self._credmgr, **kwargs)
         item.fetch(byName)
         return item
 
 class UserHelper(BaseHelper):
-    MODEL = User
+    _model = User
 
     def __call__(self, id=None, name=None, batchSize=20, limit=None):
         kwargs = {}
@@ -98,13 +98,12 @@ class UserHelper(BaseHelper):
         if name:
             kwargs['username'] = name
         if not (id or name):
-            return User(self._credmgr).list(batchSize=batchSize, limit=limit)
+            return User(self._credmgr).listItems(batchSize=batchSize, limit=limit)
         item = User(self._credmgr, **kwargs)
         item.fetch(byName)
         return item
 
-    def create(self, username, password, default_settings=None, is_admin=False, is_active=True, is_regular_user=True, is_internal=False,
-               reddit_username=None) -> User:
+    def create(self, username, password, default_settings=None, is_admin=False, is_active=True, is_regular_user=True, is_internal=False, reddit_username=None) -> User:
         '''Create a new user
 
         **PERMISSIONS: Admin role is required.**
@@ -112,25 +111,27 @@ class UserHelper(BaseHelper):
         :param str username: Username for new user (Example: ```spaz```) (required)
         :param str password: Password for new user (Example: ```supersecurepassword```) (required)
         :param str default_settings: Default values to use for new apps (Example: ```{"database_flavor": "postgres", "database_host": "localhost"}```)
-        :param bool is_admin: Is the user an admin? Allows the user to see all objects and create users (Default: ``false``)
-        :param bool is_active: Is the user active? Allows the user to sign in (Default: ``true``)
+        :param bool is_admin: Is the user an admin? Allows the user to see all objects and create users (Default: ``False``)
+        :param bool is_active: Is the user active? Allows the user to sign in (Default: ``True``)
         :param bool is_regular_user: (Internal use only)
         :param bool is_internal: (Internal use only)
         :param str reddit_username:
         :return: User
         '''
 
-        return User._create(self._credmgr, username, password, default_settings, is_admin, is_active, is_regular_user, is_internal, reddit_username)
+        return self._model._create(self._credmgr, username, password, default_settings, is_admin, is_active, is_regular_user, is_internal, reddit_username)
 
 class BotHelper(BaseHelper):
-    MODEL = Bot
+    _model = Bot
 
-    def create(self, name, reddit_app=None, sentry_token=None, database_credential=None, owner=None) -> Bot:
+    def create(self, app_name, reddit_app=None, sentry_token=None, database_credential=None, owner=None) -> Bot:
         '''Create a new Bot
 
-        **PERMISSIONS: At least Active user is required.**   Bots are used for grouping apps into a single request
+        **PERMISSIONS: At least Active user is required.**
 
-        :param str name: Name of the Bot (required)
+        Bots are used for grouping apps into a single request
+
+        :param str app_name: Name of the Bot (required)
         :param Union[RedditApp,int] reddit_app: Reddit App the bot will use
         :param Union[SentryToken,int] sentry_token: Sentry Token the bot will use
         :param Union[DatabaseCredential,int] database_credential: Database Credentials the bot will use
@@ -138,29 +139,65 @@ class BotHelper(BaseHelper):
         :return: Bot
         '''
 
-        return self.MODEL._create(self._credmgr, name, reddit_app, sentry_token, database_credential, owner)
+        return self._model._create(self._credmgr, app_name, reddit_app, sentry_token, database_credential, owner)
 
 class RedditAppHelper(BaseHelper):
-    MODEL = RedditApp
+    _model = RedditApp
 
-    def create(self, name, client_id, user_agent, app_type, redirect_uri, client_secret=None, short_name=None, app_description=None, enabled=True,
-               owner=None) -> RedditApp:
+    def create(self, app_name, client_id, user_agent=None, app_type='web', redirect_uri='https://credmgr.jesassn.org/oauth2/reddit_callback', client_secret=None, short_name=None, app_description=None, enabled=True, owner=None) -> RedditApp:
         '''Create a new RedditApp
 
-        **PERMISSIONS: At least Active user is required.**   Reddit Apps are used for interacting with reddit
+        **PERMISSIONS: At least Active user is required.**
 
-        :param str name: (required)
+        Reddit Apps are used for interacting with reddit
+
+        :param str app_name: (required)
         :param str client_id: Client ID of the Reddit App (required)
-        :param str user_agent: User agent used for requests to Reddit's API (required)
-        :param str app_type: Type of the app. One of `web`, `installed`, or `script` (required)
-        :param str redirect_uri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (required)
+        :param str user_agent: User agent used for requests to Reddit's API (required, defaults to user set default, then to 'python:{app_name} by /u/{redditUsername}' if currentUser.reddit_username is set or 'python:{app_name}' if it is not set)
+        :param str app_type: Type of the app. One of `web`, `installed`, or `script` (default: 'web')
+        :param str redirect_uri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (default: 'https://credmgr.jesassn.org/oauth2/reddit_callback')
         :param str client_secret: Client secret of the Reddit App
         :param str short_name: Short name of the Reddit App
         :param str app_description: Description of the Reddit App
         :param bool enabled: Allows the app to be used
-        :param int owner_id: Owner of the app. Requires Admin to create for other users.
+        :param int owner: Owner of the app. Requires Admin to create for other users.
         :return: RedditApp
         '''
+        if not user_agent:
+            redditUsername = self._credmgr.currentUser.reddit_username
+            redditUsernameStr = ''
+            if redditUsername:
+                redditUsernameStr = f' by /u/{redditUsername}'
+            user_agent = self._credmgr.getUserDefault('user_agent', f'python:{app_name}{redditUsernameStr}')
+        return self._model._create(self._credmgr, app_name, client_id, user_agent, app_type, redirect_uri, client_secret, short_name, app_description, enabled, owner)
 
-        return RedditApp._create(self._credmgr, name, client_id, user_agent, app_type, redirect_uri, client_secret, short_name, app_description,
-                                 enabled, owner)
+class UserVerificationHelper(BaseHelper):
+    _model = UserVerification
+
+    def create(self, user_id, reddit_app_id, redditor=None, extra_data=None, owner=None) -> RedditApp:
+        '''Create a new User Verification
+
+        **PERMISSIONS: At least Active user is required.**
+
+        User Verifications for verifying a redditor with a User ID
+
+        :param str user_id: User ID to associate Redditor with (required)
+        :param int reddit_app_id: Reddit app the User Verification is for (required)
+        :param str redditor: Redditor the User Verification is for
+        :param str extra_data: Extra JSON data to include with verification
+        :param int owner: Owner of the verification. Requires Admin to create for other users.
+        :return: UserVerification
+        '''
+        return self._model._create(self._credmgr, user_id=user_id, reddit_app=reddit_app_id, redditor=redditor, extra_data=extra_data, owner=owner)
+
+    def __call__(self, user_id=None, reddit_app_id=None, batchSize=20, limit=None, owner=None):
+        kwargs = {}
+        if user_id:
+            kwargs['user_id'] = user_id
+        if reddit_app_id:
+            kwargs['reddit_app_id'] = reddit_app_id
+        if not user_id:
+            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
+        item = self._model(self._credmgr, **kwargs)
+        item.fetch(True)
+        return item

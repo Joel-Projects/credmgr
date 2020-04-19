@@ -1,11 +1,8 @@
-import re
-
 # python 2 and python 3 compatibility library
 from CredentialManager.api_client import ApiClient
 
 
 class BotsApi(object):
-
 
     def __init__(self, api_client=None):
         if api_client is None:
@@ -85,8 +82,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -168,8 +164,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -237,11 +232,9 @@ class BotsApi(object):
         if 'limit' in params and params['limit'] > 100:
             raise ValueError("Invalid value for parameter `limit` when calling `get_bots`, must be a value less than or equal to `100`")
         if 'limit' in params and params['limit'] < 1:
-            raise ValueError(
-                "Invalid value for parameter `limit` when calling `get_bots`, must be a value greater than or equal to `1`")
+            raise ValueError("Invalid value for parameter `limit` when calling `get_bots`, must be a value greater than or equal to `1`")
         if 'offset' in params and params['offset'] < 0:
-            raise ValueError(
-                "Invalid value for parameter `offset` when calling `get_bots`, must be a value greater than or equal to `0`")
+            raise ValueError("Invalid value for parameter `offset` when calling `get_bots`, must be a value greater than or equal to `0`")
         collection_formats = {}
 
         path_params = {}
@@ -264,8 +257,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -347,8 +339,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -423,8 +414,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -499,8 +489,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -589,8 +578,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -683,8 +671,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/x-www-form-urlencoded', 'multipart/form-data'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/x-www-form-urlencoded', 'multipart/form-data'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -770,8 +757,7 @@ class BotsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/x-www-form-urlencoded', 'multipart/form-data'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/x-www-form-urlencoded', 'multipart/form-data'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']

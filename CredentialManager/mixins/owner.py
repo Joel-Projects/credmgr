@@ -1,5 +1,3 @@
-
-
 class OwnerMixin:
     _editableAttrs = []
 

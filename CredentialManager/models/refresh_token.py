@@ -2,8 +2,8 @@ from CredentialManager.mixins import BaseModel, DeletableMixin
 
 
 class RefreshToken(BaseModel, DeletableMixin):
-
-    _attr_types = {**BaseModel._attr_types,
+    _attrTypes = {
+        **BaseModel._attrTypes,
         'reddit_app_id': 'str',
         'redditor': 'str',
         'refresh_token': 'str',
@@ -14,18 +14,9 @@ class RefreshToken(BaseModel, DeletableMixin):
         'revoked_at': 'datetime'
         }
 
-    _attribute_map = {**BaseModel._attribute_map,
-        'id': 'id',
-        'reddit_app_id': 'reddit_app_id',
-        'redditor': 'redditor',
-        'refresh_token': 'refresh_token',
-        'owner_id': 'owner_id',
-        'scopes': 'scopes',
-        'issued_at': 'issued_at',
-        'revoked': 'revoked',
-        'revoked_at': 'revoked_at'
-        }
     _path = '/refresh_tokens'
+    _credmgrCallable = 'refresh_token'
+
     def __init__(self, credmgr, id=None, reddit_app_id=None, redditor=None, refresh_token=None, owner_id=None, scopes=None, issued_at=None,
                  revoked=None, revoked_at=None):
         super().__init__(credmgr, id)

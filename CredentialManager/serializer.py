@@ -1,9 +1,5 @@
 import datetime
-import json
 import re
-from json import JSONDecodeError
-
-from . import __version__
 
 import CredentialManager.models
 from .exceptions import SerializerException
@@ -15,18 +11,13 @@ class Serializer(object):
     PRIMITIVE_TYPES = (float, bool, bytes, str, int)
     NATIVE_TYPES_MAPPING = {
         'int': int,
-        'long': int,
-        'float': float,
         'str': str,
         'bool': bool,
-        'date': datetime.date,
         'datetime': datetime.datetime,
         'object': object,
         'dict': dict,
         'list': list
         }
-
-
 
     def __init__(self, credmgr):
         '''Initialize an Objector instance.
@@ -158,27 +149,23 @@ class Serializer(object):
         :return: model object.
         '''
 
-        if not objectType._attr_types and not self.__hasattr(objectType, 'get_real_child_model'):
+        if not objectType._attrTypes:
             return data
 
         kwargs = {}
-        if objectType._attr_types is not None:
-            for attr, attr_type in objectType._attr_types.items():
-                if data is not None and objectType._attribute_map[attr] in data and isinstance(data, (list, dict)):
-                    value = data[objectType._attribute_map[attr]]
-                    kwargs[attr] = self.__deserialize(value, attr_type)
+        if objectType._attrTypes is not None:
+            for attr, attrType in objectType._attrTypes.items():
+                if data is not None and attr in data and isinstance(data, (list, dict)):
+                    value = data[attr]
+                    kwargs[attr] = self.__deserialize(value, attrType)
         try:
             instance = objectType(self._credmgr, **kwargs)
         except TypeError:
             for key, value in kwargs.items():
                 setattr(objectType, key, value)
             instance = objectType
-        if isinstance(instance, dict) and objectType._attr_types is not None and isinstance(data, dict):
+        if isinstance(instance, dict) and objectType._attrTypes is not None and isinstance(data, dict):
             for key, value in data.items():
-                if key not in objectType._attr_types:
+                if key not in objectType._attrTypes:
                     instance[key] = value
-        if self.__hasattr(instance, 'get_real_child_model'):
-            objectType_name = instance.get_real_child_model(data)
-            if objectType_name:
-                instance = self.__deserialize(data, objectType_name)
         return instance

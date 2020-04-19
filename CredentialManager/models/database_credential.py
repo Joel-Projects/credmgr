@@ -2,7 +2,8 @@ from ..mixins import BaseApp
 
 
 class DatabaseCredential(BaseApp):
-    _attr_types = {**BaseApp._attr_types,
+    _attrTypes = {
+        **BaseApp._attrTypes,
         'database_username': 'str',
         'database_host': 'str',
         'database': 'str',
@@ -19,39 +20,12 @@ class DatabaseCredential(BaseApp):
         'private_key_passphrase': 'str'
         }
 
-    _attribute_map = {**BaseApp._attribute_map,
-        'database_username': 'database_username',
-        'database_host': 'database_host',
-        'database': 'database',
-        'database_flavor': 'database_flavor',
-        'database_port': 'database_port',
-        'database_password': 'database_password',
-        'use_ssh': 'use_ssh',
-        'ssh_host': 'ssh_host',
-        'ssh_port': 'ssh_port',
-        'ssh_username': 'ssh_username',
-        'ssh_password': 'ssh_password',
-        'use_ssh_key': 'use_ssh_key',
-        'private_key': 'private_key',
-        'private_key_passphrase': 'private_key_passphrase'
-        }
-    editableAttrs = BaseApp._editableAttrs + [
-        'database_username',
-        'database_host',
-        'database',
-        'database_flavor',
-        'database_port',
-        'database_password',
-        'use_ssh',
-        'ssh_host',
-        'ssh_port',
-        'ssh_username',
-        'ssh_password',
-        'use_ssh_key',
-        'private_key',
-        'private_key_passphrase',
-         ]
+    _editableAttrs = BaseApp._editableAttrs + ['database_username', 'database_host', 'database', 'database_flavor', 'database_port',
+        'database_password', 'use_ssh', 'ssh_host', 'ssh_port', 'ssh_username', 'ssh_password', 'use_ssh_key', 'private_key',
+        'private_key_passphrase']
     _path = '/database_credentials'
+    _credmgrCallable = 'database_credential'
+
     def __init__(self, credmgr, id=None, app_name=None, database_username=None, database_host=None, database=None, database_flavor=None,
                  database_port=None, database_password=None, use_ssh=None, ssh_host=None, ssh_port=None, ssh_username=None, ssh_password=None,
                  use_ssh_key=None, private_key=None, private_key_passphrase=None, enabled=None, owner_id=None):

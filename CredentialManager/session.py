@@ -2,7 +2,6 @@
 import logging
 import random
 import time
-from copy import deepcopy
 from urllib.parse import urljoin
 
 from requests.exceptions import ChunkedEncodingError, ConnectionError, ReadTimeout
@@ -62,14 +61,7 @@ class Session(object):
     '''The low-level connection interface to reddit's API.'''
 
     RETRY_EXCEPTIONS = (ChunkedEncodingError, ConnectionError, ReadTimeout)
-    RETRY_STATUSES = {
-        520,
-        522,
-        codes['bad_gateway'],
-        codes['gateway_timeout'],
-        codes['internal_server_error'],
-        codes['service_unavailable'],
-    }
+    RETRY_STATUSES = {520, 522, codes['bad_gateway'], codes['gateway_timeout'], codes['internal_server_error'], codes['service_unavailable'], }
     STATUS_EXCEPTIONS = {
         codes['bad_gateway']: ServerError,
         codes['bad_request']: BadRequest,
@@ -86,7 +78,7 @@ class Session(object):
         codes['unavailable_for_legal_reasons']: UnavailableForLegalReasons,
         520: ServerError,
         522: ServerError,
-    }
+        }
     SUCCESS_STATUSES = {codes['created'], codes['ok']}
 
     @staticmethod
@@ -121,11 +113,13 @@ class Session(object):
         else:
             status = response.status_code
         log.warning(f'Retrying due to {status} status: {method} {url}')
-        return self._request_with_retries(data=data, files=files, json=json, method=method, params=params, url=url, retry_strategy_state=retry_strategy_state.consume_available_retry())
+        return self._request_with_retries(data=data, files=files, json=json, method=method, params=params, url=url,
+                                          retry_strategy_state=retry_strategy_state.consume_available_retry())
 
     def _make_request(self, data, files, json, method, params, retry_strategy_state, url):
         try:
-            response = self._rate_limiter.call(self._requestor.request, self._set_header_callback, method, url, allow_redirects=False, data=data, files=files, json=json, params=params, )
+            response = self._rate_limiter.call(self._requestor.request, self._set_header_callback, method, url, allow_redirects=False, data=data,
+                                               files=files, json=json, params=params, )
             log.debug(f"Response: {response.status_code} ({response.headers.get('content-length')} bytes)")
             return response, None
         except RequestException as exception:

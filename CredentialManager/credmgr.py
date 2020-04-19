@@ -84,8 +84,9 @@ class CredentialManager(object):
 
         self._requestor = Requestor(self._host, self._auth, session_class, **session_kwargs)
         self.serializer = Serializer(self)
-        self.current_user = self.currentUser()
-
+        self.currentUser: User = self.current_user()
+        self.userDefaults = self.currentUser.default_settings
+        self.getUserDefault = lambda key, default: self.userDefaults.get(key, default)
         self.user = models.UserHelper(self)
         '''An instance of :class:`.UserHelper`.
 
@@ -151,7 +152,7 @@ class CredentialManager(object):
         .. note::
             Refresh tokens cannot be manually created.
         '''
-        ## self.user_verification = models.UserVerificationHelper(self)
+        self.user_verification = models.UserVerificationHelper(self)
         '''An instance of :class:`.UserVerificationHelper`.
 
         Provides the interface for interacting with :class:`.UserVerification`.
@@ -203,28 +204,28 @@ class CredentialManager(object):
         See :meth:`~.DatabaseCredentialHelper.create` for the required params.
         '''
 
-    def users(self, batchSize=10, limit=None, owner=None):
-        return User(self).list(batchSize=batchSize, limit=limit)
+    def users(self, batchSize=10, limit=None):
+        return User(self).listItems(batchSize=batchSize, limit=limit)
 
     def bots(self, batchSize=20, limit=None, owner=None):
-        return Bot(self).list(batchSize=batchSize, limit=limit, owner=owner)
+        return Bot(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def reddit_apps(self, batchSize=20, limit=None, owner=None):
-        return RedditApp(self).list(batchSize=batchSize, limit=limit, owner=owner)
+        return RedditApp(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def refresh_tokens(self, batchSize=20, limit=None, owner=None):
-        return RefreshToken(self).list(batchSize=batchSize, limit=limit, owner=owner)
+        return RefreshToken(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def user_verifications(self, batchSize=20, limit=None, owner=None):
-        return UserVerification(self).list(batchSize=batchSize, limit=limit, owner=owner)
+        return UserVerification(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def sentry_tokens(self, batchSize=20, limit=None, owner=None):
-        return SentryToken(self).list(batchSize=batchSize, limit=limit, owner=owner)
+        return SentryToken(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def database_credentials(self, batchSize=20, limit=None, owner=None):
-        return DatabaseCredential(self).list(batchSize=batchSize, limit=limit, owner=owner)
+        return DatabaseCredential(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
-    def currentUser(self):
+    def current_user(self) -> User:
         return self.get('/users/me')
 
     def get(self, path, params=None):

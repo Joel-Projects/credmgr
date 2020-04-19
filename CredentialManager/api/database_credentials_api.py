@@ -1,11 +1,8 @@
-import re
-
 # python 2 and python 3 compatibility library
 from CredentialManager.api_client import ApiClient
 
 
 class DatabaseCredentialsApi(object):
-
 
     def __init__(self, api_client=None):
         if api_client is None:
@@ -85,8 +82,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -168,8 +164,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -266,8 +261,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -349,8 +343,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -425,8 +418,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -515,8 +507,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/json'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
@@ -550,8 +541,7 @@ class DatabaseCredentialsApi(object):
         if kwargs.get('async_req'):
             return self.post_database_credentials_with_http_info(app_name, database_username, database_host, database_flavor, **kwargs)
         else:
-            (data) = self.post_database_credentials_with_http_info(app_name, database_username, database_host, database_flavor,
-                                                                   **kwargs)
+            (data) = self.post_database_credentials_with_http_info(app_name, database_username, database_host, database_flavor, **kwargs)
             return data
 
     def post_database_credentials_with_http_info(self, app_name, database_username, database_host, database_flavor, **kwargs):
@@ -629,8 +619,7 @@ class DatabaseCredentialsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(['application/json'])
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(
-            ['application/x-www-form-urlencoded', 'multipart/form-data'])
+        header_params['Content-Type'] = self.api_client.select_header_content_type(['application/x-www-form-urlencoded', 'multipart/form-data'])
 
         # Authentication setting
         auth_settings = ['apiKey', 'basic']
