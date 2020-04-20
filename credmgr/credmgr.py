@@ -139,6 +139,7 @@ class CredentialManager(object):
         
         See :meth:`~.RedditAppHelper.create` for the required params.
         '''
+
         ## self.refreshToken = models.RefreshTokenHelper(self)
         '''An instance of :class:`.RefreshTokenHelper`.
 
@@ -170,7 +171,8 @@ class CredentialManager(object):
         
         See :meth:`~.UserVerificationHelper.create` for the required params.
         '''
-        ## self.sentryToken = models.SentryTokenHelper(self)
+
+        self.sentryToken = models.SentryTokenHelper(self)
         '''An instance of :class:`.SentryTokenHelper`.
 
         Provides the interface for interacting with :class:`.SentryToken`.
@@ -187,7 +189,8 @@ class CredentialManager(object):
         
         See :meth:`~.SentryTokenHelper.create` for the required params.
         '''
-        ## self.databaseCredential = models.DatabaseCredentialHelper(self)
+
+        self.databaseCredential = models.DatabaseCredentialHelper(self)
         '''An instance of :class:`.DatabaseCredentialHelper`.
 
         Provides the interface for interacting with :class:`.DatabaseCredential`.

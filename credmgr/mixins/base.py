@@ -49,6 +49,7 @@ class BaseModel(object):
         result = {}
 
         for attr, _ in self._attrTypes.items():
+            attr = ''.join(attr.split('_')[:1] + [i.capitalize() for i in attr.split('_')[1:]])
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(lambda x: x.toDict() if hasattr(x, 'toDict') else x, value))

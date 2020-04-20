@@ -47,18 +47,6 @@ class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
         :param dict extraData: Extra JSON data to include with verification
         :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
         :return: UserVerification
-
-        To create an User Verification do:
-
-        .. code:: python
-            bot = credmgr.bot('botName')
-            userVerification = credmgr.userVerification.create('userId',
-
-        To get a redditor from a ``userId`` do:
-
-        .. code:: python
-            credmgr.
-
         '''
 
         data = {'user_id': userId, 'reddit_app_id': resolveModelFromInput(_credmgr, RedditApp, redditApp)}

@@ -1,4 +1,4 @@
-from . import Bot, RedditApp, User, UserVerification
+from . import Bot, DatabaseCredential, RedditApp, SentryToken, User, UserVerification
 from .utils import resolveUser
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
@@ -140,7 +140,8 @@ class BotHelper(BaseHelper):
 class RedditAppHelper(BaseHelper):
     _model = RedditApp
 
-    def create(self, appName, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None, shortName=None, appDescription=None, enabled=True, owner=None) -> RedditApp:
+    def create(self, appName, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None, shortName=None,
+            appDescription=None, enabled=True, owner=None) -> RedditApp:
         '''Create a new RedditApp
 
         **PERMISSIONS: At least Active user is required.**
@@ -170,7 +171,7 @@ class RedditAppHelper(BaseHelper):
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification
 
-    def create(self, userId, redditAppId, redditor=None, extraData=None, owner=None) -> RedditApp:
+    def create(self, userId, redditAppId, redditor=None, extraData=None, owner=None) -> UserVerification:
         '''Create a new User Verification
 
         **PERMISSIONS: At least Active user is required.**
@@ -197,3 +198,55 @@ class UserVerificationHelper(BaseHelper):
         item = self._model(self._credmgr, **kwargs)
         item.fetch(True)
         return item
+
+class SentryTokenHelper(BaseHelper):
+    _model = SentryToken
+
+    def create(self, appName, dsn, owner=None) -> SentryToken:
+        '''Create a new Sentry Token
+
+        **PERMISSIONS: At least Active user is required.**
+
+        Sentry Tokens are used for logging and error reporting in applications
+
+        :param str appName: Name of the Sentry Token (required)
+        :param str dsn: DSN of the Sentry Token (required)
+        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
+        :return: SentryToken
+        '''
+        return self._model._create(self._credmgr, appName=appName, dsn=dsn, owner=owner)
+
+class DatabaseCredentialHelper(BaseHelper):
+    _model = DatabaseCredential
+
+    def create(self, appName, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
+            useSSH=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSSHKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True,
+            owner=None) -> DatabaseCredential:
+        '''Create a new Database Credential
+
+        **PERMISSIONS: At least Active user is required.**
+
+        Database Credentials are used for..ya know..databases
+
+        :param str appName: Name of the Database Credential (required)
+        :param str databaseFlavor: Type of database, (default: ``postgres``)
+        :param str database: Working database to use, (default: ``postgres``)
+        :param str databaseHost: Database server address, (default: ``localhost``)
+        :param int databasePort: Port the database server listens on, (default: ``5432``)
+        :param str databaseUsername: Username to use to connect to the database
+        :param str databasePassword: Password to use to connect to the database
+        :param bool useSSH: Determines if the database will be connected to through a tunnel
+        :param str sshHost: The address of the server that the SSH tunnel will connect to
+        :param str sshPort: The port the SSH tunnel will use
+        :param str sshUsername: Username for the SSH tunnel
+        :param str sshPassword: Password for the SSH tunnel
+        :param bool useSSHKey: Allows the credentials to be used
+        :param str privateKey: SSH private key. Note: No validation will be performed.
+        :param str privateKeyPassphrase: Passphrase for the SSH key
+        :param bool enabled: Allows the credentials to be used
+        :param Union[User,int,str] owner: Owner of the app. Requires Admin to create for other users.
+        :return: DatabaseCredential
+        '''
+        return self._model._create(self._credmgr, appName=appName, databaseFlavor=databaseFlavor, database=database, databaseHost=databaseHost, databasePort=databasePort,
+            databaseUsername=databaseUsername, databasePassword=databasePassword, useSSH=useSSH, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
+            useSSHKey=useSSHKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
