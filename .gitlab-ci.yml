@@ -8,6 +8,7 @@ before_script:
     - python setup.py sdist
 
 deploy:
+    stage: deploy
     variables:
         TWINE_USERNAME: $PYPI_USERNAME
         TWINE_PASSWORD: $PYPI_PASSWORD
