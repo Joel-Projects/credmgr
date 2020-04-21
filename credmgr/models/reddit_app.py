@@ -69,9 +69,13 @@ class RedditApp(BaseApp):
             data['ownerId'] = owner
         return _credmgr.post('/reddit_apps', data=data)
 
-    @property
-    def reddit(self) -> praw.reddit:
-        return praw.Reddit(client_id=self.clientId, client_secret=self.clientSecret, user_agent=self.userAgent, redirect_uri=self.redirectUri)
+    def reddit(self, redditor=None) -> praw.reddit:
+        refreshToken = None
+        if redditor:
+            refreshToken = self._credmgr.refreshToken(redditor, self.id)
+            if refreshToken:
+                refreshToken = refreshToken.refreshToken
+        return praw.Reddit(client_id=self.clientId, client_secret=self.clientSecret, user_agent=self.userAgent, redirect_uri=self.redirectUri, refresh_token=refreshToken)
 
     def genAuthUrl(self, scopes=None, permanent=False, userVerification=None):
         '''Generates an URL for users to verify or authenciate their Reddit account
@@ -104,4 +108,4 @@ class RedditApp(BaseApp):
             state = base64.urlsafe_b64encode(f'{self.state}:{userVerification}'.encode()).decode()
         else:
             state = self.state
-        return self.reddit.auth.url(scopes, state, duration)
+        return self.reddit().auth.url(scopes, state, duration)

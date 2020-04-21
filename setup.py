@@ -1,3 +1,4 @@
+import os
 from os import path
 import re
 
@@ -14,29 +15,16 @@ with open(path.join(root, projectName, "const.py")) as f:
 with open(path.join(root, "README.rst")) as f:
     longDescription = f.read()
 
-requires = [
-    'setuptools',
-    'python-dateutil',
-    'requests',
-    'praw',
-    'prawcore'
-]
-testsRequires = [
-    'coverage',
-    'pytest',
-    'betamax',
-    'sphinx'
-]
+requires = ['setuptools', 'python-dateutil', 'requests', 'praw', 'prawcore']
+# testsRequires = [
+#     'coverage',
+#     'pytest',
+#     'betamax',
+#     'sphinx'
+# ]
 
-setup(
-    name=projectName,
-    author='Lil_SpazJoekp',
-    author_email='spaz@jesassn.org',
-    python_requires='>=3.6',
-    description='Credential Manager API Client',
-    include_package_data=True,
-    install_requires=requires,
-    docs_requires=requires,
+setup(name=projectName, author='Lil_SpazJoekp', author_email='spaz@jesassn.org', python_requires='>=3.6', description='Credential Manager API Client', include_package_data=True,
+    install_requires=requires, docs_requires=requires,
     license='Private',
     long_description=longDescription,
     packages=find_packages(exclude=['tests', 'tests.*']),

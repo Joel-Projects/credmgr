@@ -31,7 +31,13 @@ class BaseModel(object):
         self.fetched = True
 
     def getByName(self, name):
-        self.__dict__ = self._credmgr.post(f'{self._path}/{self._getByNamePath}', data={self._fetchNameAttr: name}).__dict__
+        data = {}
+        if isinstance(self._fetchNameAttr, dict):
+            for modelAttr, dataAttr in self._fetchNameAttr.items():
+                data[dataAttr] = getattr(self, modelAttr)
+        else:
+            data[self._fetchNameAttr] = name
+        self.__dict__ = self._credmgr.post(f'{self._path}/{self._getByNamePath}', data=data).__dict__
         self.fetched = True
 
     def fetch(self, byName=False):

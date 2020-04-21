@@ -9,4 +9,4 @@ from .user_verification import UserVerification
 
 _ = None
 del _
-from .helpers import BotHelper, RedditAppHelper, UserHelper, UserVerificationHelper, SentryTokenHelper, DatabaseCredentialHelper
+from .helpers import BotHelper, RedditAppHelper, UserHelper, UserVerificationHelper, SentryTokenHelper, DatabaseCredentialHelper, RefreshTokenHelper

@@ -1,10 +1,10 @@
-from credmgr.mixins import BaseModel, DeletableMixin
+from credmgr.mixins import BaseModel, DeletableMixin, OwnerMixin
 
 
-class RefreshToken(BaseModel, DeletableMixin):
+class RefreshToken(BaseModel, DeletableMixin, OwnerMixin):
     _attrTypes = {
         **BaseModel._attrTypes,
-        'reddit_app_id': 'str',
+        'reddit_app_id': 'int',
         'redditor': 'str',
         'refresh_token': 'str',
         'owner_id': 'int',
@@ -16,22 +16,19 @@ class RefreshToken(BaseModel, DeletableMixin):
 
     _path = '/refresh_tokens'
     _credmgrCallable = 'refreshToken'
+    _fetchNameAttr = {'redditor': 'redditor', 'redditAppId': 'reddit_app_id'}
+    _getByNamePath = 'by_redditor'
+    _canFetchByName = True
+    _nameAttr = 'redditor'
 
-    def __init__(self, credmgr, id=None, redditAppId=None, redditor=None, refreshToken=None, ownerId=None, scopes=None, issuedAt=None, revoked=None, revokedAt=None):
+    def __init__(self, credmgr, id=None, redditAppId=None, redditor=None, refreshToken=None, ownerId=None, scopes=None, issuedAt=None, revoked=False, revokedAt=None):
         super().__init__(credmgr, id)
-        if redditAppId:
-            self.redditAppId = redditAppId
-        if redditor:
-            self.redditor = redditor
-        if refreshToken:
-            self.refreshToken = refreshToken
-        if ownerId:
-            self.ownerId = ownerId
-        if scopes:
-            self.scopes = scopes
-        if issuedAt:
-            self.issuedAt = issuedAt
-        if revoked:
-            self.revoked = revoked
-        if revokedAt:
-            self.revokedAt = revokedAt
+        self.redditAppId = redditAppId
+        self.redditApp = self._credmgr.redditApp(self.redditAppId)
+        self.redditor = redditor
+        self.refreshToken = refreshToken
+        self.ownerId = ownerId
+        self.scopes = scopes
+        self.issuedAt = issuedAt
+        self.revoked = revoked
+        self.revokedAt = revokedAt

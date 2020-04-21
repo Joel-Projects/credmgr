@@ -1,4 +1,4 @@
-from . import Bot, DatabaseCredential, RedditApp, SentryToken, User, UserVerification
+from . import Bot, DatabaseCredential, RedditApp, RefreshToken, SentryToken, User, UserVerification
 from .utils import resolveUser
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
@@ -135,7 +135,7 @@ class BotHelper(BaseHelper):
         :return: Bot
         '''
 
-        return self._model._create(self._credmgr, appName, redditApp, sentryToken, databaseCredential, owner)
+        return self._model._create(self._credmgr, name=appName, redditApp=redditApp, sentryToken=sentryToken, databaseCredential=databaseCredential, owner=owner)
 
 class RedditAppHelper(BaseHelper):
     _model = RedditApp
@@ -171,7 +171,7 @@ class RedditAppHelper(BaseHelper):
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification
 
-    def create(self, userId, redditAppId, redditor=None, extraData=None, owner=None) -> UserVerification:
+    def create(self, userId, redditApp, redditor=None, extraData=None, owner=None) -> UserVerification:
         '''Create a new User Verification
 
         **PERMISSIONS: At least Active user is required.**
@@ -179,13 +179,13 @@ class UserVerificationHelper(BaseHelper):
         User Verifications for verifying a redditor with a User ID
 
         :param str userId: User ID to associate Redditor with (required)
-        :param int redditAppId: Reddit app the User Verification is for (required)
+        :param Union[RedditApp,int,str] redditApp: Reddit app the User Verification is for (required)
         :param str redditor: Redditor the User Verification is for
         :param dict extraData: Extra JSON data to include with verification
         :param int owner: Owner of the verification. Requires Admin to create for other users.
         :return: UserVerification
         '''
-        return self._model._create(self._credmgr, userId=userId, redditApp=redditAppId, redditor=redditor, extraData=extraData, owner=owner)
+        return self._model._create(self._credmgr, userId=userId, redditApp=redditApp, redditor=redditor, extraData=extraData, owner=owner)
 
     def __call__(self, userId=None, redditAppId=None, batchSize=20, limit=None, owner=None):
         kwargs = {}
@@ -248,5 +248,20 @@ class DatabaseCredentialHelper(BaseHelper):
         :return: DatabaseCredential
         '''
         return self._model._create(self._credmgr, appName=appName, databaseFlavor=databaseFlavor, database=database, databaseHost=databaseHost, databasePort=databasePort,
-            databaseUsername=databaseUsername, databasePassword=databasePassword, useSSH=useSSH, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
-            useSSHKey=useSSHKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
+            databaseUsername=databaseUsername, databasePassword=databasePassword, useSsh=useSSH, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
+            useSshKey=useSSHKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
+
+class RefreshTokenHelper(BaseHelper):
+    _model = RefreshToken
+
+    def __call__(self, redditor=None, redditAppId=None, batchSize=20, limit=None, owner=None):
+        kwargs = {}
+        if redditor:
+            kwargs['redditor'] = redditor
+        if redditAppId:
+            kwargs['redditAppId'] = redditAppId
+        if not (redditor and redditAppId):
+            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
+        item = self._model(self._credmgr, **kwargs)
+        item.fetch(True)
+        return item

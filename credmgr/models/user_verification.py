@@ -5,14 +5,8 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
 
 class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
     _attrTypes = {
-        **BaseModel._attrTypes,
-        'id': 'int',
-        'user_id': 'str',
-        'redditor': 'str',
-        'reddit_app_id': 'str',
-        'extra_data': 'str',
-        'owner_id': 'int'
-        }
+        **BaseModel._attrTypes, 'id': 'int', 'user_id': 'str', 'redditor': 'str', 'reddit_app_id': 'int', 'extra_data': 'str', 'owner_id': 'int'
+    }
 
     _editableAttrs = ['userId', 'redditor', 'redditAppId', 'extraData']
     _path = '/user_verifications'
@@ -26,6 +20,7 @@ class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
         super().__init__(credmgr, id)
         self.userId = userId
         self.redditAppId = redditAppId
+        self.redditApp = self._credmgr.redditApp(self.redditAppId)
         if redditor:
             self.redditor = redditor
         if extraData:

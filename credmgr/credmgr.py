@@ -140,7 +140,7 @@ class CredentialManager(object):
         See :meth:`~.RedditAppHelper.create` for the required params.
         '''
 
-        ## self.refreshToken = models.RefreshTokenHelper(self)
+        self.refreshToken = models.RefreshTokenHelper(self)
         '''An instance of :class:`.RefreshTokenHelper`.
 
         Provides the interface for interacting with :class:`.RefreshToken`.

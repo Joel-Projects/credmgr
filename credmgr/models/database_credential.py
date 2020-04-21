@@ -21,13 +21,13 @@ class DatabaseCredential(BaseApp):
         'private_key_passphrase': 'str'
     }
 
-    _editableAttrs = BaseApp._editableAttrs + ['databaseUsername', 'databaseHost', 'database', 'databaseFlavor', 'databasePort', 'databasePassword', 'useSSH', 'sshHost', 'sshPort',
-                                               'sshUsername', 'sshPassword', 'useSSHKey', 'privateKey', 'privateKeyPassphrase']
+    _editableAttrs = BaseApp._editableAttrs + ['databaseUsername', 'databaseHost', 'database', 'databaseFlavor', 'databasePort', 'databasePassword', 'useSsh', 'sshHost', 'sshPort',
+                                               'sshUsername', 'sshPassword', 'useSshKey', 'privateKey', 'privateKeyPassphrase']
     _path = '/database_credentials'
     _credmgrCallable = 'databaseCredential'
 
     def __init__(self, credmgr, id=None, appName=None, databaseUsername=None, databaseHost=None, database=None, databaseFlavor=None, databasePort=None, databasePassword=None,
-            useSSH=None, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSSHKey=None, privateKey=None, privateKeyPassphrase=None, enabled=None, ownerId=None):
+            useSsh=None, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=None, privateKey=None, privateKeyPassphrase=None, enabled=None, ownerId=None):
         super().__init__(credmgr, id, appName, enabled, ownerId)
         self.databaseUsername = databaseUsername
         self.databaseHost = databaseHost
@@ -39,8 +39,8 @@ class DatabaseCredential(BaseApp):
             self.databaseFlavor = databaseFlavor
         if databasePassword:
             self.databasePassword = databasePassword
-        if useSSH:
-            self.useSSH = useSSH
+        if useSsh:
+            self.useSsh = useSsh
         if sshHost:
             self.sshHost = sshHost
         if sshPort:
@@ -49,8 +49,8 @@ class DatabaseCredential(BaseApp):
             self.sshUsername = sshUsername
         if sshPassword:
             self.sshPassword = sshPassword
-        if useSSHKey:
-            self.useSSHKey = useSSHKey
+        if useSshKey:
+            self.useSshKey = useSshKey
         if privateKey:
             self.privateKey = privateKey
         if privateKeyPassphrase:
@@ -59,7 +59,7 @@ class DatabaseCredential(BaseApp):
     @staticmethod
     @resolveUser()
     def _create(_credmgr, appName, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
-            useSSH=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSSHKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True, owner=None):
+            useSsh=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True, owner=None):
         '''Create a new Database Credential
 
         **PERMISSIONS: At least Active user is required.**
@@ -73,12 +73,12 @@ class DatabaseCredential(BaseApp):
         :param int databasePort: Port the database server listens on, (default: ``5432``)
         :param str databaseUsername: Username to use to connect to the database
         :param str databasePassword: Password to use to connect to the database
-        :param bool useSSH: Determines if the database will be connected to through a tunnel
+        :param bool useSsh: Determines if the database will be connected to through a tunnel
         :param str sshHost: The address of the server that the SSH tunnel will connect to
         :param str sshPort: The port the SSH tunnel will use
         :param str sshUsername: Username for the SSH tunnel
         :param str sshPassword: Password for the SSH tunnel
-        :param bool useSSHKey: Allows the credentials to be used
+        :param bool useSshKey: Allows the credentials to be used
         :param str privateKey: SSH private key. Note: No validation will be performed.
         :param str privateKeyPassphrase: Passphrase for the SSH key
         :param bool enabled: Allows the credentials to be used
@@ -99,8 +99,8 @@ class DatabaseCredential(BaseApp):
             data['database_username'] = databaseUsername
         if databasePassword:
             data['database_password'] = databasePassword
-        if useSSH:
-            data['use_ssh'] = useSSH
+        if useSsh:
+            data['use_ssh'] = useSsh
         if sshHost:
             data['ssh_host'] = sshHost
         if sshPort:
@@ -109,8 +109,8 @@ class DatabaseCredential(BaseApp):
             data['ssh_username'] = sshUsername
         if sshPassword:
             data['ssh_password'] = sshPassword
-        if useSSHKey:
-            data['use_ssh_key'] = useSSHKey
+        if useSshKey:
+            data['use_ssh_key'] = useSshKey
         if privateKey:
             data['private_key'] = privateKey
         if privateKeyPassphrase:
