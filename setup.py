@@ -10,7 +10,7 @@ projectName = 'credmgr'
 root = path.abspath(path.dirname(__file__))
 
 with open(path.join(root, projectName, "const.py")) as f:
-    __version__ = re.search('__version__ = "([^"]+)"', f.read()).group(1)
+    __version__ = re.search(r"__version__ = '(.+)'", f.read()).group(1)
 
 with open(path.join(root, "README.rst")) as f:
     longDescription = f.read()
@@ -28,8 +28,7 @@ setup(name=projectName, author='Lil_SpazJoekp', author_email='spaz@jesassn.org',
     license='Private',
     long_description=longDescription,
     packages=find_packages(exclude=['tests', 'tests.*']),
-    test_suite='tests',
-    tests_require=testsRequires,
+    test_suite='tests', # tests_require=testsRequires,
     url='https://credmgr.jesassn.org',
     version=__version__
 )
