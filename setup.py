@@ -23,9 +23,24 @@ requires = ['setuptools', 'python-dateutil', 'requests', 'praw', 'prawcore']
 #     'sphinx'
 # ]
 
-setup(name=projectName, author='Lil_SpazJoekp', author_email='spaz@jesassn.org', python_requires='>=3.6', description='Credential Manager API Client', include_package_data=True,
-    install_requires=requires, docs_requires=requires,
-    license='Private',
+setup(
+    name=projectName,
+    author='Lil_SpazJoekp',
+    author_email='spaz@jesassn.org',
+    license='Proprietary',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Operating System :: OS Independent',
+        'License :: Other/Proprietary License'
+    ],
+    python_requires='>=3.6',
+    description='Credential Manager API Client',
+    include_package_data=True,
+    install_requires=requires,
     long_description=longDescription,
     packages=find_packages(exclude=['tests', 'tests.*']),
     test_suite='tests', # tests_require=testsRequires,
