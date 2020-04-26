@@ -16,10 +16,6 @@ stages:
     - test
     - deploy
 
-test:pytest3.9:
-    image: python:3.9
-    <<: *testSetup
-
 test:pytest3.8:
     image: python:3.8
     <<: *testSetup

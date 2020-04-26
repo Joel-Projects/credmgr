@@ -19,6 +19,7 @@ testsRequires = [
     'coverage',
     'pytest',
     'betamax',
+    'betamax_serializers',
     'sphinx'
 ]
 extras = {
