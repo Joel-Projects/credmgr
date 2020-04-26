@@ -10,7 +10,7 @@ include:
     before_script:
         - pip install .[test] coverage pytest betamax sphinx
     script:
-        - pytest --cov-report=term --cov=app tests
+        - pytest --cov-report=term --cov=credmgr
 
 stages:
     - test
