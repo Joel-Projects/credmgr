@@ -5,6 +5,7 @@ from requests import Session
 from . import models
 from .auth import ApiTokenAuth
 from .exceptions import InitializationError
+from .models.utils import CachedProperty
 from .requestor import Requestor
 from .serializer import Serializer
 
@@ -84,8 +85,8 @@ class CredentialManager(object):
 
         self._requestor = Requestor(self._host, self._auth, sessionClass, **sessionKwargs)
         self.serializer = Serializer(self)
-        self.currentUser: User = self.currentUser()
-        self.userDefaults = self.currentUser.defaultSettings
+        self._currentUser = None
+        self._userDefaults = None
         self.getUserDefault = lambda key, default: self.userDefaults.get(key, default)
         self.user = models.UserHelper(self)
         '''An instance of :class:`.UserHelper`.
@@ -229,8 +230,17 @@ class CredentialManager(object):
     def databaseCredentials(self, batchSize=20, limit=None, owner=None):
         return DatabaseCredential(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
+    @CachedProperty
     def currentUser(self) -> User:
-        return self.get('/users/me')
+        if not self._currentUser:
+            self._currentUser = self.get('/users/me')
+        return self._currentUser
+
+    @CachedProperty
+    def userDefaults(self):
+        if not self._userDefaults:
+            self._userDefaults = self.currentUser.defaultSettings
+        return self._userDefaults
 
     def get(self, path, params=None):
         return self.serializer.deserialize(self._requestor.request(path, 'GET', params=params))

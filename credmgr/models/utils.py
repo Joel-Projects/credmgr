@@ -3,11 +3,11 @@ import re
 from credmgr.exceptions import NotFound
 
 
-reCamelToSnake = re.compile(r"([a-z0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))")
+reCamelToSnake = re.compile(r'([a-z0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))')
 
 def camelToSnake(name: str) -> str:
-    """Convert `name` from camelCase to snake_case."""
-    return reCamelToSnake.sub(r"\1_", name).lower()
+    '''Convert `name` from camelCase to snake_case.'''
+    return reCamelToSnake.sub(r'\1_', name).lower()
 
 def resolveUser(userAttr='owner', returnAttr='id'):
     def decorator(func):
@@ -45,3 +45,18 @@ def resolveModelFromInput(credmgr, model, input, returnAttr='id'):
         if foundItem:
             value = getattr(foundItem, returnAttr)
     return value
+
+class CachedProperty:
+    def __init__(self, func, doc=None):
+        self.func = self.__wrapped__ = func
+
+        if doc is None:
+            doc = func.__doc__
+        self.__doc__ = doc
+
+    def __get__(self, item, objtype=None):
+        if item is None:
+            return self
+
+        value = item.__dict__[self.func.__name__] = self.func(item)
+        return value

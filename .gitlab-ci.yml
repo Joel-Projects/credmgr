@@ -1,17 +1,58 @@
 image: python:3.8
 
+include:
+  - template: Code-Quality.gitlab-ci.yml
+
+.testSetup: &testSetup
+    stage: test
+    allow_failure: true
+    coverage: '/^TOTAL.*\s+(\d+\%)$/'
+    before_script:
+        - pip install .[test]
+    script:
+        - pytest --cov-report=term --cov=app tests
+
 stages:
+    - test
     - deploy
 
-before_script:
-    - pip install twine
-    - python setup.py sdist
+test:pytest3.9:
+    image: python:3.9
+    <<: *testSetup
+
+test:pytest3.8:
+    image: python:3.8
+    <<: *testSetup
+
+test:pytest3.7:
+    image: python:3.7
+    <<: *testSetup
+
+test:pytest3.6:
+    image: python:3.6
+    <<: *testSetup
+
+test:sonarqube:
+    image:
+        name: sonarsource/sonar-scanner-cli:latest
+        entrypoint: [""]
+    stage: test
+    allow_failure: true
+    variables:
+      SONAR_TOKEN: $SONAR_TOKEN
+      SONAR_HOST_URL: "https://qube.jesassn.org"
+      GIT_DEPTH: 0
+    script:
+        - sonar-scanner -Dsonar.projectKey=credmgr-client -Dproject.settings=$CI_PROJECT_DI/sonar-project.properties -Dsonar.qualitygate.wait=true
 
 deploy:
     stage: deploy
     variables:
         TWINE_USERNAME: $PYPI_USERNAME
         TWINE_PASSWORD: $PYPI_PASSWORD
+    before_script:
+        - pip install twine
+        - python setup.py sdist
     script:
         - twine upload dist/*
     only:

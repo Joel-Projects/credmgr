@@ -7,20 +7,20 @@ from ..mixins import BaseModel
 class Paginator:
 
     @resolveUser()
-    def __init__(self, credmgr, model, batchSize=20, limit=None, owner=None):
+    def __init__(self, credmgr, model, batchSize=20, limit=None, itemsOwner=None):
         '''Initialize a ListGenerator instance.
 
         :param credmgr: An instance of :class:`.CredentialManager`.
         :param model: A CredentialManager model to list.
         :param int batchSize: The number of items to fetch at a time. If ``batchSize`` is None, it will fetch them 100 at a time. (default: 20).
         :param int limit: The maximum number of items to get.
-        :param Union[int, User, str] owner: Owner to filter the items by.
+        :param Union[int, User, str] itemsOwner: Owner to filter the items by.
         '''
         self._credmgr = credmgr
         self._model = model(self._credmgr)
         self.batchSize = batchSize
         self.limit = limit
-        self.owner = owner
+        self.itemsOwner = itemsOwner
         self._itemsReturned = 0
         self._completed = False
         self._offset = 0
@@ -45,8 +45,8 @@ class Paginator:
         if self._completed:
             raise StopIteration()
         params = dict(limit=self.batchSize, offset=self._offset)
-        if self.owner:
-            params['owner_id'] = self.owner
+        if self.itemsOwner:
+            params['owner_id'] = self.itemsOwner
         self._response = self._credmgr.get(self._model._path, params=params)
         self._currentItemIndex = 0
         if not self._response:

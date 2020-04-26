@@ -13,22 +13,19 @@ class BaseModel(object):
     def __init__(self, credmgr, id=None, name=None):
         self._credmgr = credmgr
         self.id = id
-        self.fetched = False
+        self._fetched = False
         if self._nameAttr and self._canFetchByName:
             setattr(self, self._nameAttr, name)
 
     def __getattr__(self, attribute):
         '''Return the value of `attribute`.'''
-        if not attribute.startswith('_'):
-            if not self.fetched:
-                self.fetch()
-            return self.__dict__.get(attribute, None)
-        else:
-            return None
+        if not attribute.startswith('_') and not self._fetched:
+            self.fetch()
+            return getattr(self, attribute)
+        raise AttributeError(f'{self.__class__.__name__!r} object has no attribute {attribute!r}')
 
     def get(self, id):
         self.__dict__ = self._credmgr.get(f'{self._path}/{id}').__dict__
-        self.fetched = True
 
     def getByName(self, name):
         data = {}
@@ -38,18 +35,18 @@ class BaseModel(object):
         else:
             data[self._fetchNameAttr] = name
         self.__dict__ = self._credmgr.post(f'{self._path}/{self._getByNamePath}', data=data).__dict__
-        self.fetched = True
 
     def fetch(self, byName=False):
         if byName and self._canFetchByName:
             self.getByName(getattr(self, self._nameAttr))
         else:
             self.get(self.id)
+        self._fetched = True
 
     @resolveUser()
     def listItems(self, batchSize=20, limit=None, owner=None):
         from credmgr.models.helpers import Paginator
-        return Paginator(self._credmgr, self.__class__, batchSize=batchSize, limit=limit, owner=owner)
+        return Paginator(self._credmgr, self.__class__, batchSize=batchSize, limit=limit, itemsOwner=owner)
 
     def toDict(self):
         result = {}
@@ -72,7 +69,7 @@ class BaseModel(object):
 
     def __repr__(self):
         ownerRepr = ''
-        if hasattr(self, 'owner'):
+        if hasattr(self, 'owner') and self.owner is not None:
             ownerRepr = f', owner={self.owner.username!r}'
         return f'<{self.__class__.__name__} id={self.id}, {self._nameAttr}={getattr(self, self._nameAttr)!r}{ownerRepr}>'
 

@@ -113,8 +113,8 @@ class Serializer(object):
 
         if type(objectType) == str:
             if objectType.startswith('list['):
-                subKls = re.match(r'list\[(.*)\]', objectType).group(1)
-                return [self.__deserialize(subData, subKls) for subData in data]
+                subClass = re.match(r'list\[(.*)\]', objectType).group(1)
+                return [self.__deserialize(subData, subClass) for subData in data]
 
             if objectType.startswith('dict'):
                 return {k: self.__deserialize(v, type(v)) for k, v in data.items()}

@@ -34,6 +34,8 @@ class RedditApp(BaseApp):
         self.appType = appType
         self.redirectUri = redirectUri
         self.state = state
+        if state:
+            self._fetched = True
         self.enabled = enabled
         self.ownerId = ownerId
 
