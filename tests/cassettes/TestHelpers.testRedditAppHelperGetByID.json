@@ -1,0 +1,341 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-04-26T03:03:11",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "481"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 26 Apr 2020 03:03:11 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      }
+    },
+    {
+      "recorded_at": "2020-04-26T03:07:05",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "481"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 26 Apr 2020 03:07:05 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      }
+    },
+    {
+      "recorded_at": "2020-04-26T03:07:37",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "481"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 26 Apr 2020 03:07:37 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      }
+    },
+    {
+      "recorded_at": "2020-04-26T03:10:40",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "481"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 26 Apr 2020 03:10:40 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      }
+    },
+    {
+      "recorded_at": "2020-04-26T03:14:36",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "481"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 26 Apr 2020 03:14:36 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      }
+    },
+    {
+      "recorded_at": "2020-04-26T03:15:00",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "481"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 26 Apr 2020 03:15:00 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/1"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

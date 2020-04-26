@@ -1,4 +1,3 @@
-import os
 from os import path
 import re
 
@@ -16,12 +15,15 @@ with open(path.join(root, "README.rst")) as f:
     longDescription = f.read()
 
 requires = ['setuptools', 'python-dateutil', 'requests', 'praw', 'prawcore']
-# testsRequires = [
-#     'coverage',
-#     'pytest',
-#     'betamax',
-#     'sphinx'
-# ]
+testsRequires = [
+    'coverage',
+    'pytest',
+    'betamax',
+    'sphinx'
+]
+extras = {
+    'test': testsRequires,
+}
 
 setup(
     name=projectName,
@@ -43,7 +45,9 @@ setup(
     install_requires=requires,
     long_description=longDescription,
     packages=find_packages(exclude=['tests', 'tests.*']),
-    test_suite='tests', # tests_require=testsRequires,
+    test_suite='tests',
+    tests_require=testsRequires,
+    extras_require=extras,
     url='https://credmgr.jesassn.org',
     version=__version__
 )
