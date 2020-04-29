@@ -17,10 +17,10 @@ class BaseModel(object):
         if self._nameAttr and self._canFetchByName:
             setattr(self, self._nameAttr, name)
 
-    def __getattr__(self, attribute):
+    def __getattr__(self, attribute): # pragma: no cover
         '''Return the value of `attribute`.'''
         if not attribute.startswith('_') and not self._fetched:
-            self.fetch()
+            self._fetch()
             return getattr(self, attribute)
         raise AttributeError(f'{self.__class__.__name__!r} object has no attribute {attribute!r}')
 
@@ -36,7 +36,7 @@ class BaseModel(object):
             data[self._fetchNameAttr] = name
         self.__dict__ = self._credmgr.post(f'{self._path}/{self._getByNamePath}', data=data).__dict__
 
-    def fetch(self, byName=False):
+    def _fetch(self, byName=False):
         if byName and self._canFetchByName:
             self.getByName(getattr(self, self._nameAttr))
         else:
@@ -67,11 +67,8 @@ class BaseModel(object):
                 result[key] = value
         return result
 
-    def __repr__(self):
-        ownerRepr = ''
-        if hasattr(self, 'owner') and self.owner is not None:
-            ownerRepr = f', owner={self.owner.username!r}'
-        return f'<{self.__class__.__name__} id={self.id}, {self._nameAttr}={getattr(self, self._nameAttr)!r}{ownerRepr}>'
+    def __repr__(self): # pragma: no cover
+        return f'<{self.__class__.__name__} id={self.id}, {self._nameAttr}={getattr(self, self._nameAttr)!r}>'
 
     def __eq__(self, other):
         '''Returns true if both objects are equal'''

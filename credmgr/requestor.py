@@ -44,7 +44,7 @@ class Requestor(object):
         self._baseUrl = credmgrUrl
         self._session = session or requests.Session()
         self._session.auth = auth
-        for key, value in sessionKwargs.items():
+        for key, value in sessionKwargs.items(): # pragma: no cover
             setattr(self._session, key, value)
         self._session.headers['User-Agent'] = f'credmgr/{__version__}'
 

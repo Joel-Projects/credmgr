@@ -76,7 +76,7 @@ class BaseHelper(BaseModel):
         if not (id or name):
             return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
         item = self._model(self._credmgr, **kwargs)
-        item.fetch(byName)
+        item._fetch(byName)
         return item
 
 class UserHelper(BaseHelper):
@@ -96,7 +96,7 @@ class UserHelper(BaseHelper):
         if not (id or name):
             return User(self._credmgr).listItems(batchSize=batchSize, limit=limit)
         item = User(self._credmgr, **kwargs)
-        item.fetch(byName)
+        item._fetch(byName)
         return item
 
     def create(self, username, password, defaultSettings=None, isAdmin=False, isActive=True, isRegularUser=True, isInternal=False, redditUsername=None) -> User:
@@ -196,7 +196,7 @@ class UserVerificationHelper(BaseHelper):
         if not userId:
             return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
         item = self._model(self._credmgr, **kwargs)
-        item.fetch(True)
+        item._fetch(True)
         return item
 
 class SentryTokenHelper(BaseHelper):
@@ -263,5 +263,5 @@ class RefreshTokenHelper(BaseHelper):
         if not (redditor and redditAppId):
             return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
         item = self._model(self._credmgr, **kwargs)
-        item.fetch(True)
+        item._fetch(True)
         return item

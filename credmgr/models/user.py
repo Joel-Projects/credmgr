@@ -18,7 +18,7 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
         'sentry_tokens': 'list[SentryToken]',
         'database_credentials': 'list[DatabaseCredential]'
     }
-
+    _editableAttrs = ['username', 'isActive', 'isRegularUser', 'isAdmin', 'defaultSettings', 'redditUsername']
     _path = '/users'
     _credmgrCallable = 'user'
     _nameAttr = 'username'

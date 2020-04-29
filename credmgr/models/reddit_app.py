@@ -19,7 +19,7 @@ class RedditApp(BaseApp):
         'state': 'str'
         }
 
-    _editableAttrs = BaseApp._editableAttrs + ['client_id', 'client_secret', 'short_name', 'app_description', 'user_agent', 'app_type', 'redirect_uri']
+    _editableAttrs = BaseApp._editableAttrs + ['clientId', 'clientSecret', 'shortName', 'appDescription', 'userAgent', 'appType', 'redirectUri']
     _path = '/reddit_apps'
     _credmgrCallable = 'redditApp'
 

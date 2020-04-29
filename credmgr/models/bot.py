@@ -6,7 +6,7 @@ class Bot(BaseApp):
     _attrTypes = {
         **BaseApp._attrTypes, 'reddit_app': 'RedditApp', 'sentry_token': 'SentryToken', 'database_credential': 'DatabaseCredential'
     }
-    _editableAttrs = BaseApp._editableAttrs + ['reddit_app_id', 'sentry_token_id', 'database_credential_id']
+    _editableAttrs = BaseApp._editableAttrs + ['redditAppId', 'sentryTokenId', 'databaseCredentialId']
     _path = '/bots'
     _credmgrCallable = 'bot'
     _canFetchByName = True

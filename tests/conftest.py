@@ -11,7 +11,7 @@ from credmgr import CredentialManager
 from tests.utils import genCassetteName
 
 def filterRefreshToken(interaction, current_cassette):  # pragma: no cover
-    filterItems = ['refresh_token', 'client_id', 'client_secret']
+    filterItems = ['refresh_token']
     response = interaction.data['response']
     body = response['body']['string']
     for item in filterItems:

@@ -138,7 +138,7 @@ class Serializer(object):
         else:
             return self.__deserializeModel(data, objectType)
 
-    def __hasattr(self, object, name):
+    def __hasattr(self, object, name): # pragma: no cover
         return name in object.__class__.__dict__
 
     def __deserializeModel(self, data, objectType):
@@ -161,7 +161,7 @@ class Serializer(object):
                     kwargs[snakeToCamel(attr)] = self.__deserialize(value, attrType)
         try:
             instance = objectType(self._credmgr, **kwargs)
-        except TypeError:
+        except TypeError: # pragma: no cover
             for key, value in kwargs.items():
                 setattr(objectType, key, value)
             instance = objectType

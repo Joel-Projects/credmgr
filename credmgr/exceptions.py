@@ -17,7 +17,7 @@ class APIException(CredentialManagerException):
         self.body = response.text
         self.headers = response.headers
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         '''Custom error messages for exception'''
         errorMessage = f'\n{self.status}: {self.url}\n{self.reason}'
         if self.headers:
