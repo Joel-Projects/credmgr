@@ -20,7 +20,11 @@ testsRequires = [
     'pytest',
     'betamax',
     'betamax_serializers',
-    'sphinx'
+    'sphinx',
+    'pytest-mock',
+    'pytest-xdist',
+    'pytest-cov',
+    'mock'
 ]
 extras = {
     'test': testsRequires,
