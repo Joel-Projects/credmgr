@@ -9,7 +9,7 @@ include:
     coverage: '/^TOTAL.*\s+(\d+\%)$/'
     script:
         - pip install .[test] coverage pytest betamax sphinx
-        - pytest --cov-report=term --cov=credmgr
+        - pytest --cov-report=term --cov=credmgr/credmgr
 
 stages:
     - test
