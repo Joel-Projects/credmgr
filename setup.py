@@ -14,7 +14,7 @@ with open(path.join(root, projectName, "const.py")) as f:
 with open(path.join(root, "README.rst")) as f:
     longDescription = f.read()
 
-requires = ['setuptools', 'python-dateutil', 'requests', 'praw', 'prawcore']
+requires = ['setuptools', 'python-dateutil', 'requests', 'praw', 'prawcore', 'requests_toolbelt']
 testsRequires = [
     'coverage',
     'pytest',
