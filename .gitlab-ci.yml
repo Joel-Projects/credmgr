@@ -7,9 +7,8 @@ include:
     stage: test
     allow_failure: true
     coverage: '/^TOTAL.*\s+(\d+\%)$/'
-    before_script:
-        - pip install .[test] coverage pytest betamax sphinx
     script:
+        - pip install .[test] coverage pytest betamax sphinx
         - pytest --cov-report=term --cov=credmgr
 
 stages:
