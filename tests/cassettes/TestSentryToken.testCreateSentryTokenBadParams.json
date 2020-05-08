@@ -1,11 +1,11 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T23:37:36",
+      "recorded_at": "2020-04-29T23:49:04",
       "request": {
         "body": {
           "encoding": "utf-8",
-          "string": "app_name=testRedditApp&client_id=clientId&user_agent=userAgent&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&client_secret=clientSecret&short_name=shortName&app_description=appDescription&enabled=True"
+          "string": "app_name=se&dsn=https%3A%2F%2Fkey%40sentry.jesassn.org%2Fid2"
         },
         "headers": {
           "Accept": [
@@ -18,7 +18,7 @@
             "keep-alive"
           ],
           "Content-Length": [
-            "241"
+            "60"
           ],
           "Content-Type": [
             "application/x-www-form-urlencoded"
@@ -31,35 +31,35 @@
           ]
         },
         "method": "POST",
-        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+        "uri": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
       },
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 19, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"short_name\": \"shortName\", \"app_description\": \"appDescription\", \"user_agent\": \"userAgent\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "417"
+            "188"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 23:37:36 GMT"
+            "Wed, 29 Apr 2020 23:49:04 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
           ]
         },
         "status": {
-          "code": 200,
-          "message": "OK"
+          "code": 422,
+          "message": "Unprocessable Entity"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+        "url": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
       }
     }
   ],

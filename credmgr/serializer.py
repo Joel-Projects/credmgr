@@ -45,7 +45,7 @@ class Serializer(object):
             raise SerializerException(f"Failed to parse `{string}` as datetime object")
 
     @staticmethod
-    def deserializeDate(string):
+    def deserializeDate(string): # pragma: no cover
         '''Deserializes string to date.
 
         :param string: str.
@@ -78,9 +78,9 @@ class Serializer(object):
         '''
         try:
             return objectType(data)
-        except UnicodeEncodeError:
+        except UnicodeEncodeError: # pragma: no cover
             return str(data)
-        except TypeError:
+        except TypeError: # pragma: no cover
             return data
 
     def deserialize(self, response):
@@ -127,9 +127,9 @@ class Serializer(object):
 
         if objectType in self.primitiveTypes:
             return self.deserializePrimitive(data, objectType)
-        elif objectType == object:
+        elif objectType == object: # pragma: no cover
             return self.deserializeObject(data)
-        elif objectType == datetime.date:
+        elif objectType == datetime.date: # pragma: no cover
             return self.deserializeDate(data)
         elif objectType == datetime.datetime:
             return self.deserializeDatatime(data)
@@ -149,7 +149,7 @@ class Serializer(object):
         :return: model object.
         '''
 
-        if not objectType._attrTypes:
+        if not objectType._attrTypes: # pragma: no cover
             return data
 
         kwargs = {}
@@ -165,7 +165,7 @@ class Serializer(object):
             for key, value in kwargs.items():
                 setattr(objectType, key, value)
             instance = objectType
-        if isinstance(instance, dict) and objectType._attrTypes is not None and isinstance(data, dict):
+        if isinstance(instance, dict) and objectType._attrTypes is not None and isinstance(data, dict):  # pragma: no cover
             for key, value in data.items():
                 if key not in objectType._attrTypes:
                     instance[key] = value

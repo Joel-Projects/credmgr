@@ -10,9 +10,9 @@ from .exceptions import Conflict, Forbidden, InvalidJSON, InvalidRequest, NotFou
 log = logging.getLogger(__package__)
 
 def urljoin(base, path):
-    if base.endswith('/'):
+    if base.endswith('/'): # pragma: no cover
         base = base[:-1]
-    if not path.startswith('/'):
+    if not path.startswith('/'): # pragma: no cover
         path = f'/{path}'
     return f'{base}{path}'
 
@@ -48,7 +48,7 @@ class Requestor(object):
             setattr(self._session, key, value)
         self._session.headers['User-Agent'] = f'credmgr/{__version__}'
 
-    def __getattr__(self, attribute):
+    def __getattr__(self, attribute): # pragma: no cover
         '''Pass all undefined attributes to the _session attribute.'''
         if attribute.startswith('__'):
             raise AttributeError
@@ -60,10 +60,6 @@ class Requestor(object):
         log.info(f'Request: {method} {url}')
         log.info(f'Query Parameters: {params}')
 
-    def close(self):
-        '''Call close on the underlying session.'''
-        return self._session.close()
-
     def request(self, path, method, data=None, params=None, **kwargs):
         url = urljoin(self._baseUrl, path)
         self._logRequest(data, method, params, url)
@@ -73,11 +69,11 @@ class Requestor(object):
         elif response.status_code == codes['no_content']:
             return
         assert (response.status_code in self._successCodes), f'Unexpected status code: {response.status_code}'
-        if response.headers.get('content-length') == '0':
+        if response.headers.get('content-length') == '0': # pragma: no cover
             return ''
         try:
             response.json()
-        except ValueError:
+        except ValueError: # pragma: no cover
             raise InvalidJSON(response)
         log.info(f'Response: {response.status_code} ({response.headers.get("content-length")} bytes)')
         return response

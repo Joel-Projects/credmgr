@@ -1,0 +1,123 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-04-29T23:56:05",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=testSentryToken&dsn=https%3A%2F%2Fkey%40sentry.jesassn.org%2Fid&owner_id=4"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "83"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 8, \"app_name\": \"testSentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"enabled\": true, \"resource_type\": \"SentryToken\", \"owner_id\": 4}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "149"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 29 Apr 2020 23:56:05 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      }
+    },
+    {
+      "recorded_at": "2020-04-29T23:56:05",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/users/4"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 4, \"username\": \"elfah\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": true, \"default_settings\": {\"undefined\": \"http://localhost:8080\", \"database_flavor\": \"postgres\", \"database_host\": \"localhost\"}, \"reddit_username\": \"\", \"created\": \"2020-02-10T23:49:55.562421+00:00\", \"updated\": \"2020-04-29T23:56:04.796613+00:00\", \"resource_type\": \"User\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "356"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 29 Apr 2020 23:56:05 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/users/4"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

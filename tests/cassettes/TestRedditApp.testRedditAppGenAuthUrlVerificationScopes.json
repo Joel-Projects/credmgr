@@ -1,11 +1,11 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T23:37:36",
+      "recorded_at": "2020-04-29T23:40:11",
       "request": {
         "body": {
           "encoding": "utf-8",
-          "string": "app_name=testRedditApp&client_id=clientId&user_agent=userAgent&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&client_secret=clientSecret&short_name=shortName&app_description=appDescription&enabled=True"
+          "string": ""
         },
         "headers": {
           "Accept": [
@@ -17,12 +17,6 @@
           "Connection": [
             "keep-alive"
           ],
-          "Content-Length": [
-            "241"
-          ],
-          "Content-Type": [
-            "application/x-www-form-urlencoded"
-          ],
           "User-Agent": [
             "credmgr/1.0.1"
           ],
@@ -30,8 +24,8 @@
             "<API_TOKEN>"
           ]
         },
-        "method": "POST",
-        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/19"
       },
       "response": {
         "body": {
@@ -49,7 +43,7 @@
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 23:37:36 GMT"
+            "Wed, 29 Apr 2020 23:40:11 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
@@ -59,7 +53,7 @@
           "code": 200,
           "message": "OK"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/19"
       }
     }
   ],

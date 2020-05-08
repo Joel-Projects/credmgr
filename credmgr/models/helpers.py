@@ -106,7 +106,7 @@ class UserHelper(BaseHelper):
 
         :param str username: Username for new user (Example: ```spaz```) (required)
         :param str password: Password for new user (Example: ```supersecurepassword```) (required)
-        :param str defaultSettings: Default values to use for new apps (Example: ```{"databaseFlavor": "postgres", "databaseHost": "localhost"}```)
+        :param dict defaultSettings: Default values to use for new apps (Example: ```{"databaseFlavor": "postgres", "databaseHost": "localhost"}```)
         :param bool isAdmin: Is the user an admin? Allows the user to see all objects and create users (Default: ``False``)
         :param bool isActive: Is the user active? Allows the user to sign in (Default: ``True``)
         :param bool isRegularUser: (Internal use only)
@@ -115,7 +115,7 @@ class UserHelper(BaseHelper):
         :return: User
         '''
 
-        return self._model._create(self._credmgr, username, password, defaultSettings, isAdmin, isActive, isRegularUser, isInternal, redditUsername)
+        return self._model._create(self._credmgr, username=username, password=password, defaultSettings=defaultSettings, isAdmin=isAdmin, isActive=isActive, isRegularUser=isRegularUser, isInternal=isInternal, redditUsername=redditUsername)
 
 class BotHelper(BaseHelper):
     _model = Bot
@@ -157,7 +157,7 @@ class RedditAppHelper(BaseHelper):
         :param str shortName: Short name of the Reddit App
         :param str appDescription: Description of the Reddit App
         :param bool enabled: Allows the app to be used
-        :param int owner: Owner of the app. Requires Admin to create for other users.
+        :param Union[User,int,str] owner: Owner of the Reddit App. Requires Admin to create for other users.
         :return: RedditApp
         '''
         if not userAgent:
@@ -166,7 +166,7 @@ class RedditAppHelper(BaseHelper):
             if redditUsername:
                 redditUsernameStr = f' by /u/{redditUsername}'
             userAgent = self._credmgr.getUserDefault('user_agent', f'python:{appName}{redditUsernameStr}')
-        return self._model._create(self._credmgr, appName, clientId, userAgent, appType, redirectUri, clientSecret, shortName, appDescription, enabled, owner)
+        return self._model._create(self._credmgr, appName=appName, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, shortName=shortName, appDescription=appDescription, enabled=enabled, owner=owner)
 
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification

@@ -11,7 +11,7 @@ class BaseApp(BaseModel, DeletableMixin, EditableMixin, ToggableMixin, OwnerMixi
         super(BaseApp, self).__init__(credmgr, id)
         if appName:
             self.appName = appName
-        if enabled:
+        if enabled is not None:
             self.enabled = enabled
         if ownerId:
             self.ownerId = ownerId

@@ -1,0 +1,191 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-08T03:30:48",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "username=test2"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "14"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/users/by_name"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 10, \"username\": \"test2\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": false, \"default_settings\": {\"database_flavor\": \"postgres\", \"database_host\": \"localhost\"}, \"reddit_username\": \"\", \"created\": \"2020-04-04T17:21:03.411505+00:00\", \"updated\": \"2020-04-04T17:21:03.411740+00:00\", \"resource_type\": \"User\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "320"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 08 May 2020 03:30:48 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/users/by_name"
+      }
+    },
+    {
+      "recorded_at": "2020-05-08T03:30:49",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "[{\"op\": \"replace\", \"path\": \"/username\", \"value\": \"newUsername\"}, {\"op\": \"replace\", \"path\": \"/default_settings\", \"value\": {\"database_host\": \"localhost\", \"database_flavor\": \"postgres\", \"user_agent\": \"userAgent\"}}, {\"op\": \"replace\", \"path\": \"/reddit_username\", \"value\": \"newRedditUsername\"}]"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "288"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "PATCH",
+        "uri": "https://credmgr.jesassn.org/api/v1/users/10"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 10, \"username\": \"newUsername\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": false, \"default_settings\": {\"database_host\": \"localhost\", \"database_flavor\": \"postgres\", \"user_agent\": \"userAgent\"}, \"reddit_username\": \"newRedditUsername\", \"created\": \"2020-04-04T17:21:03.411505+00:00\", \"updated\": \"2020-05-08T03:30:49.513196+00:00\", \"resource_type\": \"User\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "370"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 08 May 2020 03:30:49 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/users/10"
+      }
+    },
+    {
+      "recorded_at": "2020-05-08T03:30:50",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "username=newUsername"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "20"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/users/by_name"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 10, \"username\": \"newUsername\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": false, \"default_settings\": {\"database_host\": \"localhost\", \"database_flavor\": \"postgres\", \"user_agent\": \"userAgent\"}, \"reddit_username\": \"newRedditUsername\", \"created\": \"2020-04-04T17:21:03.411505+00:00\", \"updated\": \"2020-05-08T03:30:49.513196+00:00\", \"resource_type\": \"User\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "370"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 08 May 2020 03:30:50 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/users/by_name"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

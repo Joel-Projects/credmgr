@@ -55,7 +55,7 @@ class RedditApp(BaseApp):
         :param str shortName: Short name of the Reddit App
         :param str appDescription: Description of the Reddit App
         :param bool enabled: Allows the app to be used
-        :param int owner: Owner of the app. Requires Admin to create for other users.
+        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
         :return: RedditApp
         '''
         data = {'app_name': appName, 'client_id': clientId, 'user_agent': userAgent, 'app_type': appType, 'redirect_uri': redirectUri}
@@ -68,7 +68,7 @@ class RedditApp(BaseApp):
         if enabled:
             data['enabled'] = enabled
         if owner:
-            data['ownerId'] = owner
+            data['owner_id'] = owner
         return _credmgr.post('/reddit_apps', data=data)
 
     def reddit(self, redditor=None) -> praw.reddit:
@@ -93,21 +93,21 @@ class RedditApp(BaseApp):
         :return str: Auth URL
         '''
         from credmgr.models import UserVerification
-        if scopes is None:
+        if scopes is None or scopes == 'identity':
             scopes = ['identity']
         elif scopes == 'all':
             scopes = ['*']
         if not 'identity' in scopes and scopes != ['*']:
-            scopes.append('identity')
+            scopes = [scopes, 'identity']
         if permanent:
             duration = 'permanent'
         else:
             duration = 'temporary'
-        userVerification = resolveModelFromInput(self._credmgr, UserVerification, userVerification, 'userId')
-        if not userVerification and userVerification:
-            userVerification = self._credmgr.userVerification.create(userVerification, self.id)
-        if userVerification:
-            state = base64.urlsafe_b64encode(f'{self.state}:{userVerification}'.encode()).decode()
+        uVerification = resolveModelFromInput(self._credmgr, UserVerification, userVerification, 'userId')
+        if not uVerification and userVerification:
+            uVerification = self._credmgr.userVerification.create(userVerification, self.id)
+        if uVerification:
+            state = base64.urlsafe_b64encode(f'{self.state}:{uVerification}'.encode()).decode()
         else:
             state = self.state
         return self.reddit().auth.url(scopes, state, duration)

@@ -1,11 +1,11 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T23:37:36",
+      "recorded_at": "2020-05-07T23:05:44",
       "request": {
         "body": {
           "encoding": "utf-8",
-          "string": "app_name=testRedditApp&client_id=clientId&user_agent=userAgent&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&client_secret=clientSecret&short_name=shortName&app_description=appDescription&enabled=True"
+          "string": "username=username&password=password&default_settings=%7B%22database_flavor%22%3A+%22postgres%22%2C+%22user_agent%22%3A+%22userAgent%22%7D&is_active=True&is_regular_user=True&reddit_username=redditUsername"
         },
         "headers": {
           "Accept": [
@@ -18,7 +18,7 @@
             "keep-alive"
           ],
           "Content-Length": [
-            "241"
+            "204"
           ],
           "Content-Type": [
             "application/x-www-form-urlencoded"
@@ -31,35 +31,35 @@
           ]
         },
         "method": "POST",
-        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+        "uri": "https://credmgr.jesassn.org/api/v1/users"
       },
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 19, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"short_name\": \"shortName\", \"app_description\": \"appDescription\", \"user_agent\": \"userAgent\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\n    \"id\": 10,\n    \"username\": \"username\",\n    \"is_active\": true,\n    \"is_regular_user\": true,\n    \"is_admin\": false,\n    \"default_settings\": {\n        \"database_flavor\": \"postgres\",\n        \"user_agent\": \"userAgent\"\n    },\n    \"reddit_username\": \"redditUsername\",\n    \"created\": \"2020-05-08T03:57:32.830618+00:00\",\n    \"updated\": \"2020-05-08T03:57:32.830873+00:00\",\n    \"resource_type\": \"User\"\n}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "417"
+            "398"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 23:37:36 GMT"
+            "Thu, 07 May 2020 23:05:44 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "Werkzeug/0.15.6 Python/3.7.5"
           ]
         },
         "status": {
           "code": 200,
           "message": "OK"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+        "url": "https://credmgr.jesassn.org/api/v1/users"
       }
     }
   ],

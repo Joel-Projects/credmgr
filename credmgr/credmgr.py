@@ -1,6 +1,7 @@
 from urllib.parse import urljoin
 
 from requests import Session
+from requests_toolbelt.utils import formdata
 
 from . import models
 from .auth import ApiTokenAuth
@@ -8,6 +9,7 @@ from .exceptions import InitializationError
 from .models.utils import CachedProperty
 from .requestor import Requestor
 from .serializer import Serializer
+from .utils import urlencode
 
 
 User = models.User

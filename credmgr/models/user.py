@@ -1,3 +1,5 @@
+import json
+
 from ..exceptions import InitializationError
 from ..mixins import BaseModel, DeletableMixin, EditableMixin, ToggableMixin
 
@@ -61,7 +63,7 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
 
         :param str username: Username for new user (Example: ```spaz```) (required)
         :param str password: Password for new user (Example: ```supersecurepassword```) (required)
-        :param str defaultSettings: Default values to use for new apps (Example: ```{"databaseFlavor": "postgres", "databaseHost": "localhost"}```)
+        :param dict defaultSettings: Default values to use for new apps (Example: ```{"databaseFlavor": "postgres", "databaseHost": "localhost"}```)
         :param str redditUsername: User's Reddit username (Example: ```LilSpazJoekp```)
         :param bool isAdmin: Is the user an admin? Allows the user to see all objects and create users (Default: ``false``)
         :param bool isActive: Is the user active? Allows the user to sign in (Default: ``true``)
@@ -72,7 +74,7 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
         '''
         additionalParams = {}
         if defaultSettings:
-            additionalParams['default_settings'] = defaultSettings
+            additionalParams['default_settings'] = json.dumps(defaultSettings)
         if isAdmin:
             additionalParams['is_admin'] = isAdmin
         if isActive:

@@ -26,4 +26,7 @@ class SentryToken(BaseApp):
         :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
         :return: SentryToken
         '''
-        return _credmgr.post('/sentry_tokens', data={'app_name': appName, 'dsn': dsn})
+        data = {'app_name': appName, 'dsn': dsn}
+        if owner:
+            data['owner_id'] = owner
+        return _credmgr.post('/sentry_tokens', data=data)
