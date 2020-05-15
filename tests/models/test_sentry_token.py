@@ -1,5 +1,7 @@
 import praw
 import pytest
+from credmgr.models import SentryToken
+
 from credmgr.exceptions import Conflict, NotFound, ServerError
 
 
@@ -46,5 +48,5 @@ def testEditSentryTokenConflictingData(credmgr):
 
 def testListSentryTokens(credmgr):
     sentryTokens = credmgr.sentryTokens()
-    sentryTokens = [i for i in sentryTokens]
-    assert isinstance(sentryTokens, list)
+    for sentryToken in sentryTokens:
+        assert isinstance(sentryToken, SentryToken)

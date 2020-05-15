@@ -1,3 +1,4 @@
+from datetime import datetime
 from credmgr.models.utils import resolveUser
 
 
@@ -51,18 +52,21 @@ class BaseModel(object):
     def toDict(self):
         result = {}
 
-        for attr, _ in self._attrTypes.items():
-            attr = ''.join(attr.split('_')[:1] + [i.capitalize() for i in attr.split('_')[1:]])
-            value = getattr(self, attr)
-            if isinstance(value, list):
-                result[attr] = list(map(lambda x: x.toDict() if hasattr(x, 'toDict') else x, value))
-            elif hasattr(value, 'toDict'):
-                result[attr] = value.toDict()
-            elif isinstance(value, dict):
-                result[attr] = dict(map(lambda item: (item[0], item[1].toDict()) if hasattr(item[1], 'toDict') else item, value.items()))
-            else:
-                result[attr] = value
-        if issubclass(type(self), dict):
+        for exportAttr, _ in self._attrTypes.items():
+            attr = ''.join(exportAttr.split('_')[:1] + [i.capitalize() for i in exportAttr.split('_')[1:]])
+            value = getattr(self, attr, None)
+            if value:
+                if isinstance(value, list):
+                    result[exportAttr] = list(map(lambda x: x.toDict() if hasattr(x, 'toDict') else x, value))
+                elif hasattr(value, 'toDict'):
+                    result[exportAttr] = value.toDict()
+                elif isinstance(value, dict):
+                    result[exportAttr] = dict(map(lambda item: (item[0], item[1].toDict()) if hasattr(item[1], 'toDict') else item, value.items()))
+                elif isinstance(value, datetime):
+                    result[exportAttr] = value.astimezone().strftime(self._credmgr.config.dateFormat)
+                else:
+                    result[exportAttr] = value
+        if issubclass(type(self), dict): # pragma: no cover
             for key, value in self.items():
                 result[key] = value
         return result

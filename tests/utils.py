@@ -9,3 +9,4 @@ def genCassetteName():
     testDir = capitalCamelCase(os.path.basename(testDir))
     testName = testName.split(' ')[0]
     return f'{testDir}.{testName}'
+

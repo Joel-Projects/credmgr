@@ -1,15 +1,14 @@
-from urllib.parse import urljoin
-
+import configparser
+import os
 from requests import Session
-from requests_toolbelt.utils import formdata
 
 from . import models
 from .auth import ApiTokenAuth
+from .config import Config
 from .exceptions import InitializationError
 from .models.utils import CachedProperty
-from .requestor import Requestor
+from .requestor import Requestor, urljoin
 from .serializer import Serializer
-from .utils import urlencode
 
 
 User = models.User
@@ -19,10 +18,6 @@ RefreshToken = models.RefreshToken
 UserVerification = models.UserVerification
 SentryToken = models.SentryToken
 DatabaseCredential = models.DatabaseCredential
-
-def setOwner(ownerId, data):
-    if ownerId:
-        data['ownerId'] = ownerId
 
 class CredentialManager(object):
     '''The CredentialManager class provides convenient access to CredentialManager's API.
@@ -41,15 +36,26 @@ class CredentialManager(object):
     _default = None
     _endpoint = '/api/v1'
 
-    def __init__(self, host='https://credmgr.jesassn.org', apiToken=None, username=None, password=None, sessionClass=None, sessionKwargs={}):
+    def __init__(self, configName=None, sessionClass=None, sessionKwargs=None, **kwargs):
         '''Initialize a CredentialManager instance.
 
-        :param str host: Hostname to use for interacting with the API (default: ``https://credmgr.jesassn.org``)
-        :param str apiToken: API Token used for authentication (Note: cannot be used when ``username`` and ``password`` params are passed)
-        :param str username: Username to use for interacting with the API (Note: Cannot be used when ``apiToken`` param is passed)
-        :param str password: Password to use for interacting with the API (Note: Cannot be used when ``apiToken`` param is passed)
+        :param str configName: The name of a section in your ``.credmgr.ini`` file that credmgr will load its configuration
+            is loaded from. If ``configName`` is ``None``, then it will look for it in the environment variable ``credmgr_configName``.
+            If it is not found there, the ``default`` section is used.
         :param Session sessionClass: A Session class that will be used to create a requestor. If not set, use ``requests.Session`` (default: None).
         :param dict sessionKwargs: Dictionary with additional keyword arguments used to initialize the session (default: None).
+
+        Additional keyword arguments will be used to initialize the
+        :class:`.Config` object. This can be used to specify configuration
+        settings during instantiation of the :class:`.Reddit` instance. For
+        more details please see :ref:`configuration`.
+
+        Required settings are:
+
+        - apiToken
+        OR
+        - username
+        - password
 
         .. warning::
              Using an API Token instead of a username/password is strongly recommended!
@@ -73,19 +79,35 @@ class CredentialManager(object):
                    return response
 
            mySession = betamax.Betamax(requests.Session())
-           reddit = CredentialManager.client(..., sessionClass=JSONDebugRequestor, sessionKwargs={'session': mySession})
+           credmgr = CredentialManager(..., sessionClass=JSONDebugRequestor, sessionKwargs={'session': mySession})
         '''
-        self._host = urljoin(host, self._endpoint)
+        if sessionKwargs is None:
+            sessionKwargs = {}
+        configSection = None
+        try:
+            configSection = configName or os.getenv('credmgr_configName') or 'DEFAULT'
+            self.config = Config(configSection, **kwargs)
+        except configparser.NoSectionError as exc:
+            if configSection is not None:
+                exc.message += "\nYou provided the name of a .credmgr.ini section that doesn't exist."
+            raise
+
+        self._server = urljoin(getattr(self.config, 'server'), getattr(self.config, 'endpoint'))
+        apiToken = getattr(self.config, 'apiToken')
+        username = getattr(self.config, 'username')
+        password = getattr(self.config, 'password')
+
+        initErrorMessage = "Required settings are missing. Either 'apiToken' OR 'username' and 'password' must be specified, These settings can be provided in a .credmgr.ini file, as a keyword argument during the initialization of the `CredentialManager` class, or as an environment variable."
         if all([apiToken, username, password]):
-            raise InitializationError('Either apiToken or username/password pair can be passed, both cannot be passed')
+            raise InitializationError(initErrorMessage)
         if apiToken:
             self._auth = ApiTokenAuth(apiToken)
         elif username and password:
             self._auth = (username, password)
         else:
-            raise InitializationError('apiToken or an username/password pair must be passed')
+            raise InitializationError('API Token or an username/password pair must be set.')
 
-        self._requestor = Requestor(self._host, self._auth, sessionClass, **sessionKwargs)
+        self._requestor = Requestor(self._server, self._auth, sessionClass, **sessionKwargs)
         self.serializer = Serializer(self)
         self._currentUser = None
         self._userDefaults = None

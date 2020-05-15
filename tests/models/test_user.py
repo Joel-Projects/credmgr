@@ -1,13 +1,11 @@
 import pytest
+from credmgr.models import SentryToken, User
 
-from credmgr.exceptions import Conflict, NotFound
+from credmgr.exceptions import Conflict, InitializationError, NotFound
 
 
 data = {
-    'username': 'username',
-    'password': 'password',
-    'redditUsername': 'redditUsername',
-    'defaultSettings': {'database_flavor': 'postgres', 'user_agent': 'userAgent'}
+    'username': 'username', 'password': 'password', 'redditUsername': 'redditUsername', 'defaultSettings': {'database_flavor': 'postgres', 'user_agent': 'userAgent'}
 }
 
 def testCreateUser(credmgr):
@@ -35,7 +33,11 @@ def testDeleteUser(credmgr):
 
 def testEditUser(credmgr):
     user = credmgr.user('test2')
-    data = {'username': 'newUsername', 'redditUsername': 'newRedditUsername', 'defaultSettings': {'database_host': 'localhost', 'database_flavor': 'postgres', 'user_agent': 'userAgent'}}
+    data = {
+        'username': 'newUsername',
+        'redditUsername': 'newRedditUsername',
+        'defaultSettings': {'database_host': 'localhost', 'database_flavor': 'postgres', 'user_agent': 'userAgent'}
+    }
     user.edit(**data)
     modifiedUser = credmgr.user('newUsername')
     for key, value in data.items():
@@ -46,7 +48,54 @@ def testEditUserConflictingData(credmgr):
     with pytest.raises(Conflict):
         user.edit(username='username')
 
-def testListRedditApps(credmgr):
+def testListUsers(credmgr):
     users = credmgr.users()
-    users = [i for i in users]
-    assert isinstance(users, list)
+    for user in users:
+        assert isinstance(user, User)
+
+def testListUsersWithUser(credmgr):
+    users = credmgr.user()
+    for user in users:
+        assert isinstance(user, User)
+
+def testToDict(credmgr):
+    user = credmgr.currentUser
+    user.apps()
+    exportDict = user.toDict()
+    assert exportDict == {
+        'id': 1,
+        'username': 'spaz',
+        'is_active': True,
+        'is_regular_user': True,
+        'is_admin': True,
+        'default_settings': {'database_flavor': 'postgres', 'database_host': 'localhost'},
+        'reddit_username': 'Lil_SpazJoekp',
+        'created': '04/02/2020 09:55:01 PM CDT',
+        'updated': '04/29/2020 07:56:20 PM CDT',
+        'reddit_apps': [{'id': 22, 'app_name': 'testRedditApp', 'client_id': 'clientId', 'client_secret': 'clientSecret'},
+                        {'id': 2, 'app_name': 'Test', 'client_id': 'client_id2', 'client_secret': 'client_secret2'}],
+        'sentry_tokens': [{'id': 4, 'app_name': 'sentryToken', 'enabled': True, 'owner_id': 1, 'dsn': 'https://key@sentry.jesassn.org/id'}],
+        'database_credentials': [{
+            'id': 1,
+            'app_name': 'test',
+            'database_username': 'postgres',
+            'database_host': 'localhost',
+            'database': 'postgres',
+            'database_flavor': 'postgres',
+            'database_password': 'postgres',
+            'ssh_port': 22
+        }]
+    }
+
+def testAppsOnly(credmgr):
+    user = credmgr.currentUser
+    sentryTokens = user.apps('sentryTokens')
+    assert isinstance(sentryTokens, list)
+    for token in sentryTokens:
+        assert isinstance(token, SentryToken)
+
+
+def testAppsOnlyInvalid(credmgr):
+    user = credmgr.currentUser
+    with pytest.raises(InitializationError):
+        _ = user.apps('invalid')

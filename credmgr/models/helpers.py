@@ -32,7 +32,7 @@ class Paginator:
 
     def __next__(self):
         if self.limit is not None and self._itemsReturned >= self.limit:
-            raise StopIteration()
+            raise StopIteration() # pragma: no cover
 
         if self._response is None or self._currentItemIndex >= len(self._response):
             self._next()
@@ -50,9 +50,9 @@ class Paginator:
         self._response = self._credmgr.get(self._model._path, params=params)
         self._currentItemIndex = 0
         if not self._response:
-            raise StopIteration()
+            raise StopIteration() # pragma: no cover
         if self._response and len(self._response) == self.batchSize:
-            self._offset += self.batchSize
+            self._offset += self.batchSize # pragma: no cover
         else:
             self._completed = True
 

@@ -1,3 +1,5 @@
+import json
+
 from . import RedditApp
 from .utils import resolveModelFromInput, resolveUser
 from ..mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
@@ -5,7 +7,7 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
 
 class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
     _attrTypes = {
-        **BaseModel._attrTypes, 'id': 'int', 'user_id': 'str', 'redditor': 'str', 'reddit_app_id': 'int', 'extra_data': 'str', 'owner_id': 'int'
+        **BaseModel._attrTypes, 'id': 'int', 'user_id': 'str', 'redditor': 'str', 'reddit_app_id': 'int', 'extra_data': 'dict', 'owner_id': 'int'
     }
 
     _editableAttrs = ['userId', 'redditor', 'redditAppId', 'extraData']
@@ -48,7 +50,7 @@ class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
         if redditor:
             data['redditor'] = redditor
         if extraData:
-            data['extra_data'] = extraData
+            data['extra_data'] = json.dumps(extraData)
         if owner:
             data['owner_id'] = owner
         return _credmgr.post('/user_verifications', data=data)

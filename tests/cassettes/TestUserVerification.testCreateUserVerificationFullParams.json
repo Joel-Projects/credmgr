@@ -1,0 +1,123 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-15T03:45:23",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "user_id=1234567&reddit_app_id=22&redditor=redditor&extra_data=%7B%22extra%22%3A+%22data%22%2C+%22nested%22%3A+%7B%22dict%22%3A+%22value%22%7D%7D"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "144"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 31, \"user_id\": \"1234567\", \"redditor\": \"redditor\", \"resource_type\": \"UserVerification\", \"reddit_app_id\": 22, \"extra_data\": {\"extra\": \"data\", \"nested\": {\"dict\": \"value\"}}, \"owner_id\": 1}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "192"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:45:23 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/user_verifications"
+      }
+    },
+    {
+      "recorded_at": "2020-05-15T03:45:23",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/22"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 22, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"short_name\": \"shortName\", \"app_description\": \"appDescription\", \"user_agent\": \"python:testRedditApp by /u/Lil_SpazJoekp\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4\", \"enabled\": true, \"owner_id\": 1}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "448"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:45:23 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/22"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

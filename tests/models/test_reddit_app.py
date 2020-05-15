@@ -1,5 +1,7 @@
 import praw
 import pytest
+from credmgr.models import RedditApp
+
 from credmgr.exceptions import Conflict, NotFound, ServerError
 
 
@@ -52,8 +54,13 @@ def testToggleRedditApp(credmgr):
 
 def testListRedditApps(credmgr):
     redditApps = credmgr.redditApps()
-    redditApps = [i for i in redditApps]
-    assert isinstance(redditApps, list)
+    for redditApp in redditApps:
+        assert isinstance(redditApp, RedditApp)
+
+def testListRedditAppsWithRedditApp(credmgr):
+    redditApps = credmgr.redditApp()
+    for redditApp in redditApps:
+        assert isinstance(redditApp, RedditApp)
 
 def testCreateRedditAppWithoutUserAgent(credmgr):
     data = {'appName': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'shortName': 'shortName', 'appDescription': 'appDescription'}

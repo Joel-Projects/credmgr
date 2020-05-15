@@ -1,0 +1,241 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-15T03:49:55",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "user_id=12345"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "13"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications/get_redditor"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 28, \"user_id\": \"12345\", \"redditor\": null, \"resource_type\": \"UserVerification\", \"reddit_app_id\": 22, \"extra_data\": null, \"owner_id\": 4}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "142"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:49:55 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/user_verifications/get_redditor"
+      }
+    },
+    {
+      "recorded_at": "2020-05-15T03:49:56",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/22"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 22, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"short_name\": \"shortName\", \"app_description\": \"appDescription\", \"user_agent\": \"python:testRedditApp by /u/Lil_SpazJoekp\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4\", \"enabled\": true, \"owner_id\": 1}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "448"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:49:55 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/22"
+      }
+    },
+    {
+      "recorded_at": "2020-05-15T03:49:56",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "0"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "DELETE",
+        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications/28"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Type": [
+            "text/html; charset=utf-8"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:49:56 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 204,
+          "message": "No Content"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/user_verifications/28"
+      }
+    },
+    {
+      "recorded_at": "2020-05-15T03:49:57",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "user_id=12345"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "13"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications/get_redditor"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"message\": \"The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "136"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:49:57 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 404,
+          "message": "Not Found"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/user_verifications/get_redditor"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

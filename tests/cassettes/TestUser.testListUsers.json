@@ -1,7 +1,7 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-05-15T03:37:03",
+      "recorded_at": "2020-05-15T03:37:05",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -25,35 +25,38 @@
           ]
         },
         "method": "GET",
-        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps?limit=20&offset=0"
+        "uri": "https://credmgr.jesassn.org/api/v1/users?limit=10&offset=0"
       },
       "response": {
         "body": {
           "encoding": null,
-          "string": "[{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"FjLV5xUo9-db4A\", \"client_secret\": \"zipSR4S8nZ_tN0viQSmPjcjcf3c\", \"resource_type\": \"RedditApp\"}, {\"id\": 23, \"app_name\": \"mod_from_discord\", \"client_id\": \"6qisfTLPS_q2rA\", \"client_secret\": \"S2PJmmvQZGKx2Q1J33cMo8VY9b4\", \"resource_type\": \"RedditApp\"}, {\"id\": 24, \"app_name\": \"test\", \"client_id\": \"test\", \"client_secret\": \"\", \"resource_type\": \"RedditApp\"}, {\"id\": 25, \"app_name\": \"test2\", \"client_id\": \"test2\", \"client_secret\": \"\", \"resource_type\": \"RedditApp\"}]\n"
+          "string": "[{\"id\": 5, \"username\": \"jackson\", \"resource_type\": \"User\"}, {\"id\": 8, \"username\": \"kellytest\", \"resource_type\": \"User\"}, {\"id\": 9, \"username\": \"test\", \"resource_type\": \"User\"}, {\"id\": 6, \"username\": \"kelly\", \"resource_type\": \"User\"}, {\"id\": 10, \"username\": \"newUsername\", \"resource_type\": \"User\"}, {\"id\": 27, \"username\": \"username\", \"resource_type\": \"User\"}, {\"id\": 7, \"username\": \"Pim\", \"resource_type\": \"User\"}, {\"id\": 1, \"username\": \"spaz\", \"resource_type\": \"User\"}, {\"id\": 4, \"username\": \"elfah\", \"resource_type\": \"User\"}]\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "517"
+            "527"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Fri, 15 May 2020 03:37:03 GMT"
+            "Fri, 15 May 2020 03:37:05 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
+          ],
+          "X-Total-Count": [
+            "9"
           ]
         },
         "status": {
           "code": 200,
           "message": "OK"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps?limit=20&offset=0"
+        "url": "https://credmgr.jesassn.org/api/v1/users?limit=10&offset=0"
       }
     }
   ],

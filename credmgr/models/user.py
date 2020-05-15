@@ -49,10 +49,13 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
         if updated is not None:
             self.updated = updated
         if redditApps:
+            self.redditApps = redditApps
             self._apps['redditApps'] = redditApps
         if sentryTokens:
+            self.sentryTokens = sentryTokens
             self._apps['sentryTokens'] = sentryTokens
         if databaseCredentials:
+            self.databaseCredentials = databaseCredentials
             self._apps['databaseCredentials'] = databaseCredentials
 
     @staticmethod
@@ -75,13 +78,13 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
         additionalParams = {}
         if defaultSettings:
             additionalParams['default_settings'] = json.dumps(defaultSettings)
-        if isAdmin:
+        if isAdmin: # pragma: no cover
             additionalParams['is_admin'] = isAdmin
         if isActive:
             additionalParams['is_active'] = isActive
         if isRegularUser:
             additionalParams['is_regular_user'] = isRegularUser
-        if isInternal:
+        if isInternal: # pragma: no cover
             additionalParams['is_internal'] = isInternal
         if redditUsername:
             additionalParams['reddit_username'] = redditUsername
@@ -93,12 +96,15 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
         :param str only: Pass one of ``redditApps``, ``sentryTokens``, ``databaseCredentials`` to only get those types
         :return: Union[dict,list[Union[RedditApp,SentryToken,DatabaseCredential]]]
         '''
+        appTypes = ['redditApps', 'sentryTokens', 'databaseCredentials']
         if not self._apps:
             response = self._credmgr.get(f'/users/{self.id}/apps')
             self._apps = response._apps
+            for app in appTypes:
+                setattr(self, app, self._apps[app])
         if only:
-            if only in ['redditApps', 'sentryTokens', 'databaseCredentials']:
+            if only in appTypes:
                 return self._apps[only]
             else:
-                raise InitializationError(f"App type: {only} is not valid. Only 'reddit_apps', 'sentry_tokens', and 'database_credentials' are valid.")
+                raise InitializationError(f"App type: {only} is not valid. Only 'redditApps', 'sentryTokens', and 'databaseCredentials' are valid.")
         return self._apps

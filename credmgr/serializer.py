@@ -39,9 +39,9 @@ class Serializer(object):
         try:
             from dateutil.parser import parse
             return parse(string)
-        except ImportError:
+        except ImportError: # pragma: no cover
             return string
-        except ValueError:
+        except ValueError: # pragma: no cover
             raise SerializerException(f"Failed to parse `{string}` as datetime object")
 
     @staticmethod
@@ -65,7 +65,7 @@ class Serializer(object):
 
         :return: object.
         '''
-        return value
+        return value # pragma: no cover
 
     @staticmethod
     def deserializePrimitive(data, objectType):
@@ -94,7 +94,7 @@ class Serializer(object):
         if isinstance(data, list) and all([i['resource_type'] == data[0]['resource_type'] for i in data]):
             if data:
                 resourceType = f'list[{data[0]["resource_type"]}]'
-            else:
+            else: # pragma: no cover
                 return data
         else:
             resourceType = data.get('resource_type', 'dict')

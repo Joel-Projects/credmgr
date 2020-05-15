@@ -1,0 +1,129 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-15T03:33:20",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "user_id=newId"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "13"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications/get_redditor"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 23, \"user_id\": \"newId\", \"redditor\": \"redditor\", \"resource_type\": \"UserVerification\", \"reddit_app_id\": null, \"extra_data\": null, \"owner_id\": 1}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "150"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:33:20 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/user_verifications/get_redditor"
+      }
+    },
+    {
+      "recorded_at": "2020-05-15T03:33:21",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "[{\"op\": \"replace\", \"path\": \"/user_id\", \"value\": \"12345\"}]"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "57"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "PATCH",
+        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications/23"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"status\": 409, \"error\": \"already exists\", \"items\": {\"user_id\": \"12345\"}, \"message\": \"Failed to update User Verification details.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "132"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 03:33:21 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 409,
+          "message": "Conflict"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/user_verifications/23"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

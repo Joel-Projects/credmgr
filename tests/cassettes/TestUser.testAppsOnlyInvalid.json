@@ -1,0 +1,117 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-15T00:09:32",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/users/me"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"username\": \"spaz\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": true, \"default_settings\": {\"database_flavor\": \"postgres\", \"database_host\": \"localhost\"}, \"reddit_username\": \"Lil_SpazJoekp\", \"created\": \"2020-04-03T02:55:01.957432+00:00\", \"updated\": \"2020-04-30T00:56:20.335816+00:00\", \"resource_type\": \"User\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "330"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 00:09:32 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/users/me"
+      }
+    },
+    {
+      "recorded_at": "2020-05-15T00:09:36",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/users/1/apps"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 1, \"username\": \"spaz\", \"resource_type\": \"User\", \"reddit_apps\": [{\"id\": 22, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\"}, {\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\"}], \"sentry_tokens\": [{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"enabled\": true, \"resource_type\": \"SentryToken\"}], \"database_credentials\": [{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\"}]}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "705"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Fri, 15 May 2020 00:09:36 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/users/1/apps"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

@@ -1,7 +1,7 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T23:49:08",
+      "recorded_at": "2020-05-15T03:37:04",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -30,20 +30,20 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "[]\n"
+          "string": "[{\"id\": 9, \"app_name\": \"mod_from_discord\", \"dsn\": \"https://b365439feb7641cb88ecffd347ecec0d@sentry.jesassn.org/10\", \"enabled\": true, \"resource_type\": \"SentryToken\"}]\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "3"
+            "166"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 23:49:08 GMT"
+            "Fri, 15 May 2020 03:37:04 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
