@@ -13,15 +13,6 @@ def testCreateUserVerification(credmgr):
             continue
         assert getattr(userVerification, key) == value
 
-def testGetUserVerificationWithRedditAppId(credmgr):
-    data = {'userId': '123456', 'redditAppId': 22}
-    userVerification = credmgr.userVerification(**data)
-    for key, value in data.items():
-        if key == 'redditApp':
-            assert getattr(userVerification, key).id == value
-            continue
-        assert getattr(userVerification, key) == value
-
 def testCreateUserVerificationFullParams(credmgr):
     data = {'userId': '1234567', 'redditApp': 22, 'redditor': 'redditor', 'extraData': {'extra': 'data', 'nested': {'dict': 'value'}}}
     userVerification = credmgr.userVerification.create(**data)

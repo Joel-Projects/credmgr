@@ -114,3 +114,8 @@ def testRedditAppGenAuthUrlUserVerificationCreate(credmgr):
     redditApp = credmgr.redditApp(19)
     url = redditApp.genAuthUrl(userVerification='newId')
     assert url == 'https://www.reddit.com/api/v1/authorize?client_id=clientId&duration=temporary&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&response_type=code&scope=identity&state=OTE4OTMzNjJiMDJkMDFjMDBmYjcxYmM2YmUwMjA2NWRlZGMzMzU2NTk1ZmM2NDg1ODFhYjU5YTk0ODY0YTdlNDo8VXNlclZlcmlmaWNhdGlvbiBpZD0yMywgdXNlcklkPSduZXdJZCc-'
+
+def testRedditAppGenAuthUrlUserVerificationCreateExisting(credmgr):
+    redditApp = credmgr.redditApp(22)
+    url = redditApp.genAuthUrl(userVerification='newId')
+    assert url == 'https://www.reddit.com/api/v1/authorize?client_id=clientId&duration=temporary&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&response_type=code&scope=identity&state=OTE4OTMzNjJiMDJkMDFjMDBmYjcxYmM2YmUwMjA2NWRlZGMzMzU2NTk1ZmM2NDg1ODFhYjU5YTk0ODY0YTdlNDpuZXdJZA%3D%3D'

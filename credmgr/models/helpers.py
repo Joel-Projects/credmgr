@@ -1,8 +1,12 @@
+import logging
+from operator import xor
+
 from . import Bot, DatabaseCredential, RedditApp, RefreshToken, SentryToken, User, UserVerification
 from .utils import resolveUser
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
 
+log = logging.getLogger(__package__)
 
 class Paginator:
 
@@ -171,6 +175,18 @@ class RedditAppHelper(BaseHelper):
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification
 
+    def __call__(self, userId=None, redditAppId=None, batchSize=20, limit=None, owner=None):
+        kwargs = {}
+        if userId:
+            kwargs['userId'] = userId
+        if redditAppId:
+            kwargs['redditAppId'] = redditAppId
+        if not userId:
+            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
+        item = self._model(self._credmgr, **kwargs)
+        item._fetch(True)
+        return item
+
     def create(self, userId, redditApp, redditor=None, extraData=None, owner=None) -> UserVerification:
         '''Create a new User Verification
 
@@ -186,18 +202,6 @@ class UserVerificationHelper(BaseHelper):
         :return: UserVerification
         '''
         return self._model._create(self._credmgr, userId=userId, redditApp=redditApp, redditor=redditor, extraData=extraData, owner=owner)
-
-    def __call__(self, userId=None, redditAppId=None, batchSize=20, limit=None, owner=None):
-        kwargs = {}
-        if userId:
-            kwargs['userId'] = userId
-        if redditAppId:
-            kwargs['redditAppId'] = redditAppId
-        if not userId:
-            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
-        item = self._model(self._credmgr, **kwargs)
-        item._fetch(True)
-        return item
 
 class SentryTokenHelper(BaseHelper):
     _model = SentryToken
@@ -220,7 +224,7 @@ class DatabaseCredentialHelper(BaseHelper):
     _model = DatabaseCredential
 
     def create(self, appName, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
-            useSSH=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSSHKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True,
+            useSsh=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True,
             owner=None) -> DatabaseCredential:
         '''Create a new Database Credential
 
@@ -248,8 +252,8 @@ class DatabaseCredentialHelper(BaseHelper):
         :return: DatabaseCredential
         '''
         return self._model._create(self._credmgr, appName=appName, databaseFlavor=databaseFlavor, database=database, databaseHost=databaseHost, databasePort=databasePort,
-            databaseUsername=databaseUsername, databasePassword=databasePassword, useSsh=useSSH, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
-            useSshKey=useSSHKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
+            databaseUsername=databaseUsername, databasePassword=databasePassword, useSsh=useSsh, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
+            useSshKey=useSshKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
 
 class RefreshTokenHelper(BaseHelper):
     _model = RefreshToken
@@ -260,6 +264,8 @@ class RefreshTokenHelper(BaseHelper):
             kwargs['redditor'] = redditor
         if redditAppId:
             kwargs['redditAppId'] = redditAppId
+        if xor(bool(RedditAppHelper), bool(redditAppId)):
+            raise InitializationError("Both 'redditor' and 'redditAppId' are required")
         if not (redditor and redditAppId):
             return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
         item = self._model(self._credmgr, **kwargs)

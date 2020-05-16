@@ -1,3 +1,5 @@
+import datetime
+
 import pytest
 from credmgr.models import SentryToken, User
 
@@ -62,6 +64,8 @@ def testToDict(credmgr):
     user = credmgr.currentUser
     user.apps()
     exportDict = user.toDict()
+    exportDict.pop('created')
+    exportDict.pop('updated')
     assert exportDict == {
         'id': 1,
         'username': 'spaz',
@@ -70,8 +74,6 @@ def testToDict(credmgr):
         'is_admin': True,
         'default_settings': {'database_flavor': 'postgres', 'database_host': 'localhost'},
         'reddit_username': 'Lil_SpazJoekp',
-        'created': '04/02/2020 09:55:01 PM CDT',
-        'updated': '04/29/2020 07:56:20 PM CDT',
         'reddit_apps': [{'id': 22, 'app_name': 'testRedditApp', 'client_id': 'clientId', 'client_secret': 'clientSecret'},
                         {'id': 2, 'app_name': 'Test', 'client_id': 'client_id2', 'client_secret': 'client_secret2'}],
         'sentry_tokens': [{'id': 4, 'app_name': 'sentryToken', 'enabled': True, 'owner_id': 1, 'dsn': 'https://key@sentry.jesassn.org/id'}],

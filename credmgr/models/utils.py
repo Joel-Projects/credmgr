@@ -31,15 +31,15 @@ def resolveUser(userAttr='owner', returnAttr='id'):
 
     return decorator
 
-def resolveModelFromInput(credmgr, model, input, returnAttr='id'):
+def resolveModelFromInput(credmgr, model, inputValue, returnAttr='id'):
     value = None
-    if isinstance(input, model):
-        value = getattr(input, returnAttr)
-    elif isinstance(input, int):
-        value = input
-    elif isinstance(input, str):
+    if isinstance(inputValue, model):
+        value = getattr(inputValue, returnAttr)
+    elif isinstance(inputValue, int):
+        value = inputValue
+    elif isinstance(inputValue, str):
         try:
-            foundItem = getattr(credmgr, model._credmgrCallable)(input)
+            foundItem = getattr(credmgr, model._credmgrCallable)(inputValue)
         except NotFound:
             foundItem = None
         if foundItem:

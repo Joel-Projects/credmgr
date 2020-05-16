@@ -5,6 +5,5 @@ from .owner import OwnerMixin
 from .togglable import ToggableMixin
 
 
-_ = None
-del _
+''''''
 from .baseApp import BaseApp
