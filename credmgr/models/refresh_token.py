@@ -1,7 +1,8 @@
 from credmgr.mixins import BaseModel, DeletableMixin, OwnerMixin
+from credmgr.mixins.redditReddit import RedditAppMixin
 
 
-class RefreshToken(BaseModel, DeletableMixin, OwnerMixin):
+class RefreshToken(BaseModel, DeletableMixin, OwnerMixin, RedditAppMixin):
     _attrTypes = {
         **BaseModel._attrTypes,
         'reddit_app_id': 'int',
@@ -16,19 +17,26 @@ class RefreshToken(BaseModel, DeletableMixin, OwnerMixin):
 
     _path = '/refresh_tokens'
     _credmgrCallable = 'refreshToken'
-    _fetchNameAttr = {'redditor': 'redditor', 'redditAppId': 'reddit_app_id'}
+    _nameMapping = {'redditor': 'redditor'}
+    _fetchNameMapping = {'redditor': 'redditor', 'redditAppId': 'reddit_app_id'}
     _getByNamePath = 'by_redditor'
     _canFetchByName = True
     _nameAttr = 'redditor'
 
-    def __init__(self, credmgr, id=None, redditAppId=None, redditor=None, refreshToken=None, ownerId=None, scopes=None, issuedAt=None, revoked=False, revokedAt=None):
-        super().__init__(credmgr, id)
-        self.redditAppId = redditAppId
-        self.redditApp = self._credmgr.redditApp(self.redditAppId)
-        self.redditor = redditor
-        self.refreshToken = refreshToken
-        self.ownerId = ownerId
-        self.scopes = scopes
-        self.issuedAt = issuedAt
-        self.revoked = revoked
-        self.revokedAt = revokedAt
+    def __init__(self, credmgr, **kwargs):
+        '''Initialize a Refresh Token instance.
+
+        Refresh Tokens are for authenticating with Reddit as a Reddit that has authorized a `~.RedditApp` to access their Reddit account.
+
+        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param int id: ID of this Refresh Token.
+        :param str redditor: Redditor this Refresh Token is for.
+        :param str redditAppId: ID of the `~.RedditApp` this Refresh Token is for.
+        :param str refreshToken: The Refresh Token to pass to a Reddit instance.
+        :param list[str] scopes: The OAuth2 scopes this Refresh Token grants access to.
+        :param int ownerId: ID of the `~.User` that owns this Refresh Token.
+        :param datetime.datetime issuedAt: Date and time this Refresh Token was issued.
+        :param bool revoked: Indicates if this Refresh Token was revoked or superseded by another Refresh Token.
+        :param datetime.datetime revokedAt: Date and time this Refresh Token was revoked or superseded.
+        '''
+        super().__init__(credmgr, **kwargs)

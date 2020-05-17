@@ -2,17 +2,17 @@ import praw
 import pytest
 from credmgr.models import RedditApp
 
-from credmgr.exceptions import Conflict, NotFound, ServerError
+from credmgr.exceptions import Conflict, InitializationError, NotFound, ServerError
 
 
 def testCreateRedditApp(credmgr):
-    data = {'appName': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'userAgent': 'userAgent', 'shortName': 'shortName', 'appDescription': 'appDescription'}
+    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'userAgent': 'userAgent', 'shortName': 'shortName', 'appDescription': 'appDescription'}
     redditApp = credmgr.redditApp.create(**data)
     for key, value in data.items():
         assert getattr(redditApp, key) == value
 
 def testCreateRedditAppOtherUser(credmgr):
-    data = {'appName': 'testRedditApp', 'clientId': 'clientId', 'owner': 4}
+    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'owner': 4}
     redditApp = credmgr.redditApp.create(**data)
     for key, value in data.items():
         if key == 'owner':
@@ -21,12 +21,12 @@ def testCreateRedditAppOtherUser(credmgr):
         assert getattr(redditApp, key) == value
 
 def testCreateRedditAppBadParams(credmgr):
-    data = {'appName': 'te', 'clientId': 'clientId2'}
+    data = {'name': 'te', 'clientId': 'clientId2'}
     with pytest.raises(ServerError):
         _ = credmgr.redditApp.create(**data)
 
 def testCreateRedditAppExisting(credmgr):
-    data = {'appName': 'redditApp', 'clientId': 'clientId'}
+    data = {'name': 'redditApp', 'clientId': 'clientId'}
     with pytest.raises(Conflict):
         _ = credmgr.redditApp.create(**data)
 
@@ -46,24 +46,17 @@ def testEditRedditAppConflictingData(credmgr):
     with pytest.raises(Conflict):
         redditApp.edit(clientId='clientId')
 
-def testToggleRedditApp(credmgr):
-    redditApp = credmgr.redditApp(2)
-    previousState = redditApp.enabled
-    redditApp.toggle(False)
-    assert redditApp.enabled is not previousState
-
 def testListRedditApps(credmgr):
     redditApps = credmgr.redditApps()
     for redditApp in redditApps:
         assert isinstance(redditApp, RedditApp)
 
 def testListRedditAppsWithRedditApp(credmgr):
-    redditApps = credmgr.redditApp()
-    for redditApp in redditApps:
-        assert isinstance(redditApp, RedditApp)
+    with pytest.raises(InitializationError):
+        _ = credmgr.redditApp()
 
 def testCreateRedditAppWithoutUserAgent(credmgr):
-    data = {'appName': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'shortName': 'shortName', 'appDescription': 'appDescription'}
+    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'shortName': 'shortName', 'appDescription': 'appDescription'}
     redditApp = credmgr.redditApp.create(**data)
     assert redditApp.userAgent == 'python:testRedditApp by /u/Lil_SpazJoekp'
     for key, value in data.items():

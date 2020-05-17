@@ -1,9 +1,7 @@
-import datetime
-
 import pytest
-from credmgr.models import SentryToken, User
 
 from credmgr.exceptions import Conflict, InitializationError, NotFound
+from credmgr.models import SentryToken, User
 
 
 data = {
@@ -56,9 +54,8 @@ def testListUsers(credmgr):
         assert isinstance(user, User)
 
 def testListUsersWithUser(credmgr):
-    users = credmgr.user()
-    for user in users:
-        assert isinstance(user, User)
+    with pytest.raises(InitializationError):
+        _ = credmgr.user()
 
 def testToDict(credmgr):
     user = credmgr.currentUser
@@ -67,26 +64,33 @@ def testToDict(credmgr):
     exportDict.pop('created')
     exportDict.pop('updated')
     assert exportDict == {
-        'id': 1,
-        'username': 'spaz',
-        'is_active': True,
-        'is_regular_user': True,
-        'is_admin': True,
-        'default_settings': {'database_flavor': 'postgres', 'database_host': 'localhost'},
-        'reddit_username': 'Lil_SpazJoekp',
-        'reddit_apps': [{'id': 22, 'app_name': 'testRedditApp', 'client_id': 'clientId', 'client_secret': 'clientSecret'},
-                        {'id': 2, 'app_name': 'Test', 'client_id': 'client_id2', 'client_secret': 'client_secret2'}],
-        'sentry_tokens': [{'id': 4, 'app_name': 'sentryToken', 'enabled': True, 'owner_id': 1, 'dsn': 'https://key@sentry.jesassn.org/id'}],
         'database_credentials': [{
-            'id': 1,
             'app_name': 'test',
-            'database_username': 'postgres',
-            'database_host': 'localhost',
             'database': 'postgres',
             'database_flavor': 'postgres',
+            'database_host': 'localhost',
             'database_password': 'postgres',
+            'database_port': 5432,
+            'database_username': 'postgres',
+            'id': 1,
+            'owner_id': 1,
             'ssh_port': 22
-        }]
+        }], 'default_settings': {
+            'database_flavor': 'postgres', 'database_host': 'localhost'
+        }, 'id': 1, 'is_active': True, 'is_regular_user': True, 'reddit_apps': [{
+            'app_name': 'Test',
+            'app_type': 'web',
+            'client_id': 'client_id2',
+            'client_secret': 'client_secret2',
+            'id': 2,
+            'owner_id': 1,
+            'redirect_uri': 'https://credmgr.jesassn.org/oauth2/reddit_callback',
+            'short_name': 'test',
+            'state': 'state',
+            'user_agent': 'nah'
+        }], 'reddit_username': 'Lil_SpazJoekp', 'sentry_tokens': [{
+            'app_name': 'sentryToken', 'dsn': 'https://key@sentry.jesassn.org/id', 'id': 4, 'owner_id': 1
+        }], 'username': 'spaz'
     }
 
 def testAppsOnly(credmgr):
@@ -95,7 +99,6 @@ def testAppsOnly(credmgr):
     assert isinstance(sentryTokens, list)
     for token in sentryTokens:
         assert isinstance(token, SentryToken)
-
 
 def testAppsOnlyInvalid(credmgr):
     user = credmgr.currentUser

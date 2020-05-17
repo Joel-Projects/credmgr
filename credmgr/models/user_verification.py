@@ -3,9 +3,10 @@ import json
 from . import RedditApp
 from .utils import resolveModelFromInput, resolveUser
 from ..mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
+from ..mixins.redditReddit import RedditAppMixin
 
 
-class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
+class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin, RedditAppMixin):
     _attrTypes = {
         **BaseModel._attrTypes, 'id': 'int', 'user_id': 'str', 'redditor': 'str', 'reddit_app_id': 'int', 'extra_data': 'dict', 'owner_id': 'int'
     }
@@ -14,31 +15,34 @@ class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
     _path = '/user_verifications'
     _credmgrCallable = 'userVerification'
     _nameAttr = 'userId'
+    _nameMapping = {'user_id': 'userId'}
     _canFetchByName = True
     _getByNamePath = 'get_redditor'
-    _fetchNameAttr = 'user_id'
+    _fetchNameMapping = {'userId': 'user_id'}
 
-    def __init__(self, credmgr, id=None, userId=None, redditor=None, redditAppId=None, extraData=None, ownerId=None):
-        super().__init__(credmgr, id)
-        self.userId = userId
-        self.redditAppId = redditAppId
-        self.redditApp = self._credmgr.redditApp(self.redditAppId)
-        if redditor:
-            self.redditor = redditor
-        if extraData:
-            self.extraData = extraData
-        self.ownerId = ownerId
+    def __init__(self, credmgr, **kwargs):
+        '''Initialize an User Verification instance.
+
+        User Verifications for associating an unique ID with a Redditor
+
+        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param id: ID of this User Verification.
+        :param userId: An unique ID to associate with a Redditor.
+        :param redditor: Redditor username to associate with an unique ID.
+        :param redditAppId: ID of the RedditApp the Refresh Token is for.
+        :param extraData: Extra data to be associated with this User Verification
+        :param ownerId: ID of the `~.User` that owns this User Verification
+        '''
+        super().__init__(credmgr, **kwargs)
 
     @staticmethod
     @resolveUser()
     def _create(_credmgr, userId, redditApp, redditor=None, extraData=None, owner=None):
         '''Create a new User Verification
 
-        **PERMISSIONS: At least Active user is required.**
+        User Verifications for associating an unique ID with a Redditor
 
-        User Verifications for verifying a redditor with a User ID
-
-        :param str userId: User ID to associate Redditor with (required)
+        :param str userId: An unique ID to associate with a Redditor (required)
         :param Union[RedditApp,int,str] redditApp: Reddit app the User Verification is for (required)
         :param str redditor: Redditor the User Verification is for. This is not usually set manually.
         :param dict extraData: Extra JSON data to include with verification

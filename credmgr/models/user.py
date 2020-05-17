@@ -1,10 +1,10 @@
 import json
 
 from ..exceptions import InitializationError
-from ..mixins import BaseModel, DeletableMixin, EditableMixin, ToggableMixin
+from ..mixins import BaseModel, DeletableMixin, EditableMixin
 
 
-class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
+class User(BaseModel, DeletableMixin, EditableMixin):
     _attrTypes = {
         **BaseModel._attrTypes,
         'id': 'int',
@@ -24,39 +24,37 @@ class User(BaseModel, DeletableMixin, EditableMixin, ToggableMixin):
     _path = '/users'
     _credmgrCallable = 'user'
     _nameAttr = 'username'
-    _enabledAttr = 'isActive'
+    _nameMapping = {'username': 'username'}
     _canFetchByName = True
-    _fetchNameAttr = _nameAttr
+    _fetchNameMapping = {_nameAttr: 'username'}
 
-    def __init__(self, credmgr, id=None, username=None, isActive=None, isRegularUser=None, isAdmin=None, defaultSettings=None, redditUsername=None, created=None, updated=None, redditApps=None, sentryTokens=None, databaseCredentials=None):
-        super(User, self).__init__(credmgr, id)
+    def __init__(self, credmgr, **kwargs):
+        '''Initialize an User instance
+
+        Users are for logging into and accessing that user's credentials
+
+        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param int id: ID of the User.
+        :param username: Username of the User.
+        :param bool isActive: Indicates if the User can login and access CredentialManager.
+        :param bool isRegularUser: Incicates if this is a regular user.
+        :param bool isAdmin: Incicates if this User can create other users and their credentials.
+        :param defaultSettings:
+        :param str redditUsername: This User's Reddit username. Used for :class:`~.RedditApp`'s userAgent.
+        :param datetime.datetime created: Date and time this User was created.
+        :param datetime.datetime updated: Date and time this User was last updated.
+        :param redditApps: A list of Reddit Apps this User owns.
+        :param sentryTokens: A list of Sentry Tokens this User owns.
+        :param databaseCredentials: A list of Database Credentials this User owns.
+        '''
+        super().__init__(credmgr, **kwargs)
         self._apps = {}
-        if username:
-            self.username = username
-        if isActive is not None:
-            self._fetched = True
-            self.isActive = isActive
-        if isRegularUser is not None:
-            self.isRegularUser = isRegularUser
-        if isAdmin is not None:
-            self.isAdmin = isAdmin
-        if defaultSettings is not None:
-            self.defaultSettings = defaultSettings
-        if redditUsername is not None:
-            self.redditUsername = redditUsername
-        if created is not None:
-            self.created = created
-        if updated is not None:
-            self.updated = updated
-        if redditApps:
-            self.redditApps = redditApps
-            self._apps['redditApps'] = redditApps
-        if sentryTokens:
-            self.sentryTokens = sentryTokens
-            self._apps['sentryTokens'] = sentryTokens
-        if databaseCredentials:
-            self.databaseCredentials = databaseCredentials
-            self._apps['databaseCredentials'] = databaseCredentials
+        if 'redditApps' in kwargs:
+            self._apps['redditApps'] = kwargs['redditApps']
+        if 'sentryTokens' in kwargs:
+            self._apps['sentryTokens'] = kwargs['sentryTokens']
+        if 'databaseCredentials' in kwargs:
+            self._apps['databaseCredentials'] = kwargs['databaseCredentials']
 
     @staticmethod
     def _create(_credmgr, username, password, defaultSettings=None, redditUsername=None, isAdmin=False, isActive=True, isRegularUser=True, isInternal=False):

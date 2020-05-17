@@ -14,7 +14,7 @@ class Paginator:
     def __init__(self, credmgr, model, batchSize=20, limit=None, itemsOwner=None):
         '''Initialize a ListGenerator instance.
 
-        :param credmgr: An instance of :class:`.CredentialManager`.
+        :param credmgr: An instance of :class:`~.CredentialManager`.
         :param model: A CredentialManager model to list.
         :param int batchSize: The number of items to fetch at a time. If ``batchSize`` is None, it will fetch them 100 at a time. (default: 20).
         :param int limit: The maximum number of items to get.
@@ -63,23 +63,29 @@ class Paginator:
 class BaseHelper(BaseModel):
     _model = None
 
-    def __call__(self, id=None, name=None, batchSize=20, limit=None, owner=None):
-        kwargs = {}
+    def __call__(self, id=None, **kwargs):
+        modelKwargs = {}
         byName = False
         if isinstance(id, str):
-            byName = True
             name = id
             id = None
-        if id:
-            kwargs['id'] = id
-        if name:
             if self._model._canFetchByName:
+                byName = True
                 kwargs[self._model._nameAttr] = name
             else:
                 raise InitializationError(f'Cannot get {self._model.__name__!r} by name')
-        if not (id or name):
-            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
-        item = self._model(self._credmgr, **kwargs)
+        if id:
+            modelKwargs['id'] = id
+        elif self._model._canFetchByName:
+            for key in self._model._fetchNameMapping.keys():
+                name = kwargs.get(key, None)
+                if key:
+                    modelKwargs[self._model._nameAttr] = name
+                else:
+                    raise InitializationError(f'Missing required keyword argument, {key!r}, to fetch object by name')
+        else:
+            raise InitializationError("'id' is required")
+        item = self._model(self._credmgr, **modelKwargs)
         item._fetch(byName)
         return item
 
@@ -98,7 +104,7 @@ class UserHelper(BaseHelper):
         if name:
             kwargs['username'] = name
         if not (id or name):
-            return User(self._credmgr).listItems(batchSize=batchSize, limit=limit)
+            raise InitializationError("At least 'id' or 'name' is required")
         item = User(self._credmgr, **kwargs)
         item._fetch(byName)
         return item
@@ -124,14 +130,12 @@ class UserHelper(BaseHelper):
 class BotHelper(BaseHelper):
     _model = Bot
 
-    def create(self, appName, redditApp=None, sentryToken=None, databaseCredential=None, owner=None) -> Bot:
+    def create(self, name, redditApp=None, sentryToken=None, databaseCredential=None, owner=None) -> Bot:
         '''Create a new Bot
-
-        **PERMISSIONS: At least Active user is required.**
 
         Bots are used for grouping apps into a single request
 
-        :param str appName: Name of the Bot (required)
+        :param str name: Name of the Bot (required)
         :param Union[RedditApp,int] redditApp: Reddit App the bot will use
         :param Union[SentryToken,int] sentryToken: Sentry Token the bot will use
         :param Union[DatabaseCredential,int] databaseCredential: Database Credentials the bot will use
@@ -139,22 +143,20 @@ class BotHelper(BaseHelper):
         :return: Bot
         '''
 
-        return self._model._create(self._credmgr, name=appName, redditApp=redditApp, sentryToken=sentryToken, databaseCredential=databaseCredential, owner=owner)
+        return self._model._create(self._credmgr, name=name, redditApp=redditApp, sentryToken=sentryToken, databaseCredential=databaseCredential, owner=owner)
 
 class RedditAppHelper(BaseHelper):
     _model = RedditApp
 
-    def create(self, appName, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None, shortName=None,
+    def create(self, name, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None, shortName=None,
             appDescription=None, enabled=True, owner=None) -> RedditApp:
         '''Create a new RedditApp
 
-        **PERMISSIONS: At least Active user is required.**
-
         Reddit Apps are used for interacting with reddit
 
-        :param str appName: (required)
+        :param str name: (required)
         :param str clientId: Client ID of the Reddit App (required)
-        :param str userAgent: User agent used for requests to Reddit's API (required, defaults to user set default, then to 'python:{appName} by /u/{redditUsername}' if currentUser.redditUsername is set or 'python:{appName}' if it is not set)
+        :param str userAgent: User agent used for requests to Reddit's API (required, defaults to user set default, then to 'python:{name} by /u/{redditUsername}' if currentUser.redditUsername is set or 'python:{name}' if it is not set)
         :param str appType: Type of the app. One of `web`, `installed`, or `script` (default: 'web')
         :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (default: 'https://credmgr.jesassn.org/oauth2/reddit_callback')
         :param str clientSecret: Client secret of the Reddit App
@@ -169,28 +171,26 @@ class RedditAppHelper(BaseHelper):
             redditUsernameStr = ''
             if redditUsername:
                 redditUsernameStr = f' by /u/{redditUsername}'
-            userAgent = self._credmgr.getUserDefault('user_agent', f'python:{appName}{redditUsernameStr}')
-        return self._model._create(self._credmgr, appName=appName, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, shortName=shortName, appDescription=appDescription, enabled=enabled, owner=owner)
+            userAgent = self._credmgr.getUserDefault('user_agent', f'python:{name}{redditUsernameStr}')
+        return self._model._create(self._credmgr, name=name, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, shortName=shortName, appDescription=appDescription, enabled=enabled, owner=owner)
 
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification
 
-    def __call__(self, userId=None, redditAppId=None, batchSize=20, limit=None, owner=None):
+    def __call__(self, userId=None, redditAppId=None):
         kwargs = {}
         if userId:
             kwargs['userId'] = userId
         if redditAppId:
             kwargs['redditAppId'] = redditAppId
         if not userId:
-            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
+            raise InitializationError("Parameter 'userId' is required")
         item = self._model(self._credmgr, **kwargs)
         item._fetch(True)
         return item
 
     def create(self, userId, redditApp, redditor=None, extraData=None, owner=None) -> UserVerification:
         '''Create a new User Verification
-
-        **PERMISSIONS: At least Active user is required.**
 
         User Verifications for verifying a redditor with a User ID
 
@@ -206,33 +206,29 @@ class UserVerificationHelper(BaseHelper):
 class SentryTokenHelper(BaseHelper):
     _model = SentryToken
 
-    def create(self, appName, dsn, owner=None) -> SentryToken:
+    def create(self, name, dsn, owner=None) -> SentryToken:
         '''Create a new Sentry Token
-
-        **PERMISSIONS: At least Active user is required.**
 
         Sentry Tokens are used for logging and error reporting in applications
 
-        :param str appName: Name of the Sentry Token (required)
+        :param str name: Name of the Sentry Token (required)
         :param str dsn: DSN of the Sentry Token (required)
         :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
         :return: SentryToken
         '''
-        return self._model._create(self._credmgr, appName=appName, dsn=dsn, owner=owner)
+        return self._model._create(self._credmgr, name=name, dsn=dsn, owner=owner)
 
 class DatabaseCredentialHelper(BaseHelper):
     _model = DatabaseCredential
 
-    def create(self, appName, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
+    def create(self, name, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
             useSsh=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True,
             owner=None) -> DatabaseCredential:
         '''Create a new Database Credential
 
-        **PERMISSIONS: At least Active user is required.**
-
         Database Credentials are used for..ya know..databases
 
-        :param str appName: Name of the Database Credential (required)
+        :param str name: Name of the Database Credential (required)
         :param str databaseFlavor: Type of database, (default: ``postgres``)
         :param str database: Working database to use, (default: ``postgres``)
         :param str databaseHost: Database server address, (default: ``localhost``)
@@ -251,23 +247,30 @@ class DatabaseCredentialHelper(BaseHelper):
         :param Union[User,int,str] owner: Owner of the app. Requires Admin to create for other users.
         :return: DatabaseCredential
         '''
-        return self._model._create(self._credmgr, appName=appName, databaseFlavor=databaseFlavor, database=database, databaseHost=databaseHost, databasePort=databasePort,
+        return self._model._create(self._credmgr, name=name, databaseFlavor=databaseFlavor, database=database, databaseHost=databaseHost, databasePort=databasePort,
             databaseUsername=databaseUsername, databasePassword=databasePassword, useSsh=useSsh, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
             useSshKey=useSshKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
 
 class RefreshTokenHelper(BaseHelper):
     _model = RefreshToken
 
-    def __call__(self, redditor=None, redditAppId=None, batchSize=20, limit=None, owner=None):
+    def __call__(self, id=None, redditor=None, redditAppId=None):
         kwargs = {}
+        if isinstance(id, str):
+            if redditor:
+                redditAppId = redditor
+            redditor = id
+            id = None
+        if id:
+            kwargs['id'] = id
         if redditor:
             kwargs['redditor'] = redditor
         if redditAppId:
             kwargs['redditAppId'] = redditAppId
-        if xor(bool(RedditAppHelper), bool(redditAppId)):
+        if not id and xor(bool(RedditAppHelper), bool(redditAppId)):
             raise InitializationError("Both 'redditor' and 'redditAppId' are required")
-        if not (redditor and redditAppId):
-            return self._model(self._credmgr).listItems(batchSize=batchSize, limit=limit, owner=owner)
+        if not ((redditor and redditAppId) or id):
+            raise InitializationError("At least 'id' or 'redditor' and 'redditAppId' is required")
         item = self._model(self._credmgr, **kwargs)
         item._fetch(True)
         return item

@@ -2,7 +2,7 @@ def testBaseToDict(credmgr):
     bot = credmgr.bot(1)
     exportDict = bot.toDict()
     assert exportDict == {
-        'id': 1, 'app_name': 'test', 'enabled': True, 'owner_id': 1, 'reddit_app': {
+        'id': 1, 'app_name': 'test', 'owner_id': 1, 'reddit_app': {
             'id': 22,
             'app_name': 'testRedditApp',
             'owner_id': 1,
@@ -15,7 +15,7 @@ def testBaseToDict(credmgr):
             'redirect_uri': 'https://credmgr.jesassn.org/oauth2/reddit_callback',
             'state': '91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4'
         }, 'sentry_token': {
-            'id': 4, 'app_name': 'sentryToken', 'enabled': True, 'owner_id': 1, 'dsn': 'https://key@sentry.jesassn.org/id'
+            'id': 4, 'app_name': 'sentryToken', 'owner_id': 1, 'dsn': 'https://key@sentry.jesassn.org/id'
         }, 'database_credential': {
             'id': 1,
             'app_name': 'test',

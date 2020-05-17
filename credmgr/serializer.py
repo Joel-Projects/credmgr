@@ -22,7 +22,7 @@ class Serializer(object):
     def __init__(self, credmgr):
         '''Initialize an Objector instance.
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+         :param credmgr: An instance of :class:`~.CredentialManager`.
 
         '''
         self._credmgr = credmgr
@@ -158,7 +158,11 @@ class Serializer(object):
             for attr, attrType in objectType._attrTypes.items():
                 if data and attr in data and isinstance(data, (list, dict)):
                     value = data[attr]
-                    kwargs[snakeToCamel(attr)] = self.__deserialize(value, attrType)
+                    if attr in objectType._nameMapping:
+                        kwargs[objectType._nameMapping[attr]] = self.__deserialize(value, attrType)
+                    else:
+                        kwargs[snakeToCamel(attr)] = self.__deserialize(value, attrType)
+
         try:
             instance = objectType(self._credmgr, **kwargs)
         except TypeError: # pragma: no cover

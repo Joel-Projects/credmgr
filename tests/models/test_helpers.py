@@ -46,7 +46,7 @@ def testBotHelperGetByID(credmgr):
     bot = credmgr.bot(1)
     assert getattr(bot, bot._nameAttr) == 'test'
 
-def testBotHelperGetByhName(credmgr):
+def testBotHelperGetByName(credmgr):
     bot = credmgr.bot('test')
     assert getattr(bot, bot._nameAttr) == 'test'
 

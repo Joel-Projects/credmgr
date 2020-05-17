@@ -1,7 +1,7 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-05-14T23:52:17",
+      "recorded_at": "2020-05-17T03:35:26",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -18,7 +18,7 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.0.2"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -30,20 +30,20 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"username\": \"spaz\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": true, \"default_settings\": {\"database_flavor\": \"postgres\", \"database_host\": \"localhost\"}, \"reddit_username\": \"Lil_SpazJoekp\", \"created\": \"2020-04-03T02:55:01.957432+00:00\", \"updated\": \"2020-04-30T00:56:20.335816+00:00\", \"resource_type\": \"User\"}\n"
+          "string": "{\"id\": 1, \"username\": \"spaz\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": false, \"default_settings\": {\"database_flavor\": \"postgres\", \"database_host\": \"localhost\"}, \"reddit_username\": \"Lil_SpazJoekp\", \"created\": \"2020-04-03T02:55:01.957432+00:00\", \"updated\": \"2020-05-17T03:21:03.514688+00:00\", \"resource_type\": \"User\"}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "330"
+            "331"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Thu, 14 May 2020 23:52:17 GMT"
+            "Sun, 17 May 2020 03:35:26 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
@@ -57,7 +57,7 @@
       }
     },
     {
-      "recorded_at": "2020-05-14T23:52:18",
+      "recorded_at": "2020-05-17T03:35:27",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -74,7 +74,7 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.0.2"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -86,20 +86,20 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"username\": \"spaz\", \"resource_type\": \"User\", \"reddit_apps\": [{\"id\": 22, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\"}, {\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"client_id2\", \"client_secret\": \"client_secret2\", \"resource_type\": \"RedditApp\"}], \"sentry_tokens\": [{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"enabled\": true, \"resource_type\": \"SentryToken\"}], \"database_credentials\": [{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\"}]}\n"
+          "string": "{\"id\": 1, \"username\": \"spaz\", \"resource_type\": \"User\", \"reddit_apps\": [{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\"}], \"sentry_tokens\": [{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"resource_type\": \"SentryToken\"}], \"database_credentials\": [{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\"}]}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "705"
+            "559"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Thu, 14 May 2020 23:52:18 GMT"
+            "Sun, 17 May 2020 03:35:27 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
@@ -113,7 +113,7 @@
       }
     },
     {
-      "recorded_at": "2020-05-14T23:52:19",
+      "recorded_at": "2020-05-17T03:35:28",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -130,7 +130,63 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.0.2"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"client_id2\", \"client_secret\": \"client_secret2\", \"resource_type\": \"RedditApp\", \"short_name\": \"test\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"state\", \"owner_id\": 1}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "386"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Sun, 17 May 2020 03:35:28 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
+      }
+    },
+    {
+      "recorded_at": "2020-05-17T03:35:28",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.0.2"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -142,20 +198,20 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"enabled\": true, \"resource_type\": \"SentryToken\", \"owner_id\": 1}\n"
+          "string": "{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"resource_type\": \"SentryToken\", \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "145"
+            "128"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Thu, 14 May 2020 23:52:19 GMT"
+            "Sun, 17 May 2020 03:35:28 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
@@ -169,7 +225,7 @@
       }
     },
     {
-      "recorded_at": "2020-05-14T23:52:19",
+      "recorded_at": "2020-05-17T03:35:29",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -186,7 +242,7 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.0.2"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -198,20 +254,20 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\", \"database_port\": 5432, \"database_password\": \"postgres\", \"use_ssh\": false, \"ssh_host\": null, \"ssh_port\": 22, \"ssh_username\": null, \"ssh_password\": null, \"use_ssh_key\": false, \"private_key\": null, \"private_key_passphrase\": null, \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\", \"database_port\": 5432, \"database_password\": \"postgres\", \"use_ssh\": false, \"ssh_host\": null, \"ssh_port\": 22, \"ssh_username\": null, \"ssh_password\": null, \"use_ssh_key\": false, \"private_key\": null, \"private_key_passphrase\": null, \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "446"
+            "429"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Thu, 14 May 2020 23:52:19 GMT"
+            "Sun, 17 May 2020 03:35:29 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"

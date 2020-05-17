@@ -1,11 +1,11 @@
 import pytest
 
-from credmgr.exceptions import Conflict, NotFound
+from credmgr.exceptions import Conflict, InitializationError, NotFound
 from credmgr.models import UserVerification
 
 
 def testCreateUserVerification(credmgr):
-    data = {'userId': '12345', 'redditApp': 22}
+    data = {'userId': '12345', 'redditApp': 27}
     userVerification = credmgr.userVerification.create(**data)
     for key, value in data.items():
         if key == 'redditApp':
@@ -14,7 +14,7 @@ def testCreateUserVerification(credmgr):
         assert getattr(userVerification, key) == value
 
 def testCreateUserVerificationFullParams(credmgr):
-    data = {'userId': '1234567', 'redditApp': 22, 'redditor': 'redditor', 'extraData': {'extra': 'data', 'nested': {'dict': 'value'}}}
+    data = {'userId': '1234567', 'redditApp': 27, 'redditor': 'redditor', 'extraData': {'extra': 'data', 'nested': {'dict': 'value'}}}
     userVerification = credmgr.userVerification.create(**data)
     for key, value in data.items():
         if key == 'redditApp':
@@ -59,6 +59,5 @@ def testListUserVerifications(credmgr):
         assert isinstance(userVerification, UserVerification)
 
 def testListUserVerificationsWithUserVerification(credmgr):
-    userVerifications = credmgr.userVerification()
-    for userVerification in userVerifications:
-        assert isinstance(userVerification, UserVerification)
+    with pytest.raises(InitializationError):
+        _ = credmgr.userVerification()

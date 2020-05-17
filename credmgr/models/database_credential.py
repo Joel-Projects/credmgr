@@ -26,47 +26,39 @@ class DatabaseCredential(BaseApp):
     _path = '/database_credentials'
     _credmgrCallable = 'databaseCredential'
 
-    def __init__(self, credmgr, id=None, appName=None, databaseUsername=None, databaseHost=None, database=None, databaseFlavor=None, databasePort=None, databasePassword=None,
-            useSsh=None, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=None, privateKey=None, privateKeyPassphrase=None, enabled=None, ownerId=None):
-        super().__init__(credmgr, id, appName, enabled, ownerId)
-        self.databaseUsername = databaseUsername
-        self.databaseHost = databaseHost
-        self.database = database
-        self.databasePort = databasePort
-        self.enabled = enabled
-        self.ownerId = ownerId
-        if databaseFlavor:
-            self.databaseFlavor = databaseFlavor
-        if databasePassword:
-            self.databasePassword = databasePassword
-        if useSsh:
-            self.useSsh = useSsh
-        if sshHost:
-            self.sshHost = sshHost
-        if sshPort:
-            self.sshPort = sshPort
-        if sshUsername:
-            self.sshUsername = sshUsername
-        if sshPassword:
-            self.sshPassword = sshPassword
-        if useSshKey:
-            self.useSshKey = useSshKey
-        if privateKey:
-            self.privateKey = privateKey
-        if privateKeyPassphrase:
-            self.privateKeyPassphrase = privateKeyPassphrase
+    def __init__(self, credmgr, **kwargs):
+        '''Initialize a Database Credential instance.
+
+        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param id:
+        :param str name: Name of the Database Credential.
+        :param str databaseFlavor: Type of database.
+        :param str database: Working database to use.
+        :param str databaseHost: Database server address.
+        :param int databasePort: Port the database server listens on.
+        :param str databaseUsername: Username used to connect and authenciate the database.
+        :param str databasePassword: Password used to connect and authenciate the database.
+        :param bool useSsh: Determines if the database will be connected to through a tunnel.
+        :param str sshHost: The address of the server that the SSH tunnel will connect to.
+        :param str sshPort: The port the SSH tunnel will use.
+        :param str sshUsername: Username for the SSH tunnel.
+        :param str sshPassword: Password for the SSH tunnel.
+        :param bool useSshKey: Determines if the SSH tunnel will use private key authenciation.
+        :param str privateKey: SSH private key. Note: No validation will be performed.
+        :param str privateKeyPassphrase: Passphrase for the SSH key.
+        :param ownerId: ID of the `~.User` that owns this Database Credential.
+        '''
+        super().__init__(credmgr, **kwargs)
 
     @staticmethod
     @resolveUser()
-    def _create(_credmgr, appName, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
+    def _create(_credmgr, name, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
             useSsh=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True, owner=None):
         '''Create a new Database Credential
 
-        **PERMISSIONS: At least Active user is required.**
-
         Database Credentials are used for..ya know..databases
 
-        :param str appName: Name of the Database Credential (required)
+        :param str name: Name of the Database Credential (required)
         :param str databaseFlavor: Type of database, (default: ``postgres``)
         :param str database: Working database to use, (default: ``postgres``)
         :param str databaseHost: Database server address, (default: ``localhost``)
@@ -82,8 +74,8 @@ class DatabaseCredential(BaseApp):
         :param str privateKey: SSH private key. Note: No validation will be performed.
         :param str privateKeyPassphrase: Passphrase for the SSH key
         :param bool enabled: Allows the credentials to be used
-        :param Union[User,int,str] owner: Owner of the app. Requires Admin to create for other users.
-        :return: DatabaseCredential
+        :param Union[User,int,str] owner: Owner of the Database Credential. Requires Admin to create for other users.
+        :returns: DatabaseCredential
         '''
 
         data = {}
@@ -119,4 +111,4 @@ class DatabaseCredential(BaseApp):
             data['enabled'] = enabled
         if owner:
             data['owner_id'] = owner
-        return _credmgr.post('/database_credentials', data={'app_name': appName, **data})
+        return _credmgr.post('/database_credentials', data={'app_name': name, **data})

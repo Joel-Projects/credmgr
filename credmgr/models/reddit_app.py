@@ -23,30 +23,36 @@ class RedditApp(BaseApp):
     _path = '/reddit_apps'
     _credmgrCallable = 'redditApp'
 
-    def __init__(self, credmgr, id=None, appName=None, clientId=None, clientSecret=None, shortName=None, appDescription=None, userAgent=None,
-                 appType=None, redirectUri=None, state=None, enabled=None, ownerId=None):
-        super(RedditApp, self).__init__(credmgr, id, appName, enabled, ownerId)
-        self.clientId = clientId
-        self.clientSecret = clientSecret
-        self.shortName = shortName
-        self.appDescription = appDescription
-        self.userAgent = userAgent
-        self.appType = appType
-        self.redirectUri = redirectUri
-        self.state = state
-        if state:
+    def __init__(self, credmgr, **kwargs):
+        '''Initialize a Reddit App instance.
+
+        Reddit Apps are used for interacting with reddit
+
+        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param int id: ID of this Reddit App.
+        :param str name: Name of this Reddit App.
+        :param str clientId: Client ID of this Reddit App.
+        :param str clientSecret: Client secret of the Reddit App.
+        :param str appDescription: Description of what this Reddit App is used for.
+        :param str userAgent: The user agent used to identify this Reddit App to Reddit.
+        :param str appType: Type of app this Reddit App is. One of: ``web``, ``installed``, or ``script``.
+        :param str redirectUri: URL that redditors are redirected to after authorizing this Reddit App to access their account.
+        :param str state: Used to identify this Reddit App during the OAuth2 flow.
+        :param int ownerId: ID of the `~.User` that owns this Reddit App.
+        '''
+        super().__init__(credmgr, **kwargs)
+
+        if 'state' in kwargs:
             self._fetched = True
-        self.enabled = enabled
-        self.ownerId = ownerId
 
     @staticmethod
     @resolveUser()
-    def _create(_credmgr, appName, clientId, userAgent, appType, redirectUri, clientSecret, shortName, appDescription, enabled, owner=None):
+    def _create(_credmgr, name, clientId, userAgent, appType, redirectUri, clientSecret, shortName, appDescription, enabled, owner=None):
         '''Create a new Reddit App
 
-        **PERMISSIONS: At least Active user is required.**   Reddit Apps are used for interacting with reddit
+        Reddit Apps are used for interacting with reddit
 
-        :param str appName: (required)
+        :param str name: (required)
         :param str clientId: Client ID of the Reddit App (required)
         :param str userAgent: User agent used for requests to Reddit's API (required)
         :param str appType: Type of the app. One of `web`, `installed`, or `script` (required)
@@ -58,7 +64,7 @@ class RedditApp(BaseApp):
         :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
         :return: RedditApp
         '''
-        data = {'app_name': appName, 'client_id': clientId, 'user_agent': userAgent, 'app_type': appType, 'redirect_uri': redirectUri}
+        data = {'app_name': name, 'client_id': clientId, 'user_agent': userAgent, 'app_type': appType, 'redirect_uri': redirectUri}
         if clientSecret:
             data['client_secret'] = clientSecret
         if shortName:

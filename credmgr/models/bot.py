@@ -11,18 +11,27 @@ class Bot(BaseApp):
     _credmgrCallable = 'bot'
     _canFetchByName = True
 
-    def __init__(self, credmgr, id=None, appName=None, enabled=None, ownerId=None, redditApp=None, sentryToken=None, databaseCredential=None):
-        super(Bot, self).__init__(credmgr, id, appName, enabled, ownerId)
-        self.redditApp = redditApp
-        self.sentryToken = sentryToken
-        self.databaseCredential = databaseCredential
+    def __init__(self, credmgr, **kwargs):
+        '''Initialize a Bot instance
+
+        Bots are used for grouping apps into a single request
+
+        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param id: ID of this Bot.
+        :param name: Name of this Bot.
+        :param ownerId: ID of the `~.User` that owns this Bot.
+        :param redditApp: `~.RedditApp` that will be used with this Bot.
+        :param sentryToken: `~.SentryToken` that will be used with this Bot.
+        :param databaseCredential: `~.DatabaseCredential` that will be used with this Bot.
+        '''
+        super().__init__(credmgr, **kwargs)
 
     @staticmethod
     @resolveUser()
     def _create(_credmgr, name, redditApp, sentryToken, databaseCredential, owner=None):
         '''Create a new Bot
 
-        **PERMISSIONS: At least Active user is required.**   Bots are used for grouping apps into a single request
+        Bots are used for grouping apps into a single request
 
         :param str name: Name of the Bot (required)
         :param Union[RedditApp,int] redditApp: Reddit App the bot will use

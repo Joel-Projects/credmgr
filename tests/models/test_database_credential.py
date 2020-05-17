@@ -4,7 +4,7 @@ from credmgr.models import DatabaseCredential
 from credmgr.exceptions import Conflict, NotFound, ServerError
 
 data = {
-    'appName': 'testDatabaseCredential',
+    'name': 'testDatabaseCredential',
     'databaseUsername': 'databaseUsername',
     'databaseHost': 'databaseHost',
     'database': 'database',
@@ -37,7 +37,7 @@ def testCreateDatabaseCredentialOtherUser(credmgr):
         assert getattr(databaseCredential, key) == value
 
 def testCreateDatabaseCredentialBadParams(credmgr):
-    data = {'appName': 'se'}
+    data = {'name': 'se'}
     with pytest.raises(ServerError):
         _ = credmgr.databaseCredential.create(**data)
 
@@ -59,7 +59,7 @@ def testEditDatabaseCredential(credmgr):
 def testEditDatabaseCredentialConflictingData(credmgr):
     databaseCredential = credmgr.databaseCredential(4)
     with pytest.raises(Conflict):
-        databaseCredential.edit(appName='testDatabaseCredential')
+        databaseCredential.edit(name='testDatabaseCredential')
 
 def testListDatabaseCredentials(credmgr):
     databaseCredentials = credmgr.databaseCredentials()

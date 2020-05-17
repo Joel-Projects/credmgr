@@ -1,11 +1,11 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-05-15T18:23:08",
+      "recorded_at": "2020-05-17T01:12:49",
       "request": {
         "body": {
           "encoding": "utf-8",
-          "string": "app_name=test"
+          "string": ""
         },
         "headers": {
           "Accept": [
@@ -17,12 +17,6 @@
           "Connection": [
             "keep-alive"
           ],
-          "Content-Length": [
-            "13"
-          ],
-          "Content-Type": [
-            "application/x-www-form-urlencoded"
-          ],
           "User-Agent": [
             "credmgr/1.0.2"
           ],
@@ -30,26 +24,26 @@
             "<API_TOKEN>"
           ]
         },
-        "method": "POST",
-        "uri": "https://credmgr.jesassn.org/api/v1/bots/by_name"
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/refresh_tokens?limit=20&offset=0"
       },
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 4, \"app_name\": \"test\", \"enabled\": true, \"resource_type\": \"Bot\", \"owner_id\": 9, \"reddit_app\": null, \"sentry_token\": null, \"database_credential\": null}\n"
+          "string": "[{\"id\": 2, \"reddit_app_id\": 23, \"redditor\": \"dankmailman\", \"refresh_token\": \"431362459603-LBOb9Grz2vgnUjdXmo0z1ET9fuc\", \"resource_type\": \"RefreshToken\"}, {\"id\": 3, \"reddit_app_id\": 23, \"redditor\": \"terminator076bot\", \"refresh_token\": \"366611694089-1b4k2_LNwb50vGjEFS5IJluo6_s\", \"resource_type\": \"RefreshToken\"}]\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "157"
+            "312"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Fri, 15 May 2020 18:23:08 GMT"
+            "Sun, 17 May 2020 01:12:49 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
@@ -59,7 +53,7 @@
           "code": 200,
           "message": "OK"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/bots/by_name"
+        "url": "https://credmgr.jesassn.org/api/v1/refresh_tokens?limit=20&offset=0"
       }
     }
   ],

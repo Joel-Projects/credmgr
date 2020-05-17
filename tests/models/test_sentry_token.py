@@ -6,13 +6,13 @@ from credmgr.exceptions import Conflict, NotFound, ServerError
 
 
 def testCreateSentryToken(credmgr):
-    data = {'appName': 'testSentryToken', 'dsn': 'https://key@sentry.jesassn.org/id'}
+    data = {'name': 'testSentryToken', 'dsn': 'https://key@sentry.jesassn.org/id'}
     sentryToken = credmgr.sentryToken.create(**data)
     for key, value in data.items():
         assert getattr(sentryToken, key) == value
 
 def testCreateSentryTokenOtherUser(credmgr):
-    data = {'appName': 'testSentryToken', 'dsn': 'https://key@sentry.jesassn.org/id', 'owner': 4}
+    data = {'name': 'testSentryToken', 'dsn': 'https://key@sentry.jesassn.org/id', 'owner': 4}
     sentryToken = credmgr.sentryToken.create(**data)
     for key, value in data.items():
         if key == 'owner':
@@ -21,12 +21,12 @@ def testCreateSentryTokenOtherUser(credmgr):
         assert getattr(sentryToken, key) == value
 
 def testCreateSentryTokenBadParams(credmgr):
-    data = {'appName': 'se', 'dsn': 'https://key@sentry.jesassn.org/id2'}
+    data = {'name': 'se', 'dsn': 'https://key@sentry.jesassn.org/id2'}
     with pytest.raises(ServerError):
         _ = credmgr.sentryToken.create(**data)
 
 def testCreateSentryTokenExisting(credmgr):
-    data = {'appName': 'sentryToken', 'dsn': 'https://key@sentry.jesassn.org/id'}
+    data = {'name': 'sentryToken', 'dsn': 'https://key@sentry.jesassn.org/id'}
     with pytest.raises(Conflict):
         _ = credmgr.sentryToken.create(**data)
 
@@ -44,7 +44,7 @@ def testEditSentryToken(credmgr):
 def testEditSentryTokenConflictingData(credmgr):
     sentryToken = credmgr.sentryToken(2)
     with pytest.raises(Conflict):
-        sentryToken.edit(appName='sentryToken')
+        sentryToken.edit(name='sentryToken')
 
 def testListSentryTokens(credmgr):
     sentryTokens = credmgr.sentryTokens()
