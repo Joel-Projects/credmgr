@@ -30,6 +30,15 @@ def testRefreshTokenHelperGetByName(credmgr):
     for key, value in data.items():
         assert getattr(refreshToken, key) == value
 
+def testRefreshTokenHelperGetByNameFail(credmgr):
+    with pytest.raises(InitializationError):
+        _ = credmgr.refreshToken('Lil_SpazJoekp')
+
+def testRefreshTokenHelperGetByNameMissingName(credmgr):
+    data = {'redditAppId': 2}
+    with pytest.raises(InitializationError):
+        _ = credmgr.refreshToken(**data)
+
 def testSentryTokenHelperGetByID(credmgr):
     sentryToken = credmgr.sentryToken(1)
     assert getattr(sentryToken, sentryToken._nameAttr) == 'test'

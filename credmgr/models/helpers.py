@@ -77,10 +77,11 @@ class BaseHelper(BaseModel):
         if id:
             modelKwargs['id'] = id
         elif self._model._canFetchByName:
-            for key in self._model._fetchNameMapping.keys():
+            byName = True
+            for key in self._model._apiNameMapping.keys():
                 name = kwargs.get(key, None)
-                if key:
-                    modelKwargs[self._model._nameAttr] = name
+                if name:
+                    modelKwargs[key] = name
                 else:
                     raise InitializationError(f'Missing required keyword argument, {key!r}, to fetch object by name')
         else:
@@ -177,18 +178,6 @@ class RedditAppHelper(BaseHelper):
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification
 
-    def __call__(self, userId=None, redditAppId=None):
-        kwargs = {}
-        if userId:
-            kwargs['userId'] = userId
-        if redditAppId:
-            kwargs['redditAppId'] = redditAppId
-        if not userId:
-            raise InitializationError("Parameter 'userId' is required")
-        item = self._model(self._credmgr, **kwargs)
-        item._fetch(True)
-        return item
-
     def create(self, userId, redditApp, redditor=None, extraData=None, owner=None) -> UserVerification:
         '''Create a new User Verification
 
@@ -267,10 +256,10 @@ class RefreshTokenHelper(BaseHelper):
             kwargs['redditor'] = redditor
         if redditAppId:
             kwargs['redditAppId'] = redditAppId
-        if not id and xor(bool(RedditAppHelper), bool(redditAppId)):
-            raise InitializationError("Both 'redditor' and 'redditAppId' are required")
-        if not ((redditor and redditAppId) or id):
-            raise InitializationError("At least 'id' or 'redditor' and 'redditAppId' is required")
-        item = self._model(self._credmgr, **kwargs)
-        item._fetch(True)
-        return item
+        # if not id and xor(bool(RedditAppHelper), bool(redditAppId)):
+        #     raise InitializationError("Both 'redditor' and 'redditAppId' are required")
+        # if not ((redditor and redditAppId) or id):
+        #     raise InitializationError("At least 'id' or 'redditor' and 'redditAppId' is required")
+        # item = self._model(self._credmgr, **kwargs)
+        # item._fetch(True)
+        return super().__call__(**kwargs)

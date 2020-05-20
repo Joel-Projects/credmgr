@@ -18,7 +18,7 @@ class UserVerification(BaseModel, DeletableMixin, EditableMixin, OwnerMixin, Red
     _nameMapping = {'user_id': 'userId'}
     _canFetchByName = True
     _getByNamePath = 'get_redditor'
-    _fetchNameMapping = {'userId': 'user_id'}
+    _apiNameMapping = {'userId': 'user_id'}
 
     def __init__(self, credmgr, **kwargs):
         '''Initialize an User Verification instance.

@@ -1,11 +1,11 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-05-15T03:54:58",
+      "recorded_at": "2020-05-20T20:55:31",
       "request": {
         "body": {
           "encoding": "utf-8",
-          "string": ""
+          "string": "app_name=botName"
         },
         "headers": {
           "Accept": [
@@ -17,33 +17,39 @@
           "Connection": [
             "keep-alive"
           ],
+          "Content-Length": [
+            "16"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.2.0"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
           ]
         },
-        "method": "GET",
-        "uri": "https://credmgr.jesassn.org/api/v1/user_verifications?limit=20&offset=0"
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots"
       },
       "response": {
         "body": {
           "encoding": null,
-          "string": "[{\"id\": 20, \"user_id\": \"174622382361673728\", \"redditor\": \"kellysama\", \"resource_type\": \"UserVerification\"}, {\"id\": 24, \"user_id\": \"0001\", \"redditor\": \"terminator076bot\", \"resource_type\": \"UserVerification\"}]\n"
+          "string": "{\"id\": 5, \"app_name\": \"botName\", \"resource_type\": \"Bot\", \"owner_id\": 1, \"reddit_app\": null, \"sentry_token\": null, \"database_credential\": null}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "208"
+            "143"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Fri, 15 May 2020 03:54:58 GMT"
+            "Wed, 20 May 2020 20:55:31 GMT"
           ],
           "Server": [
             "gunicorn/20.0.4"
@@ -53,7 +59,7 @@
           "code": 200,
           "message": "OK"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/user_verifications?limit=20&offset=0"
+        "url": "https://credmgr.jesassn.org/api/v1/bots"
       }
     }
   ],

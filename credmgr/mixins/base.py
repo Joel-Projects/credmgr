@@ -11,7 +11,7 @@ class BaseModel(object):
     _canFetchByName = False
     _credmgrCallable = None
     _getByNamePath = 'by_name'
-    _fetchNameMapping = None
+    _apiNameMapping = None
 
     def __init__(self, credmgr, **kwargs):
         self._credmgr = credmgr
@@ -20,7 +20,7 @@ class BaseModel(object):
                 setattr(self, attribute, value)
         self._fetched = False
 
-    def __getattr__(self, attribute):  # pragma: no cover
+    def __getattr__(self, attribute): # pragma: no cover
         '''Return the value of `attribute`.'''
         if not attribute.startswith('_') and not self._fetched:
             self._fetch()
@@ -32,9 +32,9 @@ class BaseModel(object):
 
     def _getByName(self):
         data = {}
-        for modelAttr, dataAttr in self._fetchNameMapping.items():
+        for modelAttr, dataAttr in self._apiNameMapping.items():
             name = getattr(self, modelAttr, None)
-            if not name:
+            if not name: # pragma: no cover
                 raise InitializationError(f'Missing required keyword arg, {modelAttr!r}, to fetch object by name')
             data[dataAttr] = name
         self.__dict__ = self._credmgr.post(f'{self._path}/{self._getByNamePath}', data=data).__dict__

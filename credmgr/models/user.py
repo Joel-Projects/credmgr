@@ -26,7 +26,7 @@ class User(BaseModel, DeletableMixin, EditableMixin):
     _nameAttr = 'username'
     _nameMapping = {'username': 'username'}
     _canFetchByName = True
-    _fetchNameMapping = {_nameAttr: 'username'}
+    _apiNameMapping = {_nameAttr: 'username'}
 
     def __init__(self, credmgr, **kwargs):
         '''Initialize an User instance

@@ -1,0 +1,61 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-20T21:10:13",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "User-Agent": [
+            "credmgr/1.2.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "GET",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots?limit=20&offset=0"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "[{\"id\": 3, \"app_name\": \"mod_from_discord\", \"resource_type\": \"Bot\"}, {\"id\": 8, \"app_name\": \"botName3\", \"resource_type\": \"Bot\"}, {\"id\": 6, \"app_name\": \"newBotName\", \"resource_type\": \"Bot\"}, {\"id\": 1, \"app_name\": \"botName4\", \"resource_type\": \"Bot\"}]\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "247"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 20 May 2020 21:10:13 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/bots?limit=20&offset=0"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

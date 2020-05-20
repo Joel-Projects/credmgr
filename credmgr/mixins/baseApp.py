@@ -6,4 +6,4 @@ class BaseApp(BaseModel, DeletableMixin, EditableMixin, OwnerMixin):
     _nameAttr = 'name'
     _nameMapping = {'app_name': 'name'}
     _editableAttrs = ['name',]
-    _fetchNameMapping = {'name': 'app_name'}
+    _apiNameMapping = {'name': 'app_name'}

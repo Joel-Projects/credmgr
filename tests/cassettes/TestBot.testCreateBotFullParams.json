@@ -1,0 +1,67 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-20T20:56:03",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=botName2&reddit_app_id=27&sentry_token_id=4&database_credential_id=1"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "77"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.2.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 6, \"app_name\": \"botName2\", \"resource_type\": \"Bot\", \"owner_id\": 1, \"reddit_app\": {\"id\": 27, \"app_name\": \"test\", \"client_id\": \"test\", \"client_secret\": \"\", \"resource_type\": \"RedditApp\", \"short_name\": \"\", \"app_description\": \"\", \"user_agent\": \"test\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\", \"owner_id\": 1}, \"sentry_token\": {\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"resource_type\": \"SentryToken\", \"owner_id\": 1}, \"database_credential\": {\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\", \"database_port\": 5432, \"database_password\": \"postgres\", \"use_ssh\": false, \"ssh_host\": null, \"ssh_port\": 22, \"ssh_username\": null, \"ssh_password\": null, \"use_ssh_key\": false, \"private_key\": null, \"private_key_passphrase\": null, \"owner_id\": 1}}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "1033"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 20 May 2020 20:56:03 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/bots"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

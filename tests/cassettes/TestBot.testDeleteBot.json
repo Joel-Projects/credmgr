@@ -1,0 +1,185 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-20T20:59:56",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=botName"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "16"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.2.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots/by_name"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"id\": 5, \"app_name\": \"botName\", \"resource_type\": \"Bot\", \"owner_id\": 1, \"reddit_app\": null, \"sentry_token\": null, \"database_credential\": null}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "143"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 20 May 2020 20:59:56 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/bots/by_name"
+      }
+    },
+    {
+      "recorded_at": "2020-05-20T20:59:56",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "0"
+          ],
+          "User-Agent": [
+            "credmgr/1.2.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "DELETE",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots/5"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": ""
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Type": [
+            "text/html; charset=utf-8"
+          ],
+          "Date": [
+            "Wed, 20 May 2020 20:59:56 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 204,
+          "message": "No Content"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/bots/5"
+      }
+    },
+    {
+      "recorded_at": "2020-05-20T20:59:57",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=botName"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "16"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.2.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots/by_name"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"message\": \"The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "136"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 20 May 2020 20:59:57 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 404,
+          "message": "Not Found"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/bots/by_name"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

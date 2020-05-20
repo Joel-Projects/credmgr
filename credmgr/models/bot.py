@@ -61,8 +61,7 @@ class Bot(BaseApp):
 
     def edit(self, **kwargs):
         for key, value in kwargs.items():
-            snakeKey = camelToSnake(key)
-            if snakeKey in ['reddit_app', 'sentry_token', 'database_credential']:
-                newKey = f'{snakeKey}_id'
+            if key in ['redditApp', 'sentryToken', 'databaseCredential']:
+                newKey = f'{key}Id'
                 kwargs[newKey] = kwargs.pop(key)
         super(Bot, self).edit(**kwargs)

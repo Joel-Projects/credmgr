@@ -1,0 +1,67 @@
+{
+  "http_interactions": [
+    {
+      "recorded_at": "2020-05-20T20:58:24",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=botName&reddit_app_id=27"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "33"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.2.0"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/bots"
+      },
+      "response": {
+        "body": {
+          "encoding": null,
+          "string": "{\"status\": 409, \"error\": \"already exists\", \"items\": {\"app_name\": \"botName\", \"owner_id\": \"1\"}, \"message\": \"Failed to create a new Bot.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "136"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 20 May 2020 20:58:24 GMT"
+          ],
+          "Server": [
+            "gunicorn/20.0.4"
+          ]
+        },
+        "status": {
+          "code": 409,
+          "message": "Conflict"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/bots"
+      }
+    }
+  ],
+  "recorded_with": "betamax/0.8.1"
+}

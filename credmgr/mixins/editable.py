@@ -9,6 +9,10 @@ class EditableMixin:
 
         for attr in self._editableAttrs:
             if attr in kwargs:
-                payload.append({'op': 'replace', 'path': f'/{camelToSnake(attr)}', 'value': kwargs[attr]})
+                if attr in self._apiNameMapping:
+                    path = f'/{self._apiNameMapping[attr]}'
+                else:
+                    path = f'/{camelToSnake(attr)}'
+                payload.append({'op': 'replace', 'path': path, 'value': kwargs[attr]})
         self.__dict__.update(self._credmgr.patch(f'{self._path}/{self.id}', data=payload).__dict__)
         return self

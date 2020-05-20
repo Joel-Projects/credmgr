@@ -57,7 +57,3 @@ def testListUserVerifications(credmgr):
     userVerifications = credmgr.userVerifications()
     for userVerification in userVerifications:
         assert isinstance(userVerification, UserVerification)
-
-def testListUserVerificationsWithUserVerification(credmgr):
-    with pytest.raises(InitializationError):
-        _ = credmgr.userVerification()

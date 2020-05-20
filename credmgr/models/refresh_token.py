@@ -18,7 +18,7 @@ class RefreshToken(BaseModel, DeletableMixin, OwnerMixin, RedditAppMixin):
     _path = '/refresh_tokens'
     _credmgrCallable = 'refreshToken'
     _nameMapping = {'redditor': 'redditor'}
-    _fetchNameMapping = {'redditor': 'redditor', 'redditAppId': 'reddit_app_id'}
+    _apiNameMapping = {'redditor': 'redditor', 'redditAppId': 'reddit_app_id'}
     _getByNamePath = 'by_redditor'
     _canFetchByName = True
     _nameAttr = 'redditor'
