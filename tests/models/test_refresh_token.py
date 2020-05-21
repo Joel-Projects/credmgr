@@ -6,12 +6,12 @@ from credmgr.exceptions import Conflict, NotFound, ServerError
 
 
 def testDeleteRefreshToken(credentialManager):
-    refreshToken = credmgr.refreshToken(id=1)
+    refreshToken = credentialManager.refreshToken(id=1)
     refreshToken.delete()
     with pytest.raises(NotFound):
-        _ = credmgr.refreshToken(id=1)
+        _ = credentialManager.refreshToken(id=1)
 
 def testListRefreshTokens(credentialManager):
-    refreshTokens = credmgr.refreshTokens()
+    refreshTokens = credentialManager.refreshTokens()
     for refreshToken in refreshTokens:
         assert isinstance(refreshToken, RefreshToken)

@@ -45,10 +45,10 @@ if platform == 'darwin':
     socket.gethostbyname = lambda x: '127.0.0.1'
 
 @pytest.fixture()
-def credmgr():
+def credentialManager():
     yield CredentialManager(apiToken=pytest.placeholders.api_token)
 
 @pytest.fixture(autouse=True)
 def recorder(credentialManager):
-    with Betamax(credmgr._requestor._session).use_cassette(genCassetteName()):
+    with Betamax(credentialManager._requestor._session).use_cassette(genCassetteName()):
         yield

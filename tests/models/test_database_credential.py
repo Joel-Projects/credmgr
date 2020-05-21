@@ -22,14 +22,14 @@ data = {
 }
 
 def testCreateDatabaseCredential(credentialManager):
-    databaseCredential = credmgr.databaseCredential.create(**data)
+    databaseCredential = credentialManager.databaseCredential.create(**data)
     print(databaseCredential.id)
     for key, value in data.items():
         assert getattr(databaseCredential, key) == value
 
 def testCreateDatabaseCredentialOtherUser(credentialManager):
     newData = {**data, 'owner': 4}
-    databaseCredential = credmgr.databaseCredential.create(**{**newData, 'owner': 4})
+    databaseCredential = credentialManager.databaseCredential.create(**{**newData, 'owner': 4})
     for key, value in newData.items():
         if key == 'owner':
             assert getattr(databaseCredential, key).id == value
@@ -39,29 +39,29 @@ def testCreateDatabaseCredentialOtherUser(credentialManager):
 def testCreateDatabaseCredentialBadParams(credentialManager):
     data = {'name': 'se'}
     with pytest.raises(ServerError):
-        _ = credmgr.databaseCredential.create(**data)
+        _ = credentialManager.databaseCredential.create(**data)
 
 def testCreateDatabaseCredentialExisting(credentialManager):
     with pytest.raises(Conflict):
-        _ = credmgr.databaseCredential.create(**data)
+        _ = credentialManager.databaseCredential.create(**data)
 
 def testDeleteDatabaseCredential(credentialManager):
-    databaseCredential = credmgr.databaseCredential(3)
+    databaseCredential = credentialManager.databaseCredential(3)
     databaseCredential.delete()
     with pytest.raises(NotFound):
-        _ = credmgr.databaseCredential(3)
+        _ = credentialManager.databaseCredential(3)
 
 def testEditDatabaseCredential(credentialManager):
-    databaseCredential = credmgr.databaseCredential(3)
+    databaseCredential = credentialManager.databaseCredential(3)
     databaseCredential.edit(databaseUsername='newUsername')
     assert databaseCredential.databaseUsername == 'newUsername'
 
 def testEditDatabaseCredentialConflictingData(credentialManager):
-    databaseCredential = credmgr.databaseCredential(4)
+    databaseCredential = credentialManager.databaseCredential(4)
     with pytest.raises(Conflict):
         databaseCredential.edit(name='testDatabaseCredential')
 
 def testListDatabaseCredentials(credentialManager):
-    databaseCredentials = credmgr.databaseCredentials()
+    databaseCredentials = credentialManager.databaseCredentials()
     for databaseCredential in databaseCredentials:
         assert isinstance(databaseCredential, DatabaseCredential)

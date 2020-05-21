@@ -1,5 +1,5 @@
 def testBaseToDict(credentialManager):
-    bot = CredentialManager.bot(1)
+    bot = credentialManager.bot(1)
     exportDict = bot.toDict()
     assert exportDict == {
         'id': 1, 'app_name': 'test', 'owner_id': 1, 'reddit_app': {
@@ -31,16 +31,16 @@ def testBaseToDict(credentialManager):
     }
 
 def testBaseEqual(credentialManager):
-    bot = credmgr.bot(1)
-    bot2 = credmgr.bot(1)
+    bot = credentialManager.bot(1)
+    bot2 = credentialManager.bot(1)
     assert bot == bot2
 
 def testBaseNotEqual(credentialManager):
-    bot = credmgr.bot(1)
-    bot2 = credmgr.bot(4)
+    bot = credentialManager.bot(1)
+    bot2 = credentialManager.bot(4)
     assert bot != bot2
 
 def testBaseEqualDifferentType(credentialManager):
-    item = credmgr.bot(1)
+    item = credentialManager.bot(1)
     item2 = item.redditApp
     assert item != item2

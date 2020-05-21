@@ -14,48 +14,48 @@ def assertCreated(bot, data):
 
 def testCreateBot(credentialManager):
     data = {'name': 'botName'}
-    bot = credmgr.bot.create(**data)
+    bot = credentialManager.bot.create(**data)
     assertCreated(bot, data)
 
 def testCreateBotFullParams(credentialManager):
     data = {'name': 'botName2', 'redditApp': 27, 'sentryToken': 4, 'databaseCredential': 1}
-    bot = credmgr.bot.create(**data)
+    bot = credentialManager.bot.create(**data)
     assertCreated(bot, data)
 
 def testCreateBotFullParamsObjects(credentialManager):
-    data = {'name': 'botName2', 'redditApp': credmgr.redditApp(27), 'sentryToken': credmgr.sentryToken(4), 'databaseCredential': credmgr.databaseCredential(1)}
-    bot = credmgr.bot.create(**data)
+    data = {'name': 'botName2', 'redditApp': credentialManager.redditApp(27), 'sentryToken': credentialManager.sentryToken(4), 'databaseCredential': credentialManager.databaseCredential(1)}
+    bot = credentialManager.bot.create(**data)
     for key, value in data.items():
         assert getattr(bot, key) == value
 
 def testCreateBotOtherUser(credentialManager):
     data = {'name': 'botName3', 'redditApp': 29, 'sentryToken': 12, 'databaseCredential': 20, 'owner': 4}
-    bot = credmgr.bot.create(**data)
+    bot = credentialManager.bot.create(**data)
     assertCreated(bot, data)
 
 def testCreateBotExisting(credentialManager):
     data = {'name': 'botName', 'redditApp': 27}
     with pytest.raises(Conflict):
-        _ = credmgr.bot.create(**data)
+        _ = credentialManager.bot.create(**data)
 
 def testDeleteBot(credentialManager):
-    bot = credmgr.bot('botName')
+    bot = credentialManager.bot('botName')
     bot.delete()
     with pytest.raises(NotFound):
-        _ = credmgr.bot('botName')
+        _ = credentialManager.bot('botName')
 
 def testEditBot(credentialManager):
-    bot = credmgr.bot('botName2')
+    bot = credentialManager.bot('botName2')
     bot.edit(redditApp=28, name='newBotName')
     assert bot.redditApp.id == 28
     assert bot.name == 'newBotName'
 
 def testEditBotConflictingData(credentialManager):
-    bot = credmgr.bot('newBotName')
+    bot = credentialManager.bot('newBotName')
     with pytest.raises(Conflict):
         bot.edit(name='botName4')
 
 def testListBots(credentialManager):
-    bots = credmgr.bots()
+    bots = credentialManager.bots()
     for bot in bots:
         assert isinstance(bot, Bot)

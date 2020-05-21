@@ -58,7 +58,7 @@ def testListUsersWithUser(credentialManager):
         _ = credentialManager.user()
 
 def testToDict(credentialManager):
-    user = CredentialManager.currentUser
+    user = credentialManager.currentUser
     user.apps()
     exportDict = user.toDict()
     exportDict.pop('created')
@@ -94,13 +94,13 @@ def testToDict(credentialManager):
     }
 
 def testAppsOnly(credentialManager):
-    user = CredentialManager.currentUser
+    user = credentialManager.currentUser
     sentryTokens = user.apps('sentryTokens')
     assert isinstance(sentryTokens, list)
     for token in sentryTokens:
         assert isinstance(token, SentryToken)
 
 def testAppsOnlyInvalid(credentialManager):
-    user = CredentialManager.currentUser
+    user = credentialManager.currentUser
     with pytest.raises(InitializationError):
         _ = user.apps('invalid')
