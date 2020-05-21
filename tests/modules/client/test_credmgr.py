@@ -7,21 +7,21 @@ from credmgr.exceptions import InitializationError
 from credmgr import CredentialManager
 
 
-def testCredmgrInit(credmgr):
-    assert credmgr.currentUser.username == 'spaz'
+def testCredmgrInit(credentialManager):
+    assert credentialManager.currentUser.username == 'spaz'
 
-def testCredmgrInitBadParams(credmgr):
+def testCredmgrInitBadParams(credentialManager):
     with pytest.raises(InitializationError):
         _ = CredentialManager(apiToken='token', username='username', password='password')
 
-def testCredmgrInitBadSectionName(credmgr):
+def testCredmgrInitBadSectionName(credentialManager):
     with pytest.raises(configparser.NoSectionError):
         _ = CredentialManager('invalid')
 
-def testCredmgrNoParams(credmgr):
+def testCredmgrNoParams(credentialManager):
     with pytest.raises(InitializationError):
         _ = CredentialManager()
 
 def testCredmgrInitUsernamePassword():
-    credmgr = CredentialManager(username='username', password='password')
-    assert credmgr.currentUser.username == 'username'
+    credentialManager = CredentialManager(username='username', password='password')
+    assert credentialManager.currentUser.username == 'username'

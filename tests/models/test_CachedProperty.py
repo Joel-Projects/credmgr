@@ -4,11 +4,11 @@ from credmgr.models.utils import CachedProperty
 
 
 @pytest.yield_fixture()
-def credmgr():
+def credentialManager():
     yield None
 
 @pytest.yield_fixture(autouse=True)
-def recorder(credmgr):
+def recorder(credentialManager):
     yield None
 
 

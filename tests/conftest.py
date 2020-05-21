@@ -49,6 +49,6 @@ def credmgr():
     yield CredentialManager(apiToken=pytest.placeholders.api_token)
 
 @pytest.fixture(autouse=True)
-def recorder(credmgr):
+def recorder(credentialManager):
     with Betamax(credmgr._requestor._session).use_cassette(genCassetteName()):
         yield

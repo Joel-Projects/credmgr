@@ -24,7 +24,8 @@ testsRequires = [
     'pytest-mock',
     'pytest-xdist',
     'pytest-cov',
-    'mock'
+    'mock',
+    'sphinx_rtd_theme'
 ]
 extras = {
     'test': testsRequires,

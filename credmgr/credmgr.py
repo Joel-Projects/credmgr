@@ -29,7 +29,7 @@ class CredentialManager(object):
     .. code-block:: python
 
         import CredentialManager
-        credmgr = CredentialManager.client(apiToken='LIqbGjAeep3Ws5DH3LOEQPmw8UZ6ek')
+        credentialManager = CredentialManager.client(apiToken='LIqbGjAeep3Ws5DH3LOEQPmw8UZ6ek')
 
 
     '''
@@ -47,7 +47,7 @@ class CredentialManager(object):
 
         Additional keyword arguments will be used to initialize the
         :class:`.Config` object. This can be used to specify configuration
-        settings during instantiation of the :class:`.Reddit` instance. For
+        settings during instantiation of the :class:`.CredentialManager` instance. For
         more details please see :ref:`configuration`.
 
         Required settings are:
@@ -79,7 +79,7 @@ class CredentialManager(object):
                    return response
 
            mySession = betamax.Betamax(requests.Session())
-           credmgr = CredentialManager(..., sessionClass=JSONDebugRequestor, sessionKwargs={'session': mySession})
+           credentialManager = CredentialManager(..., sessionClass=JSONDebugRequestor, sessionKwargs={'session': mySession})
         '''
         if sessionKwargs is None:
             sessionKwargs = {}
@@ -148,9 +148,9 @@ class CredentialManager(object):
         '''
 
         self.redditApp = models.RedditAppHelper(self)
-        '''An instance of :class:`.RedditAppHelper`.
+        '''An instance of :class:`.CredentialManagerAppHelper`.
 
-        Provides the interface for interacting with :class:`.RedditApp`.
+        Provides the interface for interacting with :class:`.CredentialManagerApp`.
         For example to get a ``redditApp`` with ``id`` of ``1`` do:
         
         .. code-block:: python
