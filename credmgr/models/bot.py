@@ -76,7 +76,7 @@ class Bot(BaseApp):
         '''
         from credmgr.models import DatabaseCredential, RedditApp, SentryToken
         iterKwargs = dict(kwargs.items())
-        for key, value in iterKwargs:
+        for key, value in iterKwargs.items():
             if key in ['redditApp', 'sentryToken', 'databaseCredential']:
                 if isinstance(kwargs[key], (RedditApp, SentryToken, DatabaseCredential)):
                     newKey = f'{key}Id'
