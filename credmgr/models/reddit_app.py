@@ -77,7 +77,7 @@ class RedditApp(BaseApp):
             data['owner_id'] = owner
         return _credmgr.post('/reddit_apps', data=data)
 
-    def reddit(self, redditor=None) -> praw.reddit:
+    def reddit(self, redditor=None) -> praw.Reddit:
         refreshToken = None
         if redditor:
             refreshToken = self._credmgr.refreshToken(redditor, self.id)

@@ -28,8 +28,8 @@ CredentialManager.
 
 .. _initializingCredmgr:
 
-Authorized :class:`.CredentialManager` Instances
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Initializing credmgr
+^^^^^^^^^^^^^^^^^^^^
 
 In order to initialize a :class:`.CredentialManager` instance, you need to authenticate
 with one of the following:

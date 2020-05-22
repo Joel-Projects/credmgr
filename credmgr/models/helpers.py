@@ -93,19 +93,29 @@ class BaseHelper(BaseModel):
 class UserHelper(BaseHelper):
     _model = User
 
-    def __call__(self, id=None, name=None, batchSize=20, limit=None):
+    def __call__(self, id=None, username=None):
+        '''Fetches a :class:`~.User` instance by :attr:`id`` or :attr:`name`
+
+        :param Union[int,str] id: ID of the :class:`~.User` to fetch.
+            .. note :: If a ``str`` is passed it will be treated as the :attr:`username` attr
+        :param str username:
+            .. note :: If both :attr:`id` and :attr:`username` are passed the :attr:`id` will take precedence.
+                 If :attr:`id` is a ``str`` it will be treated as an :attr:`username` and will also take precedence.
+        :return User: An initialized :class:`~.User` instance
+        :meta public:
+        '''
         kwargs = {}
         byName = False
         if isinstance(id, str):
             byName = True
-            name = id
+            username = id
             id = None
         if id:
             kwargs['id'] = id
-        if name:
-            kwargs['username'] = name
-        if not (id or name):
-            raise InitializationError("At least 'id' or 'name' is required")
+        if username:
+            kwargs['username'] = username
+        if not (id or username):
+            raise InitializationError("At least 'id' or 'username' is required")
         item = User(self._credmgr, **kwargs)
         item._fetch(byName)
         return item
@@ -113,7 +123,7 @@ class UserHelper(BaseHelper):
     def create(self, username, password, defaultSettings=None, isAdmin=False, isActive=True, isRegularUser=True, isInternal=False, redditUsername=None) -> User:
         '''Create a new user
 
-        **PERMISSIONS: Admin role is required.**
+        **PERMISSIONS: At least ``isAdmin`` is required.**
 
         :param str username: Username for new user (Example: ```spaz```) (required)
         :param str password: Password for new user (Example: ```supersecurepassword```) (required)

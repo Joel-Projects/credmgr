@@ -1,3 +1,5 @@
+
+
 from .utils import camelToSnake, resolveUser
 from ..mixins import BaseApp
 
@@ -60,8 +62,25 @@ class Bot(BaseApp):
         return _credmgr.post('/bots', data={'app_name': name, **additionalParams})
 
     def edit(self, **kwargs):
+        '''
+
+        :param name: Changes the name of the :class:`~.Bot`
+        :param Union[RedditApp,int] redditApp: Changes the :class:`~.RedditApp` the Bot will use
+        :param Union[SentryToken,int] sentryToken: Changes the :class:`~.SentryToken` the Bot will use
+        :param Union[DatabaseCredential,int] databaseCredential: Changes the :class:`~.DatabaseCredential` the Bot will use
+
+        .. note ::
+            Parameters, ``redditApp``, ``sentryToken``, and ``databaseCredential`` can accept the initialized object or its :attr:`id`.
+
+        :return: The modified :class:`~.Bot`
+        '''
+        from credmgr.models import DatabaseCredential, RedditApp, SentryToken
         for key, value in kwargs.items():
             if key in ['redditApp', 'sentryToken', 'databaseCredential']:
-                newKey = f'{key}Id'
-                kwargs[newKey] = kwargs.pop(key)
+                if isinstance(kwargs[key], (RedditApp, SentryToken, DatabaseCredential)):
+                    newKey = f'{key}Id'
+                    kwargs[newKey] = kwargs.pop(key).id
+                else:
+                    newKey = f'{key}Id'
+                    kwargs[newKey] = kwargs.pop(key)
         super(Bot, self).edit(**kwargs)

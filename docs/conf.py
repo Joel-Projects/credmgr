@@ -34,7 +34,7 @@ release = __version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.todo', 'sphinx.ext.githubpages', ]
+extensions = ['sphinx.ext.todo', 'sphinx.ext.autodoc', ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -90,8 +90,24 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 # ---sphinx-themes-----
-html_theme = 'neo_rtd_theme'
-import sphinx_theme
+html_theme = 'sphinx_rtd_theme'
+import sphinx_rtd_theme
 
 
-html_theme_path = [sphinx_theme.get_html_theme_path()]
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+def skip(app, what, name, obj, skip, options):
+    if name in {
+        "__call__",
+        "__contains__",
+        "__getitem__",
+        "__init__",
+        "__iter__",
+        "__len__",
+    }:
+        return False
+    return skip
+
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)

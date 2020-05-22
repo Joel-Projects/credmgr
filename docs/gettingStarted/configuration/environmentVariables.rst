@@ -1,7 +1,7 @@
 .. _environmentVariables:
 
 Credmgr Environment Variables
-==========================
+=============================
 
 The highest priority configuration options can be passed to a program via
 environment variables prefixed with ``credmgr_``.

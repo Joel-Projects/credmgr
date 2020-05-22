@@ -1,7 +1,7 @@
 .. _.credmgr.ini:
 
 .credmgr.ini Files
-=================
+==================
 
 Credential Manager comes with a ``.credmgr.ini`` file in the package directory, and looks for
 user defined ``.credmgr.ini`` files in a few other locations:
@@ -29,16 +29,15 @@ CredentialManager. The contents of the package's ``.credmgr.ini`` file are:
              override settings of the ``DEFAULT`` site in user defined
              ``.credmgr.ini`` files.
 
-Defining Additional Sites
--------------------------
+Defining Additional Sections
+----------------------------
 
-In addition to the ``DEFAULT`` site, additional sites can be configured in user
-defined ``.credmgr.ini`` files. All sites inherit settings from the ``DEFAULT``
+In addition to the ``DEFAULT`` section, additional sections can be configured in user
+defined ``.credmgr.ini`` files. All sections inherit settings from the ``DEFAULT``
 site and can override whichever settings desired.
 
-Defining additional sites is a convenient way to store :ref:`auth credentials
-<oauth_options>` for various bot. For
-example if you have three separate bots, you might create a site for each:
+Defining additional sections is a convenient way to store :ref:`auth credentials<auth> for various bots.
+For example if you have three separate bots, you might create a site for each:
 
 .. _customConfigExample:
 .. code-block:: ini

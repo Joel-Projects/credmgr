@@ -50,6 +50,11 @@ def testEditBot(credentialManager):
     assert bot.redditApp.id == 28
     assert bot.name == 'newBotName'
 
+def testEditBotWithObject(credentialManager):
+    bot = credentialManager.bot('botName4')
+    bot.edit(redditApp=credentialManager.redditApp(28))
+    assert bot.redditApp.id == 28
+
 def testEditBotConflictingData(credentialManager):
     bot = credentialManager.bot('newBotName')
     with pytest.raises(Conflict):

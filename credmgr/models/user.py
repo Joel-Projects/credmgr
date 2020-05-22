@@ -43,9 +43,9 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         :param str redditUsername: This User's Reddit username. Used for :class:`~.RedditApp`'s userAgent.
         :param datetime.datetime created: Date and time this User was created.
         :param datetime.datetime updated: Date and time this User was last updated.
-        :param redditApps: A list of Reddit Apps this User owns.
-        :param sentryTokens: A list of Sentry Tokens this User owns.
-        :param databaseCredentials: A list of Database Credentials this User owns.
+        :param list[RedditApp] redditApps: A list of Reddit Apps this User owns.
+        :param list[SentryToken] sentryTokens: A list of Sentry Tokens this User owns.
+        :param list[DatabaseCredential] databaseCredentials: A list of Database Credentials this User owns.
         '''
         super().__init__(credmgr, **kwargs)
         self._apps = {}
@@ -89,10 +89,10 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         return _credmgr.post('/users', data={'username': username, 'password': password, **additionalParams})
 
     def apps(self, only=None):
-        '''
+        '''Returns apps that are owned by this user
 
-        :param str only: Pass one of ``redditApps``, ``sentryTokens``, ``databaseCredentials`` to only get those types
-        :return: Union[dict,list[Union[RedditApp,SentryToken,DatabaseCredential]]]
+        :param str only: Pass one of ``redditApps``, ``sentryTokens``, ``databaseCredentials`` to only get that type of apps
+        :return Union[dict[str,list[Union[RedditApp,SentryToken,DatabaseCredential]]],list[Union[RedditApp,SentryToken,DatabaseCredential]]]:
         '''
         appTypes = ['redditApps', 'sentryTokens', 'databaseCredentials']
         if not self._apps:

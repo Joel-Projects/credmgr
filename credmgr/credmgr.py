@@ -53,8 +53,11 @@ class CredentialManager(object):
         Required settings are:
 
         - apiToken
+
         OR
+
         - username
+
         - password
 
         .. warning::
@@ -115,16 +118,18 @@ class CredentialManager(object):
         self.user = models.UserHelper(self)
         '''An instance of :class:`.UserHelper`.
 
-        Provides the interface for interacting with :class:`.User`.
-        For example to get a ``user`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.User`.
+        For example, to get a :class:`~.User` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+        
             user = credmgr.user(1)
             print(user.id)
         
-        To create a ``user`` do:
+        To create a :class:`.User` do:
         
-        ..code-block:: python
+        .. code-block:: python
+        
             user = credmgr.user.create(**userKwargs)
         
         See :meth:`~.UserHelper.create` for the required params.
@@ -132,34 +137,38 @@ class CredentialManager(object):
         self.bot = models.BotHelper(self)
         '''An instance of :class:`.BotHelper`.
 
-        Provides the interface for interacting with :class:`.Bot`.
-        For example to get a ``bot`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.Bot`.
+        For example, to get a :class:`~.Bot` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+        
             bot = credmgr.bot(1)
             print(bot.id)
         
-        To create a ``bot`` do:
+        To create a :class:`.Bot` do:
         
-        ..code-block:: python
+        .. code-block:: python
+        
             bot = credmgr.bot.create(**botKwargs)
         
         See :meth:`~.BotHelper.create` for the required params.
         '''
 
         self.redditApp = models.RedditAppHelper(self)
-        '''An instance of :class:`.CredentialManagerAppHelper`.
+        '''An instance of :class:`.RedditAppHelper`.
 
-        Provides the interface for interacting with :class:`.CredentialManagerApp`.
-        For example to get a ``redditApp`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.RedditApp`.
+        For example, to get a :class:`~.RedditApp` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+        
             redditApp = credmgr.redditApp(1)
             print(redditApp.id)
         
-        To create a ``redditApp`` do:
+        To create a :class:`.RedditApp` do:
         
-        ..code-block:: python
+        .. code-block:: python
+        
             redditApp = credmgr.redditApp.create(**redditAppKwargs)
         
         See :meth:`~.RedditAppHelper.create` for the required params.
@@ -168,10 +177,11 @@ class CredentialManager(object):
         self.refreshToken = models.RefreshTokenHelper(self)
         '''An instance of :class:`.RefreshTokenHelper`.
 
-        Provides the interface for interacting with :class:`.RefreshToken`.
-        For example to get a ``refreshToken`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.RefreshToken`.
+        For example to get a :class:`.RefreshToken` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+        
             refreshToken = credmgr.refreshToken(1)
             print(refreshToken.id)
         
@@ -182,16 +192,18 @@ class CredentialManager(object):
         self.userVerification = models.UserVerificationHelper(self)
         '''An instance of :class:`.UserVerificationHelper`.
 
-        Provides the interface for interacting with :class:`.UserVerification`.
-        For example to get a ``userVerification`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.UserVerification`.
+        For example to get a :class:`.UserVerification` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+        
             userVerification = credmgr.userVerification(1)
             print(userVerification.id)
         
-        To create a ``userVerification`` do:
+        To create a :class:`.UserVerification` do:
         
-        ..code-block:: python
+        .. code-block:: python
+        
             userVerification = credmgr.userVerification.create(**userVerificationKwargs)
         
         See :meth:`~.UserVerificationHelper.create` for the required params.
@@ -200,16 +212,18 @@ class CredentialManager(object):
         self.sentryToken = models.SentryTokenHelper(self)
         '''An instance of :class:`.SentryTokenHelper`.
 
-        Provides the interface for interacting with :class:`.SentryToken`.
-        For example to get a ``sentryToken`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.SentryToken`.
+        For example to get a :class:`.SentryToken` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+        
             sentryToken = credmgr.sentryToken(1)
             print(sentryToken.id)
         
-        To create a ``sentryToken`` do:
+        To create a :class:`.SentryToken` do:
         
-        ..code-block:: python
+        .. code-block:: python
+        
             sentryToken = credmgr.sentryToken.create(**sentryTokenKwargs)
         
         See :meth:`~.SentryTokenHelper.create` for the required params.
@@ -218,50 +232,102 @@ class CredentialManager(object):
         self.databaseCredential = models.DatabaseCredentialHelper(self)
         '''An instance of :class:`.DatabaseCredentialHelper`.
 
-        Provides the interface for interacting with :class:`.DatabaseCredential`.
-        For example to get a ``databaseCredential`` with ``id`` of ``1`` do:
+        Provides an interface for interacting with :class:`.DatabaseCredential`.
+        For example to get a :class:`.DatabaseCredential` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
+
             databaseCredential = credmgr.databaseCredential(1)
             print(databaseCredential.id)
         
-        To create a ``databaseCredential`` do:
+        To create a :class:`.DatabaseCredential` do:
         
-        ..code-block:: python
+        .. code-block:: python
+
             databaseCredential = credmgr.databaseCredential.create(**databaseCredentialKwargs)
         
         See :meth:`~.DatabaseCredentialHelper.create` for the required params.
         '''
 
     def users(self, batchSize=10, limit=None):
+        '''List Users
+
+        :param int batchSize: Number of Users to return in each batch (default: ``20``)
+        :param int limit: Maximum number of Users to return
+        :return Paginator: A :class:`~.Paginator` to iterate through the Users
+        '''
         return User(self).listItems(batchSize=batchSize, limit=limit)
 
     def bots(self, batchSize=20, limit=None, owner=None):
+        '''List Bots
+
+        :param int batchSize: Number of Bots to return in each batch (default: ``20``)
+        :param int limit: Maximum number of Bots to return
+        :param Union[int,str,User] owner: Return Bots that are owner by this user
+        :return Paginator: A :class:`~.Paginator` to iterate through the Bots
+        '''
         return Bot(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def redditApps(self, batchSize=20, limit=None, owner=None):
+        '''List RedditApps
+
+        :param int batchSize: Number of RedditApps to return in each batch (default: ``20``)
+        :param int limit: Maximum number of RedditApps to return
+        :param Union[int,str,User] owner: Return RedditApps that are owner by this user
+        :return Paginator: A :class:`~.Paginator` to iterate through the RedditApps
+        '''
         return RedditApp(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def refreshTokens(self, batchSize=20, limit=None, owner=None):
+        '''List RefreshTokens
+
+        :param int batchSize: Number of RefreshTokens to return in each batch (default: ``20``)
+        :param int limit: Maximum number of RefreshTokens to return
+        :param Union[int,str,User] owner: Return RefreshTokens that are owned by this user
+        :return Paginator: A :class:`~.Paginator` to iterate through the RefreshTokens
+        '''
         return RefreshToken(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def userVerifications(self, batchSize=20, limit=None, owner=None):
+        '''List UserVerifications
+
+        :param int batchSize: Number of UserVerifications to return in each batch (default: ``20``)
+        :param int limit: Maximum number of UserVerifications to return
+        :param Union[int,str,User] owner: Return UserVerifications that are owned by this user
+        :return Paginator: A :class:`~.Paginator` to iterate through the UserVerifications
+        '''
         return UserVerification(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def sentryTokens(self, batchSize=20, limit=None, owner=None):
+        '''List SentryTokens
+
+        :param int batchSize: Number of SentryTokens to return in each batch (default: ``20``)
+        :param int limit: Maximum number of SentryTokens to return
+        :param Union[int,str,User] owner: Return SentryTokens that are owned by this user
+        :return Paginator: A :class:`~.Paginator` to iterate through the SentryTokens
+        '''
         return SentryToken(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def databaseCredentials(self, batchSize=20, limit=None, owner=None):
+        '''List DatabaseCredentials
+
+        :param int batchSize: Number of DatabaseCredentials to return in each batch (default: ``20``)
+        :param int limit: Maximum number of DatabaseCredentials to return
+        :param Union[int,str,User] owner: Return DatabaseCredentials that are owned by this user
+        :return Paginator: A :class:`~.Paginator` to iterate through the DatabaseCredentials
+        '''
         return DatabaseCredential(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     @CachedProperty
     def currentUser(self) -> User:
+        '''Returns the currently authenticated :class:`~.User`'''
         if not self._currentUser:
             self._currentUser = self.get('/users/me')
         return self._currentUser
 
     @CachedProperty
     def userDefaults(self):
+        '''Returns the currently authenticated :class:`~.User`'s default settings'''
         if not self._userDefaults:
             self._userDefaults = self.currentUser.defaultSettings
         return self._userDefaults

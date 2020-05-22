@@ -5,7 +5,7 @@ Keyword Arguments to :class:`.CredentialManager`
 
 Most of credmgr's documentation will demonstrate configuring credmgr through the use
 of keyword arguments when initializing instances of :class:`.CredentialManager`. All of
-the :ref:`configuration_options` can be specified using a keyword argument of
+the :ref:`configurationOptions` can be specified using a keyword argument of
 the same name.
 
 For example, if we wanted to explicitly pass the information for ``bot3``

@@ -5,6 +5,11 @@ class EditableMixin:
     _editableAttrs = []
 
     def edit(self, **kwargs):
+        '''Edit the object
+
+        :param kwargs:
+        :return: The edited object
+        '''
         payload = []
 
         for attr in self._editableAttrs:
