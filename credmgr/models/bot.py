@@ -75,7 +75,8 @@ class Bot(BaseApp):
         :return: The modified :class:`~.Bot`
         '''
         from credmgr.models import DatabaseCredential, RedditApp, SentryToken
-        for key, value in kwargs.items():
+        iterKwargs = dict(kwargs.items())
+        for key, value in iterKwargs:
             if key in ['redditApp', 'sentryToken', 'databaseCredential']:
                 if isinstance(kwargs[key], (RedditApp, SentryToken, DatabaseCredential)):
                     newKey = f'{key}Id'
