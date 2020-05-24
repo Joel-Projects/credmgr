@@ -22,30 +22,29 @@ Then import the package:
 
 .. code:: python
 
-    import CredentialManager
+    from credmgr import CredentialManager
 
 Getting Started
 ---------------
 
 .. code:: python
 
-    import CredentialManager
-
-    credentialManager = CredentialManager.client(api_token='apiToken')
+    credentialManager = CredentialManager(apiToken='apiToken')
 
     # List all Reddit apps
-    redditApps = credentialManager.reddit_apps()
+    redditApps = credentialManager.redditApps()
     for redditApp in redditApps:
-        print(redditApp.app_name)
+        print(redditApp.name)
 
     # Create a Reddit app
-    redditApp = credentialManager.reddit_app.create(app_name='redditAppName', client_id='client_id', client_secret='client_secret', user_agent='user_agent', redirect_uri='redirect_uri')
+    redditApp = credentialManager.redditApp.create(name='redditAppName', clientId='clientId', clientSecret='clientSecret', userAgent='userAgent', redirectUri='redirectUri')
 
     # Get the app by id
-    redditApp = credentialManager.reddit_app(1)
+    redditApp = credentialManager.redditApp(1)
 
     # Edit the Reddit app
-    redditApp.edit(client_id='new Client_id')
+    redditApp.edit(clientId='clientId2')
 
     # Delete the app
     redditApp.delete()
+
