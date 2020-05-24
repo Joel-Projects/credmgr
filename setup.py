@@ -20,15 +20,15 @@ testsRequires = [
     'pytest',
     'betamax',
     'betamax_serializers',
-    'sphinx',
     'pytest-mock',
     'pytest-xdist',
     'pytest-cov',
-    'mock',
-    'sphinx_rtd_theme'
+    'mock'
 ]
+docsRequires = ['sphinx', 'sphinx_rtd_theme']
 extras = {
     'test': testsRequires,
+    'docs': docsRequires
 }
 
 setup(

@@ -5,6 +5,11 @@ from ..mixins import BaseApp
 
 
 class Bot(BaseApp):
+    '''Bots are used for grouping apps into a single request
+
+
+    '''
+
     _attrTypes = {
         **BaseApp._attrTypes, 'reddit_app': 'RedditApp', 'sentry_token': 'SentryToken', 'database_credential': 'DatabaseCredential'
     }
@@ -14,9 +19,7 @@ class Bot(BaseApp):
     _canFetchByName = True
 
     def __init__(self, credmgr, **kwargs):
-        '''Initialize a Bot instance
-
-        Bots are used for grouping apps into a single request
+        '''Initialize a Bot instance.
 
         :param credmgr: An instance of :class:`~.CredentialManager`.
         :param id: ID of this Bot.
@@ -25,6 +28,9 @@ class Bot(BaseApp):
         :param redditApp: `~.RedditApp` that will be used with this Bot.
         :param sentryToken: `~.SentryToken` that will be used with this Bot.
         :param databaseCredential: `~.DatabaseCredential` that will be used with this Bot.
+
+        .. note:: This class should not be initialized directly. Obtain an instance via: ``credmgr.bot('botName')``
+
         '''
         super().__init__(credmgr, **kwargs)
 

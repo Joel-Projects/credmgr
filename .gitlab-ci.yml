@@ -14,6 +14,7 @@ include:
 stages:
     - test
     - deploy
+    - pages
 
 test:pytest3.8:
     image: python:3.8
@@ -52,3 +53,14 @@ deploy:
         - twine upload dist/*
     only:
         - tags
+
+pages:
+  script:
+    - pip install sphinx sphinx-rtd-theme
+    - cd docs ; make html
+    - mv _build/html/ ../public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

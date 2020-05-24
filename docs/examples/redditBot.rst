@@ -8,4 +8,4 @@ obtain an authorized ``praw.Reddit`` instance.
 
 
 .. literalinclude:: ./redditBot.py
-   :language: python
+    :language: python

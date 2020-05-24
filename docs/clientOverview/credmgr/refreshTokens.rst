@@ -1,5 +1,4 @@
 credmgr.refreshTokens
 =====================
 
-.. autofunction:: credmgr.refreshTokens
-    :inherited-members:
+.. autofunction:: credmgr.CredentialManager.refreshTokens

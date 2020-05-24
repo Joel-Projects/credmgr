@@ -1,5 +1,4 @@
 credmgr.sentryTokens
 ====================
 
-.. autofunction:: credmgr.sentryTokens
-    :inherited-members:
+.. autofunction:: credmgr.CredentialManager.sentryTokens

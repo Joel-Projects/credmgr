@@ -1,5 +1,4 @@
 credmgr.redditApps
 ==================
 
-.. autofunction:: credmgr.redditApps
-    :inherited-members:
+.. autofunction:: credmgr.CredentialManager.redditApps

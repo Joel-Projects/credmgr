@@ -1,5 +1,4 @@
 credmgr.bots
 ============
 
-.. autofunction:: credmgr.bots
-    :inherited-members:
+.. autofunction:: credmgr.CredentialManager.bots

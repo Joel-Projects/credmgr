@@ -10,7 +10,7 @@ For example, you can invoke your script as follows:
 
 .. code-block:: shell
 
-   credmgr_apitoken=C6lkm3HsoKx8fM0Zt85B0JriX6.P9-8_ python myBot.py
+    credmgr_apitoken=C6lkm3HsoKx8fM0Zt85B0JriX6.P9-8_ python bot.py
 
 The ``apitoken`` provided via environment variables will
 override any such values passed directly when initializing an instance of

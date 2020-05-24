@@ -20,18 +20,16 @@ SentryToken = models.SentryToken
 DatabaseCredential = models.DatabaseCredential
 
 class CredentialManager(object):
-    '''The CredentialManager class provides convenient access to CredentialManager's API.
+    '''The CredentialManager class provides a way to interact with CredentialManager's API.
 
-    Instances of this class are the gateway to interacting with CredentialManager's API
-    through CredentialManager. The canonical way to obtain an instance of this class is via:
-
+    The official way to initialize an instance of this class is to:
 
     .. code-block:: python
 
-        import CredentialManager
-        credentialManager = CredentialManager.client(apiToken='LIqbGjAeep3Ws5DH3LOEQPmw8UZ6ek')
+        from credmgr import CredentialManager
+        credentialManager = CredentialManager(apiToken='LIqbGjAeep3Ws5DH3LOEQPmw8UZ6ek')
 
-
+    .. note:: It is recommended to use environment variables or a ``.credmgr.ini``. See :ref:`Auth documentation<auth>` for more details.
     '''
     _default = None
     _endpoint = '/api/v1'
@@ -123,14 +121,14 @@ class CredentialManager(object):
         
         .. code-block:: python
         
-            user = credmgr.user(1)
+            user = credentialManager.user(1)
             print(user.id)
         
         To create a :class:`.User` do:
         
         .. code-block:: python
         
-            user = credmgr.user.create(**userKwargs)
+            user = credentialManager.user.create(**userKwargs)
         
         See :meth:`~.UserHelper.create` for the required params.
         '''
@@ -142,14 +140,14 @@ class CredentialManager(object):
         
         .. code-block:: python
         
-            bot = credmgr.bot(1)
+            bot = credentialManager.bot(1)
             print(bot.id)
         
         To create a :class:`.Bot` do:
         
         .. code-block:: python
         
-            bot = credmgr.bot.create(**botKwargs)
+            bot = credentialManager.bot.create(**botKwargs)
         
         See :meth:`~.BotHelper.create` for the required params.
         '''
@@ -162,14 +160,14 @@ class CredentialManager(object):
         
         .. code-block:: python
         
-            redditApp = credmgr.redditApp(1)
+            redditApp = credentialManager.redditApp(1)
             print(redditApp.id)
         
         To create a :class:`.RedditApp` do:
         
         .. code-block:: python
         
-            redditApp = credmgr.redditApp.create(**redditAppKwargs)
+            redditApp = credentialManager.redditApp.create(**redditAppKwargs)
         
         See :meth:`~.RedditAppHelper.create` for the required params.
         '''
@@ -182,7 +180,7 @@ class CredentialManager(object):
         
         .. code-block:: python
         
-            refreshToken = credmgr.refreshToken(1)
+            refreshToken = credentialManager.refreshToken(1)
             print(refreshToken.id)
         
         .. note::
@@ -197,14 +195,14 @@ class CredentialManager(object):
         
         .. code-block:: python
         
-            userVerification = credmgr.userVerification(1)
+            userVerification = credentialManager.userVerification(1)
             print(userVerification.id)
         
         To create a :class:`.UserVerification` do:
         
         .. code-block:: python
         
-            userVerification = credmgr.userVerification.create(**userVerificationKwargs)
+            userVerification = credentialManager.userVerification.create(**userVerificationKwargs)
         
         See :meth:`~.UserVerificationHelper.create` for the required params.
         '''
@@ -217,14 +215,14 @@ class CredentialManager(object):
         
         .. code-block:: python
         
-            sentryToken = credmgr.sentryToken(1)
+            sentryToken = credentialManager.sentryToken(1)
             print(sentryToken.id)
         
         To create a :class:`.SentryToken` do:
         
         .. code-block:: python
         
-            sentryToken = credmgr.sentryToken.create(**sentryTokenKwargs)
+            sentryToken = credentialManager.sentryToken.create(**sentryTokenKwargs)
         
         See :meth:`~.SentryTokenHelper.create` for the required params.
         '''
@@ -237,14 +235,14 @@ class CredentialManager(object):
         
         .. code-block:: python
 
-            databaseCredential = credmgr.databaseCredential(1)
+            databaseCredential = credentialManager.databaseCredential(1)
             print(databaseCredential.id)
         
         To create a :class:`.DatabaseCredential` do:
         
         .. code-block:: python
 
-            databaseCredential = credmgr.databaseCredential.create(**databaseCredentialKwargs)
+            databaseCredential = credentialManager.databaseCredential.create(**databaseCredentialKwargs)
         
         See :meth:`~.DatabaseCredentialHelper.create` for the required params.
         '''

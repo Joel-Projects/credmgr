@@ -7,11 +7,6 @@ The CredentialManager Instance
 .. toctree::
     :maxdepth: 2
     :caption: Helper Classes
+    :glob:
 
-    credmgr/redditApp
-    credmgr/sentryToken
-    credmgr/databaseCredential
-    credmgr/bot
-    credmgr/refreshToken
-    credmgr/userVerification
-    credmgr/user
+    credmgr/*

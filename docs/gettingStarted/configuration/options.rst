@@ -23,6 +23,7 @@ Basic Configuration Options
 .. note:: You must escape ``%`` symbols in the format string. For example:
 
     .. code::
+
         dateformat = %%m/%%d/%%Y %%I:%%M:%%S
 
 
@@ -54,13 +55,13 @@ Custom Configuration Options
 Your application can utilize credmgr's configuration system in order to provide
 its own custom settings.
 
-For example, you might want to set a global ``botName: myBotName`` option to your
+For example, you might want to set a global ``botName: botName`` option to your
 application's ``.credmgr.ini`` file. To access the value of this custom option
 from an instance of :py:class:`.CredentialManager` you can execute:
 
 .. code-block:: python
 
-   credmgr.config.custom['botName']
+    credmgr.config.custom['botName']
 
 .. note:: Custom CredentialManager configuration environment variables are not
           supported. You can directly access environment variables via

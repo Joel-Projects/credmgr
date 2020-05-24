@@ -5,7 +5,7 @@ Credmgr supports Python 3.6+. The recommended way to install credmgr is via ``pi
 
 .. code-block:: bash
 
-   pip install credmgr
+    pip install credmgr
 
 Updating Credmgr
 ----------------
@@ -14,4 +14,4 @@ Credmgr can be updated by running:
 
 .. code-block:: bash
 
-   pip install --upgrade credmgr
+    pip install --upgrade credmgr

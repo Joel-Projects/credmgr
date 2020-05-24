@@ -17,7 +17,9 @@ To create an API Token, you must first `create one here <https://credmgr.jesassn
 
 .. code-block:: python
 
-   credentialManager = credmgr.CredentialManager(username='spaz', password='p@s$w0rd')
+    from credmgr import CredentialManager
+
+    credentialManager = CredentialManager(username='spaz', password='p@s$w0rd')
 
 .. note:: See here for more ways to pass an API Token to ``credmgr``
 
@@ -30,7 +32,9 @@ This should be obvious, but this method is utilized by passing username and pass
 
 .. code-block:: python
 
-   credentialManager = credmgr.CredentialManager(username='spaz', password='p@s$w0rd')
+    from credmgr import CredentialManager
+
+    credentialManager = CredentialManager(username='spaz', password='p@s$w0rd')
 
 
 .. warning:: This method is not recommended and should not be used in prod environments!

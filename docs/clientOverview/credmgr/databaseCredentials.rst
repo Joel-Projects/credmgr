@@ -1,6 +1,6 @@
 credmgr.databaseCredentials
 ===========================
 
-.. autofunction:: credmgr.databaseCredentials
+.. autofunction:: credmgr.CredentialManager.databaseCredentials
 
 

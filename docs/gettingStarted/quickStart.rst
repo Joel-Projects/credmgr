@@ -6,11 +6,14 @@ In this section, you'll see some examples on how to use credmgr, (CredentialMana
 Prerequisites
 -------------
 
-:CredentialManager Account: You need an account on CredentialManager. If you don't have one
+:CredentialManager Account: You need an account on `CredentialManager <https://credmgr.jesassn.org>`_. If you don't have one
     contact JES.
 
-:API Token: To authenticate with and access CredentialManager you need to create an API token. See :ref:`auth`
-    for other authentication options.
+:API Token: To authenticate with and access CredentialManager you need to create an API token.
+
+.. seealso::
+
+    :ref:`auth`
 
 Common Tasks
 ------------
@@ -26,18 +29,15 @@ Create a :class:`.CredentialManager` Instance
 You need an instance of the :class:`.CredentialManager` class to do *anything* with
 CredentialManager.
 
-.. _initializingCredmgr:
-
-Initializing credmgr
-^^^^^^^^^^^^^^^^^^^^
-
 In order to initialize a :class:`.CredentialManager` instance, you need to authenticate
 with one of the following:
 
 1) An API Token or,
 2) Your CredentialManager username/password pair
 
-.. note:: See :ref:`auth` for more details
+.. seealso::
+
+    :ref:`auth`
 
 If you prefer, you can provide these by passing in keyword arguments ``apiToken`` or
 ``username`` and ``password`` when you call the :class:`.CredentialManager` initializer,
@@ -45,28 +45,28 @@ like the following:
 
 .. code-block:: python
 
-    import credmgr
+    from credmgr import CredentialManager
 
-    credentialManager = credmgr.CredentialManager(apiToken='an api token')
+    credentialManager = CredentialManager(apiToken='an api token')
 
     print(credentialManager.currentUser().username)  # Output: your username
 
-.. note:: Please see: :ref:`configuration` for better ways to pass credentials to credmgr.
+.. note:: See :ref:`configuration` for better ways to pass credentials to credmgr.
 
 Obtain a :class:`.Bot` Instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To obtain a :class:`.Bot` instance, pass the Bot's name when calling ``Bot``
+To obtain a :class:`.Bot` instance, pass the Bot's name when calling :properyt:
 on your :class:`.CredentialManager` instance. For instance:
 
 .. code-block:: python
 
-    bot = credentialManager.Bot('botName')
+    bot = credentialManager.bot('botName')
     print(bot.name)  # Output: botName
 
 
-Now that you have a :py:class:`.Bot` instance, you can get the bot's configured apps
-(:py:class:`.RedditApp`, :py:class:`.SentryToken`, and/or :py:class:`.DatabaseCredential`)
+Now that you have a :class:`.Bot` instance, you can get the bot's configured apps
+(:class:`.RedditApp`, :class:`.SentryToken`, and/or :class:`.DatabaseCredential`)
 and get each app's credentials. The following examples will use the above code to initialize
 a :class:`.Bot` instance as..ya know.. ``bot``.
 
@@ -101,7 +101,7 @@ To initialize an authenticated ``praw.Reddit`` instance for u/``redditor`` do:
 
 .. note:: This will only work if all of the follow conditions are met
     * Used CredentialManager create a `refresh token auth url <https://credmgr.jesassn.org/refresh_tokens>`_ with a permanent duration, the needed
-        scopes, and used ``https://credmgr.jesassn.org/oauth2/reddit_callback`` as the ``redirectUri``
+    scopes, and used ``https://credmgr.jesassn.org/oauth2/reddit_callback`` as the ``redirectUri``
     * Provided the auth url to ``redditor``
     * ``redditor`` navigated to url to allow ``myRedditApp`` access to their account
 
@@ -140,10 +140,11 @@ function of python. For example:
 
 .. code-block:: python
 
-    import pprint
+    from pprint import pprint
 
     bot = credentialManager.bot('botName')
     databaseCredential = bot.databaseCredential
+    pprint(vars(databaseCredential))
 
 Credmgr object initialization only creates attributes that gets passed when it is initialized.
 As a result, some :class:`.DatabaseCredential` instances might not have a ``databasePassword`` while others do.

@@ -1,5 +1,4 @@
 credmgr.users
 =============
 
-.. autofunction:: credmgr.users
-    :inherited-members:
+.. autofunction:: credmgr.CredentialManager.users

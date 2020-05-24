@@ -18,7 +18,7 @@ as a database or queuing system.
 Multiple Threads
 ----------------
 
-.. warning:: credmgr is ***NOT*** thread safe.
+.. warning:: credmgr is **NOT** thread safe.
 
 Instances of :class:`.CredentialManager` are not thread-safe because each
 instance depends on an instance of ``requests.Session``, which is not thread-safe [`ref

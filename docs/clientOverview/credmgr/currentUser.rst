@@ -1,5 +1,4 @@
 credmgr.currentUser
 ===================
 
-.. autofunction:: credmgr.currentUser
-    :inherited-members:
+.. autofunction:: credmgr.CredentialManager.currentUser
