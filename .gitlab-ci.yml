@@ -56,11 +56,11 @@ deploy:
 
 pages:
   script:
-    - pip install sphinx sphinx-rtd-theme
+    - pip install .[docs]
     - cd docs ; make html
     - mv _build/html/ ../public/
   artifacts:
     paths:
       - public
-  only:
-    - tags
+#  only:
+#    - tags
