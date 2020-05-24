@@ -52,3 +52,14 @@ deploy:
         - twine upload dist/*
     only:
         - tags
+
+pages:
+  script:
+    - pip install sphinx sphinx-rtd-theme
+    - cd doc ; make html
+    - mv _build/html/ ../public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
