@@ -77,6 +77,7 @@ class Bot(BaseApp):
 
         .. note ::
             Parameters, ``redditApp``, ``sentryToken``, and ``databaseCredential`` can accept the initialized object or its :attr:`id`.
+            Passing a ``str`` to it will not work. The intended was to create bots in with the web interface.
 
         :return: The modified :class:`~.Bot`
         '''

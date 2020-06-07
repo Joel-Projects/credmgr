@@ -85,7 +85,6 @@ def testToDict(credentialManager):
             'id': 2,
             'owner_id': 1,
             'redirect_uri': 'https://credmgr.jesassn.org/oauth2/reddit_callback',
-            'short_name': 'test',
             'state': 'state',
             'user_agent': 'nah'
         }], 'reddit_username': 'Lil_SpazJoekp', 'sentry_tokens': [{

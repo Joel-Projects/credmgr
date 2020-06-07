@@ -30,7 +30,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 6, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"short_name\": null, \"app_description\": null, \"user_agent\": \"userAgent\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"id\": 6, \"app_name\": \"testRedditApp\", \"client_id\": \"clientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"app_description\": null, \"user_agent\": \"userAgent\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"91893362b02d01c00fb71bc6be02065dedc3356595fc648581ab59a94864a7e4\", \"enabled\": true, \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -92,7 +92,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 6, \"app_name\": \"testRedditApp\", \"client_id\": \"newClientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"short_name\": null, \"app_description\": null, \"user_agent\": \"userAgent\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"7ce31a95e1abc2a41673406ff87da51932acf1047cbf2eec1beb1f783d81cfd4\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"id\": 6, \"app_name\": \"testRedditApp\", \"client_id\": \"newClientId\", \"client_secret\": \"clientSecret\", \"resource_type\": \"RedditApp\", \"app_description\": null, \"user_agent\": \"userAgent\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"7ce31a95e1abc2a41673406ff87da51932acf1047cbf2eec1beb1f783d81cfd4\", \"enabled\": true, \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [

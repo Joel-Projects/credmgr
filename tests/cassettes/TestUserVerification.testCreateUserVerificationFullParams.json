@@ -148,7 +148,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 27, \"app_name\": \"test\", \"client_id\": \"test\", \"client_secret\": \"\", \"resource_type\": \"RedditApp\", \"short_name\": \"\", \"app_description\": \"\", \"user_agent\": \"test\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\", \"owner_id\": 1}\n"
+          "string": "{\"id\": 27, \"app_name\": \"test\", \"client_id\": \"test\", \"client_secret\": \"\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"test\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\", \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [

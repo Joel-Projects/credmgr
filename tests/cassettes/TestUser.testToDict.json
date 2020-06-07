@@ -142,7 +142,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"client_id2\", \"client_secret\": \"client_secret2\", \"resource_type\": \"RedditApp\", \"short_name\": \"test\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"state\", \"owner_id\": 1}\n"
+          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"client_id2\", \"client_secret\": \"client_secret2\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"state\", \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [

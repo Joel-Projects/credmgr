@@ -8,7 +8,6 @@ def testBaseToDict(credentialManager):
             'owner_id': 1,
             'client_id': 'clientId',
             'client_secret': 'clientSecret',
-            'short_name': 'shortName',
             'app_description': 'appDescription',
             'user_agent': 'python:testRedditApp by /u/Lil_SpazJoekp',
             'app_type': 'web',

@@ -159,7 +159,7 @@ class BotHelper(BaseHelper):
 class RedditAppHelper(BaseHelper):
     _model = RedditApp
 
-    def create(self, name, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None, shortName=None,
+    def create(self, name, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None,
             appDescription=None, enabled=True, owner=None) -> RedditApp:
         '''Create a new RedditApp
 
@@ -171,7 +171,6 @@ class RedditAppHelper(BaseHelper):
         :param str appType: Type of the app. One of `web`, `installed`, or `script` (default: 'web')
         :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (default: 'https://credmgr.jesassn.org/oauth2/reddit_callback')
         :param str clientSecret: Client secret of the Reddit App
-        :param str shortName: Short name of the Reddit App
         :param str appDescription: Description of the Reddit App
         :param bool enabled: Allows the app to be used
         :param Union[User,int,str] owner: Owner of the Reddit App. Requires Admin to create for other users.
@@ -183,7 +182,7 @@ class RedditAppHelper(BaseHelper):
             if redditUsername:
                 redditUsernameStr = f' by /u/{redditUsername}'
             userAgent = self._credmgr.getUserDefault('user_agent', f'python:{name}{redditUsernameStr}')
-        return self._model._create(self._credmgr, name=name, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, shortName=shortName, appDescription=appDescription, enabled=enabled, owner=owner)
+        return self._model._create(self._credmgr, name=name, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, appDescription=appDescription, enabled=enabled, owner=owner)
 
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification

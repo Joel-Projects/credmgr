@@ -6,7 +6,7 @@ from credmgr.exceptions import Conflict, InitializationError, NotFound, ServerEr
 
 
 def testCreateRedditApp(credentialManager):
-    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'userAgent': 'userAgent', 'shortName': 'shortName', 'appDescription': 'appDescription'}
+    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'userAgent': 'userAgent', 'appDescription': 'appDescription'}
     redditApp = credentialManager.redditApp.create(**data)
     for key, value in data.items():
         assert getattr(redditApp, key) == value
@@ -56,7 +56,7 @@ def testListRedditAppsWithRedditApp(credentialManager):
         _ = credentialManager.redditApp()
 
 def testCreateRedditAppWithoutUserAgent(credentialManager):
-    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'shortName': 'shortName', 'appDescription': 'appDescription'}
+    data = {'name': 'testRedditApp', 'clientId': 'clientId', 'clientSecret': 'clientSecret', 'appDescription': 'appDescription'}
     redditApp = credentialManager.redditApp.create(**data)
     assert redditApp.userAgent == 'python:testRedditApp by /u/Lil_SpazJoekp'
     for key, value in data.items():

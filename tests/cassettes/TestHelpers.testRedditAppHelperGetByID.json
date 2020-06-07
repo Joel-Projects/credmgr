@@ -30,7 +30,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -86,7 +86,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -142,7 +142,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -198,7 +198,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -254,7 +254,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -310,7 +310,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"short_name\": \"modabuse\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
+          "string": "{\"id\": 1, \"app_name\": \"DankMemesModAbuse\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\", \"app_description\": \"Abusing /r/dankmemes mods, nothing to see here.\", \"user_agent\": \"DankMemesModAbuse\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"d4a0808927436f59b3869feaff6c8ae64dc6663dfc631bece299bf13b36570be\", \"enabled\": true, \"owner_id\": 6}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [

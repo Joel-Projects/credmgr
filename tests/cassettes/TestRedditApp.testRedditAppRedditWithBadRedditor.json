@@ -30,7 +30,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"short_name\": \"test\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
@@ -86,7 +86,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"short_name\": \"test\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [

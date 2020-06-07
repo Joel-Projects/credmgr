@@ -11,7 +11,6 @@ class RedditApp(BaseApp):
         **BaseApp._attrTypes,
         'client_id': 'str',
         'client_secret': 'str',
-        'short_name': 'str',
         'app_description': 'str',
         'user_agent': 'str',
         'app_type': 'str',
@@ -19,7 +18,7 @@ class RedditApp(BaseApp):
         'state': 'str'
         }
 
-    _editableAttrs = BaseApp._editableAttrs + ['clientId', 'clientSecret', 'shortName', 'appDescription', 'userAgent', 'appType', 'redirectUri']
+    _editableAttrs = BaseApp._editableAttrs + ['clientId', 'clientSecret', 'appDescription', 'userAgent', 'appType', 'redirectUri']
     _path = '/reddit_apps'
     _credmgrCallable = 'redditApp'
 
@@ -47,7 +46,7 @@ class RedditApp(BaseApp):
 
     @staticmethod
     @resolveUser()
-    def _create(_credmgr, name, clientId, userAgent, appType, redirectUri, clientSecret, shortName, appDescription, enabled, owner=None):
+    def _create(_credmgr, name, clientId, userAgent, appType, redirectUri, clientSecret, appDescription, enabled, owner=None):
         '''Create a new Reddit App
 
         Reddit Apps are used for interacting with reddit
@@ -58,7 +57,6 @@ class RedditApp(BaseApp):
         :param str appType: Type of the app. One of `web`, `installed`, or `script` (required)
         :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (required)
         :param str clientSecret: Client secret of the Reddit App
-        :param str shortName: Short name of the Reddit App
         :param str appDescription: Description of the Reddit App
         :param bool enabled: Allows the app to be used
         :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
@@ -67,8 +65,6 @@ class RedditApp(BaseApp):
         data = {'app_name': name, 'client_id': clientId, 'user_agent': userAgent, 'app_type': appType, 'redirect_uri': redirectUri}
         if clientSecret:
             data['client_secret'] = clientSecret
-        if shortName:
-            data['short_name'] = shortName
         if appDescription:
             data['app_description'] = appDescription
         if enabled:

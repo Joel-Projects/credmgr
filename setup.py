@@ -8,10 +8,10 @@ projectName = 'credmgr'
 
 root = path.abspath(path.dirname(__file__))
 
-with open(path.join(root, projectName, "const.py")) as f:
+with open(path.join(root, projectName, 'const.py')) as f:
     __version__ = re.search(r"__version__ = '(.+)'", f.read()).group(1)
 
-with open(path.join(root, "README.rst")) as f:
+with open(path.join(root, 'README.rst')) as f:
     longDescription = f.read()
 
 requires = ['setuptools', 'python-dateutil', 'requests', 'praw', 'prawcore', 'requests_toolbelt']
@@ -30,6 +30,17 @@ extras = {
     'test': testsRequires,
     'docs': docsRequires
 }
+
+
+
+if not path.isfile(path.join(root, projectName, '.credmgr.ini')):
+    defaultConfig = '''
+[DEFAULT]
+server = https://credmgr.jesassn.org
+endpoint = /api/v1
+dateformat = %%m/%%d/%%Y %%I:%%M:%%S %%p %%Z'''
+    with open(path.join(root, projectName, '.credmgr.ini'), 'w') as f:
+        f.write(defaultConfig)
 
 setup(
     name=projectName,
