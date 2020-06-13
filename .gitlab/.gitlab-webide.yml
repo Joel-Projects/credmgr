@@ -1,0 +1,6 @@
+terminal:
+  before_script:
+    - apt-get update
+    - apt-get upgrade -y
+    - apt-get install nano python3.7
+  script: sleep 60
