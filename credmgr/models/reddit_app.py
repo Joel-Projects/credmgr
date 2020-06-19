@@ -7,6 +7,18 @@ from ..mixins import BaseApp
 
 
 class RedditApp(BaseApp):
+    '''A class for Reddit Apps.
+
+    To obtain an instance of this class execute:
+
+    .. code:: python
+
+       bot = credmgr.bot('BotName')
+       redditApp = bot.redditApp
+
+    '''
+
+
     _attrTypes = {
         **BaseApp._attrTypes,
         'client_id': 'str',
@@ -49,7 +61,7 @@ class RedditApp(BaseApp):
     def _create(_credmgr, name, clientId, userAgent, appType, redirectUri, clientSecret, appDescription, enabled, owner=None):
         '''Create a new Reddit App
 
-        Reddit Apps are used for interacting with reddit
+        Reddit Apps are used for interacting with Reddit
 
         :param str name: (required)
         :param str clientId: Client ID of the Reddit App (required)
@@ -58,7 +70,7 @@ class RedditApp(BaseApp):
         :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (required)
         :param str clientSecret: Client secret of the Reddit App
         :param str appDescription: Description of the Reddit App
-        :param bool enabled: Allows the app to be used
+        :param bool enabled: Allows the app to be used (defaults to `True`)
         :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
         :return: RedditApp
         '''
@@ -74,6 +86,12 @@ class RedditApp(BaseApp):
         return _credmgr.post('/reddit_apps', data=data)
 
     def reddit(self, redditor=None) -> praw.Reddit:
+        '''
+
+        :param str redditor: The redditor that you want the Reddit instance
+        :return:
+        :rtype:
+        '''
         refreshToken = None
         if redditor:
             refreshToken = self._credmgr.refreshToken(redditor, self.id)
@@ -82,7 +100,7 @@ class RedditApp(BaseApp):
         return praw.Reddit(client_id=self.clientId, client_secret=self.clientSecret, user_agent=self.userAgent, redirect_uri=self.redirectUri, refresh_token=refreshToken)
 
     def genAuthUrl(self, scopes=None, permanent=False, userVerification=None):
-        '''Generates an URL for users to verify or authenciate their Reddit account
+        '''Generates an URL for users to verify or authenticate their Reddit account
 
         :param Union[list,str] scopes: List of scopes needed. Pass ``'all'`` for all scopes. The ``identity`` scope will always be included. (default: ``['identity']``)
         :param bool permanent: Determines if a refresh token will be provided. (default: ``False``)
@@ -91,6 +109,7 @@ class RedditApp(BaseApp):
             - An :class:``.UserVerification`` object
             - An :class:``.UserVerification`` id
             - An ``userId`` of a :class:``.UserVerification`` record.
+
          If a :class:`.UserVerification` record does not exist, one will be created.
         :return str: Auth URL
         '''

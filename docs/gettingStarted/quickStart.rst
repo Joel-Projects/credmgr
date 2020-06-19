@@ -6,7 +6,7 @@ In this section, you'll see some examples on how to use credmgr, (CredentialMana
 Prerequisites
 -------------
 
-:CredentialManager Account: You need an account on `CredentialManager <https://credmgr.jesassn.org>`_. If you don't have one
+:CredentialManager Account: You need an account on `CredentialManager <https://credmgr.jesassn.org>`_. If you don't have one,
     contact JES.
 
 :API Token: To authenticate with and access CredentialManager you need to create an API token.

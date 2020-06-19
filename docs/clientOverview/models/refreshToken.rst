@@ -1,5 +1,5 @@
-RefreshTokens
-=============
+RefreshToken
+============
 
-.. autoclass:: credmgr.models.RefreshTokenHelper
+.. autoclass:: credmgr.models.RefreshToken
     :inherited-members:

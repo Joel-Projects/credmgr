@@ -1,5 +1,6 @@
 from os import path
 import re
+from textwrap import dedent
 
 from setuptools import find_packages, setup
 
@@ -34,11 +35,11 @@ extras = {
 
 
 if not path.isfile(path.join(root, projectName, '.credmgr.ini')):
-    defaultConfig = '''
-[DEFAULT]
-server = https://credmgr.jesassn.org
-endpoint = /api/v1
-dateformat = %%m/%%d/%%Y %%I:%%M:%%S %%p %%Z'''
+    defaultConfig = dedent('''
+    [DEFAULT]
+    server = https://credmgr.jesassn.org
+    endpoint = /api/v1
+    dateformat = %%m/%%d/%%Y %%I:%%M:%%S %%p %%Z''')
     with open(path.join(root, projectName, '.credmgr.ini'), 'w') as f:
         f.write(defaultConfig)
 

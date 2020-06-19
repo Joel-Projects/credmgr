@@ -29,7 +29,9 @@ class CredentialManager(object):
         from credmgr import CredentialManager
         credentialManager = CredentialManager(apiToken='LIqbGjAeep3Ws5DH3LOEQPmw8UZ6ek')
 
-    .. note:: It is recommended to use environment variables or a ``.credmgr.ini``. See :ref:`Auth documentation<auth>` for more details.
+    .. note:: It is recommended to use environment variables or a ``.credmgr.ini`` file.
+        See :ref:`Auth documentation<auth>` for more details.
+
     '''
     _default = None
     _endpoint = '/api/v1'
@@ -272,7 +274,7 @@ class CredentialManager(object):
         :param int batchSize: Number of RedditApps to return in each batch (default: ``20``)
         :param int limit: Maximum number of RedditApps to return
         :param Union[int,str,User] owner: Return RedditApps that are owner by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the RedditApps
+        :return Paginator: A :class:`~.Paginator` to iterate through the Reddit Apps
         '''
         return RedditApp(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
@@ -282,7 +284,11 @@ class CredentialManager(object):
         :param int batchSize: Number of RefreshTokens to return in each batch (default: ``20``)
         :param int limit: Maximum number of RefreshTokens to return
         :param Union[int,str,User] owner: Return RefreshTokens that are owned by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the RefreshTokens
+        :return Paginator: A :class:`~.Paginator` to iterate through the Refresh Tokens
+
+        .. note::
+            This is *not* the intended way to fetch refresh tokens. See: :meth:`~.RedditApp.reddit`
+            for obtaining an authorized reddit instance.
         '''
         return RefreshToken(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 

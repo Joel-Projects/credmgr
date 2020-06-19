@@ -1,11 +1,31 @@
-
-
-from .utils import camelToSnake, resolveUser
+from .utils import resolveUser
 from ..mixins import BaseApp
 
 
 class Bot(BaseApp):
-    '''Bots are used for grouping apps into a single request
+    '''A class for Bot
+
+        To obtain an instance of this class execute:
+
+        .. code:: python
+
+            bot = credmgr.bot('botName')
+
+        Bots is the intended way to use CredentialManager. Bots are for grouping credentials that would be used in a single app.
+
+        The following is the intended usage:
+
+        .. code:: python
+
+            from credmgr import CredentialManager
+
+            credentialManager = CredentialManager(apiToken='apiToken')
+            bot = credmgr.bot('botName')
+
+            reddit = bot.reddit('Lil_SpazJoekp)
+            dbCreds = bot.databaseCredentials
+            sentryDSN = bot.sentryToken
+
 
 
     '''
@@ -21,6 +41,8 @@ class Bot(BaseApp):
     def __init__(self, credmgr, **kwargs):
         '''Initialize a Bot instance.
 
+        Bots are used for grouping credentials into a single app
+
         :param credmgr: An instance of :class:`~.CredentialManager`.
         :param id: ID of this Bot.
         :param name: Name of this Bot.
@@ -28,8 +50,6 @@ class Bot(BaseApp):
         :param redditApp: `~.RedditApp` that will be used with this Bot.
         :param sentryToken: `~.SentryToken` that will be used with this Bot.
         :param databaseCredential: `~.DatabaseCredential` that will be used with this Bot.
-
-        .. note:: This class should not be initialized directly. Obtain an instance via: ``credmgr.bot('botName')``
 
         '''
         super().__init__(credmgr, **kwargs)
@@ -39,7 +59,7 @@ class Bot(BaseApp):
     def _create(_credmgr, name, redditApp, sentryToken, databaseCredential, owner=None):
         '''Create a new Bot
 
-        Bots are used for grouping apps into a single request
+        Bots are used for grouping credentials into a single app
 
         :param str name: Name of the Bot (required)
         :param Union[RedditApp,int] redditApp: Reddit App the bot will use

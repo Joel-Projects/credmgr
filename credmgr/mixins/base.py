@@ -1,9 +1,11 @@
 from datetime import datetime
 
-from credmgr.models.utils import resolveUser
+from ..models.utils import resolveUser
 from ..exceptions import InitializationError
 
 class BaseModel(object):
+    '''Superclass for all models in credmgr.'''
+
     _attrTypes = {'id': 'int'}
     _path = None
     _nameAttr = 'name'
@@ -14,6 +16,11 @@ class BaseModel(object):
     _apiNameMapping = None
 
     def __init__(self, credmgr, **kwargs):
+        '''Initialize a BaseModel instance.
+
+        :param credmgr: An instance of :class:`.CredentialManager`.
+
+        '''
         self._credmgr = credmgr
         if kwargs:
             for attribute, value in kwargs.items():

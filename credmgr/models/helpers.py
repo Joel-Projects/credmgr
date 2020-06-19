@@ -1,10 +1,10 @@
 import logging
-from operator import xor
 
 from . import Bot, DatabaseCredential, RedditApp, RefreshToken, SentryToken, User, UserVerification
 from .utils import resolveUser
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
+
 
 log = logging.getLogger(__package__)
 
@@ -12,7 +12,7 @@ class Paginator:
 
     @resolveUser()
     def __init__(self, credmgr, model, batchSize=20, limit=None, itemsOwner=None):
-        '''Initialize a ListGenerator instance.
+        '''Initialize a Paignator instance.
 
         :param credmgr: An instance of :class:`~.CredentialManager`.
         :param model: A CredentialManager model to list.
@@ -36,7 +36,7 @@ class Paginator:
 
     def __next__(self):
         if self.limit is not None and self._itemsReturned >= self.limit:
-            raise StopIteration() # pragma: no cover
+            raise StopIteration()  # pragma: no cover
 
         if self._response is None or self._currentItemIndex >= len(self._response):
             self._next()
@@ -54,9 +54,9 @@ class Paginator:
         self._response = self._credmgr.get(self._model._path, params=params)
         self._currentItemIndex = 0
         if not self._response:
-            raise StopIteration() # pragma: no cover
+            raise StopIteration()  # pragma: no cover
         if self._response and len(self._response) == self.batchSize:
-            self._offset += self.batchSize # pragma: no cover
+            self._offset += self.batchSize  # pragma: no cover
         else:
             self._completed = True
 
@@ -136,7 +136,8 @@ class UserHelper(BaseHelper):
         :return: User
         '''
 
-        return self._model._create(self._credmgr, username=username, password=password, defaultSettings=defaultSettings, isAdmin=isAdmin, isActive=isActive, isRegularUser=isRegularUser, isInternal=isInternal, redditUsername=redditUsername)
+        return self._model._create(self._credmgr, username=username, password=password, defaultSettings=defaultSettings, isAdmin=isAdmin, isActive=isActive,
+            isRegularUser=isRegularUser, isInternal=isInternal, redditUsername=redditUsername)
 
 class BotHelper(BaseHelper):
     _model = Bot
@@ -144,7 +145,7 @@ class BotHelper(BaseHelper):
     def create(self, name, redditApp=None, sentryToken=None, databaseCredential=None, owner=None) -> Bot:
         '''Create a new Bot
 
-        Bots are used for grouping apps into a single request
+        Bots are used for grouping credentials into a single app
 
         :param str name: Name of the Bot (required)
         :param Union[RedditApp,int] redditApp: Reddit App the bot will use
@@ -159,8 +160,7 @@ class BotHelper(BaseHelper):
 class RedditAppHelper(BaseHelper):
     _model = RedditApp
 
-    def create(self, name, clientId, userAgent=None, appType='web', redirectUri='https://credmgr.jesassn.org/oauth2/reddit_callback', clientSecret=None,
-            appDescription=None, enabled=True, owner=None) -> RedditApp:
+    def create(self, name, clientId, userAgent=None, appType='web', redirectUri=None, clientSecret=None, appDescription=None, enabled=True, owner=None) -> RedditApp:
         '''Create a new RedditApp
 
         Reddit Apps are used for interacting with reddit
@@ -168,8 +168,8 @@ class RedditAppHelper(BaseHelper):
         :param str name: (required)
         :param str clientId: Client ID of the Reddit App (required)
         :param str userAgent: User agent used for requests to Reddit's API (required, defaults to user set default, then to 'python:{name} by /u/{redditUsername}' if currentUser.redditUsername is set or 'python:{name}' if it is not set)
-        :param str appType: Type of the app. One of `web`, `installed`, or `script` (default: 'web')
-        :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (default: 'https://credmgr.jesassn.org/oauth2/reddit_callback')
+        :param str appType: Type of the app. One of `web`, `installed`, or `script` (required, default: 'web')
+        :param str redirectUri: Redirect URI for Oauth2 flow. (required, defaults to user set default then to `https://credmgr.jesassn.org/oauth2/reddit_callback` if neither are set)
         :param str clientSecret: Client secret of the Reddit App
         :param str appDescription: Description of the Reddit App
         :param bool enabled: Allows the app to be used
@@ -182,6 +182,7 @@ class RedditAppHelper(BaseHelper):
             if redditUsername:
                 redditUsernameStr = f' by /u/{redditUsername}'
             userAgent = self._credmgr.getUserDefault('user_agent', f'python:{name}{redditUsernameStr}')
+        redirectUri = self._credmgr.getUserDefault('redirect_uri', redirectUri or 'https://credmgr.jesassn.org/oauth2/reddit_callback')
         return self._model._create(self._credmgr, name=name, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, appDescription=appDescription, enabled=enabled, owner=owner)
 
 class UserVerificationHelper(BaseHelper):
