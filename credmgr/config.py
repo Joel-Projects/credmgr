@@ -27,7 +27,7 @@ class Config:
                 self._loadConfig()
 
         self._settings = kwargs
-        self.customSettings = dict(Config._config.items(configName), **{k.lower(): v for k,v in kwargs.items()})
+        self.customSettings = dict(Config._config.items(configName), **{k.lower(): v for k,v in kwargs.items() if v})
         self.server = self.apiToken = self.username = self.password = None
 
         self._initializeConfig()
