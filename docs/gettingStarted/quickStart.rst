@@ -126,8 +126,8 @@ Obtain :class:`.DatabaseCredential` Instances
    .. code-block:: python
 
     databaseCredential = bot.databaseCredential
-    print(databaseCredential.name)  # Output: name of the sentryToken
-    print(databaseCredential.databaseHost)  # Output: DSN of the sentryToken (this is the important part)
+    print(databaseCredential.name)  # Output: name of the databaseCredential
+    print(databaseCredential.databaseHost)  # Output: Address used to connect to the database
 
 .. _determine-available-attributes-of-an-object:
 
