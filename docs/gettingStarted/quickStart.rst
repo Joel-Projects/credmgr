@@ -128,6 +128,9 @@ Obtain :class:`.DatabaseCredential` Instances
     databaseCredential = bot.databaseCredential
     print(databaseCredential.name)  # Output: name of the databaseCredential
     print(databaseCredential.databaseHost)  # Output: Address used to connect to the database
+    print(databaseCredential.databaseUsername) # Output: Username used to establish connection with database
+    print(databaseCredential.databasePassword) # Output: Password used to establish connection with database
+    print(databaseCredential.databasePort) # Output: Port number to create connection over
 
 .. _determine-available-attributes-of-an-object:
 
