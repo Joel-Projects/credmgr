@@ -106,9 +106,9 @@ class RedditApp(BaseApp):
         :param bool permanent: Determines if a refresh token will be provided. (default: ``False``)
         :param Union[UserVerification,int,str] userVerification: Link to a :class:`.UserVerification` object. Accepted values are:
 
-            - An :class:``.UserVerification`` object
-            - An :class:``.UserVerification`` id
-            - An ``userId`` of a :class:``.UserVerification`` record.
+            - An :class:`.UserVerification` object
+            - An :class:`.UserVerification` ``id``
+            - An ``userId`` of a :class:`.UserVerification` record.
 
          If a :class:`.UserVerification` record does not exist, one will be created.
         :return str: Auth URL
