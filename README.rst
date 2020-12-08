@@ -4,7 +4,7 @@ CredentialManager
 Client for interacting with Credential Manager API
 
 -  API version: 1.0
--  Package version: 1.1.8
+-  Package version: 1.1.9
 
 Requirements
 ------------
