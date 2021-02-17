@@ -1,6 +1,14 @@
 import logging
 
-from . import Bot, DatabaseCredential, RedditApp, RefreshToken, SentryToken, User, UserVerification
+from . import (
+    Bot,
+    DatabaseCredential,
+    RedditApp,
+    RefreshToken,
+    SentryToken,
+    User,
+    UserVerification,
+)
 from .utils import resolveUser
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
@@ -8,18 +16,18 @@ from ..mixins import BaseModel
 
 log = logging.getLogger(__package__)
 
-class Paginator:
 
+class Paginator:
     @resolveUser()
     def __init__(self, credmgr, model, batchSize=20, limit=None, itemsOwner=None):
-        '''Initialize a Paignator instance.
+        """Initialize a Paignator instance.
 
         :param credmgr: An instance of :class:`~.CredentialManager`.
         :param model: A CredentialManager model to list.
         :param int batchSize: The number of items to fetch at a time. If ``batchSize`` is None, it will fetch them 100 at a time. (default: 20).
         :param int limit: The maximum number of items to get.
         :param Union[int, User, str] itemsOwner: Owner to filter the items by.
-        '''
+        """
         self._credmgr = credmgr
         self._model = model(self._credmgr)
         self.batchSize = batchSize
@@ -50,7 +58,7 @@ class Paginator:
             raise StopIteration()
         params = dict(limit=self.batchSize, offset=self._offset)
         if self.itemsOwner:
-            params['owner_id'] = self.itemsOwner
+            params["owner_id"] = self.itemsOwner
         self._response = self._credmgr.get(self._model._path, params=params)
         self._currentItemIndex = 0
         if not self._response:
@@ -59,6 +67,7 @@ class Paginator:
             self._offset += self.batchSize  # pragma: no cover
         else:
             self._completed = True
+
 
 class BaseHelper(BaseModel):
     _model = None
@@ -73,9 +82,11 @@ class BaseHelper(BaseModel):
                 byName = True
                 kwargs[self._model._nameAttr] = name
             else:
-                raise InitializationError(f'Cannot get {self._model.__name__!r} by name')
+                raise InitializationError(
+                    f"Cannot get {self._model.__name__!r} by name"
+                )
         if id:
-            modelKwargs['id'] = id
+            modelKwargs["id"] = id
         elif self._model._canFetchByName:
             byName = True
             for key in self._model._apiNameMapping.keys():
@@ -83,18 +94,21 @@ class BaseHelper(BaseModel):
                 if name:
                     modelKwargs[key] = name
                 else:
-                    raise InitializationError(f'Missing required keyword argument, {key!r}, to fetch object by name')
+                    raise InitializationError(
+                        f"Missing required keyword argument, {key!r}, to fetch object by name"
+                    )
         else:
             raise InitializationError("'id' is required")
         item = self._model(self._credmgr, **modelKwargs)
         item._fetch(byName)
         return item
 
+
 class UserHelper(BaseHelper):
     _model = User
 
     def __call__(self, id=None, username=None):
-        '''Fetches a :class:`~.User` instance by :attr:`id`` or :attr:`name`
+        """Fetches a :class:`~.User` instance by :attr:`id`` or :attr:`name`
 
         :param Union[int,str] id: ID of the :class:`~.User` to fetch.
             .. note :: If a ``str`` is passed it will be treated as the :attr:`username` attr
@@ -103,7 +117,7 @@ class UserHelper(BaseHelper):
                  If :attr:`id` is a ``str`` it will be treated as an :attr:`username` and will also take precedence.
         :return User: An initialized :class:`~.User` instance
         :meta public:
-        '''
+        """
         kwargs = {}
         byName = False
         if isinstance(id, str):
@@ -111,17 +125,27 @@ class UserHelper(BaseHelper):
             username = id
             id = None
         if id:
-            kwargs['id'] = id
+            kwargs["id"] = id
         if username:
-            kwargs['username'] = username
+            kwargs["username"] = username
         if not (id or username):
             raise InitializationError("At least 'id' or 'username' is required")
         item = User(self._credmgr, **kwargs)
         item._fetch(byName)
         return item
 
-    def create(self, username, password, defaultSettings=None, isAdmin=False, isActive=True, isRegularUser=True, isInternal=False, redditUsername=None) -> User:
-        '''Create a new user
+    def create(
+        self,
+        username,
+        password,
+        defaultSettings=None,
+        isAdmin=False,
+        isActive=True,
+        isRegularUser=True,
+        isInternal=False,
+        redditUsername=None,
+    ) -> User:
+        """Create a new user
 
         **PERMISSIONS: At least ``isAdmin`` is required.**
 
@@ -134,16 +158,33 @@ class UserHelper(BaseHelper):
         :param bool isInternal: (Internal use only)
         :param str redditUsername:
         :return: User
-        '''
+        """
 
-        return self._model._create(self._credmgr, username=username, password=password, defaultSettings=defaultSettings, isAdmin=isAdmin, isActive=isActive,
-            isRegularUser=isRegularUser, isInternal=isInternal, redditUsername=redditUsername)
+        return self._model._create(
+            self._credmgr,
+            username=username,
+            password=password,
+            defaultSettings=defaultSettings,
+            isAdmin=isAdmin,
+            isActive=isActive,
+            isRegularUser=isRegularUser,
+            isInternal=isInternal,
+            redditUsername=redditUsername,
+        )
+
 
 class BotHelper(BaseHelper):
     _model = Bot
 
-    def create(self, name, redditApp=None, sentryToken=None, databaseCredential=None, owner=None) -> Bot:
-        '''Create a new Bot
+    def create(
+        self,
+        name,
+        redditApp=None,
+        sentryToken=None,
+        databaseCredential=None,
+        owner=None,
+    ) -> Bot:
+        """Create a new Bot
 
         Bots are used for grouping credentials into a single app
 
@@ -153,15 +194,34 @@ class BotHelper(BaseHelper):
         :param Union[DatabaseCredential,int] databaseCredential: Database Credentials the bot will use
         :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
         :return: Bot
-        '''
+        """
 
-        return self._model._create(self._credmgr, name=name, redditApp=redditApp, sentryToken=sentryToken, databaseCredential=databaseCredential, owner=owner)
+        return self._model._create(
+            self._credmgr,
+            name=name,
+            redditApp=redditApp,
+            sentryToken=sentryToken,
+            databaseCredential=databaseCredential,
+            owner=owner,
+        )
+
 
 class RedditAppHelper(BaseHelper):
     _model = RedditApp
 
-    def create(self, name, clientId, userAgent=None, appType='web', redirectUri=None, clientSecret=None, appDescription=None, enabled=True, owner=None) -> RedditApp:
-        '''Create a new RedditApp
+    def create(
+        self,
+        name,
+        clientId,
+        userAgent=None,
+        appType="web",
+        redirectUri=None,
+        clientSecret=None,
+        appDescription=None,
+        enabled=True,
+        owner=None,
+    ) -> RedditApp:
+        """Create a new RedditApp
 
         Reddit Apps are used for interacting with reddit
 
@@ -175,21 +235,40 @@ class RedditAppHelper(BaseHelper):
         :param bool enabled: Allows the app to be used
         :param Union[User,int,str] owner: Owner of the Reddit App. Requires Admin to create for other users.
         :return: RedditApp
-        '''
+        """
         if not userAgent:
             redditUsername = self._credmgr.currentUser.redditUsername
-            redditUsernameStr = ''
+            redditUsernameStr = ""
             if redditUsername:
-                redditUsernameStr = f' by /u/{redditUsername}'
-            userAgent = self._credmgr.getUserDefault('user_agent', f'python:{name}{redditUsernameStr}')
-        redirectUri = self._credmgr.getUserDefault('redirect_uri', redirectUri or 'https://credmgr.jesassn.org/oauth2/reddit_callback')
-        return self._model._create(self._credmgr, name=name, clientId=clientId, userAgent=userAgent, appType=appType, redirectUri=redirectUri, clientSecret=clientSecret, appDescription=appDescription, enabled=enabled, owner=owner)
+                redditUsernameStr = f" by /u/{redditUsername}"
+            userAgent = self._credmgr.getUserDefault(
+                "user_agent", f"python:{name}{redditUsernameStr}"
+            )
+        redirectUri = self._credmgr.getUserDefault(
+            "redirect_uri",
+            redirectUri or "https://credmgr.jesassn.org/oauth2/reddit_callback",
+        )
+        return self._model._create(
+            self._credmgr,
+            name=name,
+            clientId=clientId,
+            userAgent=userAgent,
+            appType=appType,
+            redirectUri=redirectUri,
+            clientSecret=clientSecret,
+            appDescription=appDescription,
+            enabled=enabled,
+            owner=owner,
+        )
+
 
 class UserVerificationHelper(BaseHelper):
     _model = UserVerification
 
-    def create(self, userId, redditApp, redditor=None, extraData=None, owner=None) -> UserVerification:
-        '''Create a new User Verification
+    def create(
+        self, userId, redditApp, redditor=None, extraData=None, owner=None
+    ) -> UserVerification:
+        """Create a new User Verification
 
         User Verifications for verifying a redditor with a User ID
 
@@ -199,14 +278,22 @@ class UserVerificationHelper(BaseHelper):
         :param dict extraData: Extra JSON data to include with verification
         :param int owner: Owner of the verification. Requires Admin to create for other users.
         :return: UserVerification
-        '''
-        return self._model._create(self._credmgr, userId=userId, redditApp=redditApp, redditor=redditor, extraData=extraData, owner=owner)
+        """
+        return self._model._create(
+            self._credmgr,
+            userId=userId,
+            redditApp=redditApp,
+            redditor=redditor,
+            extraData=extraData,
+            owner=owner,
+        )
+
 
 class SentryTokenHelper(BaseHelper):
     _model = SentryToken
 
     def create(self, name, dsn, owner=None) -> SentryToken:
-        '''Create a new Sentry Token
+        """Create a new Sentry Token
 
         Sentry Tokens are used for logging and error reporting in applications
 
@@ -214,16 +301,34 @@ class SentryTokenHelper(BaseHelper):
         :param str dsn: DSN of the Sentry Token (required)
         :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
         :return: SentryToken
-        '''
+        """
         return self._model._create(self._credmgr, name=name, dsn=dsn, owner=owner)
+
 
 class DatabaseCredentialHelper(BaseHelper):
     _model = DatabaseCredential
 
-    def create(self, name, databaseFlavor='postgres', database='postgres', databaseHost='localhost', databasePort=5432, databaseUsername='postgres', databasePassword=None,
-            useSsh=False, sshHost=None, sshPort=None, sshUsername=None, sshPassword=None, useSshKey=False, privateKey=None, privateKeyPassphrase=None, enabled=True,
-            owner=None) -> DatabaseCredential:
-        '''Create a new Database Credential
+    def create(
+        self,
+        name,
+        databaseFlavor="postgres",
+        database="postgres",
+        databaseHost="localhost",
+        databasePort=5432,
+        databaseUsername="postgres",
+        databasePassword=None,
+        useSsh=False,
+        sshHost=None,
+        sshPort=None,
+        sshUsername=None,
+        sshPassword=None,
+        useSshKey=False,
+        privateKey=None,
+        privateKeyPassphrase=None,
+        enabled=True,
+        owner=None,
+    ) -> DatabaseCredential:
+        """Create a new Database Credential
 
         Database Credentials are used for..ya know..databases
 
@@ -245,10 +350,28 @@ class DatabaseCredentialHelper(BaseHelper):
         :param bool enabled: Allows the credentials to be used
         :param Union[User,int,str] owner: Owner of the app. Requires Admin to create for other users.
         :return: DatabaseCredential
-        '''
-        return self._model._create(self._credmgr, name=name, databaseFlavor=databaseFlavor, database=database, databaseHost=databaseHost, databasePort=databasePort,
-            databaseUsername=databaseUsername, databasePassword=databasePassword, useSsh=useSsh, sshHost=sshHost, sshPort=sshPort, sshUsername=sshUsername, sshPassword=sshPassword,
-            useSshKey=useSshKey, privateKey=privateKey, privateKeyPassphrase=privateKeyPassphrase, enabled=enabled, owner=owner)
+        """
+        return self._model._create(
+            self._credmgr,
+            name=name,
+            databaseFlavor=databaseFlavor,
+            database=database,
+            databaseHost=databaseHost,
+            databasePort=databasePort,
+            databaseUsername=databaseUsername,
+            databasePassword=databasePassword,
+            useSsh=useSsh,
+            sshHost=sshHost,
+            sshPort=sshPort,
+            sshUsername=sshUsername,
+            sshPassword=sshPassword,
+            useSshKey=useSshKey,
+            privateKey=privateKey,
+            privateKeyPassphrase=privateKeyPassphrase,
+            enabled=enabled,
+            owner=owner,
+        )
+
 
 class RefreshTokenHelper(BaseHelper):
     _model = RefreshToken
@@ -261,11 +384,11 @@ class RefreshTokenHelper(BaseHelper):
             redditor = id
             id = None
         if id:
-            kwargs['id'] = id
+            kwargs["id"] = id
         if redditor:
-            kwargs['redditor'] = redditor
+            kwargs["redditor"] = redditor
         if redditAppId:
-            kwargs['redditAppId'] = redditAppId
+            kwargs["redditAppId"] = redditAppId
         # if not id and xor(bool(RedditAppHelper), bool(redditAppId)):
         #     raise InitializationError("Both 'redditor' and 'redditAppId' are required")
         # if not ((redditor and redditAppId) or id):

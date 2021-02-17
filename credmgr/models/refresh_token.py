@@ -5,26 +5,26 @@ from credmgr.mixins.redditReddit import RedditAppMixin
 class RefreshToken(BaseModel, DeletableMixin, OwnerMixin, RedditAppMixin):
     _attrTypes = {
         **BaseModel._attrTypes,
-        'reddit_app_id': 'int',
-        'redditor': 'str',
-        'refresh_token': 'str',
-        'owner_id': 'int',
-        'scopes': 'str',
-        'issued_at': 'datetime',
-        'revoked': 'bool',
-        'revoked_at': 'datetime'
+        "reddit_app_id": "int",
+        "redditor": "str",
+        "refresh_token": "str",
+        "owner_id": "int",
+        "scopes": "str",
+        "issued_at": "datetime",
+        "revoked": "bool",
+        "revoked_at": "datetime",
     }
 
-    _path = '/refresh_tokens'
-    _credmgrCallable = 'refreshToken'
-    _nameMapping = {'redditor': 'redditor'}
-    _apiNameMapping = {'redditor': 'redditor', 'redditAppId': 'reddit_app_id'}
-    _getByNamePath = 'by_redditor'
+    _path = "/refresh_tokens"
+    _credmgrCallable = "refreshToken"
+    _nameMapping = {"redditor": "redditor"}
+    _apiNameMapping = {"redditor": "redditor", "redditAppId": "reddit_app_id"}
+    _getByNamePath = "by_redditor"
     _canFetchByName = True
-    _nameAttr = 'redditor'
+    _nameAttr = "redditor"
 
     def __init__(self, credmgr, **kwargs):
-        '''Initialize a Refresh Token instance.
+        """Initialize a Refresh Token instance.
 
         Refresh Tokens are for authenticating with Reddit as a Reddit that has authorized a `~.RedditApp` to access their Reddit account.
 
@@ -38,5 +38,5 @@ class RefreshToken(BaseModel, DeletableMixin, OwnerMixin, RedditAppMixin):
         :param datetime.datetime issuedAt: Date and time this Refresh Token was issued.
         :param bool revoked: Indicates if this Refresh Token was revoked or superseded by another Refresh Token.
         :param datetime.datetime revokedAt: Date and time this Refresh Token was revoked or superseded.
-        '''
+        """
         super().__init__(credmgr, **kwargs)

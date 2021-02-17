@@ -7,29 +7,36 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin
 class User(BaseModel, DeletableMixin, EditableMixin):
     _attrTypes = {
         **BaseModel._attrTypes,
-        'id': 'int',
-        'username': 'str',
-        'is_active': 'bool',
-        'is_regular_user': 'bool',
-        'is_admin': 'bool',
-        'default_settings': 'dict(str, str)',
-        'reddit_username': 'str',
-        'created': 'datetime',
-        'updated': 'datetime',
-        'reddit_apps': 'list[RedditApp]',
-        'sentry_tokens': 'list[SentryToken]',
-        'database_credentials': 'list[DatabaseCredential]'
+        "id": "int",
+        "username": "str",
+        "is_active": "bool",
+        "is_regular_user": "bool",
+        "is_admin": "bool",
+        "default_settings": "dict(str, str)",
+        "reddit_username": "str",
+        "created": "datetime",
+        "updated": "datetime",
+        "reddit_apps": "list[RedditApp]",
+        "sentry_tokens": "list[SentryToken]",
+        "database_credentials": "list[DatabaseCredential]",
     }
-    _editableAttrs = ['username', 'isActive', 'isRegularUser', 'isAdmin', 'defaultSettings', 'redditUsername']
-    _path = '/users'
-    _credmgrCallable = 'user'
-    _nameAttr = 'username'
-    _nameMapping = {'username': 'username'}
+    _editableAttrs = [
+        "username",
+        "isActive",
+        "isRegularUser",
+        "isAdmin",
+        "defaultSettings",
+        "redditUsername",
+    ]
+    _path = "/users"
+    _credmgrCallable = "user"
+    _nameAttr = "username"
+    _nameMapping = {"username": "username"}
     _canFetchByName = True
-    _apiNameMapping = {_nameAttr: 'username'}
+    _apiNameMapping = {_nameAttr: "username"}
 
     def __init__(self, credmgr, **kwargs):
-        '''Initialize an User instance
+        """Initialize an User instance
 
         Users are for logging into and accessing that user's credentials
 
@@ -46,19 +53,29 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         :param list[RedditApp] redditApps: A list of Reddit Apps this User owns.
         :param list[SentryToken] sentryTokens: A list of Sentry Tokens this User owns.
         :param list[DatabaseCredential] databaseCredentials: A list of Database Credentials this User owns.
-        '''
+        """
         super().__init__(credmgr, **kwargs)
         self._apps = {}
-        if 'redditApps' in kwargs:
-            self._apps['redditApps'] = kwargs['redditApps']
-        if 'sentryTokens' in kwargs:
-            self._apps['sentryTokens'] = kwargs['sentryTokens']
-        if 'databaseCredentials' in kwargs:
-            self._apps['databaseCredentials'] = kwargs['databaseCredentials']
+        if "redditApps" in kwargs:
+            self._apps["redditApps"] = kwargs["redditApps"]
+        if "sentryTokens" in kwargs:
+            self._apps["sentryTokens"] = kwargs["sentryTokens"]
+        if "databaseCredentials" in kwargs:
+            self._apps["databaseCredentials"] = kwargs["databaseCredentials"]
 
     @staticmethod
-    def _create(_credmgr, username, password, defaultSettings=None, redditUsername=None, isAdmin=False, isActive=True, isRegularUser=True, isInternal=False):
-        '''Create a new User
+    def _create(
+        _credmgr,
+        username,
+        password,
+        defaultSettings=None,
+        redditUsername=None,
+        isAdmin=False,
+        isActive=True,
+        isRegularUser=True,
+        isInternal=False,
+    ):
+        """Create a new User
 
         **PERMISSIONS: Admin role is required.**
 
@@ -72,31 +89,34 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         :param bool isInternal: (Internal use only)
         :return: User
 
-        '''
+        """
         additionalParams = {}
         if defaultSettings:
-            additionalParams['default_settings'] = json.dumps(defaultSettings)
-        if isAdmin: # pragma: no cover
-            additionalParams['is_admin'] = isAdmin
+            additionalParams["default_settings"] = json.dumps(defaultSettings)
+        if isAdmin:  # pragma: no cover
+            additionalParams["is_admin"] = isAdmin
         if isActive:
-            additionalParams['is_active'] = isActive
+            additionalParams["is_active"] = isActive
         if isRegularUser:
-            additionalParams['is_regular_user'] = isRegularUser
-        if isInternal: # pragma: no cover
-            additionalParams['is_internal'] = isInternal
+            additionalParams["is_regular_user"] = isRegularUser
+        if isInternal:  # pragma: no cover
+            additionalParams["is_internal"] = isInternal
         if redditUsername:
-            additionalParams['reddit_username'] = redditUsername
-        return _credmgr.post('/users', data={'username': username, 'password': password, **additionalParams})
+            additionalParams["reddit_username"] = redditUsername
+        return _credmgr.post(
+            "/users",
+            data={"username": username, "password": password, **additionalParams},
+        )
 
     def apps(self, only=None):
-        '''Returns apps that are owned by this user
+        """Returns apps that are owned by this user
 
         :param str only: Pass one of ``redditApps``, ``sentryTokens``, ``databaseCredentials`` to only get that type of apps
         :return Union[dict[str,list[Union[RedditApp,SentryToken,DatabaseCredential]]],list[Union[RedditApp,SentryToken,DatabaseCredential]]]:
-        '''
-        appTypes = ['redditApps', 'sentryTokens', 'databaseCredentials']
+        """
+        appTypes = ["redditApps", "sentryTokens", "databaseCredentials"]
         if not self._apps:
-            response = self._credmgr.get(f'/users/{self.id}/apps')
+            response = self._credmgr.get(f"/users/{self.id}/apps")
             self._apps = response._apps
             for app in appTypes:
                 setattr(self, app, self._apps[app])
@@ -104,5 +124,7 @@ class User(BaseModel, DeletableMixin, EditableMixin):
             if only in appTypes:
                 return self._apps[only]
             else:
-                raise InitializationError(f"App type: {only} is not valid. Only 'redditApps', 'sentryTokens', and 'databaseCredentials' are valid.")
+                raise InitializationError(
+                    f"App type: {only} is not valid. Only 'redditApps', 'sentryTokens', and 'databaseCredentials' are valid."
+                )
         return self._apps

@@ -1,4 +1,4 @@
-image: python:3.8
+image: python:3.9
 
 include:
   - template: Code-Quality.gitlab-ci.yml
@@ -8,13 +8,34 @@ include:
     allow_failure: true
     coverage: '/^TOTAL.*\s+(\d+\%)$/'
     script:
-        - pip install .[test] coverage pytest betamax sphinx
+        - pip install ".[test]"
         - pytest --cov-report=term --cov=credmgr tests
 
 stages:
+    - lint
     - test
     - deploy
     - pages
+
+black:
+    stage: lint
+    image: alpine
+    except:
+        refs:
+            - master
+            - dev
+            - /v*/
+    before_script:
+        - apk --no-cache add py3-pip python3-dev gcc linux-headers musl-dev libffi-dev openssl-dev git
+        - pip3 install black
+    script:
+        - black --check .
+    allow_failure: false
+
+
+test:pytest3.9:
+    image: python:3.9
+    <<: *testSetup
 
 test:pytest3.8:
     image: python:3.8
@@ -27,19 +48,6 @@ test:pytest3.7:
 test:pytest3.6:
     image: python:3.6
     <<: *testSetup
-
-# test:sonarqube:
-#     image:
-#         name: sonarsource/sonar-scanner-cli:latest
-#         entrypoint: [""]
-#     stage: test
-#     allow_failure: true
-#     variables:
-#       SONAR_TOKEN: $SONAR_TOKEN
-#       SONAR_HOST_URL: "https://qube.jesassn.org"
-#       GIT_DEPTH: 0
-#     script:
-#         - sonar-scanner -Dsonar.projectKey=credmgr-client -Dproject.settings=$CI_PROJECT_DI/sonar-project.properties -Dsonar.qualitygate.wait=true
 
 deploy:
     stage: deploy

@@ -1,8 +1,8 @@
 class DeletableMixin:
-    '''Interface for classes that can be edited and deleted.'''
+    """Interface for classes that can be edited and deleted."""
 
     def delete(self):
-        '''Delete the object.
+        """Delete the object.
 
         Example usage:
 
@@ -20,6 +20,6 @@ class DeletableMixin:
             databaseCredential.delete()
 
             userVerification = cre
-        '''
-        self._credmgr.delete(f'{self._path}/{self.id}')
+        """
+        self._credmgr.delete(f"{self._path}/{self.id}")
         del self

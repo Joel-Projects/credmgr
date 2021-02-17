@@ -11,6 +11,7 @@ def testDeleteRefreshToken(credentialManager):
     with pytest.raises(NotFound):
         _ = credentialManager.refreshToken(id=1)
 
+
 def testListRefreshTokens(credentialManager):
     refreshTokens = credentialManager.refreshTokens()
     for refreshToken in refreshTokens:

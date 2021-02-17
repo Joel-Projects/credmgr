@@ -8,6 +8,7 @@ def testResolveUserWithObject(credentialManager):
         assert isinstance(redditApp, RedditApp)
         assert redditApp.owner == user
 
+
 def testResolveUserWithUsername(credentialManager):
     user = credentialManager.currentUser
     redditApps = credentialManager.redditApps(owner=user.username)
@@ -15,12 +16,18 @@ def testResolveUserWithUsername(credentialManager):
         assert isinstance(redditApp, RedditApp)
         assert redditApp.owner == user
 
+
 def testResolveModelWithObject(credentialManager):
     redditApp = credentialManager.redditApp(26)
-    userVerification = credentialManager.userVerification.create(userId='testuserid', redditApp=redditApp)
+    userVerification = credentialManager.userVerification.create(
+        userId="testuserid", redditApp=redditApp
+    )
     assert isinstance(userVerification, UserVerification)
+
 
 def testResolveModelWithId(credentialManager):
     redditApp = credentialManager.redditApp(26)
-    userVerification = credentialManager.userVerification.create(userId='testuserid', redditApp=redditApp.id)
+    userVerification = credentialManager.userVerification.create(
+        userId="testuserid", redditApp=redditApp.id
+    )
     assert isinstance(userVerification, UserVerification)

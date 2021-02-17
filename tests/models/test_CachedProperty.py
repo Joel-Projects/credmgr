@@ -7,6 +7,7 @@ from credmgr.models.utils import CachedProperty
 def credentialManager():
     yield None
 
+
 @pytest.yield_fixture(autouse=True)
 def recorder(credentialManager):
     yield None
@@ -15,7 +16,7 @@ def recorder(credentialManager):
 class ClassPropertyTest:
     @CachedProperty
     def nine(self):
-        '''Return 9.'''
+        """Return 9."""
         return 9
 
     def ten(self):
@@ -25,20 +26,22 @@ class ClassPropertyTest:
     def eleven(self):
         return 11
 
-    ten = CachedProperty(ten, doc='Return 10.')
+    ten = CachedProperty(ten, doc="Return 10.")
+
 
 def testCachedPropertyGet():
     cachedPropertyClass = ClassPropertyTest()
-    assert 'nine' not in cachedPropertyClass.__dict__
+    assert "nine" not in cachedPropertyClass.__dict__
     assert cachedPropertyClass.nine == 9
-    assert 'nine' in cachedPropertyClass.__dict__
-    assert 'ten' not in cachedPropertyClass.__dict__
+    assert "nine" in cachedPropertyClass.__dict__
+    assert "ten" not in cachedPropertyClass.__dict__
     assert cachedPropertyClass.ten == 10
-    assert 'ten' in cachedPropertyClass.__dict__
-    assert 'eleven' not in cachedPropertyClass.__dict__
+    assert "ten" in cachedPropertyClass.__dict__
+    assert "eleven" not in cachedPropertyClass.__dict__
     assert cachedPropertyClass.eleven == 11
-    assert 'eleven' not in cachedPropertyClass.__dict__
+    assert "eleven" not in cachedPropertyClass.__dict__
+
 
 def testCachedPropertyDoc():
-    assert ClassPropertyTest.nine.__doc__ == 'Return 9.'
-    assert ClassPropertyTest.ten.__doc__ == 'Return 10.'
+    assert ClassPropertyTest.nine.__doc__ == "Return 9."
+    assert ClassPropertyTest.ten.__doc__ == "Return 10."

@@ -3,16 +3,19 @@ import re
 from credmgr.exceptions import NotFound
 
 
-reCamelToSnake = re.compile(r'([a-z0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))')
+reCamelToSnake = re.compile(r"([a-z0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))")
+
 
 def camelToSnake(name: str) -> str:
-    '''Convert `name` from camelCase to snake_case.'''
-    return reCamelToSnake.sub(r'\1_', name).lower()
+    """Convert `name` from camelCase to snake_case."""
+    return reCamelToSnake.sub(r"\1_", name).lower()
 
-def resolveUser(userAttr='owner', returnAttr='id'):
+
+def resolveUser(userAttr="owner", returnAttr="id"):
     def decorator(func):
         def wrapper(self, *args, **kwargs):
             from . import User
+
             value = None
             user = kwargs.get(userAttr, None)
             if user:
@@ -31,7 +34,8 @@ def resolveUser(userAttr='owner', returnAttr='id'):
 
     return decorator
 
-def resolveModelFromInput(credmgr, model, inputValue, returnAttr='id'):
+
+def resolveModelFromInput(credmgr, model, inputValue, returnAttr="id"):
     value = None
     if isinstance(inputValue, model):
         value = getattr(inputValue, returnAttr)
@@ -45,6 +49,7 @@ def resolveModelFromInput(credmgr, model, inputValue, returnAttr='id'):
         if foundItem:
             value = getattr(foundItem, returnAttr)
     return value
+
 
 class CachedProperty:
     def __init__(self, func, doc=None):
