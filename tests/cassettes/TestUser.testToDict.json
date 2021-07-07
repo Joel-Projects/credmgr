@@ -86,7 +86,7 @@
       "response": {
         "body": {
           "encoding": null,
-          "string": "{\"id\": 1, \"username\": \"spaz\", \"resource_type\": \"User\", \"reddit_apps\": [{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\"}], \"sentry_tokens\": [{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"resource_type\": \"SentryToken\"}], \"database_credentials\": [{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\"}]}\n"
+          "string": "{\"id\": 1, \"username\": \"spaz\", \"resource_type\": \"User\", \"reddit_apps\": [{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"<CLIENT_ID>\", \"client_secret\": \"<CLIENT_SECRET>\", \"resource_type\": \"RedditApp\"}], \"sentry_tokens\": [{\"id\": 4, \"app_name\": \"sentryToken\", \"dsn\": \"https://key@sentry.jesassn.org/id\", \"resource_type\": \"SentryToken\"}], \"database_credentials\": [{\"id\": 1, \"app_name\": \"test\", \"database_username\": \"postgres\", \"database_host\": \"localhost\", \"database\": \"postgres\", \"database_flavor\": \"postgres\", \"resource_type\": \"DatabaseCredential\"}]}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [

@@ -1,10 +1,12 @@
 import configparser
 
 import pytest
+from betamax import Betamax
 
 from credmgr.exceptions import InitializationError
 
 from credmgr import CredentialManager
+from tests.utils import genCassetteName
 
 
 def testCredmgrInit(credentialManager):
@@ -28,6 +30,8 @@ def testCredmgrNoParams(credentialManager):
         _ = CredentialManager()
 
 
-def testCredmgrInitUsernamePassword():
-    credentialManager = CredentialManager(username="username", password="password")
-    assert credentialManager.currentUser.username == "username"
+def testCredmgrInitUsernamePassword(credentialManager):
+    credmgr = CredentialManager(username='username', password='password')
+    credmgr._requestor._session = credentialManager._requestor._session
+    credmgr._requestor._session.auth = credmgr._auth
+    assert credmgr.currentUser.username == "username"

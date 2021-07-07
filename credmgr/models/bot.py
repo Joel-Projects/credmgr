@@ -50,13 +50,13 @@ class Bot(BaseApp):
 
         Bots are used for grouping credentials into a single app
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param id: ID of this Bot.
         :param name: Name of this Bot.
-        :param ownerId: ID of the `~.User` that owns this Bot.
-        :param redditApp: `~.RedditApp` that will be used with this Bot.
-        :param sentryToken: `~.SentryToken` that will be used with this Bot.
-        :param databaseCredential: `~.DatabaseCredential` that will be used with this Bot.
+        :param ownerId: ID of the `.User` that owns this Bot.
+        :param redditApp: `.RedditApp` that will be used with this Bot.
+        :param sentryToken: `.SentryToken` that will be used with this Bot.
+        :param databaseCredential: `.DatabaseCredential` that will be used with this Bot.
 
         """
         super().__init__(credmgr, **kwargs)
@@ -98,16 +98,16 @@ class Bot(BaseApp):
     def edit(self, **kwargs):
         """
 
-        :param name: Changes the name of the :class:`~.Bot`
-        :param Union[RedditApp,int] redditApp: Changes the :class:`~.RedditApp` the Bot will use
-        :param Union[SentryToken,int] sentryToken: Changes the :class:`~.SentryToken` the Bot will use
-        :param Union[DatabaseCredential,int] databaseCredential: Changes the :class:`~.DatabaseCredential` the Bot will use
+        :param name: Changes the name of the :class:`.Bot`
+        :param Union[RedditApp,int] redditApp: Changes the :class:`.RedditApp` the Bot will use
+        :param Union[SentryToken,int] sentryToken: Changes the :class:`.SentryToken` the Bot will use
+        :param Union[DatabaseCredential,int] databaseCredential: Changes the :class:`.DatabaseCredential` the Bot will use
 
         .. note ::
             Parameters, ``redditApp``, ``sentryToken``, and ``databaseCredential`` can accept the initialized object or its :attr:`id`.
             Passing a ``str`` to it will not work. The intended was to create bots in with the web interface.
 
-        :return: The modified :class:`~.Bot`
+        :return: The modified :class:`.Bot`
         """
         from credmgr.models import DatabaseCredential, RedditApp, SentryToken
 

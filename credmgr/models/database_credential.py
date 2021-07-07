@@ -43,7 +43,7 @@ class DatabaseCredential(BaseApp):
     def __init__(self, credmgr, **kwargs):
         """Initialize a Database Credential instance.
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param id:
         :param str name: Name of the Database Credential.
         :param str databaseFlavor: Type of database.
@@ -60,7 +60,7 @@ class DatabaseCredential(BaseApp):
         :param bool useSshKey: Determines if the SSH tunnel will use private key authenciation.
         :param str privateKey: SSH private key. Note: No validation will be performed.
         :param str privateKeyPassphrase: Passphrase for the SSH key.
-        :param ownerId: ID of the `~.User` that owns this Database Credential.
+        :param ownerId: ID of the `.User` that owns this Database Credential.
         """
         super().__init__(credmgr, **kwargs)
 

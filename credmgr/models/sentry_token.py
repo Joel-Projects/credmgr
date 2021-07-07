@@ -11,11 +11,11 @@ class SentryToken(BaseApp):
     def __init__(self, credmgr, **kwargs):
         """Initialize a Sentry Token instance.
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param id: ID of the Sentry Token
         :param str name: Name of the Sentry Token.
         :param str dsn: Sentry DSN url for reporting errors.
-        :param ownerId: ID of the `~.User` that owns this Sentry Token.
+        :param ownerId: ID of the `.User` that owns this Sentry Token.
         """
         super().__init__(credmgr, **kwargs)
 

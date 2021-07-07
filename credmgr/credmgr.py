@@ -86,7 +86,7 @@ class CredentialManager(object):
                    return response
 
            mySession = betamax.Betamax(requests.Session())
-           credentialManager = CredentialManager(..., sessionClass=JSONDebugRequestor, sessionKwargs={'session': mySession})
+           credentialManager = CredentialManager(..., sessionClass=JSONDebugRequestor, session=mySession)
         """
         if sessionKwargs is None:
             sessionKwargs = {}
@@ -115,8 +115,9 @@ class CredentialManager(object):
             self._auth = (username, password)
         else:
             raise InitializationError(
-                "API Token or an username/password pair must be set."
+                "API Token or a username/password pair must be set."
             )
+
 
         self._requestor = Requestor(
             self._server, self._auth, sessionClass, **sessionKwargs
@@ -129,7 +130,7 @@ class CredentialManager(object):
         """An instance of :class:`.UserHelper`.
 
         Provides an interface for interacting with :class:`.User`.
-        For example, to get a :class:`~.User` with :attr:`id` of ``1`` you can do:
+        For example, to get a :class:`.User` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
         
@@ -148,7 +149,7 @@ class CredentialManager(object):
         """An instance of :class:`.BotHelper`.
 
         Provides an interface for interacting with :class:`.Bot`.
-        For example, to get a :class:`~.Bot` with :attr:`id` of ``1`` you can do:
+        For example, to get a :class:`.Bot` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
         
@@ -168,7 +169,7 @@ class CredentialManager(object):
         """An instance of :class:`.RedditAppHelper`.
 
         Provides an interface for interacting with :class:`.RedditApp`.
-        For example, to get a :class:`~.RedditApp` with :attr:`id` of ``1`` you can do:
+        For example, to get a :class:`.RedditApp` with :attr:`id` of ``1`` you can do:
         
         .. code-block:: python
         
@@ -264,7 +265,7 @@ class CredentialManager(object):
 
         :param int batchSize: Number of Users to return in each batch (default: ``20``)
         :param int limit: Maximum number of Users to return
-        :return Paginator: A :class:`~.Paginator` to iterate through the Users
+        :return Paginator: A :class:`.Paginator` to iterate through the Users
         """
         return User(self).listItems(batchSize=batchSize, limit=limit)
 
@@ -274,7 +275,7 @@ class CredentialManager(object):
         :param int batchSize: Number of Bots to return in each batch (default: ``20``)
         :param int limit: Maximum number of Bots to return
         :param Union[int,str,User] owner: Return Bots that are owner by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the Bots
+        :return Paginator: A :class:`.Paginator` to iterate through the Bots
         """
         return Bot(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
@@ -284,7 +285,7 @@ class CredentialManager(object):
         :param int batchSize: Number of RedditApps to return in each batch (default: ``20``)
         :param int limit: Maximum number of RedditApps to return
         :param Union[int,str,User] owner: Return RedditApps that are owner by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the Reddit Apps
+        :return Paginator: A :class:`.Paginator` to iterate through the Reddit Apps
         """
         return RedditApp(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
@@ -294,7 +295,7 @@ class CredentialManager(object):
         :param int batchSize: Number of RefreshTokens to return in each batch (default: ``20``)
         :param int limit: Maximum number of RefreshTokens to return
         :param Union[int,str,User] owner: Return RefreshTokens that are owned by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the Refresh Tokens
+        :return Paginator: A :class:`.Paginator` to iterate through the Refresh Tokens
 
         .. note::
             This is *not* the intended way to fetch refresh tokens. See: :meth:`~.RedditApp.reddit`
@@ -310,7 +311,7 @@ class CredentialManager(object):
         :param int batchSize: Number of UserVerifications to return in each batch (default: ``20``)
         :param int limit: Maximum number of UserVerifications to return
         :param Union[int,str,User] owner: Return UserVerifications that are owned by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the UserVerifications
+        :return Paginator: A :class:`.Paginator` to iterate through the UserVerifications
         """
         return UserVerification(self).listItems(
             batchSize=batchSize, limit=limit, owner=owner
@@ -322,7 +323,7 @@ class CredentialManager(object):
         :param int batchSize: Number of SentryTokens to return in each batch (default: ``20``)
         :param int limit: Maximum number of SentryTokens to return
         :param Union[int,str,User] owner: Return SentryTokens that are owned by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the SentryTokens
+        :return Paginator: A :class:`.Paginator` to iterate through the SentryTokens
         """
         return SentryToken(self).listItems(
             batchSize=batchSize, limit=limit, owner=owner
@@ -334,7 +335,7 @@ class CredentialManager(object):
         :param int batchSize: Number of DatabaseCredentials to return in each batch (default: ``20``)
         :param int limit: Maximum number of DatabaseCredentials to return
         :param Union[int,str,User] owner: Return DatabaseCredentials that are owned by this user
-        :return Paginator: A :class:`~.Paginator` to iterate through the DatabaseCredentials
+        :return Paginator: A :class:`.Paginator` to iterate through the DatabaseCredentials
         """
         return DatabaseCredential(self).listItems(
             batchSize=batchSize, limit=limit, owner=owner
@@ -342,14 +343,14 @@ class CredentialManager(object):
 
     @CachedProperty
     def currentUser(self) -> User:
-        """Returns the currently authenticated :class:`~.User`"""
+        """Returns the currently authenticated :class:`.User`"""
         if not self._currentUser:
             self._currentUser = self.get("/users/me")
         return self._currentUser
 
     @CachedProperty
     def userDefaults(self):
-        """Returns the currently authenticated :class:`~.User`'s default settings"""
+        """Returns the currently authenticated :class:`.User`'s default settings"""
         if not self._userDefaults:
             self._userDefaults = self.currentUser.defaultSettings
         return self._userDefaults

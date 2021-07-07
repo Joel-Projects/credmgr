@@ -22,7 +22,7 @@ class Serializer(object):
     def __init__(self, credmgr):
         """Initialize an Objector instance.
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
 
         """
         self._credmgr = credmgr
@@ -142,7 +142,7 @@ class Serializer(object):
         else:
             return self.__deserializeModel(data, objectType)
 
-    def __hasattr(self, object, name):  # pragma: no cover
+    def __hasattr__(self, object, name):  # pragma: no cover
         return name in object.__class__.__dict__
 
     def __deserializeModel(self, data, objectType):

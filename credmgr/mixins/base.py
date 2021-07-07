@@ -29,7 +29,7 @@ class BaseModel(object):
         self._fetched = False
 
     def __getattr__(self, attribute):  # pragma: no cover
-        """Return the value of `attribute`."""
+        """Return the value of ``attribute``."""
         if not attribute.startswith("_") and not self._fetched:
             self._fetch()
             return getattr(self, attribute)

@@ -33,13 +33,13 @@ class UserVerification(
 
         User Verifications for associating an unique ID with a Redditor
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param id: ID of this User Verification.
         :param userId: An unique ID to associate with a Redditor.
         :param redditor: Redditor username to associate with an unique ID.
         :param redditAppId: ID of the RedditApp the Refresh Token is for.
         :param extraData: Extra data to be associated with this User Verification
-        :param ownerId: ID of the `~.User` that owns this User Verification
+        :param ownerId: ID of the `.User` that owns this User Verification
         """
         super().__init__(credmgr, **kwargs)
 

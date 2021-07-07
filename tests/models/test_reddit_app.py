@@ -1,3 +1,7 @@
+import time
+from functools import partial
+
+import mock
 import praw
 import pytest
 from credmgr.models import RedditApp
@@ -89,11 +93,29 @@ def testRedditAppReddit(credentialManager):
     assert isinstance(reddit, praw.Reddit)
 
 
-def testRedditAppRedditWithRedditor(credentialManager, recorder):
+def patched__request_token(self, **data):
+    payload = {'access_token': 'access_token', 'token_type': 'bearer', 'expires_in': 3600, 'refresh_token': 'new_token', 'scope': 'account creddits edit flair history identity livemanage modconfig modcontributors modflair modlog modmail modothers modposts modself modtraffic modwiki mysubreddits privatemessages read report save structuredstyles submit subscribe vote wikiedit wikiread'}
+    pre_request_time = time.time()
+    self._expiration_timestamp = (pre_request_time - 10 + payload["expires_in"])
+    self.access_token = payload["access_token"]
+    if "refresh_token" in payload:
+        self.refresh_token = payload["refresh_token"]
+    self.scopes = set(payload["scope"].split(" "))
+
+
+def testRedditAppRedditWithRedditor(credentialManager):
     redditApp = credentialManager.redditApp(2)
     reddit = redditApp.reddit("Lil_SpazJoekp")
     assert isinstance(reddit, praw.Reddit)
-    assert reddit.config.refresh_token is not None
+    assert not reddit.read_only
+    response = mock.Mock(status_code=200)
+    response.json.return_value = {"name": "Lil_SpazJoekp"}
+    with mock.patch("prawcore.requestor.Requestor.request", return_value=response, create=True):
+        with mock.patch("prawcore.rate_limit.RateLimiter.delay"):
+            with mock.patch("prawcore.rate_limit.RateLimiter.update"):
+                reddit._core._authorizer._request_token = partial(patched__request_token, self=reddit._core._authorizer)
+                reddit._core._authorizer.refresh()
+                assert reddit.user.me() == 'Lil_SpazJoekp'
 
 
 def testRedditAppRedditWithBadRedditor(credentialManager):

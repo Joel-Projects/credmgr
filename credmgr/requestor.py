@@ -45,15 +45,15 @@ class Requestor(object):
     }
     _successCodes = [200, 201, 202, 204]
 
-    def __init__(self, credmgrUrl, auth, session=None, **sessionKwargs):
+    def __init__(self, credmgrUrl, auth, sessionClass, **sessionKwargs):
         """Create an instance of the Requestor class.
 
         :param str credmgrUrl: Url used to make API requests
         :param auth: An auth tuple or a class that subclasses requests.auth
-        :param Session session: (Optional) A session to handle requests, compatible with requests.Session(). (Default: None)
+        :param Session sessionClass: (Optional) A custom session class to handle requests, compatible with requests.Session(). (Default: None)
         """
         self._baseUrl = credmgrUrl
-        self._session = session or requests.Session()
+        self._session = (sessionClass or requests.Session)()
         self._session.auth = auth
         for key, value in sessionKwargs.items():  # pragma: no cover
             setattr(self._session, key, value)

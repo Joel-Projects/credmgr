@@ -4,7 +4,10 @@ import praw
 
 from .utils import resolveModelFromInput, resolveUser
 from ..mixins import BaseApp
+from praw.util.token_manager import BaseTokenManager
 
+import logging
+log = logging.getLogger(__package__)
 
 class RedditApp(BaseApp):
     """A class for Reddit Apps.
@@ -39,13 +42,14 @@ class RedditApp(BaseApp):
     ]
     _path = "/reddit_apps"
     _credmgrCallable = "redditApp"
+    _reddit = None
 
     def __init__(self, credmgr, **kwargs):
         """Initialize a Reddit App instance.
 
         Reddit Apps are used for interacting with reddit
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param int id: ID of this Reddit App.
         :param str name: Name of this Reddit App.
         :param str clientId: Client ID of this Reddit App.
@@ -55,7 +59,7 @@ class RedditApp(BaseApp):
         :param str appType: Type of app this Reddit App is. One of: ``web``, ``installed``, or ``script``.
         :param str redirectUri: URL that redditors are redirected to after authorizing this Reddit App to access their account.
         :param str state: Used to identify this Reddit App during the OAuth2 flow.
-        :param int ownerId: ID of the `~.User` that owns this Reddit App.
+        :param int ownerId: ID of the `.User` that owns this Reddit App.
         """
         super().__init__(credmgr, **kwargs)
 
@@ -108,39 +112,45 @@ class RedditApp(BaseApp):
             data["owner_id"] = owner
         return _credmgr.post("/reddit_apps", data=data)
 
-    def reddit(self, redditor=None) -> praw.Reddit:
-        """
+    def reddit(self, redditor=None, reddit=praw.Reddit) -> praw.Reddit:
+        """Provides an optionally authenticated [Async] PRAW
 
-        :param str redditor: The redditor that you want the Reddit instance
-        :return:
-        :rtype:
+        :param str redditor: The redditor that you want the Reddit instance authorized as.
+        :param reddit: The Reddit class to use. Useful if you have a local version of PRAW.
+        :returns: Reddit instance.
+
         """
-        refreshToken = None
-        if redditor:
-            refreshToken = self._credmgr.refreshToken(redditor, self.id)
-            if refreshToken:
-                refreshToken = refreshToken.refreshToken
-        return praw.Reddit(
-            client_id=self.clientId,
-            client_secret=self.clientSecret,
-            user_agent=self.userAgent,
-            redirect_uri=self.redirectUri,
-            refresh_token=refreshToken,
-        )
+        if not self._reddit:
+            extra_kwargs = {}
+            if redditor:
+                extra_kwargs['token_manager'] = RefreshTokenManager(self._credmgr, redditor, self)
+            self._reddit = reddit(
+                client_id=self.clientId,
+                client_secret=self.clientSecret,
+                user_agent=self.userAgent,
+                redirect_uri=self.redirectUri,
+                **extra_kwargs,
+            )
+        return self._reddit
 
     def genAuthUrl(self, scopes=None, permanent=False, userVerification=None):
-        """Generates an URL for users to verify or authenticate their Reddit account
+        """Generates a URL for users to verify or authenticate their Reddit account
 
-        :param Union[list,str] scopes: List of scopes needed. Pass ``'all'`` for all scopes. The ``identity`` scope will always be included. (default: ``['identity']``)
-        :param bool permanent: Determines if a refresh token will be provided. (default: ``False``)
-        :param Union[UserVerification,int,str] userVerification: Link to a :class:`.UserVerification` object. Accepted values are:
+        :param Union[list,str] scopes: List of scopes needed. Pass ``'all'``
+            for all scopes. The ``identity`` scope will always be included.
+            (default:  ``['identity']``)
+        :param bool permanent: Determines if a refresh token will be provided.
+            (default: ``False``)
+        :param Union[UserVerification,int,str] userVerification: Link to a
+            :class:`.UserVerification` object. Accepted values are:
 
             - An :class:`.UserVerification` object
             - An :class:`.UserVerification` ``id``
             - An ``userId`` of a :class:`.UserVerification` record.
 
          If a :class:`.UserVerification` record does not exist, one will be created.
-        :return str: Auth URL
+
+        :returns str: Auth URL
         """
         from credmgr.models import UserVerification
 
@@ -148,7 +158,7 @@ class RedditApp(BaseApp):
             scopes = ["identity"]
         elif scopes == "all":
             scopes = ["*"]
-        if not "identity" in scopes and scopes != ["*"]:
+        if "identity" not in scopes and scopes != ["*"]:
             scopes = [scopes, "identity"]
         if permanent:
             duration = "permanent"
@@ -168,3 +178,28 @@ class RedditApp(BaseApp):
         else:
             state = self.state
         return self.reddit().auth.url(scopes, state, duration)
+
+
+
+
+class RefreshTokenManager(BaseTokenManager):
+
+    def __init__(self, credmgr, redditor, reddit_app):
+        self._credmgr = credmgr
+        self.redditor = redditor
+        self.reddit_app = reddit_app
+        self.refreshToken = self._credmgr.refreshToken(self.redditor, self.reddit_app.id)
+        super().__init__()
+
+    def post_refresh_callback(self, authorizer):
+        log.debug(f'Storing new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        self.refreshToken.edit(refreshToken=authorizer.refresh_token)
+        log.debug(f'Successfully sorted new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+
+    def pre_refresh_callback(self, authorizer):
+        log.debug(f'Fetching refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        refreshToken = self._credmgr.refreshToken(self.redditor, self.reddit_app.id)
+        log.debug(f'Fetched refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        if refreshToken:
+            authorizer.refresh_token = refreshToken.refreshToken
+

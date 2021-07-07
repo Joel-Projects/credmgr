@@ -1,7 +1,7 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T02:18:30",
+      "recorded_at": "2021-07-07T21:54:43",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -18,7 +18,7 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.1.9"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -28,81 +28,25 @@
         "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
       },
       "response": {
-        "body": {
-          "encoding": null,
-          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
-        },
-        "headers": {
-          "Access-Control-Allow-Origin": [
-            "*"
-          ],
-          "Content-Length": [
-            "403"
-          ],
-          "Content-Type": [
-            "application/json"
-          ],
-          "Date": [
-            "Wed, 29 Apr 2020 02:18:30 GMT"
-          ],
-          "Server": [
-            "gunicorn/20.0.4"
-          ]
-        },
-        "status": {
-          "code": 200,
-          "message": "OK"
-        },
-        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
-      }
-    },
-    {
-      "recorded_at": "2020-04-29T02:18:31",
-      "request": {
         "body": {
           "encoding": "utf-8",
-          "string": ""
-        },
-        "headers": {
-          "Accept": [
-            "*/*"
-          ],
-          "Accept-Encoding": [
-            "gzip, deflate"
-          ],
-          "Connection": [
-            "keep-alive"
-          ],
-          "User-Agent": [
-            "credmgr/1.0.1"
-          ],
-          "X-API-TOKEN": [
-            "<API_TOKEN>"
-          ]
-        },
-        "method": "GET",
-        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
-      },
-      "response": {
-        "body": {
-          "encoding": null,
-          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
+          "string": "{\"id\": 2, \"app_name\": \"usernote\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"owner_id\": 1}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "403"
+            "368"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 02:18:31 GMT"
+            "Wed, 07 Jul 2021 21:54:43 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "gunicorn"
           ]
         },
         "status": {
@@ -113,7 +57,7 @@
       }
     },
     {
-      "recorded_at": "2020-04-29T02:18:32",
+      "recorded_at": "2021-07-07T21:54:43",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -136,7 +80,7 @@
             "application/x-www-form-urlencoded"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.1.9"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -147,24 +91,24 @@
       },
       "response": {
         "body": {
-          "encoding": null,
-          "string": "{\"id\": 1, \"reddit_app_id\": 2, \"redditor\": \"Lil_SpazJoekp\", \"refresh_token\": \"<REFRESH_TOKEN>\", \"resource_type\": \"RefreshToken\", \"owner_id\": 1, \"scopes\": [\"account\", \"modtraffic\", \"modwiki\", \"structuredstyles\", \"wikiread\", \"read\", \"edit\", \"privatemessages\", \"modposts\", \"wikiedit\", \"vote\", \"save\", \"modothers\", \"history\", \"submit\", \"identity\", \"modconfig\", \"creddits\", \"modcontributors\", \"subscribe\", \"report\", \"modself\", \"livemanage\", \"flair\", \"modlog\", \"modmail\", \"modflair\", \"mysubreddits\"], \"issued_at\": \"2020-04-26T03:01:21.622489+00:00\", \"revoked\": false, \"revoked_at\": null}\n"
+          "encoding": "utf-8",
+          "string": "{\"id\": 4, \"reddit_app_id\": 2, \"redditor\": \"Lil_SpazJoekp\", \"refresh_token\": \"<REFRESH_TOKEN>\", \"resource_type\": \"RefreshToken\", \"owner_id\": 1, \"scopes\": [\"read\", \"wikiread\", \"report\", \"modconfig\", \"subscribe\", \"modtraffic\", \"modself\", \"account\", \"structuredstyles\", \"privatemessages\", \"submit\", \"modposts\", \"modothers\", \"modwiki\", \"save\", \"edit\", \"modmail\", \"creddits\", \"modflair\", \"flair\", \"modcontributors\", \"vote\", \"mysubreddits\", \"modlog\", \"identity\", \"wikiedit\", \"livemanage\", \"history\"], \"issued_at\": \"2020-05-28T21:16:25.665402+00:00\", \"revoked\": false, \"revoked_at\": null}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "602"
+            "605"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 02:18:32 GMT"
+            "Wed, 07 Jul 2021 21:54:44 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "gunicorn"
           ]
         },
         "status": {
@@ -175,7 +119,131 @@
       }
     },
     {
-      "recorded_at": "2020-04-29T02:18:32",
+      "recorded_at": "2021-07-07T21:55:28",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "redditor=Lil_SpazJoekp&reddit_app_id=2"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "38"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.1.9"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/refresh_tokens/by_redditor"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"id\": 4, \"reddit_app_id\": 2, \"redditor\": \"Lil_SpazJoekp\", \"refresh_token\": \"<REFRESH_TOKEN>\", \"resource_type\": \"RefreshToken\", \"owner_id\": 1, \"scopes\": [\"read\", \"wikiread\", \"report\", \"modconfig\", \"subscribe\", \"modtraffic\", \"modself\", \"account\", \"structuredstyles\", \"privatemessages\", \"submit\", \"modposts\", \"modothers\", \"modwiki\", \"save\", \"edit\", \"modmail\", \"creddits\", \"modflair\", \"flair\", \"modcontributors\", \"vote\", \"mysubreddits\", \"modlog\", \"identity\", \"wikiedit\", \"livemanage\", \"history\"], \"issued_at\": \"2020-05-28T21:16:25.665402+00:00\", \"revoked\": false, \"revoked_at\": null}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "605"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 07 Jul 2021 21:55:28 GMT"
+          ],
+          "Server": [
+            "gunicorn"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/refresh_tokens/by_redditor"
+      }
+    },
+    {
+      "recorded_at": "2021-07-07T21:55:40",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "[{\"op\": \"replace\", \"path\": \"/refresh_token\", \"value\": \"<REFRESH_TOKEN>\"}]"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "97"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "User-Agent": [
+            "credmgr/1.1.9"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "PATCH",
+        "uri": "https://credmgr.jesassn.org/api/v1/refresh_tokens/4"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"id\": 4, \"reddit_app_id\": 2, \"redditor\": \"Lil_SpazJoekp\", \"refresh_token\": \"<REFRESH_TOKEN>\", \"resource_type\": \"RefreshToken\", \"owner_id\": 1, \"scopes\": [\"read\", \"wikiread\", \"report\", \"modconfig\", \"subscribe\", \"modtraffic\", \"modself\", \"account\", \"structuredstyles\", \"privatemessages\", \"submit\", \"modposts\", \"modothers\", \"modwiki\", \"save\", \"edit\", \"modmail\", \"creddits\", \"modflair\", \"flair\", \"modcontributors\", \"vote\", \"mysubreddits\", \"modlog\", \"identity\", \"wikiedit\", \"livemanage\", \"history\"], \"issued_at\": \"2020-05-28T21:16:25.665402+00:00\", \"revoked\": false, \"revoked_at\": null}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Length": [
+            "605"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 07 Jul 2021 21:55:41 GMT"
+          ],
+          "Server": [
+            "gunicorn"
+          ]
+        },
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/refresh_tokens/4"
+      }
+    },
+    {
+      "recorded_at": "2021-07-07T21:55:41",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -192,42 +260,42 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.1.9"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
           ]
         },
         "method": "GET",
-        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
+        "uri": "https://credmgr.jesassn.org/api/v1/refresh_tokens/4"
       },
       "response": {
         "body": {
-          "encoding": null,
-          "string": "{\"id\": 2, \"app_name\": \"Test\", \"client_id\": \"IMm-Mg5agA_JZw\", \"client_secret\": \"_NK5DW8t52Wj7WMrsbHHAqyYvv4\", \"resource_type\": \"RedditApp\", \"app_description\": \"\", \"user_agent\": \"nah\", \"app_type\": \"web\", \"redirect_uri\": \"https://credmgr.jesassn.org/oauth2/reddit_callback\", \"state\": \"18c4a2234c5ea580989fde0b50eb64902f28353d9107bb9a113c271781cd5e54\", \"enabled\": true, \"owner_id\": 1}\n"
+          "encoding": "utf-8",
+          "string": "{\"id\": 4, \"reddit_app_id\": 2, \"redditor\": \"Lil_SpazJoekp\", \"refresh_token\": \"<REFRESH_TOKEN>\", \"resource_type\": \"RefreshToken\", \"owner_id\": 1, \"scopes\": [\"read\", \"wikiread\", \"report\", \"modconfig\", \"subscribe\", \"modtraffic\", \"modself\", \"account\", \"structuredstyles\", \"privatemessages\", \"submit\", \"modposts\", \"modothers\", \"modwiki\", \"save\", \"edit\", \"modmail\", \"creddits\", \"modflair\", \"flair\", \"modcontributors\", \"vote\", \"mysubreddits\", \"modlog\", \"identity\", \"wikiedit\", \"livemanage\", \"history\"], \"issued_at\": \"2020-05-28T21:16:25.665402+00:00\", \"revoked\": false, \"revoked_at\": null}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
           "Content-Length": [
-            "403"
+            "605"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 02:18:32 GMT"
+            "Wed, 07 Jul 2021 21:55:41 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "gunicorn"
           ]
         },
         "status": {
           "code": 200,
           "message": "OK"
         },
-        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps/2"
+        "url": "https://credmgr.jesassn.org/api/v1/refresh_tokens/4"
       }
     }
   ],

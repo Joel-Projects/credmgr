@@ -20,9 +20,9 @@ log = logging.getLogger(__package__)
 class Paginator:
     @resolveUser()
     def __init__(self, credmgr, model, batchSize=20, limit=None, itemsOwner=None):
-        """Initialize a Paignator instance.
+        """Initialize a Paginator instance.
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param model: A CredentialManager model to list.
         :param int batchSize: The number of items to fetch at a time. If ``batchSize`` is None, it will fetch them 100 at a time. (default: 20).
         :param int limit: The maximum number of items to get.
@@ -108,14 +108,14 @@ class UserHelper(BaseHelper):
     _model = User
 
     def __call__(self, id=None, username=None):
-        """Fetches a :class:`~.User` instance by :attr:`id`` or :attr:`name`
+        """Fetches a :class:`.User` instance by :attr:`id`` or :attr:`name`
 
-        :param Union[int,str] id: ID of the :class:`~.User` to fetch.
+        :param Union[int,str] id: ID of the :class:`.User` to fetch.
             .. note :: If a ``str`` is passed it will be treated as the :attr:`username` attr
         :param str username:
             .. note :: If both :attr:`id` and :attr:`username` are passed the :attr:`id` will take precedence.
                  If :attr:`id` is a ``str`` it will be treated as an :attr:`username` and will also take precedence.
-        :return User: An initialized :class:`~.User` instance
+        :return User: An initialized :class:`.User` instance
         :meta public:
         """
         kwargs = {}

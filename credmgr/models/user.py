@@ -40,14 +40,14 @@ class User(BaseModel, DeletableMixin, EditableMixin):
 
         Users are for logging into and accessing that user's credentials
 
-        :param credmgr: An instance of :class:`~.CredentialManager`.
+        :param credmgr: An instance of :class:`.CredentialManager`.
         :param int id: ID of the User.
         :param username: Username of the User.
         :param bool isActive: Indicates if the User can login and access CredentialManager.
         :param bool isRegularUser: Incicates if this is a regular user.
         :param bool isAdmin: Incicates if this User can create other users and their credentials.
         :param defaultSettings:
-        :param str redditUsername: This User's Reddit username. Used for :class:`~.RedditApp`'s userAgent.
+        :param str redditUsername: This User's Reddit username. Used for :class:`.RedditApp`'s userAgent.
         :param datetime.datetime created: Date and time this User was created.
         :param datetime.datetime updated: Date and time this User was last updated.
         :param list[RedditApp] redditApps: A list of Reddit Apps this User owns.
