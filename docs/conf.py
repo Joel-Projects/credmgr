@@ -20,7 +20,7 @@ from credmgr import __version__
 # -- Project information -----------------------------------------------------
 
 project = "CredentialManager"
-copyright = "2020, Jackson Elfah & Spaz"
+copyright = "2021, Jackson Elfah & Spaz"
 author = "Lil_SpazJoekp"
 
 # The full version, including alpha/beta/rc tags
