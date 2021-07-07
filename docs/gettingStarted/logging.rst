@@ -1,8 +1,8 @@
 Logging in credmgr
 ==================
 
-It is occasionally useful to observe the HTTP requests that credmgr is issuing. To
-do so you have to configure and enable logging.
+It is occasionally useful to observe the HTTP requests that credmgr is issuing. To do so
+you have to configure and enable logging.
 
 Add the following to your code to log everything available:
 
@@ -12,12 +12,12 @@ Add the following to your code to log everything available:
 
     handler = logging.StreamHandler()
     handler.setLevel(logging.DEBUG)
-    logger = logging.getLogger('credmgr')
+    logger = logging.getLogger("credmgr")
     logger.setLevel(logging.DEBUG)
     logger.addHandler(handler)
 
-When properly configured, HTTP requests that are issued should produce output
-similar to the following:
+When properly configured, HTTP requests that are issued should produce output similar to
+the following:
 
 .. code-block:: text
 

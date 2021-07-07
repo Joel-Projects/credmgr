@@ -40,6 +40,7 @@ class UserVerification(
         :param redditAppId: ID of the RedditApp the Refresh Token is for.
         :param extraData: Extra data to be associated with this User Verification
         :param ownerId: ID of the `.User` that owns this User Verification
+
         """
         super().__init__(credmgr, **kwargs)
 
@@ -51,11 +52,16 @@ class UserVerification(
         User Verifications for associating an unique ID with a Redditor
 
         :param str userId: An unique ID to associate with a Redditor (required)
-        :param Union[RedditApp,int,str] redditApp: Reddit app the User Verification is for (required)
-        :param str redditor: Redditor the User Verification is for. This is not usually set manually.
+        :param Union[RedditApp,int,str] redditApp: Reddit app the User Verification is
+            for (required)
+        :param str redditor: Redditor the User Verification is for. This is not usually
+            set manually.
         :param dict extraData: Extra JSON data to include with verification
-        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
-        :return: UserVerification
+        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to
+            create for other users.
+
+        :returns: UserVerification
+
         """
 
         data = {

@@ -8,7 +8,6 @@ Configuring Credential Manager Client (credmgr)
 
     configuration/options
 
-
 Configuration options can be provided to credmgr in one of three ways:
 
 .. toctree::
@@ -18,5 +17,5 @@ Configuration options can be provided to credmgr in one of three ways:
     configuration/clientInitialization
     configuration/environmentVariables
 
-Environment variables have the highest priority, followed by keyword arguments
-to :class:`.CredentialManager`, and finally settings in ``.credmgr.ini`` files.
+Environment variables have the highest priority, followed by keyword arguments to
+:class:`.CredentialManager`, and finally settings in ``.credmgr.ini`` files.

@@ -34,7 +34,9 @@ class Serializer(object):
         The string should be in iso8601 datetime format.
 
         :param string: str.
-        :return: datetime.
+
+        :returns: datetime.
+
         """
         try:
             from dateutil.parser import parse
@@ -50,7 +52,9 @@ class Serializer(object):
         """Deserializes string to date.
 
         :param string: str.
-        :return: date.
+
+        :returns: date.
+
         """
         try:
             from dateutil.parser import parse
@@ -65,7 +69,8 @@ class Serializer(object):
     def deserializeObject(value):
         """Return a original value.
 
-        :return: object.
+        :returns: object.
+
         """
         return value  # pragma: no cover
 
@@ -76,7 +81,8 @@ class Serializer(object):
         :param data: str.
         :param objectType: class literal.
 
-        :return: int, long, float, str, bool.
+        :returns: int, long, float, str, bool.
+
         """
         try:
             return objectType(data)
@@ -90,7 +96,8 @@ class Serializer(object):
 
         :param response: Response object to be deserialized.
 
-        :return: deserialized object.
+        :returns: deserialized object.
+
         """
         data = response.json()
         if isinstance(data, list) and all(
@@ -110,7 +117,8 @@ class Serializer(object):
         :param data: dict, list or str.
         :param objectType: class literal, or string of class name.
 
-        :return: object.
+        :returns: object.
+
         """
         if data is None:
             return None
@@ -150,7 +158,9 @@ class Serializer(object):
 
         :param data: dict, list.
         :param objectType: class literal.
-        :return: model object.
+
+        :returns: model object.
+
         """
 
         if not objectType._attrTypes:  # pragma: no cover

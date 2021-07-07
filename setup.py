@@ -25,7 +25,16 @@ extras = {
         "sphinx<3.0",
         "sphinx_rtd_theme",
     ],
-    "test": ["betamax", "betamax_serializers", "coverage", "mock", "pytest", "pytest-cov", "pytest-mock", "pytest-xdist"],
+    "test": [
+        "betamax",
+        "betamax_serializers",
+        "coverage",
+        "mock",
+        "pytest",
+        "pytest-cov",
+        "pytest-mock",
+        "pytest-xdist",
+    ],
 }
 extras["dev"] = extras["docs"] + extras["lint"] + extras["test"]
 

@@ -6,9 +6,9 @@ class DeletableMixin:
 
         Example usage:
 
-        .. code:: python
+        .. code-block:: python
 
-            bot = credentialManager.bot('name')
+            bot = credentialManager.bot("name")
 
             redditApp = bot.redditApp
             redditApp.delete()
@@ -20,6 +20,7 @@ class DeletableMixin:
             databaseCredential.delete()
 
             userVerification = cre
+
         """
         self._credmgr.delete(f"{self._path}/{self.id}")
         del self

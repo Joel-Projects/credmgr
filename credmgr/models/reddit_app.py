@@ -7,17 +7,19 @@ from ..mixins import BaseApp
 from praw.util.token_manager import BaseTokenManager
 
 import logging
+
 log = logging.getLogger(__package__)
+
 
 class RedditApp(BaseApp):
     """A class for Reddit Apps.
 
     To obtain an instance of this class execute:
 
-    .. code:: python
+    .. code-block:: python
 
-       bot = credmgr.bot('BotName')
-       redditApp = bot.redditApp
+        bot = credmgr.bot("BotName")
+        redditApp = bot.redditApp
 
     """
 
@@ -56,10 +58,13 @@ class RedditApp(BaseApp):
         :param str clientSecret: Client secret of the Reddit App.
         :param str appDescription: Description of what this Reddit App is used for.
         :param str userAgent: The user agent used to identify this Reddit App to Reddit.
-        :param str appType: Type of app this Reddit App is. One of: ``web``, ``installed``, or ``script``.
-        :param str redirectUri: URL that redditors are redirected to after authorizing this Reddit App to access their account.
+        :param str appType: Type of app this Reddit App is. One of: ``web``,
+            ``installed``, or ``script``.
+        :param str redirectUri: URL that redditors are redirected to after authorizing
+            this Reddit App to access their account.
         :param str state: Used to identify this Reddit App during the OAuth2 flow.
         :param int ownerId: ID of the `.User` that owns this Reddit App.
+
         """
         super().__init__(credmgr, **kwargs)
 
@@ -87,13 +92,18 @@ class RedditApp(BaseApp):
         :param str name: (required)
         :param str clientId: Client ID of the Reddit App (required)
         :param str userAgent: User agent used for requests to Reddit's API (required)
-        :param str appType: Type of the app. One of `web`, `installed`, or `script` (required)
-        :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set redirect uri (required)
+        :param str appType: Type of the app. One of `web`, `installed`, or `script`
+            (required)
+        :param str redirectUri: Redirect URI for Oauth2 flow. Defaults to user set
+            redirect uri (required)
         :param str clientSecret: Client secret of the Reddit App
         :param str appDescription: Description of the Reddit App
         :param bool enabled: Allows the app to be used (defaults to `True`)
-        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
-        :return: RedditApp
+        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for
+            other users.
+
+        :returns: RedditApp
+
         """
         data = {
             "app_name": name,
@@ -115,15 +125,20 @@ class RedditApp(BaseApp):
     def reddit(self, redditor=None, reddit=praw.Reddit) -> praw.Reddit:
         """Provides an optionally authenticated [Async] PRAW
 
-        :param str redditor: The redditor that you want the Reddit instance authorized as.
-        :param reddit: The Reddit class to use. Useful if you have a local version of PRAW.
+        :param str redditor: The redditor that you want the Reddit instance authorized
+            as.
+        :param reddit: The Reddit class to use. Useful if you have a local version of
+            PRAW.
+
         :returns: Reddit instance.
 
         """
         if not self._reddit:
             extra_kwargs = {}
             if redditor:
-                extra_kwargs['token_manager'] = RefreshTokenManager(self._credmgr, redditor, self)
+                extra_kwargs["token_manager"] = RefreshTokenManager(
+                    self._credmgr, redditor, self
+                )
             self._reddit = reddit(
                 client_id=self.clientId,
                 client_secret=self.clientSecret,
@@ -136,21 +151,23 @@ class RedditApp(BaseApp):
     def genAuthUrl(self, scopes=None, permanent=False, userVerification=None):
         """Generates a URL for users to verify or authenticate their Reddit account
 
-        :param Union[list,str] scopes: List of scopes needed. Pass ``'all'``
-            for all scopes. The ``identity`` scope will always be included.
-            (default:  ``['identity']``)
-        :param bool permanent: Determines if a refresh token will be provided.
-            (default: ``False``)
+        :param Union[list,str] scopes: List of scopes needed. Pass ``'all'`` for all
+            scopes. The ``identity`` scope will always be included. (default:
+            ``['identity']``)
+        :param bool permanent: Determines if a refresh token will be provided. (default:
+            ``False``)
         :param Union[UserVerification,int,str] userVerification: Link to a
-            :class:`.UserVerification` object. Accepted values are:
+                :class:`.UserVerification`
+                object. Accepted values are:
 
-            - An :class:`.UserVerification` object
-            - An :class:`.UserVerification` ``id``
-            - An ``userId`` of a :class:`.UserVerification` record.
+                - An :class:`.UserVerification` object
+                - An :class:`.UserVerification` ``id``
+                - An ``userId`` of a :class:`.UserVerification` record.
 
-         If a :class:`.UserVerification` record does not exist, one will be created.
+            If a :class:`.UserVerification` record does not exist, one will be created.
 
-        :returns str: Auth URL
+        :returns: Auth URL
+
         """
         from credmgr.models import UserVerification
 
@@ -180,26 +197,32 @@ class RedditApp(BaseApp):
         return self.reddit().auth.url(scopes, state, duration)
 
 
-
-
 class RefreshTokenManager(BaseTokenManager):
-
     def __init__(self, credmgr, redditor, reddit_app):
         self._credmgr = credmgr
         self.redditor = redditor
         self.reddit_app = reddit_app
-        self.refreshToken = self._credmgr.refreshToken(self.redditor, self.reddit_app.id)
+        self.refreshToken = self._credmgr.refreshToken(
+            self.redditor, self.reddit_app.id
+        )
         super().__init__()
 
     def post_refresh_callback(self, authorizer):
-        log.debug(f'Storing new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        log.debug(
+            f"Storing new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
+        )
         self.refreshToken.edit(refreshToken=authorizer.refresh_token)
-        log.debug(f'Successfully sorted new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        log.debug(
+            f"Successfully sorted new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
+        )
 
     def pre_refresh_callback(self, authorizer):
-        log.debug(f'Fetching refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        log.debug(
+            f"Fetching refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
+        )
         refreshToken = self._credmgr.refreshToken(self.redditor, self.reddit_app.id)
-        log.debug(f'Fetched refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}')
+        log.debug(
+            f"Fetched refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
+        )
         if refreshToken:
             authorizer.refresh_token = refreshToken.refreshToken
-

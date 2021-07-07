@@ -43,16 +43,22 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         :param credmgr: An instance of :class:`.CredentialManager`.
         :param int id: ID of the User.
         :param username: Username of the User.
-        :param bool isActive: Indicates if the User can login and access CredentialManager.
-        :param bool isRegularUser: Incicates if this is a regular user.
-        :param bool isAdmin: Incicates if this User can create other users and their credentials.
-        :param defaultSettings:
-        :param str redditUsername: This User's Reddit username. Used for :class:`.RedditApp`'s userAgent.
+        :param bool isActive: Indicates if the User can log in and access
+            CredentialManager.
+        :param bool isRegularUser: Indicates if this is a regular user.
+        :param bool isAdmin: Indicates if this User can create other users and their
+            credentials.
+        :param defaultSettings: Default settings used when creating new items without
+            those settings explicitly set.
+        :param str redditUsername: This User's Reddit username. Used for
+            :class:`.RedditApp`'s userAgent.
         :param datetime.datetime created: Date and time this User was created.
         :param datetime.datetime updated: Date and time this User was last updated.
         :param list[RedditApp] redditApps: A list of Reddit Apps this User owns.
         :param list[SentryToken] sentryTokens: A list of Sentry Tokens this User owns.
-        :param list[DatabaseCredential] databaseCredentials: A list of Database Credentials this User owns.
+        :param list[DatabaseCredential] databaseCredentials: A list of Database
+            Credentials this User owns.
+
         """
         super().__init__(credmgr, **kwargs)
         self._apps = {}
@@ -79,15 +85,20 @@ class User(BaseModel, DeletableMixin, EditableMixin):
 
         **PERMISSIONS: Admin role is required.**
 
-        :param str username: Username for new user (Example: ```spaz```) (required)
-        :param str password: Password for new user (Example: ```supersecurepassword```) (required)
-        :param dict defaultSettings: Default values to use for new apps (Example: ```{"databaseFlavor": "postgres", "databaseHost": "localhost"}```)
-        :param str redditUsername: User's Reddit username (Example: ```LilSpazJoekp```)
-        :param bool isAdmin: Is the user an admin? Allows the user to see all objects and create users (Default: ``false``)
-        :param bool isActive: Is the user active? Allows the user to sign in (Default: ``true``)
+        :param str username: Username for new user (Example: ``spaz``) (required)
+        :param str password: Password for new user (Example: ``supersecurepassword``)
+            (required)
+        :param dict defaultSettings: Default values to use for new apps (Example:
+            ``{"databaseFlavor": "postgres", "databaseHost": "localhost"}``)
+        :param str redditUsername: User's Reddit username (Example: ``Lil_SpazJoekp``)
+        :param bool isAdmin: Is the user an admin? Allows the user to see all objects
+            and create users (Default: ``False``)
+        :param bool isActive: Is the user active? Allows the user to sign in (Default:
+            ``True``)
         :param bool isRegularUser: (Internal use only)
         :param bool isInternal: (Internal use only)
-        :return: User
+
+        :returns: User
 
         """
         additionalParams = {}
@@ -111,8 +122,12 @@ class User(BaseModel, DeletableMixin, EditableMixin):
     def apps(self, only=None):
         """Returns apps that are owned by this user
 
-        :param str only: Pass one of ``redditApps``, ``sentryTokens``, ``databaseCredentials`` to only get that type of apps
-        :return Union[dict[str,list[Union[RedditApp,SentryToken,DatabaseCredential]]],list[Union[RedditApp,SentryToken,DatabaseCredential]]]:
+        :param str only: Pass one of ``redditApps``, ``sentryTokens``,
+            ``databaseCredentials`` to only get that type of apps
+
+        :returns: Returns
+            the user's apps.
+
         """
         appTypes = ["redditApps", "sentryTokens", "databaseCredentials"]
         if not self._apps:

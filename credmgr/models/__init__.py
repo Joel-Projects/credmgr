@@ -7,7 +7,9 @@ from .user import User
 from .user_verification import UserVerification
 
 
-""""""
+"""
+
+"""
 from .helpers import (
     BotHelper,
     RedditAppHelper,

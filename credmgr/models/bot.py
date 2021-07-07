@@ -7,26 +7,25 @@ class Bot(BaseApp):
 
     To obtain an instance of this class execute:
 
-    .. code:: python
+    .. code-block:: python
 
-        bot = credmgr.bot('botName')
+        bot = credmgr.bot("botName")
 
-    Bots is the intended way to use CredentialManager. Bots are for grouping credentials that would be used in a single app.
+    Bots is the intended way to use CredentialManager. Bots are for grouping credentials
+    that would be used in a single app.
 
     The following is the intended usage:
 
-    .. code:: python
+    .. code-block:: python
 
         from credmgr import CredentialManager
 
-        credentialManager = CredentialManager(apiToken='apiToken')
-        bot = credmgr.bot('botName')
+        credentialManager = CredentialManager(apiToken="apiToken")
+        bot = credmgr.bot("botName")
 
-        reddit = bot.reddit('Lil_SpazJoekp)
+        reddit = bot.reddit("Lil_SpazJoekp")
         dbCreds = bot.databaseCredentials
         sentryDSN = bot.sentryToken
-
-
 
     """
 
@@ -56,7 +55,8 @@ class Bot(BaseApp):
         :param ownerId: ID of the `.User` that owns this Bot.
         :param redditApp: `.RedditApp` that will be used with this Bot.
         :param sentryToken: `.SentryToken` that will be used with this Bot.
-        :param databaseCredential: `.DatabaseCredential` that will be used with this Bot.
+        :param databaseCredential: `.DatabaseCredential` that will be used with this
+            Bot.
 
         """
         super().__init__(credmgr, **kwargs)
@@ -71,9 +71,13 @@ class Bot(BaseApp):
         :param str name: Name of the Bot (required)
         :param Union[RedditApp,int] redditApp: Reddit App the bot will use
         :param Union[SentryToken,int] sentryToken: Sentry Token the bot will use
-        :param Union[DatabaseCredential,int] databaseCredential: Database Credentials the bot will use
-        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
-        :return: Bot
+        :param Union[DatabaseCredential,int] databaseCredential: Database Credentials
+            the bot will use
+        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for
+            other users.
+
+        :returns: Bot
+
         """
 
         from . import DatabaseCredential, RedditApp, SentryToken
@@ -96,18 +100,22 @@ class Bot(BaseApp):
         return _credmgr.post("/bots", data={"app_name": name, **additionalParams})
 
     def edit(self, **kwargs):
-        """
+        """:param name: Changes the name of the :class:`.Bot`
+        :param Union[RedditApp,int] redditApp: Changes the :class:`.RedditApp` the Bot
+            will use
+        :param Union[SentryToken,int] sentryToken: Changes the :class:`.SentryToken` the
+            Bot will use
+        :param Union[DatabaseCredential,int] databaseCredential: Changes the
+            :class:`.DatabaseCredential` the Bot will use
 
-        :param name: Changes the name of the :class:`.Bot`
-        :param Union[RedditApp,int] redditApp: Changes the :class:`.RedditApp` the Bot will use
-        :param Union[SentryToken,int] sentryToken: Changes the :class:`.SentryToken` the Bot will use
-        :param Union[DatabaseCredential,int] databaseCredential: Changes the :class:`.DatabaseCredential` the Bot will use
+        .. note::
 
-        .. note ::
-            Parameters, ``redditApp``, ``sentryToken``, and ``databaseCredential`` can accept the initialized object or its :attr:`id`.
-            Passing a ``str`` to it will not work. The intended was to create bots in with the web interface.
+            Parameters, ``redditApp``, ``sentryToken``, and ``databaseCredential`` can
+            accept the initialized object or its :attr:`id`. Passing a ``str`` to it
+            will not work. The intended was to create bots in with the web interface.
 
-        :return: The modified :class:`.Bot`
+        :returns: The modified :class:`.Bot`
+
         """
         from credmgr.models import DatabaseCredential, RedditApp, SentryToken
 

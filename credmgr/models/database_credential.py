@@ -44,23 +44,29 @@ class DatabaseCredential(BaseApp):
         """Initialize a Database Credential instance.
 
         :param credmgr: An instance of :class:`.CredentialManager`.
-        :param id:
+        :param id: The ID of the Database Credential.
         :param str name: Name of the Database Credential.
         :param str databaseFlavor: Type of database.
         :param str database: Working database to use.
         :param str databaseHost: Database server address.
         :param int databasePort: Port the database server listens on.
-        :param str databaseUsername: Username used to connect and authenciate the database.
-        :param str databasePassword: Password used to connect and authenciate the database.
-        :param bool useSsh: Determines if the database will be connected to through a tunnel.
-        :param str sshHost: The address of the server that the SSH tunnel will connect to.
+        :param str databaseUsername: Username used to connect and authenciate the
+            database.
+        :param str databasePassword: Password used to connect and authenciate the
+            database.
+        :param bool useSsh: Determines if the database will be connected to through a
+            tunnel.
+        :param str sshHost: The address of the server that the SSH tunnel will connect
+            to.
         :param str sshPort: The port the SSH tunnel will use.
         :param str sshUsername: Username for the SSH tunnel.
         :param str sshPassword: Password for the SSH tunnel.
-        :param bool useSshKey: Determines if the SSH tunnel will use private key authenciation.
+        :param bool useSshKey: Determines if the SSH tunnel will use private key
+            authenciation.
         :param str privateKey: SSH private key. Note: No validation will be performed.
         :param str privateKeyPassphrase: Passphrase for the SSH key.
         :param ownerId: ID of the `.User` that owns this Database Credential.
+
         """
         super().__init__(credmgr, **kwargs)
 
@@ -94,11 +100,14 @@ class DatabaseCredential(BaseApp):
         :param str databaseFlavor: Type of database, (default: ``postgres``)
         :param str database: Working database to use, (default: ``postgres``)
         :param str databaseHost: Database server address, (default: ``localhost``)
-        :param int databasePort: Port the database server listens on, (default: ``5432``)
+        :param int databasePort: Port the database server listens on, (default:
+            ``5432``)
         :param str databaseUsername: Username to use to connect to the database
         :param str databasePassword: Password to use to connect to the database
-        :param bool useSsh: Determines if the database will be connected to through a tunnel
-        :param str sshHost: The address of the server that the SSH tunnel will connect to
+        :param bool useSsh: Determines if the database will be connected to through a
+            tunnel
+        :param str sshHost: The address of the server that the SSH tunnel will connect
+            to
         :param str sshPort: The port the SSH tunnel will use
         :param str sshUsername: Username for the SSH tunnel
         :param str sshPassword: Password for the SSH tunnel
@@ -106,8 +115,11 @@ class DatabaseCredential(BaseApp):
         :param str privateKey: SSH private key. Note: No validation will be performed.
         :param str privateKeyPassphrase: Passphrase for the SSH key
         :param bool enabled: Allows the credentials to be used
-        :param Union[User,int,str] owner: Owner of the Database Credential. Requires Admin to create for other users.
+        :param Union[User,int,str] owner: Owner of the Database Credential. Requires
+            Admin to create for other users.
+
         :returns: DatabaseCredential
+
         """
 
         data = {}

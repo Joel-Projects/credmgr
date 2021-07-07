@@ -1,13 +1,14 @@
-.. CredentialManager documentation master file, created by
+..
+    CredentialManager documentation master file, created by
     sphinx-quickstart on Sun Apr 19 14:02:09 2020.
     You can adapt this file completely to your liking, but it should at least
     contain the root `toctree` directive.
 
-
 Welcome to Credmgr's documentation!
 ===================================
 
-.. _gettingStarted:
+.. _gettingstarted:
+
 .. toctree::
     :maxdepth: 1
     :caption: Getting Started
@@ -19,7 +20,8 @@ Welcome to Credmgr's documentation!
     gettingStarted/multipleInstances
     gettingStarted/logging
 
-.. _codeOverview:
+.. _codeoverview:
+
 .. toctree::
     :maxdepth: 1
     :caption: Client Overview
@@ -30,6 +32,7 @@ Welcome to Credmgr's documentation!
     clientOverview/other
 
 .. _examples:
+
 .. toctree::
     :maxdepth: 1
     :caption: Examples
@@ -37,10 +40,11 @@ Welcome to Credmgr's documentation!
     examples/redditBot.rst
 
 .. _index:
+
 .. toctree::
     :maxdepth: 1
 
     genindex
 
-* :ref:`modindex`
-* :ref:`search`
+- :ref:`modindex`
+- :ref:`search`

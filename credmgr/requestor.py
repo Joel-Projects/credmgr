@@ -50,7 +50,9 @@ class Requestor(object):
 
         :param str credmgrUrl: Url used to make API requests
         :param auth: An auth tuple or a class that subclasses requests.auth
-        :param Session sessionClass: (Optional) A custom session class to handle requests, compatible with requests.Session(). (Default: None)
+        :param Session sessionClass: (Optional) A custom session class to handle
+            requests, compatible with requests.Session(). (Default: None)
+
         """
         self._baseUrl = credmgrUrl
         self._session = (sessionClass or requests.Session)()

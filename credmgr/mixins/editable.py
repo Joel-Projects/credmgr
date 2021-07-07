@@ -7,8 +7,10 @@ class EditableMixin:
     def edit(self, **kwargs):
         """Edit the object
 
-        :param kwargs:
-        :return: The edited object
+        :param kwargs: The params to update on the object.
+
+        :returns: The edited object.
+
         """
         payload = []
 

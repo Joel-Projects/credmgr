@@ -31,7 +31,7 @@ def testCredmgrNoParams(credentialManager):
 
 
 def testCredmgrInitUsernamePassword(credentialManager):
-    credmgr = CredentialManager(username='username', password='password')
+    credmgr = CredentialManager(username="username", password="password")
     credmgr._requestor._session = credentialManager._requestor._session
     credmgr._requestor._session.auth = credmgr._auth
     assert credmgr.currentUser.username == "username"

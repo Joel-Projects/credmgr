@@ -24,9 +24,11 @@ class Paginator:
 
         :param credmgr: An instance of :class:`.CredentialManager`.
         :param model: A CredentialManager model to list.
-        :param int batchSize: The number of items to fetch at a time. If ``batchSize`` is None, it will fetch them 100 at a time. (default: 20).
+        :param int batchSize: The number of items to fetch at a time. If ``batchSize``
+            is None, it will fetch them 100 at a time. (default: 20).
         :param int limit: The maximum number of items to get.
-        :param Union[int, User, str] itemsOwner: Owner to filter the items by.
+        :param Union[int,User,str] itemsOwner: Owner to filter the items by.
+
         """
         self._credmgr = credmgr
         self._model = model(self._credmgr)
@@ -108,15 +110,17 @@ class UserHelper(BaseHelper):
     _model = User
 
     def __call__(self, id=None, username=None):
-        """Fetches a :class:`.User` instance by :attr:`id`` or :attr:`name`
+        """Fetches a :class:`.User` instance by :attr:`id`` or :attr:`name`.
 
-        :param Union[int,str] id: ID of the :class:`.User` to fetch.
-            .. note :: If a ``str`` is passed it will be treated as the :attr:`username` attr
-        :param str username:
-            .. note :: If both :attr:`id` and :attr:`username` are passed the :attr:`id` will take precedence.
-                 If :attr:`id` is a ``str`` it will be treated as an :attr:`username` and will also take precedence.
-        :return User: An initialized :class:`.User` instance
-        :meta public:
+        :param Union[int,str] id: ID of the :class:`.User` to fetch. .. note:: If a
+            ``str`` is passed it will be treated as the :attr:`username` attr.
+        :param str username: Username of the :class:`.User` to fetch. .. note:: If both
+            :attr:`id` and :attr:`username` are passed the :attr:`id` will take
+            precedence. If :attr:`id` is a ``str`` it will be treated as an
+            :attr:`username` and will also take precedence.
+
+        :returns: An initialized :class:`.User` instance.
+
         """
         kwargs = {}
         byName = False
@@ -145,19 +149,25 @@ class UserHelper(BaseHelper):
         isInternal=False,
         redditUsername=None,
     ) -> User:
-        """Create a new user
+        """Create a new user.
 
         **PERMISSIONS: At least ``isAdmin`` is required.**
 
-        :param str username: Username for new user (Example: ```spaz```) (required)
-        :param str password: Password for new user (Example: ```supersecurepassword```) (required)
-        :param dict defaultSettings: Default values to use for new apps (Example: ```{"databaseFlavor": "postgres", "databaseHost": "localhost"}```)
-        :param bool isAdmin: Is the user an admin? Allows the user to see all objects and create users (Default: ``False``)
-        :param bool isActive: Is the user active? Allows the user to sign in (Default: ``True``)
+        :param str username: Username for new user (Example: ``spaz``) (required)
+        :param str password: Password for new user (Example: ``supersecurepassword``)
+            (required)
+        :param dict defaultSettings: Default values to use for new apps (Example:
+            ``{"databaseFlavor": "postgres", "databaseHost": "localhost"}``)
+        :param bool isAdmin: Is the user an admin? Allows the user to see all objects
+            and create users (Default: ``False``)
+        :param bool isActive: Is the user active? Allows the user to sign in (Default:
+            ``True``)
         :param bool isRegularUser: (Internal use only)
         :param bool isInternal: (Internal use only)
-        :param str redditUsername:
-        :return: User
+        :param str redditUsername: The user's Reddit username.
+
+        :returns: User
+
         """
 
         return self._model._create(
@@ -184,16 +194,20 @@ class BotHelper(BaseHelper):
         databaseCredential=None,
         owner=None,
     ) -> Bot:
-        """Create a new Bot
+        """Create a new Bot.
 
-        Bots are used for grouping credentials into a single app
+        Bots are used for grouping credentials into a single app.
 
-        :param str name: Name of the Bot (required)
-        :param Union[RedditApp,int] redditApp: Reddit App the bot will use
-        :param Union[SentryToken,int] sentryToken: Sentry Token the bot will use
-        :param Union[DatabaseCredential,int] databaseCredential: Database Credentials the bot will use
-        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for other users.
-        :return: Bot
+        :param str name: Name of the Bot (required).
+        :param Union[RedditApp,int] redditApp: Reddit App the bot will use.
+        :param Union[SentryToken,int] sentryToken: Sentry Token the bot will use.
+        :param Union[DatabaseCredential,int] databaseCredential: Database Credentials
+            the bot will use.
+        :param Union[User,int,str] owner: Owner of the bot. Requires Admin to create for
+            other users.
+
+        :returns: Bot
+
         """
 
         return self._model._create(
@@ -221,20 +235,28 @@ class RedditAppHelper(BaseHelper):
         enabled=True,
         owner=None,
     ) -> RedditApp:
-        """Create a new RedditApp
+        """Create a new RedditApp.
 
-        Reddit Apps are used for interacting with reddit
+        Reddit Apps are used for interacting with reddit.
 
-        :param str name: (required)
-        :param str clientId: Client ID of the Reddit App (required)
-        :param str userAgent: User agent used for requests to Reddit's API (required, defaults to user set default, then to 'python:{name} by /u/{redditUsername}' if currentUser.redditUsername is set or 'python:{name}' if it is not set)
-        :param str appType: Type of the app. One of `web`, `installed`, or `script` (required, default: 'web')
-        :param str redirectUri: Redirect URI for Oauth2 flow. (required, defaults to user set default then to `https://credmgr.jesassn.org/oauth2/reddit_callback` if neither are set)
-        :param str clientSecret: Client secret of the Reddit App
-        :param str appDescription: Description of the Reddit App
-        :param bool enabled: Allows the app to be used
-        :param Union[User,int,str] owner: Owner of the Reddit App. Requires Admin to create for other users.
-        :return: RedditApp
+        :param str name: Name of the RedditApp (required).
+        :param str clientId: Client ID of the Reddit App (required).
+        :param str userAgent: User agent used for requests to Reddit's API (required,
+            defaults to user set default, then to 'python:{name} by /u/{redditUsername}'
+            if currentUser.redditUsername is set or 'python:{name}' if it is not set).
+        :param str appType: Type of the app. One of `web`, `installed`, or `script`
+            (required, default: 'web').
+        :param str redirectUri: Redirect URI for Oauth2 flow. (required, defaults to
+            user set default then to
+            `https://credmgr.jesassn.org/oauth2/reddit_callback` if neither are set).
+        :param str clientSecret: Client secret of the Reddit App.
+        :param str appDescription: Description of the Reddit App.
+        :param bool enabled: Allows the app to be used.
+        :param Union[User,int,str] owner: Owner of the Reddit App. Requires Admin to
+            create for other users.
+
+        :returns: RedditApp
+
         """
         if not userAgent:
             redditUsername = self._credmgr.currentUser.redditUsername
@@ -268,16 +290,20 @@ class UserVerificationHelper(BaseHelper):
     def create(
         self, userId, redditApp, redditor=None, extraData=None, owner=None
     ) -> UserVerification:
-        """Create a new User Verification
+        """Create a new User Verification.
 
-        User Verifications for verifying a redditor with a User ID
+        User Verifications for verifying a redditor with a User ID.
 
-        :param str userId: User ID to associate Redditor with (required)
-        :param Union[RedditApp,int,str] redditApp: Reddit app the User Verification is for (required)
-        :param str redditor: Redditor the User Verification is for
-        :param dict extraData: Extra JSON data to include with verification
-        :param int owner: Owner of the verification. Requires Admin to create for other users.
-        :return: UserVerification
+        :param str userId: User ID to associate Redditor with (required).
+        :param Union[RedditApp,int,str] redditApp: Reddit app the User Verification is
+            for (required).
+        :param str redditor: Redditor the User Verification is for.
+        :param dict extraData: Extra JSON data to include with verification.
+        :param int owner: Owner of the verification. Requires Admin to create for other
+            users.
+
+        :returns: UserVerification
+
         """
         return self._model._create(
             self._credmgr,
@@ -297,10 +323,13 @@ class SentryTokenHelper(BaseHelper):
 
         Sentry Tokens are used for logging and error reporting in applications
 
-        :param str name: Name of the Sentry Token (required)
-        :param str dsn: DSN of the Sentry Token (required)
-        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
-        :return: SentryToken
+        :param str name: Name of the Sentry Token (required).
+        :param str dsn: DSN of the Sentry Token (required).
+        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to
+            create for other users.
+
+        :returns: SentryToken
+
         """
         return self._model._create(self._credmgr, name=name, dsn=dsn, owner=owner)
 
@@ -336,11 +365,14 @@ class DatabaseCredentialHelper(BaseHelper):
         :param str databaseFlavor: Type of database, (default: ``postgres``)
         :param str database: Working database to use, (default: ``postgres``)
         :param str databaseHost: Database server address, (default: ``localhost``)
-        :param int databasePort: Port the database server listens on, (default: ``5432``)
+        :param int databasePort: Port the database server listens on, (default:
+            ``5432``)
         :param str databaseUsername: Username to use to connect to the database
         :param str databasePassword: Password to use to connect to the database
-        :param bool useSSH: Determines if the database will be connected to through a tunnel
-        :param str sshHost: The address of the server that the SSH tunnel will connect to
+        :param bool useSSH: Determines if the database will be connected to through a
+            tunnel
+        :param str sshHost: The address of the server that the SSH tunnel will connect
+            to
         :param str sshPort: The port the SSH tunnel will use
         :param str sshUsername: Username for the SSH tunnel
         :param str sshPassword: Password for the SSH tunnel
@@ -348,8 +380,11 @@ class DatabaseCredentialHelper(BaseHelper):
         :param str privateKey: SSH private key. Note: No validation will be performed.
         :param str privateKeyPassphrase: Passphrase for the SSH key
         :param bool enabled: Allows the credentials to be used
-        :param Union[User,int,str] owner: Owner of the app. Requires Admin to create for other users.
-        :return: DatabaseCredential
+        :param Union[User,int,str] owner: Owner of the app. Requires Admin to create for
+            other users.
+
+        :returns: DatabaseCredential
+
         """
         return self._model._create(
             self._credmgr,
@@ -389,10 +424,4 @@ class RefreshTokenHelper(BaseHelper):
             kwargs["redditor"] = redditor
         if redditAppId:
             kwargs["redditAppId"] = redditAppId
-        # if not id and xor(bool(RedditAppHelper), bool(redditAppId)):
-        #     raise InitializationError("Both 'redditor' and 'redditAppId' are required")
-        # if not ((redditor and redditAppId) or id):
-        #     raise InitializationError("At least 'id' or 'redditor' and 'redditAppId' is required")
-        # item = self._model(self._credmgr, **kwargs)
-        # item._fetch(True)
         return super().__call__(**kwargs)

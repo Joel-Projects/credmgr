@@ -16,6 +16,7 @@ class SentryToken(BaseApp):
         :param str name: Name of the Sentry Token.
         :param str dsn: Sentry DSN url for reporting errors.
         :param ownerId: ID of the `.User` that owns this Sentry Token.
+
         """
         super().__init__(credmgr, **kwargs)
 
@@ -28,8 +29,11 @@ class SentryToken(BaseApp):
 
         :param str name: Name of the Sentry Token (required)
         :param str dsn: DSN of the Sentry Token (required)
-        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to create for other users.
-        :return: SentryToken
+        :param Union[User,int,str] owner: Owner of the verification. Requires Admin to
+            create for other users.
+
+        :returns: SentryToken
+
         """
         data = {"app_name": name, "dsn": dsn}
         if owner:
