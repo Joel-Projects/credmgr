@@ -1,7 +1,7 @@
 image: python:3.9
 
 include:
-  - template: Code-Quality.gitlab-ci.yml
+    -   template: Code-Quality.gitlab-ci.yml
 
 .testSetup: &testSetup
     stage: test
@@ -63,12 +63,12 @@ deploy:
         - tags
 
 pages:
-  script:
-    - pip install .[docs]
-    - cd docs ; make html
-    - mv _build/html/ ../public/
-  artifacts:
-    paths:
-      - public
-  only:
-    - tags
+    script:
+        - pip install .[docs]
+        - cd docs ; make html
+        - mv _build/html/ ../public/
+    artifacts:
+        paths:
+            - public
+    only:
+        - tags
