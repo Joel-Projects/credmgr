@@ -1,12 +1,13 @@
 import time
 from functools import partial
 
+import asyncpraw
 import mock
 import praw
 import pytest
-from credmgr.models import RedditApp
 
 from credmgr.exceptions import Conflict, InitializationError, NotFound, ServerError
+from credmgr.models import RedditApp
 
 
 def testCreateRedditApp(credentialManager):
@@ -87,10 +88,39 @@ def testCreateRedditAppWithoutUserAgent(credentialManager):
         assert getattr(redditApp, key) == value
 
 
-def testRedditAppReddit(credentialManager):
+class CustomSyncReddit(praw.Reddit):
+    pass
+
+
+class CustomAsyncReddit(asyncpraw.Reddit):
+    pass
+
+
+@pytest.mark.parametrize("use_async", [True, False], ids=["use_async", "not_use_async"])
+@pytest.mark.parametrize("use_cache", [True, False], ids=["use_cache", "not_use_cache"])
+@pytest.mark.parametrize(
+    "use_custom_reddit_class",
+    [True, False],
+    ids=["custom_reddit_class", "no_custom_class"],
+)
+def testRedditAppReddit(
+    credentialManager, use_async, use_cache, use_custom_reddit_class
+):
     redditApp = credentialManager.redditApp(2)
-    reddit = redditApp.reddit()
-    assert isinstance(reddit, praw.Reddit)
+    reddit_class = None
+    if use_custom_reddit_class:
+        reddit_class = CustomAsyncReddit if use_async else CustomSyncReddit
+    reddit = redditApp.reddit(use_async=use_async, reddit_class=reddit_class)
+    same = reddit is redditApp.reddit(
+        use_async=use_async, use_cache=use_cache, reddit_class=reddit_class
+    )
+    assert (
+        type(reddit) == (CustomAsyncReddit if use_async else CustomSyncReddit)
+        if reddit_class
+        else (asyncpraw.Reddit if use_async else praw.Reddit)
+    )
+    assert same == use_cache
+    assert isinstance(reddit, praw.Reddit if not use_async else asyncpraw.Reddit)
 
 
 def patched__request_token(self, **data):

@@ -1,5 +1,7 @@
 import logging
 
+from ..exceptions import InitializationError
+from ..mixins import BaseModel
 from . import (
     Bot,
     DatabaseCredential,
@@ -10,9 +12,6 @@ from . import (
     UserVerification,
 )
 from .utils import resolveUser
-from ..exceptions import InitializationError
-from ..mixins import BaseModel
-
 
 log = logging.getLogger(__package__)
 

@@ -1,5 +1,5 @@
-from .utils import resolveUser
 from ..mixins import BaseApp
+from .utils import resolveUser
 
 
 class Bot(BaseApp):

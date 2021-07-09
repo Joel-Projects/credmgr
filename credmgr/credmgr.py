@@ -1,5 +1,6 @@
 import configparser
 import os
+
 from requests import Session
 
 from . import models
@@ -9,7 +10,6 @@ from .exceptions import InitializationError
 from .models.utils import CachedProperty
 from .requestor import Requestor, urljoin
 from .serializer import Serializer
-
 
 User = models.User
 Bot = models.Bot

@@ -1,4 +1,5 @@
 import pytest
+
 from credmgr.exceptions import InitializationError
 
 

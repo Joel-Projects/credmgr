@@ -3,7 +3,6 @@ import pytest
 from credmgr.exceptions import Conflict, InitializationError, NotFound
 from credmgr.models import SentryToken, User
 
-
 data = {
     "username": "username",
     "password": "password",

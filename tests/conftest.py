@@ -1,4 +1,5 @@
-import os, json
+import json
+import os
 import socket
 from sys import platform
 

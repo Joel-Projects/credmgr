@@ -1,5 +1,5 @@
-import os, inspect
-
+import inspect
+import os
 
 capitalCamelCase = lambda path: "".join(
     [i.capitalize() for i in os.path.basename(path).split(".")[0].split("_")]

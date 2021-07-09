@@ -1,9 +1,9 @@
 import json
 
-from . import RedditApp
-from .utils import resolveModelFromInput, resolveUser
 from ..mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
 from ..mixins.redditReddit import RedditAppMixin
+from . import RedditApp
+from .utils import resolveModelFromInput, resolveUser
 
 
 class UserVerification(

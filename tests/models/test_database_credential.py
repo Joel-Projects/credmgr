@@ -1,7 +1,7 @@
 import pytest
-from credmgr.models import DatabaseCredential
 
 from credmgr.exceptions import Conflict, NotFound, ServerError
+from credmgr.models import DatabaseCredential
 
 data = {
     "name": "testDatabaseCredential",

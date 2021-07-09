@@ -14,7 +14,6 @@ from .exceptions import (
     Unauthorized,
 )
 
-
 log = logging.getLogger(__package__)
 
 

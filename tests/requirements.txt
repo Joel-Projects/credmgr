@@ -1,1 +1,9 @@
-pytest pytest-mock pytest-xdist pytest-cov coverage mock parameterized betamax betamax_serializers
+pytest
+pytest-mock
+pytest-xdist
+pytest-cov
+coverage
+mock
+parameterized
+betamax
+betamax_serializers

@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from ..models.utils import resolveUser
 from ..exceptions import InitializationError
+from ..models.utils import resolveUser
 
 
 class BaseModel(object):

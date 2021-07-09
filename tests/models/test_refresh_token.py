@@ -1,8 +1,8 @@
 import praw
 import pytest
-from credmgr.models import RefreshToken
 
 from credmgr.exceptions import Conflict, NotFound, ServerError
+from credmgr.models import RefreshToken
 
 
 def testDeleteRefreshToken(credentialManager):

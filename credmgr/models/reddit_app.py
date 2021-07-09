@@ -1,12 +1,13 @@
 import base64
+import logging
+from typing import Union
 
+import asyncpraw
 import praw
-
-from .utils import resolveModelFromInput, resolveUser
-from ..mixins import BaseApp
 from praw.util.token_manager import BaseTokenManager
 
-import logging
+from ..mixins import BaseApp
+from .utils import resolveModelFromInput, resolveUser
 
 log = logging.getLogger(__package__)
 
@@ -122,24 +123,41 @@ class RedditApp(BaseApp):
             data["owner_id"] = owner
         return _credmgr.post("/reddit_apps", data=data)
 
-    def reddit(self, redditor=None, reddit=praw.Reddit) -> praw.Reddit:
+    def reddit(
+        self,
+        redditor=None,
+        *,
+        use_async=False,
+        use_cache=True,
+        reddit_class: Union[praw.Reddit, asyncpraw.Reddit, None] = None,
+    ) -> praw.Reddit:
         """Provides an optionally authenticated [Async] PRAW
 
         :param str redditor: The redditor that you want the Reddit instance authorized
             as.
-        :param reddit: The Reddit class to use. Useful if you have a local version of
+        :param bool use_async: Whether to return an asyncpraw instance.
+        :param bool use_cache: Whether to fetch a new instance regardless if it was
+            cached already.
+        :param reddit_class: The Reddit class to use. Useful if you have a local version of
             PRAW.
 
         :returns: Reddit instance.
 
         """
-        if not self._reddit:
+        if not (isinstance(self._reddit, praw.Reddit) == (not use_async)):
+            self._reddit = None
+        if not (use_cache and self._reddit):
+            if not reddit_class:
+                if use_async:
+                    reddit_class = asyncpraw.Reddit
+                else:
+                    reddit_class = praw.Reddit
             extra_kwargs = {}
             if redditor:
                 extra_kwargs["token_manager"] = RefreshTokenManager(
                     self._credmgr, redditor, self
                 )
-            self._reddit = reddit(
+            self._reddit = reddit_class(
                 client_id=self.clientId,
                 client_secret=self.clientSecret,
                 user_agent=self.userAgent,

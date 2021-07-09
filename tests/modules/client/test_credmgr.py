@@ -3,9 +3,8 @@ import configparser
 import pytest
 from betamax import Betamax
 
-from credmgr.exceptions import InitializationError
-
 from credmgr import CredentialManager
+from credmgr.exceptions import InitializationError
 from tests.utils import genCassetteName
 
 

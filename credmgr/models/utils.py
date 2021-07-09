@@ -2,7 +2,6 @@ import re
 
 from credmgr.exceptions import NotFound
 
-
 reCamelToSnake = re.compile(r"([a-z0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))")
 
 

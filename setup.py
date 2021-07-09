@@ -1,8 +1,7 @@
-from os import path
 import re
+from os import path
 
 from setuptools import find_packages, setup
-
 
 project_name = "credmgr"
 
