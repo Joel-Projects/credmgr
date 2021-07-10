@@ -1,6 +1,6 @@
 import pytest
 
-from credmgr.exceptions import Conflict, InitializationError, NotFound
+from credmgr.exceptions import Conflict, NotFound
 from credmgr.models import UserVerification
 
 

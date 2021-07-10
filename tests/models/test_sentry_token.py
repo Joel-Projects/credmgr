@@ -1,4 +1,3 @@
-import praw
 import pytest
 
 from credmgr.exceptions import Conflict, NotFound, ServerError

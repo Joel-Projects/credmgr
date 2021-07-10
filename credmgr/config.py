@@ -10,15 +10,18 @@ class Config:
     _config = None
     _lock = Lock()
 
+    @staticmethod
+    def _appendFileName(dirname):
+        return os.path.join(dirname, ".credmgr.ini")
+
     @classmethod
     def _loadConfig(cls):
         """Attempt to load settings from various .credmgr.ini files."""
         config = configparser.ConfigParser()
-        appendFileName = lambda dirName: os.path.join(dirName, ".credmgr.ini")
         rootDir = os.path.dirname(sys.modules[__name__].__file__)
         locations = [
-            appendFileName(rootDir),
-            appendFileName(Path.home()),
+            cls._appendFileName(rootDir),
+            cls._appendFileName(Path.home()),
             ".credmgr.ini",
         ]
         config.read(locations)

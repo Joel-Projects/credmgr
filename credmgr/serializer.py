@@ -29,6 +29,13 @@ class Serializer(object):
         self._credmgr = credmgr
 
     @staticmethod
+    def _snakeToCamel(snakeCase):
+        return "".join(
+            snakeCase.split("_")[:1]
+            + [i.capitalize() for i in snakeCase.split("_")[1:]]
+        )
+
+    @staticmethod
     def deserializeDatatime(string):
         """Deserializes string to datetime.
 
@@ -168,10 +175,6 @@ class Serializer(object):
             return data
 
         kwargs = {}
-        snakeToCamel = lambda snakeCase: "".join(
-            snakeCase.split("_")[:1]
-            + [i.capitalize() for i in snakeCase.split("_")[1:]]
-        )
         if objectType._attrTypes is not None:
             for attr, attrType in objectType._attrTypes.items():
                 if data and attr in data and isinstance(data, (list, dict)):
@@ -181,7 +184,9 @@ class Serializer(object):
                             value, attrType
                         )
                     else:
-                        kwargs[snakeToCamel(attr)] = self.__deserialize(value, attrType)
+                        kwargs[self._snakeToCamel(attr)] = self.__deserialize(
+                            value, attrType
+                        )
 
         try:
             instance = objectType(self._credmgr, **kwargs)

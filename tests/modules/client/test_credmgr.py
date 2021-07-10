@@ -1,11 +1,9 @@
 import configparser
 
 import pytest
-from betamax import Betamax
 
 from credmgr import CredentialManager
 from credmgr.exceptions import InitializationError
-from tests.utils import genCassetteName
 
 
 def testCredmgrInit(credentialManager):

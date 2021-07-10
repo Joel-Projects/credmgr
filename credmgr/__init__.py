@@ -1,2 +1,2 @@
-from .const import __version__
-from .credmgr import CredentialManager
+from .const import __version__  # NOQA
+from .credmgr import CredentialManager  # NOQA

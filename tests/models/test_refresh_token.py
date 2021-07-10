@@ -1,7 +1,6 @@
-import praw
 import pytest
 
-from credmgr.exceptions import Conflict, NotFound, ServerError
+from credmgr.exceptions import NotFound
 from credmgr.models import RefreshToken
 
 

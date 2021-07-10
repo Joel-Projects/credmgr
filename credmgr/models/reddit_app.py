@@ -138,8 +138,8 @@ class RedditApp(BaseApp):
         :param bool use_async: Whether to return an asyncpraw instance.
         :param bool use_cache: Whether to fetch a new instance regardless if it was
             cached already.
-        :param reddit_class: The Reddit class to use. Useful if you have a local version of
-            PRAW.
+        :param reddit_class: The Reddit class to use. Useful if you have a local version
+            of PRAW.
 
         :returns: Reddit instance.
 

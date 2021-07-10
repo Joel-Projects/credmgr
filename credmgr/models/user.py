@@ -125,8 +125,7 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         :param str only: Pass one of ``redditApps``, ``sentryTokens``,
             ``databaseCredentials`` to only get that type of apps
 
-        :returns: Returns
-            the user's apps.
+        :returns: Returns the user's apps.
 
         """
         appTypes = ["redditApps", "sentryTokens", "databaseCredentials"]

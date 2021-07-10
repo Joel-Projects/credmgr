@@ -58,6 +58,10 @@ class CachedProperty:
             doc = func.__doc__
         self.__doc__ = doc
 
+    # This to make sphinx run properly
+    def __call__(self, *args, **kwargs):  # pragma: no cover noqa: D102
+        pass
+
     def __get__(self, item, objtype=None):
         if item is None:
             return self

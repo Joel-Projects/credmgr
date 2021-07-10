@@ -1,8 +1,6 @@
 import configparser
 import os
 
-from requests import Session
-
 from . import models
 from .auth import ApiTokenAuth
 from .config import Config
@@ -349,8 +347,7 @@ class CredentialManager(object):
         :param Union[int,str,User] owner: Return UserVerifications that are owned by
             this user
 
-        :returns: A :class:`.Paginator` to iterate through the
-            UserVerifications
+        :returns: A :class:`.Paginator` to iterate through the UserVerifications.
 
         """
         return UserVerification(self).listItems(
@@ -382,8 +379,7 @@ class CredentialManager(object):
         :param Union[int,str,User] owner: Return DatabaseCredentials that are owned by
             this user
 
-        :returns: A :class:`.Paginator` to iterate through the
-            DatabaseCredentials
+        :returns: A :class:`.Paginator` to iterate through the DatabaseCredentials
 
         """
         return DatabaseCredential(self).listItems(
