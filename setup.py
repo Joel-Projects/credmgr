@@ -17,6 +17,7 @@ extras = {
     "docs": ["sphinx", "sphinx_rtd_theme"],
     "lint": [
         "black",
+        "docstrfmt",
         "flake8",
         "flynt",
         "isort",
