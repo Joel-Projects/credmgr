@@ -154,9 +154,9 @@ class RedditApp(BaseApp):
                     reddit_class = praw.Reddit
             extra_kwargs = {}
             if redditor:
-                extra_kwargs["token_manager"] = RefreshTokenManager(
-                    self._credmgr, redditor, self
-                )
+                refreshToken = self._credmgr.refreshToken(redditor, self.id)
+                if refreshToken:
+                    extra_kwargs['refresh_token'] = refreshToken.refreshToken
             self._reddit = reddit_class(
                 client_id=self.clientId,
                 client_secret=self.clientSecret,
@@ -213,34 +213,3 @@ class RedditApp(BaseApp):
         else:
             state = self.state
         return self.reddit().auth.url(scopes, state, duration)
-
-
-class RefreshTokenManager(BaseTokenManager):
-    def __init__(self, credmgr, redditor, reddit_app):
-        self._credmgr = credmgr
-        self.redditor = redditor
-        self.reddit_app = reddit_app
-        self.refreshToken = self._credmgr.refreshToken(
-            self.redditor, self.reddit_app.id
-        )
-        super().__init__()
-
-    def post_refresh_callback(self, authorizer):
-        log.debug(
-            f"Storing new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
-        )
-        self.refreshToken.edit(refreshToken=authorizer.refresh_token)
-        log.debug(
-            f"Successfully sorted new refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
-        )
-
-    def pre_refresh_callback(self, authorizer):
-        log.debug(
-            f"Fetching refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
-        )
-        refreshToken = self._credmgr.refreshToken(self.redditor, self.reddit_app.id)
-        log.debug(
-            f"Fetched refresh token for app: {self.reddit_app.name}({self.reddit_app.id}) redditor: u/{self.redditor}"
-        )
-        if refreshToken:
-            authorizer.refresh_token = refreshToken.refreshToken
