@@ -4,7 +4,6 @@ from typing import Union
 
 import asyncpraw
 import praw
-from praw.util.token_manager import BaseTokenManager
 
 from ..mixins import BaseApp
 from .utils import resolveModelFromInput, resolveUser
@@ -128,6 +127,7 @@ class RedditApp(BaseApp):
         use_async=False,
         use_cache=True,
         reddit_class: Union[praw.Reddit, asyncpraw.Reddit, None] = None,
+        extra_reddit_kwargs=None,
     ) -> praw.Reddit:
         """Provides an optionally authenticated [Async] PRAW
 
@@ -138,10 +138,13 @@ class RedditApp(BaseApp):
             cached already.
         :param reddit_class: The Reddit class to use. Useful if you have a local version
             of PRAW.
+        :param dict extra_reddit_kwargs: Extra kwargs to pass to the Reddit class.
 
         :returns: Reddit instance.
 
         """
+        if extra_reddit_kwargs is None:
+            extra_reddit_kwargs = {}
         if not (isinstance(self._reddit, praw.Reddit) == (not use_async)):
             self._reddit = None
         if not (use_cache and self._reddit):
@@ -150,17 +153,16 @@ class RedditApp(BaseApp):
                     reddit_class = asyncpraw.Reddit
                 else:
                     reddit_class = praw.Reddit
-            extra_kwargs = {}
             if redditor:
                 refreshToken = self._credmgr.refreshToken(redditor, self.id)
                 if refreshToken:
-                    extra_kwargs['refresh_token'] = refreshToken.refreshToken
+                    extra_reddit_kwargs["refresh_token"] = refreshToken.refreshToken
             self._reddit = reddit_class(
                 client_id=self.clientId,
                 client_secret=self.clientSecret,
                 user_agent=self.userAgent,
                 redirect_uri=self.redirectUri,
-                **extra_kwargs,
+                **extra_reddit_kwargs,
             )
         return self._reddit
 
