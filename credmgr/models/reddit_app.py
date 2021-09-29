@@ -9,8 +9,6 @@ from praw.util.token_manager import BaseTokenManager
 from ..mixins import BaseApp
 from .utils import resolveModelFromInput, resolveUser
 
-log = logging.getLogger(__package__)
-
 
 class RedditApp(BaseApp):
     """A class for Reddit Apps.

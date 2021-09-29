@@ -68,9 +68,9 @@ class Requestor(object):
 
     @staticmethod
     def _logRequest(data, method, params, url):
-        log.info(f"Data: {data}")
-        log.info(f"Request: {method} {url}")
-        log.info(f"Query Parameters: {params}")
+        log.debug(f"Data: {data}")
+        log.debug(f"Request: {method} {url}")
+        log.debug(f"Query Parameters: {params}")
 
     def request(self, path, method, data=None, params=None, **kwargs):
         url = urljoin(self._baseUrl, path)
@@ -89,7 +89,7 @@ class Requestor(object):
             response.json()
         except ValueError:  # pragma: no cover
             raise InvalidJSON(response)
-        log.info(
+        log.debug(
             f'Response: {response.status_code} ({response.headers.get("content-length")} bytes)'
         )
         return response

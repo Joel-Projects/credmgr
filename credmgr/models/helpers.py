@@ -13,8 +13,6 @@ from . import (
 )
 from .utils import resolveUser
 
-log = logging.getLogger(__package__)
-
 
 class Paginator:
     @resolveUser()
