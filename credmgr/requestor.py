@@ -74,22 +74,32 @@ class Requestor(object):
 
     def request(self, path, method, data=None, params=None, **kwargs):
         url = urljoin(self._baseUrl, path)
-        self._logRequest(data, method, params, url)
-        response = self._session.request(method, url, params, data=data, **kwargs)
-        if response.status_code in self._exceptionMapping:
-            raise self._exceptionMapping[response.status_code](response)
-        elif response.status_code == codes["no_content"]:
-            return
-        assert (
-            response.status_code in self._successCodes
-        ), f"Unexpected status code: {response.status_code}"
-        if response.headers.get("content-length") == "0":  # pragma: no cover
-            return ""
-        try:
-            response.json()
-        except ValueError:  # pragma: no cover
-            raise InvalidJSON(response)
-        log.debug(
-            f'Response: {response.status_code} ({response.headers.get("content-length")} bytes)'
-        )
-        return response
+        retry_limit = 4
+        retry_count = 0
+        while retry_count < retry_limit:
+            try:
+                self._logRequest(data, method, params, url)
+                response = self._session.request(method, url, params, data=data, timeout=15, **kwargs)
+                log.debug(
+                    f'Response: {response.status_code} ({response.headers.get("content-length")} bytes)'
+                )
+                if response.status_code in self._exceptionMapping:
+                    raise Exception(self._exceptionMapping[response.status_code](response))
+                elif response.status_code == codes["no_content"]:
+                    return
+                if response.status_code not in self._successCodes:
+                    raise Exception(f"Unexpected status code: {response.status_code}")
+                if response.headers.get("content-length") == "0":  # pragma: no cover
+                    return ""
+                try:
+                    response.json()
+                except ValueError:  # pragma: no cover
+                    raise InvalidJSON(response)
+                return response
+            except Exception as error:
+                retry_count += 1
+                if retry_count < retry_limit:
+                    log.warning(f'Error occurred: {error}. Retrying...attempt {retry_count}/3')
+                else:
+                    log.error(f'Error occurred: {error}. Max attempts reached')
+                    raise error

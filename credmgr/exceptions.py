@@ -3,11 +3,11 @@ class CredentialManagerException(Exception):
 
 
 class InitializationError(CredentialManagerException):
-    """Invalid initialization paramaters were used."""
+    """Invalid initialization parameters were used."""
 
 
 class SerializerException(CredentialManagerException):
-    """Serializaton/deserialzation error occured."""
+    """Serialization/deserialization error occurred."""
 
 
 class APIException(CredentialManagerException):
@@ -52,7 +52,7 @@ class NotFound(APIException):
 
 
 class ServerError(APIException):
-    """Error occured on server during request."""
+    """Error occurred on server during request."""
 
 
 class Unauthorized(APIException):
