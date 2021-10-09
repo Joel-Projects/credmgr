@@ -19,34 +19,49 @@ stages:
 
 black:
     stage: lint
-    image: alpine
-    except:
-        refs:
-            - master
-            - dev
-            - /v*/
+    image: python:3.9
     before_script:
-        - apk --no-cache add py3-pip python3-dev gcc linux-headers musl-dev libffi-dev openssl-dev git
         - pip3 install black
     script:
         - black --check .
     allow_failure: false
 
-
-test:pytest3.9:
+isort:
+    stage: lint
     image: python:3.9
-    <<: *testSetup
+    before_script:
+        - pip3 install isort
+    script:
+        - isort -c .
+    allow_failure: false
 
-test:pytest3.8:
-    image: python:3.8
+docstrfmt:
+    stage: lint
+    image: python:3.9
+    before_script:
+        - pip3 install docstrfmt
+    script:
+        - docstrfmt -c .
+    allow_failure: false
+
+test:pytest3.6:
+    image: python:3.6
     <<: *testSetup
 
 test:pytest3.7:
     image: python:3.7
     <<: *testSetup
 
-test:pytest3.6:
-    image: python:3.6
+test:pytest3.8:
+    image: python:3.8
+    <<: *testSetup
+
+test:pytest3.9:
+    image: python:3.9
+    <<: *testSetup
+
+test:pytest3.10:
+    image: python:3.10
     <<: *testSetup
 
 deploy:
