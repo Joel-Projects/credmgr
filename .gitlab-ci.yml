@@ -1,15 +1,36 @@
 image: python:3.9
 
-include:
-    -   template: Code-Quality.gitlab-ci.yml
+.lint_setup: &lint_setup
+    stage: lint
+    image: python:latest
+    allow_failure: false
+    before_script:
+        - pip3 install .[lint]
 
-.testSetup: &testSetup
+.test_setup: &test_setup
     stage: test
     allow_failure: true
     coverage: '/^TOTAL.*\s+(\d+\%)$/'
     script:
-        - pip install ".[test]"
+        - pip install .[test]
         - pytest --cov-report=term --cov=credmgr tests
+
+include:
+    -   template: Code-Quality.gitlab-ci.yml
+
+variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+    paths:
+        - .cache/pip
+        - venv/
+
+before_script:
+    - python -V  # Print out python version for debugging
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
 
 stages:
     - lint
@@ -17,54 +38,60 @@ stages:
     - deploy
     - pages
 
-black:
-    stage: lint
-    image: python:3.9
-    before_script:
-        - pip3 install black
-    script:
-        - black --check .
-    allow_failure: false
 
-isort:
-    stage: lint
-    image: python:3.9
-    before_script:
-        - pip3 install isort
+lint:black:
+    <<: *lint_setup
+    script:
+        - black -c .
+
+lint:isort:
+    <<: *lint_setup
     script:
         - isort -c .
-    allow_failure: false
 
-docstrfmt:
-    stage: lint
-    image: python:3.9
-    before_script:
-        - pip3 install docstrfmt
+lint:docstrfmt:
+    <<: *lint_setup
     script:
         - docstrfmt -c .
-    allow_failure: false
+
+lint:flynt:
+    <<: *lint_setup
+    script:
+        - flynt -tc -ll 1000 .
+
+lint:pydocstyle:
+    <<: *lint_setup
+    script:
+        - pydocstyle credmgr
+
+lint:flake8:
+    <<: *lint_setup
+    script:
+        - flake8
+
 
 test:pytest3.6:
+    <<: *test_setup
     image: python:3.6
-    <<: *testSetup
 
 test:pytest3.7:
+    <<: *test_setup
     image: python:3.7
-    <<: *testSetup
 
 test:pytest3.8:
+    <<: *test_setup
     image: python:3.8
-    <<: *testSetup
 
 test:pytest3.9:
+    <<: *test_setup
     image: python:3.9
-    <<: *testSetup
 
 test:pytest3.10:
+    <<: *test_setup
     image: python:3.10
-    <<: *testSetup
 
-deploy:
+
+deploy:pypi:
     stage: deploy
     variables:
         TWINE_USERNAME: $PYPI_USERNAME
@@ -77,7 +104,8 @@ deploy:
     only:
         - tags
 
-pages:
+deploy:pages:
+    stage: deploy
     script:
         - pip install .[docs]
         - cd docs ; make html
