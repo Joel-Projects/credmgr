@@ -1,5 +1,8 @@
+"""Provide the DeletableMixin class."""
+
+
 class DeletableMixin:
-    """Interface for classes that can be edited and deleted."""
+    """Interface for classes that can be deleted."""
 
     def delete(self):
         """Delete the object.

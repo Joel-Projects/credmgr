@@ -1,3 +1,4 @@
+"""Provide the credmgr class mixins."""
 from .base import BaseModel  # NOQA
 from .deletable import DeletableMixin  # NOQA
 from .editable import EditableMixin  # NOQA

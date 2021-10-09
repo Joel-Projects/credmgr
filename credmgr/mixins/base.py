@@ -1,7 +1,8 @@
+"""Provide the BaseModel class."""
 from datetime import datetime
 
 from ..exceptions import InitializationError
-from ..models.utils import resolveUser
+from ..models.utils import _resolveUser
 
 
 class BaseModel(object):
@@ -60,8 +61,9 @@ class BaseModel(object):
             self._get(self.id)
         self._fetched = True
 
-    @resolveUser()
+    @_resolveUser()
     def listItems(self, batchSize=20, limit=None, owner=None):
+        """List items that are owned by ``owner``."""
         from credmgr.models.helpers import Paginator
 
         return Paginator(
@@ -73,6 +75,7 @@ class BaseModel(object):
         )
 
     def toDict(self):
+        """Return the object in dictionary form."""
         result = {}
 
         for exportAttr in self._attrTypes.keys():
@@ -112,10 +115,11 @@ class BaseModel(object):
         return result
 
     def __repr__(self):  # pragma: no cover
+        """Return repr(self)."""
         return f"<{self.__class__.__name__} id={self.id}, {self._nameAttr}={getattr(self, self._nameAttr)!r}>"
 
     def __eq__(self, other):
-        """Returns true if both objects are equal"""
+        """Check if both objects are equal."""
         if not isinstance(other, type(self)):
             return False
 

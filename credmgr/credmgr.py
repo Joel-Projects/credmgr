@@ -1,3 +1,5 @@
+"""Provide the CredentialManager class."""
+
 import configparser
 import os
 
@@ -6,7 +8,7 @@ from .auth import ApiTokenAuth
 from .config import Config
 from .exceptions import InitializationError
 from .models.utils import CachedProperty
-from .requestor import Requestor, urljoin
+from .requestor import Requestor, _urljoin
 from .serializer import Serializer
 
 User = models.User
@@ -110,7 +112,7 @@ class CredentialManager(object):
                 exc.message += "\nYou provided the name of a .credmgr.ini section that doesn't exist."
             raise
 
-        self._server = urljoin(
+        self._server = _urljoin(
             getattr(self.config, "server"), getattr(self.config, "endpoint")
         )
         apiToken = getattr(self.config, "apiToken")
@@ -176,7 +178,6 @@ class CredentialManager(object):
         See :meth:`~.BotHelper.create` for the required params.
 
         """
-
         self.redditApp = models.RedditAppHelper(self)
         """An instance of :class:`.RedditAppHelper`.
 
@@ -197,7 +198,6 @@ class CredentialManager(object):
         See :meth:`~.RedditAppHelper.create` for the required params.
 
         """
-
         self.refreshToken = models.RefreshTokenHelper(self)
         """An instance of :class:`.RefreshTokenHelper`.
 
@@ -214,7 +214,6 @@ class CredentialManager(object):
             Refresh tokens cannot be manually created.
 
         """
-
         self.userVerification = models.UserVerificationHelper(self)
         """An instance of :class:`.UserVerificationHelper`.
 
@@ -235,7 +234,6 @@ class CredentialManager(object):
         See :meth:`~.UserVerificationHelper.create` for the required params.
 
         """
-
         self.sentryToken = models.SentryTokenHelper(self)
         """An instance of :class:`.SentryTokenHelper`.
 
@@ -256,7 +254,6 @@ class CredentialManager(object):
         See :meth:`~.SentryTokenHelper.create` for the required params.
 
         """
-
         self.databaseCredential = models.DatabaseCredentialHelper(self)
         """An instance of :class:`.DatabaseCredentialHelper`.
 
@@ -282,7 +279,7 @@ class CredentialManager(object):
         """
 
     def users(self, batchSize=10, limit=None):
-        """List Users
+        """List Users.
 
         :param int batchSize: Number of Users to return in each batch (default: ``20``)
         :param int limit: Maximum number of Users to return
@@ -293,7 +290,7 @@ class CredentialManager(object):
         return User(self).listItems(batchSize=batchSize, limit=limit)
 
     def bots(self, batchSize=20, limit=None, owner=None):
-        """List Bots
+        """List Bots.
 
         :param int batchSize: Number of Bots to return in each batch (default: ``20``)
         :param int limit: Maximum number of Bots to return
@@ -305,7 +302,7 @@ class CredentialManager(object):
         return Bot(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def redditApps(self, batchSize=20, limit=None, owner=None):
-        """List RedditApps
+        """List RedditApps.
 
         :param int batchSize: Number of RedditApps to return in each batch (default:
             ``20``)
@@ -318,7 +315,7 @@ class CredentialManager(object):
         return RedditApp(self).listItems(batchSize=batchSize, limit=limit, owner=owner)
 
     def refreshTokens(self, batchSize=20, limit=None, owner=None):
-        """List RefreshTokens
+        """List RefreshTokens.
 
         :param int batchSize: Number of RefreshTokens to return in each batch (default:
             ``20``)
@@ -339,7 +336,7 @@ class CredentialManager(object):
         )
 
     def userVerifications(self, batchSize=20, limit=None, owner=None):
-        """List UserVerifications
+        """List UserVerifications.
 
         :param int batchSize: Number of UserVerifications to return in each batch
             (default: ``20``)
@@ -355,7 +352,7 @@ class CredentialManager(object):
         )
 
     def sentryTokens(self, batchSize=20, limit=None, owner=None):
-        """List SentryTokens
+        """List SentryTokens.
 
         :param int batchSize: Number of SentryTokens to return in each batch (default:
             ``20``)
@@ -371,7 +368,7 @@ class CredentialManager(object):
         )
 
     def databaseCredentials(self, batchSize=20, limit=None, owner=None):
-        """List DatabaseCredentials
+        """List DatabaseCredentials.
 
         :param int batchSize: Number of DatabaseCredentials to return in each batch
             (default: ``20``)
@@ -388,33 +385,58 @@ class CredentialManager(object):
 
     @CachedProperty
     def currentUser(self) -> User:
-        """Returns the currently authenticated :class:`.User`"""
+        """Get the currently authenticated :class:`.User`."""
         if not self._currentUser:
             self._currentUser = self.get("/users/me")
         return self._currentUser
 
     @CachedProperty
     def userDefaults(self):
-        """Returns the currently authenticated :class:`.User`'s default settings"""
+        """Get the currently authenticated :class:`.User`'s default settings."""
         if not self._userDefaults:
             self._userDefaults = self.currentUser.defaultSettings
         return self._userDefaults
 
     def get(self, path, params=None):
+        """Return parsed objects returned from a GET request to ``path``.
+
+        :param path: The path to fetch.
+        :param params: The query parameters to add to the request (default: None).
+
+        """
         return self.serializer.deserialize(
             self._requestor.request(path, "GET", params=params)
         )
 
     def post(self, path, data):
+        """Return parsed objects returned from a POST request to ``path``.
+
+        :param path: The path to fetch.
+        :param data: Dictionary, bytes, or file-like object to send in the body of the
+            request (default: None).
+
+        """
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
         return self.serializer.deserialize(
             self._requestor.request(path, "POST", data=data, headers=headers)
         )
 
     def patch(self, path, data):
+        """Return parsed objects returned from a PATCH request to ``path``.
+
+        :param path: The path to fetch.
+        :param data: Dictionary, bytes, or file-like object to send in the body of the
+            request (default: None).
+
+        """
         return self.serializer.deserialize(
             self._requestor.request(path, "PATCH", json=data)
         )
 
     def delete(self, path):
+        """Return parsed objects returned from a DELETE request to ``path``.
+
+        :param path: The path to fetch.
+
+        """
         return self._requestor.request(path, "DELETE")

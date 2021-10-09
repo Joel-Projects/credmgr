@@ -1,5 +1,4 @@
-import logging
-
+"""Provide the helper classes."""
 from ..exceptions import InitializationError
 from ..mixins import BaseModel
 from . import (
@@ -11,11 +10,13 @@ from . import (
     User,
     UserVerification,
 )
-from .utils import resolveUser
+from .utils import _resolveUser
 
 
 class Paginator:
-    @resolveUser()
+    """Class to handle paginated requests."""
+
+    @_resolveUser()
     def __init__(self, credmgr, model, batchSize=20, limit=None, itemsOwner=None):
         """Initialize a Paginator instance.
 
@@ -39,9 +40,11 @@ class Paginator:
         self._response = None
 
     def __iter__(self):
+        """Allow Paginator to operate as an iterator."""
         return self
 
     def __next__(self):
+        """Allow Paginator to operate as an generator."""
         if self.limit is not None and self._itemsReturned >= self.limit:
             raise StopIteration()  # pragma: no cover
 
@@ -69,9 +72,12 @@ class Paginator:
 
 
 class BaseHelper(BaseModel):
+    """Base Helper class."""
+
     _model = None
 
     def __call__(self, id=None, **kwargs):
+        """Return a fetch instance of the object."""
         modelKwargs = {}
         byName = False
         if isinstance(id, str):
@@ -104,10 +110,12 @@ class BaseHelper(BaseModel):
 
 
 class UserHelper(BaseHelper):
+    """Interface for interacting with Users."""
+
     _model = User
 
     def __call__(self, id=None, username=None):
-        """Fetches a :class:`.User` instance by :attr:`id`` or :attr:`name`.
+        """Fetch a :class:`.User` instance by :attr:`id` or :attr:`name`.
 
         :param Union[int,str] id: ID of the :class:`.User` to fetch. .. note:: If a
             ``str`` is passed it will be treated as the :attr:`username` attr.
@@ -166,7 +174,6 @@ class UserHelper(BaseHelper):
         :returns: User
 
         """
-
         return self._model._create(
             self._credmgr,
             username=username,
@@ -181,6 +188,8 @@ class UserHelper(BaseHelper):
 
 
 class BotHelper(BaseHelper):
+    """Interface for interacting with Bots."""
+
     _model = Bot
 
     def create(
@@ -206,7 +215,6 @@ class BotHelper(BaseHelper):
         :returns: Bot
 
         """
-
         return self._model._create(
             self._credmgr,
             name=name,
@@ -218,6 +226,8 @@ class BotHelper(BaseHelper):
 
 
 class RedditAppHelper(BaseHelper):
+    """Interface for interacting with RedditApps."""
+
     _model = RedditApp
 
     def create(
@@ -282,6 +292,8 @@ class RedditAppHelper(BaseHelper):
 
 
 class UserVerificationHelper(BaseHelper):
+    """Interface for interacting with UserVerifications."""
+
     _model = UserVerification
 
     def create(
@@ -313,10 +325,12 @@ class UserVerificationHelper(BaseHelper):
 
 
 class SentryTokenHelper(BaseHelper):
+    """Interface for interacting with SentryTokens."""
+
     _model = SentryToken
 
     def create(self, name, dsn, owner=None) -> SentryToken:
-        """Create a new Sentry Token
+        """Create a new Sentry Token.
 
         Sentry Tokens are used for logging and error reporting in applications
 
@@ -332,6 +346,8 @@ class SentryTokenHelper(BaseHelper):
 
 
 class DatabaseCredentialHelper(BaseHelper):
+    """Interface for interacting with DatabaseCredentials."""
+
     _model = DatabaseCredential
 
     def create(
@@ -354,7 +370,7 @@ class DatabaseCredentialHelper(BaseHelper):
         enabled=True,
         owner=None,
     ) -> DatabaseCredential:
-        """Create a new Database Credential
+        """Create a new Database Credential.
 
         Database Credentials are used for..ya know..databases
 
@@ -406,9 +422,12 @@ class DatabaseCredentialHelper(BaseHelper):
 
 
 class RefreshTokenHelper(BaseHelper):
+    """Interface for interacting with RefreshTokens."""
+
     _model = RefreshToken
 
     def __call__(self, id=None, redditor=None, redditAppId=None):
+        """Fetch an instance of :class:`RefreshToken`."""
         kwargs = {}
         if isinstance(id, str):
             if redditor:

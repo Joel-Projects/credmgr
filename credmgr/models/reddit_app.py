@@ -1,12 +1,12 @@
+"""Provide the RedditApp class."""
 import base64
-import logging
 from typing import Union
 
 import asyncpraw
 import praw
 
 from ..mixins import BaseApp
-from .utils import resolveModelFromInput, resolveUser
+from .utils import _resolveModelFromInput, _resolveUser
 
 
 class RedditApp(BaseApp):
@@ -70,7 +70,7 @@ class RedditApp(BaseApp):
             self._fetched = True
 
     @staticmethod
-    @resolveUser()
+    @_resolveUser()
     def _create(
         _credmgr,
         name,
@@ -83,7 +83,7 @@ class RedditApp(BaseApp):
         enabled,
         owner=None,
     ):
-        """Create a new Reddit App
+        """Create a new Reddit App.
 
         Reddit Apps are used for interacting with Reddit
 
@@ -129,7 +129,7 @@ class RedditApp(BaseApp):
         reddit_class: Union[praw.Reddit, asyncpraw.Reddit, None] = None,
         extra_reddit_kwargs=None,
     ) -> praw.Reddit:
-        """Provides an optionally authenticated [Async] PRAW
+        """Provide an optionally authenticated [Async] PRAW instance.
 
         :param str redditor: The redditor that you want the Reddit instance authorized
             as.
@@ -167,7 +167,7 @@ class RedditApp(BaseApp):
         return self._reddit
 
     def genAuthUrl(self, scopes=None, permanent=False, userVerification=None):
-        """Generates a URL for users to verify or authenticate their Reddit account
+        """Generate a URL for users to verify or authenticate their Reddit account.
 
         :param Union[list,str] scopes: List of scopes needed. Pass ``'all'`` for all
             scopes. The ``identity`` scope will always be included. (default:
@@ -199,7 +199,7 @@ class RedditApp(BaseApp):
             duration = "permanent"
         else:
             duration = "temporary"
-        uVerification = resolveModelFromInput(
+        uVerification = _resolveModelFromInput(
             self._credmgr, UserVerification, userVerification, "userId"
         )
         if not uVerification and userVerification:

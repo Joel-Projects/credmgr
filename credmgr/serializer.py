@@ -1,3 +1,4 @@
+"""Provide the Serializer class."""
 import datetime
 import re
 
@@ -158,8 +159,8 @@ class Serializer(object):
         else:
             return self.__deserializeModel(data, objectType)
 
-    def __hasattr__(self, object, name):  # pragma: no cover
-        return name in object.__class__.__dict__
+    # def __hasattr__(self, object, name):  # pragma: no cover
+    #     return name in object.__class__.__dict__
 
     def __deserializeModel(self, data, objectType):
         """Deserializes list or dict to model.
@@ -170,7 +171,6 @@ class Serializer(object):
         :returns: model object.
 
         """
-
         if not objectType._attrTypes:  # pragma: no cover
             return data
 

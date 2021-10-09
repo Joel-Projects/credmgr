@@ -1,3 +1,6 @@
+"""Provide the exception for credmgr."""
+
+
 class CredentialManagerException(Exception):
     """The base CredentialManager Exception that all other exception classes extend."""
 
@@ -11,9 +14,10 @@ class SerializerException(CredentialManagerException):
 
 
 class APIException(CredentialManagerException):
-    """Base exception class"""
+    """Base exception class."""
 
     def __init__(self, response):
+        """Initialize an APIException instance."""
         self.url = response.url
         self.status = response.status_code
         self.reason = response.reason
@@ -21,7 +25,7 @@ class APIException(CredentialManagerException):
         self.headers = response.headers
 
     def __str__(self):  # pragma: no cover
-        """Custom error messages for exception"""
+        """Get the message returned from str(self)."""
         errorMessage = f"\n{self.status}: {self.url}\n{self.reason}"
         if self.headers:
             errorMessage += f"\nResponse headers: {self.headers}"

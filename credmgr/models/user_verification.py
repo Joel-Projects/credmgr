@@ -1,14 +1,17 @@
+"""Provide the UserVerification class."""
 import json
 
 from ..mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
 from ..mixins.redditReddit import RedditAppMixin
 from . import RedditApp
-from .utils import resolveModelFromInput, resolveUser
+from .utils import _resolveModelFromInput, _resolveUser
 
 
 class UserVerification(
     BaseModel, DeletableMixin, EditableMixin, OwnerMixin, RedditAppMixin
 ):
+    """A class for UserVerification instances."""
+
     _attrTypes = {
         **BaseModel._attrTypes,
         "id": "int",
@@ -45,9 +48,9 @@ class UserVerification(
         super().__init__(credmgr, **kwargs)
 
     @staticmethod
-    @resolveUser()
+    @_resolveUser()
     def _create(_credmgr, userId, redditApp, redditor=None, extraData=None, owner=None):
-        """Create a new User Verification
+        """Create a new User Verification.
 
         User Verifications for associating an unique ID with a Redditor
 
@@ -63,10 +66,9 @@ class UserVerification(
         :returns: UserVerification
 
         """
-
         data = {
             "user_id": userId,
-            "reddit_app_id": resolveModelFromInput(_credmgr, RedditApp, redditApp),
+            "reddit_app_id": _resolveModelFromInput(_credmgr, RedditApp, redditApp),
         }
         if redditor:
             data["redditor"] = redditor

@@ -1,3 +1,4 @@
+"""Provide the User class."""
 import json
 
 from ..exceptions import InitializationError
@@ -5,6 +6,8 @@ from ..mixins import BaseModel, DeletableMixin, EditableMixin
 
 
 class User(BaseModel, DeletableMixin, EditableMixin):
+    """A class for User instances."""
+
     _attrTypes = {
         **BaseModel._attrTypes,
         "id": "int",
@@ -36,7 +39,7 @@ class User(BaseModel, DeletableMixin, EditableMixin):
     _apiNameMapping = {_nameAttr: "username"}
 
     def __init__(self, credmgr, **kwargs):
-        """Initialize an User instance
+        """Initialize an User instance.
 
         Users are for logging into and accessing that user's credentials
 
@@ -81,7 +84,7 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         isRegularUser=True,
         isInternal=False,
     ):
-        """Create a new User
+        """Create a new User.
 
         **PERMISSIONS: Admin role is required.**
 
@@ -120,12 +123,12 @@ class User(BaseModel, DeletableMixin, EditableMixin):
         )
 
     def apps(self, only=None):
-        """Returns apps that are owned by this user
+        """Get apps that are owned by this user.
 
         :param str only: Pass one of ``redditApps``, ``sentryTokens``,
             ``databaseCredentials`` to only get that type of apps
 
-        :returns: Returns the user's apps.
+        :returns: The user's apps.
 
         """
         appTypes = ["redditApps", "sentryTokens", "databaseCredentials"]

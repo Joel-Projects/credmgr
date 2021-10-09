@@ -7,6 +7,8 @@ from threading import Lock
 
 
 class Config:
+    """Class for loading credmgr's config."""
+
     _config = None
     _lock = Lock()
 
@@ -32,14 +34,12 @@ class Config:
         with Config._lock:
             if Config._config is None:
                 self._loadConfig()
-
         self._settings = kwargs
         self.customSettings = dict(
             Config._config.items(configName),
             **{k.lower(): v for k, v in kwargs.items() if v},
         )
         self.server = self.apiToken = self.username = self.password = None
-
         self._initializeConfig()
 
     def _fetch(self, key, default=None):

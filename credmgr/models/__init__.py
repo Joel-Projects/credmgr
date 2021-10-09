@@ -1,3 +1,4 @@
+"""Provide the credmgr models."""
 from .bot import Bot  # NOQA
 from .database_credential import DatabaseCredential  # NOQA
 from .reddit_app import RedditApp  # NOQA

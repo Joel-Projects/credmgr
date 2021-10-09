@@ -1,15 +1,18 @@
+"""Provide the SentryToken class."""
 from ..mixins import BaseApp
-from .utils import resolveUser
+from .utils import _resolveUser
 
 
 class SentryToken(BaseApp):
+    """A class for SentryToken instances."""
+
     _attrTypes = {**BaseApp._attrTypes, "dsn": "str"}
     _editableAttrs = BaseApp._editableAttrs + ["dsn"]
     _path = "/sentry_tokens"
     _credmgrCallable = "sentryToken"
 
     def __init__(self, credmgr, **kwargs):
-        """Initialize a Sentry Token instance.
+        """Initialize a SentryToken instance.
 
         :param credmgr: An instance of :class:`.CredentialManager`.
         :param id: ID of the Sentry Token
@@ -21,9 +24,9 @@ class SentryToken(BaseApp):
         super().__init__(credmgr, **kwargs)
 
     @staticmethod
-    @resolveUser()
+    @_resolveUser()
     def _create(_credmgr, name=None, dsn=None, owner=None):
-        """Create a new Sentry Token
+        """Create a new Sentry Token.
 
         Sentry Tokens are used for logging and error reporting in applications
 

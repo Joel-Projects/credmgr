@@ -1,3 +1,4 @@
+"""Provide the RefreshToken class."""
 from credmgr.mixins import BaseModel, DeletableMixin, EditableMixin, OwnerMixin
 from credmgr.mixins.redditReddit import RedditAppMixin
 
@@ -5,6 +6,8 @@ from credmgr.mixins.redditReddit import RedditAppMixin
 class RefreshToken(
     BaseModel, DeletableMixin, OwnerMixin, EditableMixin, RedditAppMixin
 ):
+    """A class for RefreshToken instances."""
+
     _attrTypes = {
         **BaseModel._attrTypes,
         "reddit_app_id": "int",

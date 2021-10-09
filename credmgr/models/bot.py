@@ -1,9 +1,10 @@
+"""Provide the Bot class."""
 from ..mixins import BaseApp
-from .utils import resolveUser
+from .utils import _resolveUser
 
 
 class Bot(BaseApp):
-    """A class for Bot
+    """A class for Bot instances.
 
     To obtain an instance of this class execute:
 
@@ -62,9 +63,9 @@ class Bot(BaseApp):
         super().__init__(credmgr, **kwargs)
 
     @staticmethod
-    @resolveUser()
+    @_resolveUser()
     def _create(_credmgr, name, redditApp, sentryToken, databaseCredential, owner=None):
-        """Create a new Bot
+        """Create a new Bot.
 
         Bots are used for grouping credentials into a single app
 
@@ -79,7 +80,6 @@ class Bot(BaseApp):
         :returns: Bot
 
         """
-
         from . import DatabaseCredential, RedditApp, SentryToken
 
         additionalParams = {}
@@ -100,7 +100,9 @@ class Bot(BaseApp):
         return _credmgr.post("/bots", data={"app_name": name, **additionalParams})
 
     def edit(self, **kwargs):
-        """:param name: Changes the name of the :class:`.Bot`
+        """Edit the bot.
+
+        :param name: Changes the name of the :class:`.Bot`
         :param Union[RedditApp,int] redditApp: Changes the :class:`.RedditApp` the Bot
             will use
         :param Union[SentryToken,int] sentryToken: Changes the :class:`.SentryToken` the
@@ -112,7 +114,7 @@ class Bot(BaseApp):
 
             Parameters, ``redditApp``, ``sentryToken``, and ``databaseCredential`` can
             accept the initialized object or its :attr:`id`. Passing a ``str`` to it
-            will not work. The intended was to create bots in with the web interface.
+            will not work.
 
         :returns: The modified :class:`.Bot`
 

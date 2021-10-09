@@ -1,8 +1,11 @@
+"""Provide the DatabaseCredential class."""
 from ..mixins import BaseApp
-from .utils import resolveUser
+from .utils import _resolveUser
 
 
 class DatabaseCredential(BaseApp):
+    """A class for DatabaseCredential instances."""
+
     _attrTypes = {
         **BaseApp._attrTypes,
         "database_username": "str",
@@ -71,7 +74,7 @@ class DatabaseCredential(BaseApp):
         super().__init__(credmgr, **kwargs)
 
     @staticmethod
-    @resolveUser()
+    @_resolveUser()
     def _create(
         _credmgr,
         name,
@@ -92,7 +95,7 @@ class DatabaseCredential(BaseApp):
         enabled=True,
         owner=None,
     ):
-        """Create a new Database Credential
+        """Create a new Database Credential.
 
         Database Credentials are used for..ya know..databases
 
@@ -121,7 +124,6 @@ class DatabaseCredential(BaseApp):
         :returns: DatabaseCredential
 
         """
-
         data = {}
         if databaseFlavor:
             data["database_flavor"] = databaseFlavor

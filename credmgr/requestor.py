@@ -1,3 +1,4 @@
+"""Provide the Requestor class."""
 import logging
 
 import requests
@@ -17,7 +18,7 @@ from .exceptions import (
 log = logging.getLogger(__package__)
 
 
-def urljoin(base, path):
+def _urljoin(base, path):
     if base.endswith("/"):  # pragma: no cover
         base = base[:-1]
     if not path.startswith("/"):  # pragma: no cover
@@ -73,7 +74,8 @@ class Requestor(object):
         log.debug(f"Query Parameters: {params}")
 
     def request(self, path, method, data=None, params=None, **kwargs):
-        url = urljoin(self._baseUrl, path)
+        """Issue the HTTP request capturing any errors that may occur."""
+        url = _urljoin(self._baseUrl, path)
         retry_limit = 4
         retry_count = 0
         while retry_count < retry_limit:
