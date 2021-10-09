@@ -42,7 +42,7 @@ stages:
 lint:black:
     <<: *lint_setup
     script:
-        - black -c .
+        - black --check .
 
 lint:isort:
     <<: *lint_setup
