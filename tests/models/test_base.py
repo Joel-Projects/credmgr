@@ -1,4 +1,4 @@
-def testBaseToDict(credentialManager):
+def testBaseToDict(recorder, credentialManager):
     bot = credentialManager.bot(1)
     exportDict = bot.toDict()
     assert exportDict == {
@@ -38,19 +38,19 @@ def testBaseToDict(credentialManager):
     }
 
 
-def testBaseEqual(credentialManager):
+def testBaseEqual(recorder, credentialManager):
     bot = credentialManager.bot(1)
     bot2 = credentialManager.bot(1)
     assert bot == bot2
 
 
-def testBaseNotEqual(credentialManager):
+def testBaseNotEqual(recorder, credentialManager):
     bot = credentialManager.bot(1)
     bot2 = credentialManager.bot(4)
     assert bot != bot2
 
 
-def testBaseEqualDifferentType(credentialManager):
+def testBaseEqualDifferentType(recorder, credentialManager):
     item = credentialManager.bot(1)
     item2 = item.redditApp
     assert item != item2

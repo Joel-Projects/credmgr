@@ -1,5 +1,6 @@
 """Provide the Requestor class."""
 import logging
+from collections import defaultdict
 
 import requests
 from requests import codes
@@ -13,6 +14,7 @@ from .exceptions import (
     NotFound,
     ServerError,
     Unauthorized,
+    UnknownStatusCode,
 )
 
 log = logging.getLogger(__package__)
@@ -29,20 +31,24 @@ def _urljoin(base, path):
 class Requestor(object):
     """Requestor provides an interface to HTTP requests."""
 
-    _exceptionMapping = {
-        400: InvalidRequest,
-        401: Unauthorized,
-        403: Forbidden,
-        404: NotFound,
-        409: Conflict,
-        422: ServerError,
-        500: ServerError,
-        502: ServerError,
-        503: ServerError,
-        504: ServerError,
-        520: ServerError,
-        522: ServerError,
-    }
+    _exceptionMapping = defaultdict(
+        lambda: UnknownStatusCode,
+        {
+            400: InvalidRequest,
+            401: Unauthorized,
+            403: Forbidden,
+            404: NotFound,
+            409: Conflict,
+            422: ServerError,
+            500: ServerError,
+            502: ServerError,
+            503: ServerError,
+            504: ServerError,
+            520: ServerError,
+            522: ServerError,
+        },
+    )
+    _retry_error = (InvalidRequest, ServerError, UnknownStatusCode)
     _successCodes = [200, 201, 202, 204]
 
     def __init__(self, credmgrUrl, auth, sessionClass, **sessionKwargs):
@@ -88,13 +94,9 @@ class Requestor(object):
                     f'Response: {response.status_code} ({response.headers.get("content-length")} bytes)'
                 )
                 if response.status_code in self._exceptionMapping:
-                    raise Exception(
-                        self._exceptionMapping[response.status_code](response)
-                    )
+                    raise self._exceptionMapping[response.status_code](response)
                 elif response.status_code == codes["no_content"]:
                     return
-                if response.status_code not in self._successCodes:
-                    raise Exception(f"Unexpected status code: {response.status_code}")
                 if response.headers.get("content-length") == "0":  # pragma: no cover
                     return ""
                 try:
@@ -102,10 +104,10 @@ class Requestor(object):
                 except ValueError:  # pragma: no cover
                     raise InvalidJSON(response)
                 return response
-            except Exception as error:
+            except self._retry_error as error:
                 retry_count += 1
                 if retry_count < retry_limit:
-                    log.warning(
+                    log.debug(
                         f"Error occurred: {error}. Retrying...attempt {retry_count}/3"
                     )
                 else:

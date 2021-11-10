@@ -1,7 +1,7 @@
 from credmgr.models import RedditApp, UserVerification
 
 
-def testResolveUserWithObject(credentialManager):
+def testResolveUserWithObject(recorder, credentialManager):
     user = credentialManager.currentUser
     redditApps = credentialManager.redditApps(owner=user)
     for redditApp in redditApps:
@@ -9,7 +9,7 @@ def testResolveUserWithObject(credentialManager):
         assert redditApp.owner == user
 
 
-def testResolveUserWithUsername(credentialManager):
+def testResolveUserWithUsername(recorder, credentialManager):
     user = credentialManager.currentUser
     redditApps = credentialManager.redditApps(owner=user.username)
     for redditApp in redditApps:
@@ -17,7 +17,7 @@ def testResolveUserWithUsername(credentialManager):
         assert redditApp.owner == user
 
 
-def testResolveModelWithObject(credentialManager):
+def testResolveModelWithObject(recorder, credentialManager):
     redditApp = credentialManager.redditApp(26)
     userVerification = credentialManager.userVerification.create(
         userId="testuserid", redditApp=redditApp
@@ -25,7 +25,7 @@ def testResolveModelWithObject(credentialManager):
     assert isinstance(userVerification, UserVerification)
 
 
-def testResolveModelWithId(credentialManager):
+def testResolveModelWithId(recorder, credentialManager):
     redditApp = credentialManager.redditApp(26)
     userVerification = credentialManager.userVerification.create(
         userId="testuserid", redditApp=redditApp.id

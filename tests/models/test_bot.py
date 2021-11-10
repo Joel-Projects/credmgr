@@ -12,13 +12,13 @@ def assertCreated(bot, data):
         assert getattr(bot, key) == value
 
 
-def testCreateBot(credentialManager):
+def testCreateBot(recorder, credentialManager):
     data = {"name": "botName"}
     bot = credentialManager.bot.create(**data)
     assertCreated(bot, data)
 
 
-def testCreateBotFullParams(credentialManager):
+def testCreateBotFullParams(recorder, credentialManager):
     data = {
         "name": "botName2",
         "redditApp": 27,
@@ -29,7 +29,7 @@ def testCreateBotFullParams(credentialManager):
     assertCreated(bot, data)
 
 
-def testCreateBotFullParamsObjects(credentialManager):
+def testCreateBotFullParamsObjects(recorder, credentialManager):
     data = {
         "name": "botName2",
         "redditApp": credentialManager.redditApp(27),
@@ -41,7 +41,7 @@ def testCreateBotFullParamsObjects(credentialManager):
         assert getattr(bot, key) == value
 
 
-def testCreateBotOtherUser(credentialManager):
+def testCreateBotOtherUser(recorder, credentialManager):
     data = {
         "name": "botName3",
         "redditApp": 29,
@@ -53,39 +53,39 @@ def testCreateBotOtherUser(credentialManager):
     assertCreated(bot, data)
 
 
-def testCreateBotExisting(credentialManager):
+def testCreateBotExisting(recorder, credentialManager):
     data = {"name": "botName", "redditApp": 27}
     with pytest.raises(Conflict):
         _ = credentialManager.bot.create(**data)
 
 
-def testDeleteBot(credentialManager):
+def testDeleteBot(recorder, credentialManager):
     bot = credentialManager.bot("botName")
     bot.delete()
     with pytest.raises(NotFound):
         _ = credentialManager.bot("botName")
 
 
-def testEditBot(credentialManager):
+def testEditBot(recorder, credentialManager):
     bot = credentialManager.bot("botName2")
     bot.edit(redditApp=28, name="newBotName")
     assert bot.redditApp.id == 28
     assert bot.name == "newBotName"
 
 
-def testEditBotWithObject(credentialManager):
+def testEditBotWithObject(recorder, credentialManager):
     bot = credentialManager.bot("botName4")
     bot.edit(redditApp=credentialManager.redditApp(28))
     assert bot.redditApp.id == 28
 
 
-def testEditBotConflictingData(credentialManager):
+def testEditBotConflictingData(recorder, credentialManager):
     bot = credentialManager.bot("newBotName")
     with pytest.raises(Conflict):
         bot.edit(name="botName4")
 
 
-def testListBots(credentialManager):
+def testListBots(recorder, credentialManager):
     bots = credentialManager.bots()
     for bot in bots:
         assert isinstance(bot, Bot)

@@ -1,16 +1,4 @@
-import pytest
-
 from credmgr.models.utils import CachedProperty
-
-
-@pytest.yield_fixture()
-def credentialManager():
-    yield None
-
-
-@pytest.yield_fixture(autouse=True)
-def recorder(credentialManager):
-    yield None
 
 
 class ClassPropertyTest:

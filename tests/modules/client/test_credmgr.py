@@ -1,12 +1,23 @@
 import configparser
 
 import pytest
+from betamax import Betamax
 
-from credmgr import CredentialManager
+from credmgr import CredentialManager, config
 from credmgr.exceptions import InitializationError
+from tests.utils import genCassetteName
 
 
-def testCredmgrInit(credentialManager):
+def _initialize_config_override(self):
+    self.server = self._fetch("server")
+    self.endpoint = self._fetch("endpoint")
+    self.apiToken = None
+    self.username = self._fetch("username")
+    self.password = self._fetch("password")
+    self.dateFormat = self._fetch("dateformat")
+
+
+def testCredmgrInit(recorder, credentialManager):
     assert credentialManager.currentUser.username == "spaz"
 
 
@@ -22,13 +33,14 @@ def testCredmgrInitBadSectionName(credentialManager):
         _ = CredentialManager("invalid")
 
 
-def testCredmgrNoParams(credentialManager):
+def testCredmgrNoParams():
+    config.Config._initializeConfig = _initialize_config_override
     with pytest.raises(InitializationError):
         _ = CredentialManager()
 
 
-def testCredmgrInitUsernamePassword(credentialManager):
+def testCredmgrInitUsernamePassword():
+    config.Config._initializeConfig = _initialize_config_override
     credmgr = CredentialManager(username="username", password="password")
-    credmgr._requestor._session = credentialManager._requestor._session
-    credmgr._requestor._session.auth = credmgr._auth
-    assert credmgr.currentUser.username == "username"
+    with Betamax(credmgr._requestor._session).use_cassette(genCassetteName()):
+        assert credmgr.currentUser.username == "username"

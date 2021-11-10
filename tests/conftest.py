@@ -61,7 +61,7 @@ def credentialManager():
     yield CredentialManager(apiToken=pytest.placeholders.api_token)
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture()
 def recorder(credentialManager):
     with Betamax(credentialManager._requestor._session).use_cassette(genCassetteName()):
         yield

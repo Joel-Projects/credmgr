@@ -1,7 +1,7 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T01:33:15",
+      "recorded_at": "2021-11-10T19:12:57",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -18,7 +18,7 @@
             "keep-alive"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.4.1"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -29,24 +29,27 @@
       },
       "response": {
         "body": {
-          "encoding": null,
-          "string": "{\"id\": 1, \"username\": \"spaz\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": true, \"default_settings\": {\"database_flavor\": \"postgres\", \"database_host\": \"localhost\"}, \"reddit_username\": \"\", \"created\": \"2020-04-03T02:55:01.957432+00:00\", \"updated\": \"2020-04-29T01:32:46.004968+00:00\", \"resource_type\": \"User\"}\n"
+          "encoding": "utf-8",
+          "string": "{\"id\": 1, \"username\": \"spaz\", \"is_active\": true, \"is_regular_user\": true, \"is_admin\": true, \"default_settings\": {\"database_flavor\": \"postgres\", \"database_host\": \"localhost\", \"ssh_host\": \"spazbots.jkpayne.com\", \"user_agent\": \"python:com.jkpayne.redditapps/ by u/Lil_SpazJoekp\"}, \"reddit_username\": \"Lil_SpazJoekp\", \"created\": \"2020-04-03T02:55:01.957432+00:00\", \"updated\": \"2021-11-09T06:33:02.485893+00:00\", \"resource_type\": \"User\"}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
           ],
+          "Connection": [
+            "keep-alive"
+          ],
           "Content-Length": [
-            "317"
+            "433"
           ],
           "Content-Type": [
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 01:33:15 GMT"
+            "Wed, 10 Nov 2021 19:12:59 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "nginx/1.10.3 (Ubuntu)"
           ]
         },
         "status": {
@@ -57,11 +60,11 @@
       }
     },
     {
-      "recorded_at": "2020-04-29T01:33:15",
+      "recorded_at": "2021-11-10T19:12:57",
       "request": {
         "body": {
           "encoding": "utf-8",
-          "string": "app_name=te&client_id=clientId2&user_agent=python%3Ate&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&enabled=True"
+          "string": "app_name=te&client_id=clientId2&user_agent=python%3Acom.jkpayne.redditapps%2F+by+u%2FLil_SpazJoekp&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&enabled=True"
         },
         "headers": {
           "Accept": [
@@ -74,13 +77,13 @@
             "keep-alive"
           ],
           "Content-Length": [
-            "154"
+            "198"
           ],
           "Content-Type": [
             "application/x-www-form-urlencoded"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.4.1"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -91,12 +94,15 @@
       },
       "response": {
         "body": {
-          "encoding": null,
+          "encoding": "utf-8",
           "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
+          ],
+          "Connection": [
+            "keep-alive"
           ],
           "Content-Length": [
             "188"
@@ -105,15 +111,210 @@
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 01:33:15 GMT"
+            "Wed, 10 Nov 2021 19:12:59 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "nginx/1.10.3 (Ubuntu)"
           ]
         },
         "status": {
           "code": 422,
-          "message": "Unprocessable Entity"
+          "message": "UNPROCESSABLE ENTITY"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+      }
+    },
+    {
+      "recorded_at": "2021-11-10T19:12:57",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=te&client_id=clientId2&user_agent=python%3Acom.jkpayne.redditapps%2F+by+u%2FLil_SpazJoekp&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&enabled=True"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "198"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.4.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "188"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 10 Nov 2021 19:12:59 GMT"
+          ],
+          "Server": [
+            "nginx/1.10.3 (Ubuntu)"
+          ]
+        },
+        "status": {
+          "code": 422,
+          "message": "UNPROCESSABLE ENTITY"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+      }
+    },
+    {
+      "recorded_at": "2021-11-10T19:12:57",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=te&client_id=clientId2&user_agent=python%3Acom.jkpayne.redditapps%2F+by+u%2FLil_SpazJoekp&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&enabled=True"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "198"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.4.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "188"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 10 Nov 2021 19:12:59 GMT"
+          ],
+          "Server": [
+            "nginx/1.10.3 (Ubuntu)"
+          ]
+        },
+        "status": {
+          "code": 422,
+          "message": "UNPROCESSABLE ENTITY"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+      }
+    },
+    {
+      "recorded_at": "2021-11-10T19:12:57",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=te&client_id=clientId2&user_agent=python%3Acom.jkpayne.redditapps%2F+by+u%2FLil_SpazJoekp&app_type=web&redirect_uri=https%3A%2F%2Fcredmgr.jesassn.org%2Foauth2%2Freddit_callback&enabled=True"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "198"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.4.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/reddit_apps"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "188"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 10 Nov 2021 19:12:59 GMT"
+          ],
+          "Server": [
+            "nginx/1.10.3 (Ubuntu)"
+          ]
+        },
+        "status": {
+          "code": 422,
+          "message": "UNPROCESSABLE ENTITY"
         },
         "url": "https://credmgr.jesassn.org/api/v1/reddit_apps"
       }

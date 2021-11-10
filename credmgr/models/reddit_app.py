@@ -1,12 +1,14 @@
 """Provide the RedditApp class."""
 import base64
-from typing import Union
+from typing import TYPE_CHECKING, Union
 
-import asyncpraw
 import praw
 
 from ..mixins import BaseApp
 from .utils import _resolveModelFromInput, _resolveUser
+
+if TYPE_CHECKING:
+    import asyncpraw
 
 
 class RedditApp(BaseApp):
@@ -126,7 +128,7 @@ class RedditApp(BaseApp):
         *,
         use_async=False,
         use_cache=True,
-        reddit_class: Union[praw.Reddit, asyncpraw.Reddit, None] = None,
+        reddit_class: Union[praw.Reddit, "asyncpraw.Reddit", None] = None,
         extra_reddit_kwargs=None,
     ) -> praw.Reddit:
         """Provide an optionally authenticated [Async] PRAW instance.
@@ -150,6 +152,8 @@ class RedditApp(BaseApp):
         if not (use_cache and self._reddit):
             if not reddit_class:
                 if use_async:
+                    import asyncpraw
+
                     reddit_class = asyncpraw.Reddit
                 else:
                     reddit_class = praw.Reddit

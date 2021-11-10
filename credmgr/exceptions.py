@@ -61,3 +61,7 @@ class ServerError(APIException):
 
 class Unauthorized(APIException):
     """Made request to resource without authenticating."""
+
+
+class UnknownStatusCode(APIException):
+    """Received an unknown status code."""

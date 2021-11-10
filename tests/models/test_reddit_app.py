@@ -10,7 +10,7 @@ from credmgr.exceptions import Conflict, InitializationError, NotFound, ServerEr
 from credmgr.models import RedditApp
 
 
-def testCreateRedditApp(credentialManager):
+def testCreateRedditApp(recorder, credentialManager):
     data = {
         "name": "testRedditApp",
         "clientId": "clientId",
@@ -23,7 +23,7 @@ def testCreateRedditApp(credentialManager):
         assert getattr(redditApp, key) == value
 
 
-def testCreateRedditAppOtherUser(credentialManager):
+def testCreateRedditAppOtherUser(recorder, credentialManager):
     data = {"name": "testRedditApp", "clientId": "clientId", "owner": 4}
     redditApp = credentialManager.redditApp.create(**data)
     for key, value in data.items():
@@ -33,49 +33,49 @@ def testCreateRedditAppOtherUser(credentialManager):
         assert getattr(redditApp, key) == value
 
 
-def testCreateRedditAppBadParams(credentialManager):
+def testCreateRedditAppBadParams(recorder, credentialManager):
     data = {"name": "te", "clientId": "clientId2"}
     with pytest.raises(ServerError):
         _ = credentialManager.redditApp.create(**data)
 
 
-def testCreateRedditAppExisting(credentialManager):
+def testCreateRedditAppExisting(recorder, credentialManager):
     data = {"name": "redditApp", "clientId": "clientId"}
     with pytest.raises(Conflict):
         _ = credentialManager.redditApp.create(**data)
 
 
-def testDeleteRedditApp(credentialManager):
+def testDeleteRedditApp(recorder, credentialManager):
     redditApp = credentialManager.redditApp(3)
     redditApp.delete()
     with pytest.raises(NotFound):
         _ = credentialManager.redditApp(3)
 
 
-def testEditRedditApp(credentialManager):
+def testEditRedditApp(recorder, credentialManager):
     redditApp = credentialManager.redditApp(6)
     redditApp.edit(clientId="newClientId")
     assert redditApp.clientId == "newClientId"
 
 
-def testEditRedditAppConflictingData(credentialManager):
+def testEditRedditAppConflictingData(recorder, credentialManager):
     redditApp = credentialManager.redditApp(6)
     with pytest.raises(Conflict):
         redditApp.edit(clientId="clientId")
 
 
-def testListRedditApps(credentialManager):
+def testListRedditApps(recorder, credentialManager):
     redditApps = credentialManager.redditApps()
     for redditApp in redditApps:
         assert isinstance(redditApp, RedditApp)
 
 
-def testListRedditAppsWithRedditApp(credentialManager):
+def testListRedditAppsWithRedditApp(recorder, credentialManager):
     with pytest.raises(InitializationError):
         _ = credentialManager.redditApp()
 
 
-def testCreateRedditAppWithoutUserAgent(credentialManager):
+def testCreateRedditAppWithoutUserAgent(recorder, credentialManager):
     data = {
         "name": "testRedditApp",
         "clientId": "clientId",
@@ -104,7 +104,7 @@ class CustomAsyncReddit(asyncpraw.Reddit):
     ids=["custom_reddit_class", "no_custom_class"],
 )
 def testRedditAppReddit(
-    credentialManager, use_async, use_cache, use_custom_reddit_class
+    recorder, credentialManager, use_async, use_cache, use_custom_reddit_class
 ):
     redditApp = credentialManager.redditApp(2)
     reddit_class = None
@@ -139,7 +139,7 @@ def patched__request_token(self, **data):
     self.scopes = set(payload["scope"].split(" "))
 
 
-def testRedditAppRedditWithRedditor(credentialManager):
+def testRedditAppRedditWithRedditor(recorder, credentialManager):
     redditApp = credentialManager.redditApp(2)
     reddit = redditApp.reddit("Lil_SpazJoekp")
     assert isinstance(reddit, praw.Reddit)
@@ -158,13 +158,13 @@ def testRedditAppRedditWithRedditor(credentialManager):
                 assert reddit.user.me() == "Lil_SpazJoekp"
 
 
-def testRedditAppRedditWithBadRedditor(credentialManager):
+def testRedditAppRedditWithBadRedditor(recorder, credentialManager):
     redditApp = credentialManager.redditApp(2)
     with pytest.raises(NotFound):
         _ = redditApp.reddit("BadRedditor")
 
 
-def testRedditAppGenAuthUrlVerificationScopes(credentialManager):
+def testRedditAppGenAuthUrlVerificationScopes(recorder, credentialManager):
     redditApp = credentialManager.redditApp(19)
     url = redditApp.genAuthUrl(scopes="read")
     assert (
@@ -173,7 +173,7 @@ def testRedditAppGenAuthUrlVerificationScopes(credentialManager):
     )
 
 
-def testRedditAppGenAuthUrlVerificationAllScopes(credentialManager):
+def testRedditAppGenAuthUrlVerificationAllScopes(recorder, credentialManager):
     redditApp = credentialManager.redditApp(19)
     url = redditApp.genAuthUrl(scopes="all")
     assert (
@@ -182,7 +182,7 @@ def testRedditAppGenAuthUrlVerificationAllScopes(credentialManager):
     )
 
 
-def testRedditAppGenAuthUrlVerification(credentialManager):
+def testRedditAppGenAuthUrlVerification(recorder, credentialManager):
     redditApp = credentialManager.redditApp(6)
     url = redditApp.genAuthUrl()
     assert (
@@ -191,7 +191,7 @@ def testRedditAppGenAuthUrlVerification(credentialManager):
     )
 
 
-def testRedditAppGenAuthUrlAuthencation(credentialManager):
+def testRedditAppGenAuthUrlAuthencation(recorder, credentialManager):
     redditApp = credentialManager.redditApp(6)
     url = redditApp.genAuthUrl(permanent=True)
     assert (
@@ -200,7 +200,7 @@ def testRedditAppGenAuthUrlAuthencation(credentialManager):
     )
 
 
-def testRedditAppGenAuthUrlUserVerification(credentialManager):
+def testRedditAppGenAuthUrlUserVerification(recorder, credentialManager):
     redditApp = credentialManager.redditApp(6)
     url = redditApp.genAuthUrl(userVerification=22)
     assert (
@@ -209,7 +209,7 @@ def testRedditAppGenAuthUrlUserVerification(credentialManager):
     )
 
 
-def testRedditAppGenAuthUrlUserVerificationCreate(credentialManager):
+def testRedditAppGenAuthUrlUserVerificationCreate(recorder, credentialManager):
     redditApp = credentialManager.redditApp(19)
     url = redditApp.genAuthUrl(userVerification="newId")
     assert (
@@ -218,7 +218,7 @@ def testRedditAppGenAuthUrlUserVerificationCreate(credentialManager):
     )
 
 
-def testRedditAppGenAuthUrlUserVerificationCreateExisting(credentialManager):
+def testRedditAppGenAuthUrlUserVerificationCreateExisting(recorder, credentialManager):
     redditApp = credentialManager.redditApp(22)
     url = redditApp.genAuthUrl(userVerification="newId")
     assert (

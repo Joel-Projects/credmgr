@@ -1,7 +1,7 @@
 {
   "http_interactions": [
     {
-      "recorded_at": "2020-04-29T23:49:04",
+      "recorded_at": "2021-11-10T19:12:41",
       "request": {
         "body": {
           "encoding": "utf-8",
@@ -24,7 +24,7 @@
             "application/x-www-form-urlencoded"
           ],
           "User-Agent": [
-            "credmgr/1.0.1"
+            "credmgr/1.4.1"
           ],
           "X-API-TOKEN": [
             "<API_TOKEN>"
@@ -35,12 +35,15 @@
       },
       "response": {
         "body": {
-          "encoding": null,
+          "encoding": "utf-8",
           "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
         },
         "headers": {
           "Access-Control-Allow-Origin": [
             "*"
+          ],
+          "Connection": [
+            "keep-alive"
           ],
           "Content-Length": [
             "188"
@@ -49,15 +52,210 @@
             "application/json"
           ],
           "Date": [
-            "Wed, 29 Apr 2020 23:49:04 GMT"
+            "Wed, 10 Nov 2021 19:12:43 GMT"
           ],
           "Server": [
-            "gunicorn/20.0.4"
+            "nginx/1.10.3 (Ubuntu)"
           ]
         },
         "status": {
           "code": 422,
-          "message": "Unprocessable Entity"
+          "message": "UNPROCESSABLE ENTITY"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      }
+    },
+    {
+      "recorded_at": "2021-11-10T19:12:41",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=se&dsn=https%3A%2F%2Fkey%40sentry.jesassn.org%2Fid2"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "60"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.4.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "188"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 10 Nov 2021 19:12:43 GMT"
+          ],
+          "Server": [
+            "nginx/1.10.3 (Ubuntu)"
+          ]
+        },
+        "status": {
+          "code": 422,
+          "message": "UNPROCESSABLE ENTITY"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      }
+    },
+    {
+      "recorded_at": "2021-11-10T19:12:41",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=se&dsn=https%3A%2F%2Fkey%40sentry.jesassn.org%2Fid2"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "60"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.4.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "188"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 10 Nov 2021 19:12:43 GMT"
+          ],
+          "Server": [
+            "nginx/1.10.3 (Ubuntu)"
+          ]
+        },
+        "status": {
+          "code": 422,
+          "message": "UNPROCESSABLE ENTITY"
+        },
+        "url": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      }
+    },
+    {
+      "recorded_at": "2021-11-10T19:12:41",
+      "request": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "app_name=se&dsn=https%3A%2F%2Fkey%40sentry.jesassn.org%2Fid2"
+        },
+        "headers": {
+          "Accept": [
+            "*/*"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "60"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "User-Agent": [
+            "credmgr/1.4.1"
+          ],
+          "X-API-TOKEN": [
+            "<API_TOKEN>"
+          ]
+        },
+        "method": "POST",
+        "uri": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
+      },
+      "response": {
+        "body": {
+          "encoding": "utf-8",
+          "string": "{\"status\": 422, \"messages\": {\"app_name\": [\"Name must be greater than 3 characters long.\"]}, \"message\": \"The request was well-formed but was unable to be followed due to semantic errors.\"}\n"
+        },
+        "headers": {
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Content-Length": [
+            "188"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Wed, 10 Nov 2021 19:12:43 GMT"
+          ],
+          "Server": [
+            "nginx/1.10.3 (Ubuntu)"
+          ]
+        },
+        "status": {
+          "code": 422,
+          "message": "UNPROCESSABLE ENTITY"
         },
         "url": "https://credmgr.jesassn.org/api/v1/sentry_tokens"
       }

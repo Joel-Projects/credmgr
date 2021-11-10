@@ -11,7 +11,7 @@ data = {
 }
 
 
-def testCreateUser(credentialManager):
+def testCreateUser(recorder, credentialManager):
     data = {
         "username": "username",
         "password": "password",
@@ -24,26 +24,26 @@ def testCreateUser(credentialManager):
         assert getattr(user, key) == value
 
 
-def testCreateUserBadParams(credentialManager):
+def testCreateUserBadParams(recorder, credentialManager):
     data = {"username": "te"}
     with pytest.raises(TypeError):
         _ = credentialManager.user.create(**data)
 
 
-def testCreateUserExisting(credentialManager):
+def testCreateUserExisting(recorder, credentialManager):
     data = {"username": "username", "password": "password"}
     with pytest.raises(Conflict):
         _ = credentialManager.user.create(**data)
 
 
-def testDeleteUser(credentialManager):
+def testDeleteUser(recorder, credentialManager):
     user = credentialManager.user(12)
     user.delete()
     with pytest.raises(NotFound):
         _ = credentialManager.user(12)
 
 
-def testEditUser(credentialManager):
+def testEditUser(recorder, credentialManager):
     user = credentialManager.user("test2")
     data = {
         "username": "newUsername",
@@ -60,24 +60,24 @@ def testEditUser(credentialManager):
         assert getattr(modifiedUser, key) == value
 
 
-def testEditUserConflictingData(credentialManager):
+def testEditUserConflictingData(recorder, credentialManager):
     user = credentialManager.user(6)
     with pytest.raises(Conflict):
         user.edit(username="username")
 
 
-def testListUsers(credentialManager):
+def testListUsers(recorder, credentialManager):
     users = credentialManager.users()
     for user in users:
         assert isinstance(user, User)
 
 
-def testListUsersWithUser(credentialManager):
+def testListUsersWithUser(recorder, credentialManager):
     with pytest.raises(InitializationError):
         _ = credentialManager.user()
 
 
-def testToDict(credentialManager):
+def testToDict(recorder, credentialManager):
     user = credentialManager.currentUser
     user.apps()
     exportDict = user.toDict()
@@ -131,7 +131,7 @@ def testToDict(credentialManager):
     }
 
 
-def testAppsOnly(credentialManager):
+def testAppsOnly(recorder, credentialManager):
     user = credentialManager.currentUser
     sentryTokens = user.apps("sentryTokens")
     assert isinstance(sentryTokens, list)
@@ -139,7 +139,7 @@ def testAppsOnly(credentialManager):
         assert isinstance(token, SentryToken)
 
 
-def testAppsOnlyInvalid(credentialManager):
+def testAppsOnlyInvalid(recorder, credentialManager):
     user = credentialManager.currentUser
     with pytest.raises(InitializationError):
         _ = user.apps("invalid")
