@@ -52,7 +52,7 @@ lint:isort:
 lint:docstrfmt:
     <<: *lint_setup
     script:
-        - docstrfmt -c .
+        - docstrfmt -c credmgr docs
 
 lint:flynt:
     <<: *lint_setup
