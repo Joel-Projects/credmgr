@@ -94,11 +94,11 @@ test:pytest3.10:
 deploy:pypi:
     stage: deploy
     variables:
-        TWINE_USERNAME: $PYPI_USERNAME
+        TWINE_USERNAME: __token__
         TWINE_PASSWORD: $PYPI_PASSWORD
     before_script:
         - pip install twine
-        - python setup.py sdist
+        - python setup.py sdist bdist_wheel
     script:
         - twine upload dist/*
     only:
